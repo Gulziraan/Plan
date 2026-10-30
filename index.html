@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f1e9" />
+  <meta name="description" content="A little world made just for Hasan — happy 23rd birthday." />
+  <title>Hasan — Chapter 23</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="wordmark" href="#" data-home>H<span>.</span></a>
+    <div class="topbar-center"><span>AN EDITION MADE FOR YOU</span><i></i><span>A BIRTHDAY EDITION</span></div>
+    <button class="restart-link" id="restartTop" type="button">START OVER ↗</button>
+  </header>
+
+  <main id="app">
+    <section class="scene active" id="welcome" aria-labelledby="welcomeTitle">
+      <div class="welcome-layout">
+        <div class="welcome-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> A VERY PERSONAL EDITION · NO. 23</p>
+          <h1 id="welcomeTitle">A day<br>for <em>Hasan.</em></h1>
+          <p class="welcome-sub">Today, the world celebrates you.<br>And I made a little world of my own — just for you.</p>
+          <div class="welcome-bottom"><button class="primary-btn" id="beginBtn">LET’S BEGIN <span>↗</span></button><span class="tiny-note">TAKE YOUR TIME · THERE IS NO RUSH</span></div>
+        </div>
+        <div class="welcome-art">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="sun-disc">23</div>
+          <div class="photo-frame hero-photo" data-photo="hero"><div class="photo-placeholder"><span class="placeholder-mark">H.</span><small>YOUR FAVOURITE PHOTO<br>GOES HERE</small></div></div>
+          <div class="ribbon-label">HAPPY<br>BIRTHDAY</div>
+          <div class="stamp">MADE<br>WITH LOVE<br><b>♥</b></div>
+          <span class="art-caption">THE MAIN CHARACTER, ALWAYS.</span>
+          <label class="frame-upload">＋ ADD COVER PHOTO<input type="file" accept="image/*" data-upload="hero" hidden></label>
+        </div>
+      </div>
+      <div class="welcome-footer"><span>CHAPTER 23</span><span>ONE PERSON. A THOUSAND LITTLE THINGS.</span><span>EST. WITH LOVE</span></div>
+    </section>
+
+    <section class="scene" id="profile" aria-labelledby="profileTitle">
+      <div class="section-heading"><p class="eyebrow">PART I — THE PERSON</p><span class="chapter-no">01 / 05</span></div>
+      <div class="profile-layout">
+        <div class="profile-image-wrap"><div class="profile-image" data-photo="portrait"><div class="photo-placeholder"><span class="placeholder-mark">23</span><small>ADD A PORTRAIT<br>OF THE BIRTHDAY BOY</small></div></div><span class="image-index">FIG. 01 — THE ORIGINAL</span><span class="handwritten profile-note">one of one.</span><label class="frame-upload profile-upload">＋ ADD PORTRAIT<input type="file" accept="image/*" data-upload="portrait" hidden></label></div>
+        <div class="profile-content">
+          <p class="eyebrow">PLAYER PROFILE · UPDATED TODAY</p>
+          <h2 id="profileTitle">Hasan <em>at 23.</em></h2>
+          <p class="profile-intro">A limited edition human being. Quietly impressive. Occasionally impossible to beat in an argument.</p>
+          <div class="profile-meta"><div><small>NAME</small><b>Hasan</b></div><div><small>CURRENT CHAPTER</small><b>23</b></div><div><small>RARITY</small><b>One of one</b></div></div>
+          <div class="stats" id="stats"></div>
+          <p class="micro-hint">TAP A CHARACTERISTIC TO REVEAL ITS NOTE</p>
+          <button class="text-btn next-btn" data-next="admire">CONTINUE TO THE GOOD PART <span>↗</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="admire" aria-labelledby="admireTitle">
+      <div class="section-heading"><p class="eyebrow">PART I — THE LITTLE THINGS</p><span class="chapter-no">02 / 05</span></div>
+      <div class="center-heading"><p class="eyebrow">A COLLECTION OF OBSERVATIONS</p><h2 id="admireTitle">What makes you<br><em>you.</em></h2><p>Some things deserve more than a passing compliment.<br>Open a few. I have been keeping notes.</p></div>
+      <div class="note-grid" id="noteGrid"></div>
+      <div class="section-bottom"><span class="tiny-note">NO TWO NOTES ARE QUITE THE SAME.</span><button class="text-btn next-btn" data-next="transition">I HAVE MORE TO SHOW YOU <span>↗</span></button></div>
+    </section>
+
+    <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
+      <div class="transition-ornament">✳</div><p class="eyebrow">AND NOW, A SMALL CHANGE OF PERSPECTIVE</p>
+      <h2 id="transitionTitle">Now that you know<br>how I <em>see you...</em></h2>
+      <div class="transition-rule"></div>
+      <p class="transition-copy">Let me show you how I feel about you.<br>Not all at once. A little at a time.</p>
+      <button class="primary-btn" data-next="senses">TURN THE PAGE <span>↗</span></button>
+      <span class="transition-foot">PART II — MY FEELINGS</span>
+    </section>
+
+    <section class="scene" id="senses" aria-labelledby="sensesTitle">
+      <div class="section-heading"><p class="eyebrow">PART II — FIVE WAYS TO SAY IT</p><span class="chapter-no">03 / 05</span></div>
+      <div class="senses-intro"><div><p class="eyebrow">A STUDY IN AFFECTION</p><h2 id="sensesTitle">Five senses.<br><em>All of them, you.</em></h2></div><p>Five little chapters. Each one holds a different kind of memory. Open them in any order — the last page will wait.</p></div>
+      <div class="progress-wrap"><div class="progress-label"><span>YOUR STORY SO FAR</span><span id="progressCount">0 OF 5 OPENED</span></div><div class="progress-track"><div id="progressFill"></div></div><div class="progress-symbols" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div>
+      <div class="sense-list" id="senseList"></div>
+    </section>
+
+    <section class="scene" id="final" aria-labelledby="finalTitle">
+      <div class="final-top"><p class="eyebrow">THE LAST PAGE · AND MY FAVOURITE ONE</p><span>23 — ∞</span></div>
+      <div class="final-composition"><div class="final-photo" data-photo="final"><div class="photo-placeholder"><span class="placeholder-mark">♥</span><small>ONE PHOTO<br>TO KEEP FOREVER</small></div><label class="frame-upload">＋ ADD PHOTO<input type="file" accept="image/*" data-upload="final" hidden></label></div><div class="final-letter-area"><p class="handwritten">for my favourite person</p><h2 id="finalTitle">Five senses.<br>Countless memories.<br><em>One favourite person.</em></h2><div class="letter-envelope" id="finalEnvelope"><div class="envelope-back"></div><div class="letter-paper"><span class="letter-date">A LETTER FOR YOU · 23</span><p id="finalLetterText">My love,</p><p class="letter-placeholder" id="finalLetterBody">Write your own letter here.</p><p class="letter-sign"><span id="finalLetterSignature">Always yours,</span> <span>♡</span></p></div><button class="envelope-flap" id="openFinal" aria-label="Open the letter"><span>OPEN MY LETTER</span></button></div><p class="final-instruction">A FEW WORDS, KEPT JUST FOR YOU.</p></div></div>
+      <div class="final-end"><span>HAPPY 23RD, MY LOVE.</span><span>MADE WITH ALL MY HEART <b>♥</b></span></div>
+      <button class="restart-final" id="restartFinal">READ IT ALL AGAIN ↗</button>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>H. / CHAPTER 23</span><span>AN ORIGINAL EDITION · MADE WITH LOVE</span></footer>
+
+  <div class="modal" id="detailModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Close">×</button><div class="modal-kicker" id="modalKicker"></div><h3 id="modalTitle"></h3><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
