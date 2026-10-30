@@ -42,26 +42,64 @@
     </section>
 
     <section class="scene" id="profile" aria-labelledby="profileTitle">
-      <div class="section-heading"><p class="eyebrow">PART I — THE PERSON</p><span class="chapter-no">01 / 05</span></div>
+      <div class="section-heading"><p class="eyebrow">PART I — THE PERSON</p><span class="chapter-no">01 / 07</span></div>
       <div class="profile-layout">
         <div class="profile-image-wrap"><div class="profile-image" data-photo="portrait"><div class="photo-placeholder"><span class="placeholder-mark">23</span><small>ADD A PORTRAIT<br>OF THE BIRTHDAY BOY</small></div></div><span class="image-index">FIG. 01 — THE ORIGINAL</span><span class="handwritten profile-note">one of one.</span><label class="frame-upload profile-upload">＋ ADD PORTRAIT<input type="file" accept="image/*" data-upload="portrait" hidden></label></div>
         <div class="profile-content">
           <p class="eyebrow">PLAYER PROFILE · UPDATED TODAY</p>
           <h2 id="profileTitle">Hasan <em>at 23.</em></h2>
+          <div class="character-rank"><span class="rarity-gem">✦</span><span>LEGENDARY</span><i></i><span>CLASS: THE STRATEGIST</span></div>
           <p class="profile-intro">A limited edition human being. Quietly impressive. Occasionally impossible to beat in an argument.</p>
+          <p class="character-description">A thoughtful, composed protagonist with a talent for seeing the bigger picture. <em>Replace this demo bio with your own description.</em></p>
           <div class="profile-meta"><div><small>NAME</small><b>Hasan</b></div><div><small>CURRENT CHAPTER</small><b>23</b></div><div><small>RARITY</small><b>One of one</b></div></div>
           <div class="stats" id="stats"></div>
           <p class="micro-hint">TAP A CHARACTERISTIC TO REVEAL ITS NOTE</p>
+          <div class="skill-block"><div class="skill-heading"><span>SPECIAL ABILITIES</span><small>UNLOCK THE FILES</small></div><div class="ability-list" id="abilityList"></div></div>
+          <div class="passive-block"><span class="skill-heading-text">PASSIVE SKILLS</span><div id="passiveSkills" class="passive-skills"></div></div>
+          <div class="weakness-line"><span>KNOWN WEAKNESS</span><b id="weaknessText"></b></div>
+          <div class="superpower-line"><span>✧ SIGNATURE SUPERPOWER</span><b id="superpowerText"></b></div>
           <button class="text-btn next-btn" data-next="admire">CONTINUE TO THE GOOD PART <span>↗</span></button>
         </div>
       </div>
     </section>
 
     <section class="scene" id="admire" aria-labelledby="admireTitle">
-      <div class="section-heading"><p class="eyebrow">PART I — THE LITTLE THINGS</p><span class="chapter-no">02 / 05</span></div>
+      <div class="section-heading"><p class="eyebrow">PART I — THE LITTLE THINGS</p><span class="chapter-no">02 / 07</span></div>
       <div class="center-heading"><p class="eyebrow">A COLLECTION OF OBSERVATIONS</p><h2 id="admireTitle">What makes you<br><em>you.</em></h2><p>Some things deserve more than a passing compliment.<br>Open a few. I have been keeping notes.</p></div>
       <div class="note-grid" id="noteGrid"></div>
-      <div class="section-bottom"><span class="tiny-note">NO TWO NOTES ARE QUITE THE SAME.</span><button class="text-btn next-btn" data-next="transition">I HAVE MORE TO SHOW YOU <span>↗</span></button></div>
+      <div class="section-bottom"><span class="tiny-note">NO TWO NOTES ARE QUITE THE SAME.</span><button class="text-btn next-btn" data-next="reasons">I HAVE MORE TO SHOW YOU <span>↗</span></button></div>
+    </section>
+
+    <section class="scene" id="reasons" aria-labelledby="reasonsTitle">
+      <div class="section-heading"><p class="eyebrow">PART I — THE THINGS I FEEL</p><span class="chapter-no">03 / 07</span></div>
+      <div class="center-heading"><p class="eyebrow">A FEW THINGS I NEVER WANT TO FORGET TO SAY</p><h2 id="reasonsTitle">Reasons I<br><em>love you.</em></h2><p>Not a checklist. Just little truths, folded into envelopes.<br>Open them slowly — the last one is sealed for a reason.</p></div>
+      <div class="envelope-progress"><div><span>LETTERS DISCOVERED</span><b id="reasonCount">0 / 6</b></div><div class="progress-track"><div id="reasonFill"></div></div></div>
+      <div class="reason-envelope-grid" id="reasonGrid"></div>
+      <div class="secret-envelope-wrap" id="secretEnvelopeWrap"><p class="eyebrow">A FINAL NOTE · SEALED UNTIL THE OTHERS ARE OPENED</p><button class="secret-envelope" id="secretEnvelope" disabled><span class="seal">H ♥</span><b>THE LAST ENVELOPE</b><small>OPEN AFTER THE SIX NOTES</small></button></div>
+      <div class="section-bottom"><span class="tiny-note">SOME THINGS ARE BETTER SAID IN A LETTER.</span><button class="text-btn next-btn" data-next="missions">ON TO YOUR MISSIONS <span>↗</span></button></div>
+    </section>
+
+    <section class="scene" id="missions" aria-labelledby="missionsTitle">
+      <div class="section-heading"><p class="eyebrow">PART I — THE INTERACTIVE EDITION</p><span class="chapter-no">04 / 07</span></div>
+      <div class="center-heading"><p class="eyebrow">FOUR SMALL TESTS. NO PRESSURE.</p><h2 id="missionsTitle">The birthday<br><em>missions.</em></h2><p>Every good main character gets a few side quests.<br>These are designed with a very specific player in mind.</p></div>
+      <div class="mission-list">
+        <article class="mission-panel" id="mission-power"><div class="mission-top"><span>MISSION 01</span><span class="mission-status" data-status="power">NOT STARTED</span></div><h3>Choose your <em>superpower.</em></h3><p class="mission-description">One power. No second thoughts. What would you choose?</p><div class="power-grid" id="powerGrid"></div><div class="mission-result" id="powerResult" aria-live="polite"></div></article>
+        <article class="mission-panel" id="mission-quiz"><div class="mission-top"><span>MISSION 02</span><span class="mission-status" data-status="quiz">NOT STARTED</span></div><h3>How well do you <em>know yourself?</em></h3><p class="mission-description">A few highly unofficial questions. The examiner may be biased.</p><div id="quizArea"></div></article>
+        <article class="mission-panel" id="mission-memory"><div class="mission-top"><span>MISSION 03</span><span class="mission-status" data-status="memory">NOT STARTED</span></div><h3>Memory <em>match.</em></h3><p class="mission-description">Match each photograph placeholder with its caption. Replace both in the content file when your photos are ready.</p><div class="memory-game-grid" id="memoryGame"></div><p class="game-feedback" id="memoryFeedback" aria-live="polite">Find all three pairs.</p></article>
+        <article class="mission-panel" id="mission-secret"><div class="mission-top"><span>MISSION 04</span><span class="mission-status" data-status="secret">NOT STARTED</span></div><h3>A detail hiding <em>in plain sight.</em></h3><p class="mission-description" id="secretPrompt"></p><div class="secret-options" id="secretOptions"></div><div class="mission-result" id="secretResult" aria-live="polite"></div></article>
+      </div>
+      <div class="section-bottom"><span class="tiny-note">NO SCORES. JUST A LITTLE FUN.</span><button class="text-btn next-btn" data-next="achievement">CHECK YOUR ACHIEVEMENT <span>↗</span></button></div>
+    </section>
+
+    <section class="scene achievement-scene" id="achievement" aria-labelledby="achievementTitle">
+      <div class="achievement-orbit"><span>✦</span><i></i><b>23</b></div>
+      <p class="eyebrow">ALL MISSIONS COMPLETE · A TITLE WELL EARNED</p>
+      <h2 id="achievementTitle">One of <em>a kind.</em></h2>
+      <div class="achievement-rule"></div>
+      <p class="achievement-copy">23 years of being you.<br><em>And still my favorite person.</em></p>
+      <div class="achievement-seal">✦<small>LEGENDARY<br>EDITION</small></div>
+      <p class="achievement-hint" id="achievementHint">Complete the four missions to reveal your achievement.</p>
+      <button class="primary-btn" id="achievementContinue" disabled>UNLOCK THE NEXT CHAPTER <span>↗</span></button>
     </section>
 
     <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
@@ -74,7 +112,7 @@
     </section>
 
     <section class="scene" id="senses" aria-labelledby="sensesTitle">
-      <div class="section-heading"><p class="eyebrow">PART II — FIVE WAYS TO SAY IT</p><span class="chapter-no">03 / 05</span></div>
+      <div class="section-heading"><p class="eyebrow">PART II — FIVE WAYS TO SAY IT</p><span class="chapter-no">07 / 07</span></div>
       <div class="senses-intro"><div><p class="eyebrow">A STUDY IN AFFECTION</p><h2 id="sensesTitle">Five senses.<br><em>All of them, you.</em></h2></div><p>Five little chapters. Each one holds a different kind of memory. Open them in any order — the last page will wait.</p></div>
       <div class="progress-wrap"><div class="progress-label"><span>YOUR STORY SO FAR</span><span id="progressCount">0 OF 5 OPENED</span></div><div class="progress-track"><div id="progressFill"></div></div><div class="progress-symbols" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div>
       <div class="sense-list" id="senseList"></div>
