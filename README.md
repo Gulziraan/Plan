@@ -1,52 +1,31 @@
-# Hasan — Chapter 23
+# Hasan — Chapter 23 | Cinematic Edition
 
-A responsive, static birthday storytelling website. No backend, build step, framework, or third-party runtime dependency is required.
+A responsive, static birthday storytelling website. This is a refinement of the existing project: the original five-senses chapters and letter experience remain, with a cinematic superhero visual direction and repaired navigation/interactions.
 
-## Run locally
+## Open
+Open `index.html` in a modern browser. `Hasan-Birthday-Preview.html` is a standalone version with CSS and JavaScript embedded.
 
-Open `index.html` in a modern browser, or serve this folder with any static server. The standalone `Hasan-Birthday-Preview.html` version can also be opened directly; it contains the HTML, CSS, content configuration and JavaScript in one file.
+## Personalise
+Edit `content.js`:
+- `stats`, `abilities`, `passives`, `superpowers` — character dossier
+- `notes`, `reasons`, `finalReason` — personal notes and letters
+- `games` — mini-mission wording
+- `senses` and `finalLetter` — five-senses chapters and final letter
+- `media` — optional relative paths to image/audio assets
 
-```bash
-python3 -m http.server 8000
-```
+Use the in-page upload controls to add photos/audio for the current browser. Browser uploads are saved locally on that device and are not automatically included when you share the ZIP. For a shareable version, place files in `assets/` and use relative paths in `content.js`.
 
-Then visit `http://localhost:8000`.
+## Interactions
+- Character stats and ability details open in a modal.
+- The hammer interaction triggers a brief lightning flash and a personal message.
+- Notes and envelopes reveal their copy.
+- Four small missions unlock the achievement and transition.
+- Five senses chapters can be opened in any order; progress is saved locally.
+- The final page unlocks after all five senses chapters are marked complete.
+- Uploaded media and progress are stored in this browser's localStorage.
 
-## Personalise the content
-
-- `content.js` — all editable content: character profile and attributes, special abilities, passive skills, weakness and superpower, personal notes, reasons envelopes, mini-game choices/reactions, quiz questions, memory captions and messages, five-senses copy, media paths, and final letter.
-- `styles.css` — original visual design plus new character dossier, envelope, mission and achievement styles.
-- `app.js` — navigation, modals, progress, envelope opening, mini-games, uploads and existing five-senses interactions.
-- `index.html` — page structure.
-
-All demo values and sample reactions are replaceable placeholders. No personal biography or shared relationship memories have been invented.
-
-## New interactive content
-
-1. Character dossier: RPG-style Level 23 profile, rarity/class, animated attributes, abilities, passives, weakness and signature power.
-2. What makes you special: seven revealable notes.
-3. Reasons I love you: six envelopes plus a seventh final envelope unlocked after opening the first six.
-4. Four missions: choose a superpower, a three-question personality quiz, a three-pair memory match, and a short secret challenge.
-5. One of a kind: achievement unlocks after all four missions and the final love-note envelope are completed, then leads into the existing five-senses chapters.
-
-## Add photographs and audio
-
-Use the upload controls inside the website, or place files in an `assets/` folder and set their relative paths in `content.js`. The memory match image placeholders are configured under `games.memories` using each item's `image` property. Browser uploads are stored in localStorage for this browser/device only; use static files in `assets/` for a shareable published version.
-
-Suggested static asset names:
-
-- `assets/hasan-cover.jpg` — welcome cover portrait
-- `assets/hasan-portrait.jpg` — profile portrait
-- `assets/us-01.jpg`, `assets/us-02.jpg`, `assets/us-03.jpg` — sight chapter
-- `assets/memory-01.jpg`, `assets/memory-02.jpg`, `assets/memory-03.jpg` — memory-match photos
-- `assets/our-song.mp3` — sound chapter
-- `assets/perfume.jpg` — scent chapter
-- `assets/favourite-photo.jpg` — final page
-
-## Progress and reset
-
-Existing five-senses progress remains under `hasan-chapter-23-progress`; the new envelope and mission completions use the same progress store. Uploaded files are stored separately under `hasan-chapter-23-assets`. “Start over” clears progress and game selections but keeps uploaded media.
+## Typography
+The site uses Barlow Condensed for display typography, DM Sans for interface text, Cormorant Garamond for editorial copy, and Parisienne for handwritten accents. Google Fonts are loaded when internet is available; system fallbacks are declared for offline use.
 
 ## Publish
-
-Upload the complete folder to any static hosting provider (for example GitHub Pages, Netlify, or Cloudflare Pages). Set the publish/root directory to this folder. No environment variables or server-side services are needed.
+Upload the complete folder to static hosting. No backend or build step is required.

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f8f1e9" />
+  <meta name="theme-color" content="#28070d" />
   <meta name="description" content="A little world made just for Hasan — happy 23rd birthday." />
   <title>Hasan — Chapter 23</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Parisienne&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -24,13 +24,13 @@
       <div class="welcome-layout">
         <div class="welcome-copy">
           <p class="eyebrow"><span class="eyebrow-line"></span> A VERY PERSONAL EDITION · NO. 23</p>
-          <h1 id="welcomeTitle">A day<br>for <em>Hasan.</em></h1>
-          <p class="welcome-sub">Today, the world celebrates you.<br>And I made a little world of my own — just for you.</p><div class="hero-reveal"><span>✦ SOME HEROES DON’T NEED A CAPE.</span><b>Some have a hammer. Some have superpowers.<br><em>And some are simply Hasan.</em></b></div>
+          <h1 id="welcomeTitle">Some heroes<br>don’t need<br>a <em>cape.</em></h1>
+          <p class="welcome-sub">Some have a hammer. Some have superpowers.<br><strong>And some are simply Hasan.</strong></p><div class="hero-reveal"><span>✦ SOME HEROES DON’T NEED A CAPE.</span><b>Some have a hammer. Some have superpowers.<br><em>And some are simply Hasan.</em></b></div>
           <div class="welcome-bottom"><button class="primary-btn" id="beginBtn">LET’S BEGIN <span>↗</span></button><span class="tiny-note">TAKE YOUR TIME · THERE IS NO RUSH</span></div>
         </div>
         <div class="welcome-art">
           <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="sun-disc">23</div><div class="storm-halo" aria-hidden="true"></div><div class="hammer-mark" aria-hidden="true">⚒</div>
+          <div class="sun-disc">23</div><div class="hero-name-backdrop">HASAN</div><div class="storm-halo" aria-hidden="true"></div><div class="hammer-mark" aria-hidden="true"><svg viewBox="0 0 120 120" role="img"><path d="M26 18h68l-8 28H34zM48 43h24l-7 58H55zM40 16l-8-8h56l-8 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg></div>
           <div class="photo-frame hero-photo" data-photo="hero"><div class="photo-placeholder"><span class="placeholder-mark">H.</span><small>YOUR FAVOURITE PHOTO<br>GOES HERE</small></div></div>
           <div class="ribbon-label">HAPPY<br>BIRTHDAY</div>
           <div class="stamp">MADE<br>WITH LOVE<br><b>♥</b></div>
@@ -47,7 +47,7 @@
         <div class="profile-image-wrap"><div class="profile-image" data-photo="portrait"><div class="photo-placeholder"><span class="placeholder-mark">23</span><small>ADD A PORTRAIT<br>OF THE BIRTHDAY BOY</small></div></div><span class="image-index">FIG. 01 — THE ORIGINAL</span><span class="handwritten profile-note">one of one.</span><label class="frame-upload profile-upload">＋ ADD PORTRAIT<input type="file" accept="image/*" data-upload="portrait" hidden></label></div>
         <div class="profile-content">
           <p class="eyebrow">PLAYER PROFILE · UPDATED TODAY</p>
-          <h2 id="profileTitle">Hasan <em>at 23.</em></h2>
+          <div class="profile-level"><span>LEVEL</span><b>23</b><i>THE LEGENDARY EDITION</i></div><h2 id="profileTitle">HASAN</h2><p class="profile-subtitle">THE STRATEGIST</p>
           <div class="character-rank"><span class="rarity-gem">✦</span><span>LEGENDARY</span><i></i><span>CLASS: THE STRATEGIST</span></div><div class="hero-designation"><span>UNIVERSE</span><b>MY FAVORITE ONE</b><i>THE ONE WHO CAN HANDLE ANYTHING</i></div>
           <p class="profile-intro">A limited edition human being. Quietly impressive. Occasionally impossible to beat in an argument.</p>
           <p class="character-description">A thoughtful, composed protagonist with a talent for seeing the bigger picture. <em>Replace this demo bio with your own description.</em></p>
@@ -57,7 +57,7 @@
           <div class="skill-block"><div class="skill-heading"><span>SPECIAL ABILITIES</span><small>UNLOCK THE FILES</small></div><div class="ability-list" id="abilityList"></div></div>
           <div class="passive-block"><span class="skill-heading-text">PASSIVE SKILLS</span><div id="passiveSkills" class="passive-skills"></div></div>
           <div class="weakness-line"><span>KNOWN WEAKNESS</span><b id="weaknessText"></b></div>
-          <div class="superpower-line"><span>✧ SIGNATURE SUPERPOWER</span><b id="superpowerText"></b></div><div class="hero-powers"><p class="skill-heading-text">SUPERPOWERS · FIELD NOTES</p><div id="heroPowers"></div></div><div class="hammer-trial"><div class="hammer-visual" aria-hidden="true">⚒</div><div><p class="eyebrow">A TEST OF WORTHINESS</p><h3>Only the worthy<br><em>can lift it.</em></h3><p>One small attempt. No thunder insurance required.</p><button class="hammer-button" id="liftHammer" type="button">TRY TO LIFT THE HAMMER ↗</button><p class="hammer-response" id="hammerResponse" aria-live="polite"></p></div></div>
+          <div class="superpower-line"><span>✧ SIGNATURE SUPERPOWER</span><b id="superpowerText"></b></div><div class="hero-powers"><p class="skill-heading-text">SUPERPOWERS · FIELD NOTES</p><div id="heroPowers"></div></div><div class="hammer-trial"><div class="hammer-visual" aria-hidden="true"><svg viewBox="0 0 160 160"><path d="M34 28h92l-10 37H44zM67 61h27l-9 83H76zM44 25l-9-12h90l-9 12" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/></svg></div><div><p class="eyebrow">A TEST OF WORTHINESS</p><h3>Only the worthy<br><em>can lift it.</em></h3><p>One small attempt. No thunder insurance required.</p><button class="hammer-button" id="liftHammer" type="button">TRY TO LIFT THE HAMMER ↗</button><p class="hammer-response" id="hammerResponse" aria-live="polite"></p></div></div>
           <button class="text-btn next-btn" data-next="admire">CONTINUE TO THE GOOD PART <span>↗</span></button>
         </div>
       </div>
