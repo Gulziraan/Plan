@@ -4,65 +4,65 @@ window.BIRTHDAY_CONTENT = {
   media:{hero:'',portrait:'',final:'',reasons:['','','','','',''],sight:['','',''],audio:'',perfume:''},
   reasonImagePositions:['50% 50%','50% 50%','50% 50%','50% 50%','50% 50%','50% 50%'],
   stats:[
-    {name:'INTELLIGENCE',value:96,note:'A mind that notices the details — even the ones everyone else missed.'},
-    {name:'STRATEGIC THINKING',value:94,note:'Sees the bigger picture and finds a way through.'},
-    {name:'RELIABILITY',value:98,note:'The kind of person people can lean on. I know I can.'},
-    {name:'PATIENCE',value:88,note:'A calm exterior. A very convincing poker face.'},
-    {name:'STRENGTH',value:92,note:'Strength is also how you keep going when things are difficult.'},
-    {name:'SENSE OF HUMOR',value:90,note:'The ability to make an ordinary day better.'},
-    {name:'PROBLEM SOLVING',value:99,note:'Give him a problem. Then give him a little time.'}
+    {name:'ИНТЕЛЛЕКТ',value:96,note:'Замечает детали — даже те, которые ускользнули от остальных.'},
+    {name:'СТРАТЕГИЧЕСКОЕ МЫШЛЕНИЕ',value:94,note:'Видит ситуацию целиком и находит выход.'},
+    {name:'НАДЁЖНОСТЬ',value:98,note:'Человек, на которого можно положиться. Я это точно знаю.'},
+    {name:'ТЕРПЕНИЕ',value:88,note:'Спокойствие снаружи. И очень убедительное покерное лицо.'},
+    {name:'СИЛА',value:92,note:'Сила — ещё и в умении продолжать, когда трудно.'},
+    {name:'ЧУВСТВО ЮМОРА',value:90,note:'Умение сделать обычный день лучше.'},
+    {name:'РЕШЕНИЕ ЗАДАЧ',value:99,note:'Дайте ему задачу. А потом немного времени.'}
   ],
   abilities:[
-    {title:'The Strategist',text:'Finds a solution when everyone else sees a problem.'},
-    {title:'Stormproof',text:'Stays calm when things get complicated.'},
-    {title:'The Impossible, Managed',text:'Makes difficult things feel manageable.'},
-    {title:'The Quiet Fixer',text:'Has an almost unfair ability to figure things out.'}
+    {title:'Стратег',text:'Находит решение там, где остальные видят проблему.'},
+    {title:'Неуязвим к бурям',text:'Сохраняет спокойствие, когда всё усложняется.'},
+    {title:'Невозможное? Решаемо.',text:'Умеет сделать сложное вполне решаемым.'},
+    {title:'Тот, кто всё уладит',text:'У него почти нечестный талант во всём разобраться.'}
   ],
-  passives:['Calm under pressure','Always thinking ahead','A reassuring presence'],
-  weakness:'A soft spot for the people he loves.',
-  signaturePower:'Making everything feel manageable.',
+  passives:['Спокоен под давлением','Всегда думает наперёд','Рядом с ним спокойно'],
+  weakness:'Слабость к тем, кого любит.',
+  signaturePower:'Умеет сделать всё не таким сложным.',
   superpowers:[
-    'Finds a solution when everyone else sees a problem.',
-    'Stays calm when things get complicated.',
+    'Находит решение там, где остальные видят проблему.',
+    'Сохраняет спокойствие, когда всё усложняется.',
     'Makes the impossible look manageable.',
-    'Has an almost unfair ability to figure things out.',
+    'У него почти нечестный талант во всём разобраться.',
     'Can make me feel safe without even trying.'
   ],
-  hammerMessage:'The hammer chose him. I just agreed.',
+  hammerMessage:'Молот выбрал его. Я просто согласилась.',
   notes:[
-    {title:'The way you think',tag:'01 / THE MIND',text:'Your way of looking at things, connecting details and finding a way forward. Replace this with a specific example only you know.',stamp:'I ADMIRE THIS'},
-    {title:'Your calm',tag:'02 / THE ANCHOR',text:'The way you can make a complicated moment feel a little less complicated.',stamp:'STEADY'},
-    {title:'Your determination',tag:'03 / THE DRIVE',text:'The quiet determination that keeps you moving towards what matters.',stamp:'NO SHORTCUTS'},
-    {title:'Your sense of humor',tag:'04 / THE SPARK',text:'The jokes, the timing, and the little moments that make me laugh.',stamp:'YOU KNOW'},
-    {title:'The way you care',tag:'05 / THE DETAILS',text:'The small things you probably do not even notice, but I do.',stamp:'I NOTICE'},
-    {title:'Simply you',tag:'06 / ONE OF ONE',text:'Not one quality or achievement. Just the person I am lucky to know and love.',stamp:'NO REPLICAS'}
+    {title:'То, как ты мыслишь',tag:'01 / РАЗУМ',text:'То, как ты смотришь на вещи, связываешь детали и находишь выход. Замени это конкретным примером, который знаете только вы.',stamp:'ЭТИМ Я ВОСХИЩАЮСЬ'},
+    {title:'Твоё спокойствие',tag:'02 / ОПОРА',text:'Ты умеешь сделать даже сложный момент немного проще.',stamp:'НЕПОКОЛЕБИМ'},
+    {title:'Твоя целеустремлённость',tag:'03 / НАСТОЙЧИВОСТЬ',text:'Твоя внутренняя решимость, которая помогает идти к тому, что действительно важно.',stamp:'БЕЗ КОРОТКИХ ПУТЕЙ'},
+    {title:'Твоё чувство юмора',tag:'04 / ИСКРА',text:'Твои шутки, чувство момента и мелочи, которые заставляют меня смеяться.',stamp:'ТЫ ЗНАЕШЬ'},
+    {title:'Твоя забота',tag:'05 / ДЕТАЛИ',text:'Маленькие вещи, которых ты, возможно, даже не замечаешь, а я замечаю.',stamp:'Я ЗАМЕЧАЮ'},
+    {title:'Просто ты',tag:'06 / ЕДИНСТВЕННЫЙ',text:'Не отдельное качество и не достижение. Просто человек, которого мне повезло знать и любить.',stamp:'НЕ ПОВТОРЯЕТСЯ'}
   ],
   reasonImagePositions:['50% 50%','50% 50%','50% 50%','50% 50%','50% 50%','50% 50%'],
   reasons:[
-    {title:'I feel safe',text:'There is a particular kind of peace in knowing I do not have to figure everything out alone.'},
-    {title:'I can be myself',text:'I love that I can be completely myself beside you.'},
-    {title:'You make ordinary days better',text:'Sometimes the best part of a day is simply getting to share it with you.'},
-    {title:'You make me laugh',text:'Even when I am trying very hard to be serious.'},
-    {title:'You are my person',text:'Not because everything is perfect, but because it is you.'},
-    {title:'I choose you',text:'In the big moments and in all the ordinary ones in between.'}
+    {title:'С тобой спокойно',text:'Есть особенное спокойствие в осознании, что мне не нужно со всем справляться одной.'},
+    {title:'С тобой я могу быть собой',text:'Мне нравится, что рядом с тобой я могу быть самой собой.'},
+    {title:'Ты делаешь обычные дни особенными',text:'Иногда лучшая часть дня — просто возможность провести его вместе с тобой.'},
+    {title:'Ты заставляешь меня смеяться',text:'Даже когда я изо всех сил пытаюсь быть серьёзной.'},
+    {title:'Ты — мой человек',text:'Не потому, что всё идеально, а потому, что это именно ты.'},
+    {title:'Я выбираю тебя',text:'В большие моменты и во все обычные дни между ними.'}
   ],
-  finalReason:{title:'My favourite person',text:'You may not be a superhero to the rest of the world. But to me, you are the person who makes me believe everything will be okay.'},
+  finalReason:{title:'Мой любимый человек',text:'Возможно, для всего мира ты не супергерой. Но для меня ты человек, рядом с которым я верю, что всё будет хорошо.'},
   games:{
-    powers:['The ability to solve anything','Teleportation','Time control'],
+    powers:['Умение решить любую задачу','Телепортация','Управление временем'],
     quiz:[
-      {question:'Your natural role when a plan goes sideways?',options:['Find a solution','Stay calm and observe','Make everyone laugh']},
-      {question:'Your ideal superpower?',options:['Strategic thinking','Super strength','Reading minds']},
-      {question:'Your signature move?',options:['Handle it','Think it through','Say something unexpectedly funny']}
+      {question:'Что ты обычно делаешь, когда план идёт не по плану?',options:['Ищешь решение','Сохраняешь спокойствие и наблюдаешь','Заставляешь всех смеяться']},
+      {question:'Какую суперспособность ты бы выбрал?',options:['Стратегическое мышление','Сверхсила','Чтение мыслей']},
+      {question:'Твой фирменный приём?',options:['Разобраться с этим','Всё обдумать','Сказать что-нибудь неожиданно смешное']}
     ],
-    memories:[{caption:'A favourite day'},{caption:'A little adventure'},{caption:'An ordinary moment'}],
-    secret:{prompt:'What is the most powerful thing in this universe?',options:['A hammer','A legendary title','Having someone in your corner'],result:'Correct. The best superpower is having someone in your corner.'}
+    memories:[{caption:'Любимый день'},{caption:'Небольшое приключение'},{caption:'Самый обычный момент'}],
+    secret:{prompt:'Что самое сильное в этой вселенной?',options:['Молот','Легендарный титул','Когда рядом есть тот, кто всегда за тебя'],result:'Верно. Самая сильная суперспособность — знать, что рядом есть человек, который всегда на твоей стороне.'}
   },
   senses:[
-    {id:'sight',number:'01',name:'Sight',ru:'Зрение',theme:'THE PHOTO ALBUM',tagline:'Everything I love to see.',description:'Some moments are so lovely that I wish I could step back into them. These are a few I kept.',prompt:'Add your favourite photos and the stories behind them.',symbol:'✳',kind:'photos',memories:[{title:'The look',text:'Add the memory behind this photo.'},{title:'A day worth keeping',text:'Add a moment you wish you could relive.'},{title:'My favourite view',text:'A small detail about him that you love seeing.'}]},
-    {id:'sound',number:'02',name:'Sound',ru:'Слух',theme:'SIDE A — OUR SOUNDTRACK',tagline:'Everything I love to hear.',description:'Your voice, familiar conversations, laughter — and the songs that somehow became ours.',prompt:'Upload a song or a voice note that belongs here.',symbol:'♫',kind:'audio',memories:[{title:'Your voice',text:'Add a voice note or a line you love hearing.'},{title:'Our song',text:'Add the story behind your song.'}]},
-    {id:'taste',number:'03',name:'Taste',ru:'Вкус',theme:'A TABLE FOR TWO',tagline:'Everything I want to share.',description:'Coffee that lasts a little longer, favourite desserts, breakfasts, and all the small joys in between.',prompt:'Add a food memory, a recipe, or a little promise.',symbol:'❦',kind:'cards',memories:[{title:'Something sweet',text:'Add a favourite dessert or a shared memory.'},{title:'Coffee, always',text:'Add your coffee ritual or a moment around it.'},{title:'A recipe for us',text:'Two cups of coffee, a slow morning, and nowhere else to be.'}]},
-    {id:'touch',number:'04',name:'Touch',ru:'Ощущения',theme:'THE SOFTEST THINGS',tagline:'Everything I feel beside you.',description:'A hug after a long day. Your hand finding mine. The quiet comfort of being close.',prompt:'Add a note, a photograph, or a little certificate.',symbol:'♡',kind:'letter',memories:[{title:'A safe place',text:'Add what it feels like to be close to him.'},{title:'A little promise',text:'Add a promise, a private joke, or a massage-certificate note.'}]},
-    {id:'scent',number:'05',name:'Scent',ru:'Обоняние',theme:'THE SCENT OF A MEMORY',tagline:'The things that stay with me.',description:'Some scents bring a person back before you even realise you were missing them.',prompt:'Add his perfume and the memory attached to it.',symbol:'✿',kind:'scent',memories:[{title:'That familiar scent',text:'Add the perfume name and why it reminds you of him.'},{title:'A memory that lingers',text:'Add a place, a season, or a moment you associate with him.'}]}
+    {id:'sight',number:'01',name:'Зрение',ru:'Зрение',theme:'ФОТОАЛЬБОМ',tagline:'Всё, на что мне нравится смотреть.',description:'Некоторые моменты настолько прекрасны, что мне хочется снова в них оказаться. Вот несколько, которые я сохранила.',prompt:'Добавь любимые фотографии и истории, которые за ними стоят.',symbol:'✳',kind:'photos',memories:[{title:'Твой взгляд',text:'Добавь историю, которая стоит за этой фотографией.'},{title:'День, который хочется сохранить',text:'Добавь момент, который хотелось бы пережить снова.'},{title:'Мой любимый вид',text:'Маленькая деталь в нём, на которую тебе нравится смотреть.'}]},
+    {id:'sound',number:'02',name:'Слух',ru:'Слух',theme:'СТОРОНА А — НАШ САУНДТРЕК',tagline:'Всё, что мне нравится слышать.',description:'Твой голос, знакомые разговоры, смех — и песни, которые каким-то образом стали нашими.',prompt:'Добавь песню или голосовое сообщение, которому здесь место.',symbol:'♫',kind:'audio',memories:[{title:'Твой голос',text:'Добавь голосовое или фразу, которую любишь слышать.'},{title:'Наша песня',text:'Добавь историю вашей песни.'}]},
+    {id:'taste',number:'03',name:'Вкус',ru:'Вкус',theme:'СТОЛИК НА ДВОИХ',tagline:'Всё, чем я хочу делиться.',description:'Кофе, который хочется пить подольше, любимые десерты, завтраки и все маленькие радости между ними.',prompt:'Добавь гастрономическое воспоминание, рецепт или маленькое обещание.',symbol:'❦',kind:'cards',memories:[{title:'Что-нибудь сладкое',text:'Добавь любимый десерт или общее воспоминание.'},{title:'Кофе — всегда',text:'Добавь ваш кофейный ритуал или воспоминание о нём.'},{title:'Рецепт для нас',text:'Две чашки кофе, неторопливое утро и никуда не нужно спешить.'}]},
+    {id:'touch',number:'04',name:'Прикосновения',ru:'Ощущения',theme:'САМЫЕ НЕЖНЫЕ МОМЕНТЫ',tagline:'Всё, что я чувствую рядом с тобой.',description:'Объятия после долгого дня. Твоя рука, находящая мою. Тихое счастье быть рядом.',prompt:'Добавь заметку, фотографию или небольшой сертификат.',symbol:'♡',kind:'letter',memories:[{title:'Место, где спокойно',text:'Добавь, что ты чувствуешь, когда он рядом.'},{title:'Маленькое обещание',text:'Добавь обещание, вашу личную шутку или текст для сертификата на массаж.'}]},
+    {id:'scent',number:'05',name:'Запах',ru:'Обоняние',theme:'АРОМАТ ВОСПОМИНАНИЯ',tagline:'То, что остаётся со мной.',description:'Иногда аромат возвращает человека в мысли ещё до того, как ты успеваешь понять, что скучала.',prompt:'Добавь его парфюм и воспоминание, которое с ним связано.',symbol:'✿',kind:'scent',memories:[{title:'Знакомый аромат',text:'Добавь название парфюма и расскажи, почему он напоминает тебе о нём.'},{title:'Воспоминание, которое остаётся',text:'Добавь место, время года или момент, который у тебя с ним ассоциируется.'}]}
   ],
-  finalLetter:{salutation:'My love,',body:'Write your own letter here. Keep it personal, specific, and entirely yours.',signature:'Always yours,'}
+  finalLetter:{salutation:'Любимый,',body:'Напиши здесь своё письмо. Пусть оно будет личным, искренним и только твоим.',signature:'Всегда твоя,'}
 };
