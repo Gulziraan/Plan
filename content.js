@@ -1,7 +1,8 @@
 /* EDITABLE PERSONAL CONTENT — replace sample copy with your own words. */
 window.BIRTHDAY_CONTENT = {
-  name:'Hasan', age:23,
-  media:{hero:'',portrait:'',final:'',sight:['','',''],audio:'',perfume:''},
+  name:'Hasan', age:24,
+  media:{hero:'',portrait:'',final:'',reasons:['','','','','',''],sight:['','',''],audio:'',perfume:''},
+  reasonImagePositions:['50% 50%','50% 50%','50% 50%','50% 50%','50% 50%','50% 50%'],
   stats:[
     {name:'INTELLIGENCE',value:96,note:'A mind that notices the details — even the ones everyone else missed.'},
     {name:'STRATEGIC THINKING',value:94,note:'Sees the bigger picture and finds a way through.'},
@@ -36,6 +37,7 @@ window.BIRTHDAY_CONTENT = {
     {title:'The way you care',tag:'05 / THE DETAILS',text:'The small things you probably do not even notice, but I do.',stamp:'I NOTICE'},
     {title:'Simply you',tag:'06 / ONE OF ONE',text:'Not one quality or achievement. Just the person I am lucky to know and love.',stamp:'NO REPLICAS'}
   ],
+  reasonImagePositions:['50% 50%','50% 50%','50% 50%','50% 50%','50% 50%','50% 50%'],
   reasons:[
     {title:'I feel safe',text:'There is a particular kind of peace in knowing I do not have to figure everything out alone.'},
     {title:'I can be myself',text:'I love that I can be completely myself beside you.'},
