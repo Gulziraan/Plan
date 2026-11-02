@@ -3,8 +3,8 @@
   const C = window.BIRTHDAY_CONTENT || {};
   const $ = (s, root=document) => root.querySelector(s);
   const $$ = (s, root=document) => [...root.querySelectorAll(s)];
-  const STORAGE = 'hasan-chapter-23-progress';
-  const ASSET_KEY = 'hasan-chapter-23-assets';
+  const STORAGE = 'hasan-chapter-24-progress';
+  const ASSET_KEY = 'hasan-chapter-24-assets';
   const safeRead = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch (_) { return fallback; } };
   let progress = new Set(safeRead(STORAGE, []));
   let assetData = safeRead(ASSET_KEY, {});
@@ -41,8 +41,68 @@
   }
   function renderNotes() {
     $('#noteGrid').innerHTML=(C.notes||[]).map((n,i)=>`<button class="note-card note-${i+1}" data-note="${i}"><span class="note-tag">${n.tag||`NOTE / 0${i+1}`}</span><span class="note-stamp">${n.stamp||'I NOTICE'}</span><strong>${n.title}</strong><span class="note-open">OPEN NOTE ↗</span></button>`).join('');
-    $('#reasonGrid').innerHTML=(C.reasons||[]).map((n,i)=>`<button class="reason-envelope" data-reason="${i}"><span class="envelope-number">0${i+1}</span><span class="envelope-seal">H</span><b>${n.title}</b><small>OPEN LETTER ↗</small></button>`).join('');
+    renderReasonCarousel();
   }
+
+  let reasonIndex = 0, reasonFlipped = false, carouselStartX = 0;
+  function reasonImage(i) {
+    const src = assetData[`reason-${i}`] || (C.media?.reasons || [])[i] || '';
+    return src ? `<img src="${src}" alt="A personal photograph" style="object-position:${(C.reasonImagePositions||[])[i]||'50% 50%'}">`
+      : `<div class="reason-photo-placeholder"><span>H.</span><small>ADD YOUR PHOTO<br>IN THIS MEMORY</small></div>`;
+  }
+  function renderReasonCarousel() {
+    const stage = $('#reasonStage'); if (!stage) return;
+    const items = C.reasons || []; if (!items.length) return;
+    const total = items.length;
+    const cardAt = (offset) => (reasonIndex + offset + total) % total;
+    stage.innerHTML = [-1,0,1].map(offset => {
+      const i = cardAt(offset), item = items[i], isCenter = offset === 0;
+      return `<button class="reason-flip-card ${isCenter?'is-center':''} ${offset<0?'is-left':''} ${offset>0?'is-right':''} ${isCenter&&reasonFlipped?'is-flipped':''}" data-reason-card="${offset}" aria-label="${isCenter?'Flip this memory':`Show ${item.title}`}">
+        <span class="reason-card-inner">
+          <span class="reason-card-front">${reasonImage(i)}<span class="reason-photo-caption">0${i+1} <b>${item.title}</b></span></span>
+          <span class="reason-card-back"><small>ONE OF THE REASONS</small><strong>${item.title}</strong><span>${item.text}</span><i>WITH LOVE · H.</i></span>
+        </span>
+      </button>`;
+    }).join('');
+    $('#reasonCounter').textContent = `${String(reasonIndex+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+    $('#reasonProgress').style.width = `${((reasonIndex+1)/total)*100}%`;
+  }
+  function shiftReason(direction) {
+    const total = (C.reasons||[]).length;
+    if (!total) return;
+    reasonIndex = (reasonIndex + direction + total) % total;
+    reasonFlipped = false;
+    renderReasonCarousel();
+  }
+  $('#reasonPrev')?.addEventListener('click',()=>shiftReason(-1));
+  $('#reasonNext')?.addEventListener('click',()=>shiftReason(1));
+  $('#reasonStage')?.addEventListener('click', e => {
+    const card = e.target.closest('[data-reason-card]'); if (!card) return;
+    const offset = Number(card.dataset.reasonCard);
+    if (offset !== 0) { shiftReason(offset); return; }
+    reasonFlipped = !reasonFlipped; renderReasonCarousel();
+  });
+  $('#reasonStage')?.addEventListener('touchstart', e => { carouselStartX=e.changedTouches[0].clientX; }, {passive:true});
+  $('#reasonStage')?.addEventListener('touchend', e => {
+    const delta=e.changedTouches[0].clientX-carouselStartX;
+    if (Math.abs(delta)>45) shiftReason(delta<0?1:-1);
+  }, {passive:true});
+  $('#reasonPhotoUpload')?.addEventListener('change', e => {
+    const files=[...(e.target.files||[])];
+    files.slice(0,6).forEach((file, offset) => {
+      const index=(reasonIndex+offset)%(C.reasons||[]).length;
+      if (!file.type.startsWith('image/')) return;
+      const reader=new FileReader();
+      reader.onload=()=>{
+        assetData[`reason-${index}`]=reader.result;
+        try { localStorage.setItem(ASSET_KEY,JSON.stringify(assetData)); renderReasonCarousel(); }
+        catch (_) { toast('The photo is too large for browser storage. Add it to assets/ and update content.js instead.'); }
+      };
+      reader.readAsDataURL(file);
+    });
+    e.target.value='';
+  });
+
   function fileControl(label, accept, key) { return `<label class="upload-control">＋ ${label}<input type="file" accept="${accept}" data-upload="${key}" hidden></label>`; }
   function photoHTML(key, className='memory-photo') {
     const idx=Number(key.split('-').pop()); const src=assetData[key] || (key.startsWith('sight-') ? (C.media?.sight||[])[idx] : '');
@@ -91,14 +151,14 @@
   $$('[data-next]').forEach(b=>b.addEventListener('click',()=>showScene(b.dataset.next)));
   $$('[data-home]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showScene('welcome')}));
   $('#restartTop').addEventListener('click',reset); $('#restartFinal').addEventListener('click',reset);
-  renderStats(); renderNotes(); renderCharacterExtras(); renderMissions();
+  renderStats(); renderNotes(); renderReasonCarousel(); renderCharacterExtras(); renderMissions();
   $('#liftHammer').addEventListener('click',()=>{$('#liftHammer').classList.add('lifted');document.body.classList.add('lightning-hit');$('#hammerResponse').textContent=C.hammerMessage||'The hammer chose him. I just agreed.';mark('hammer');setTimeout(()=>document.body.classList.remove('lightning-hit'),850);});
   $('#achievementContinue').addEventListener('click',()=>{if(['power','quiz','memory','secret'].every(k=>progress.has(`mission-${k}`)))showScene('transition');});
   $('#secretEnvelope').addEventListener('click',()=>{if(!$('#secretEnvelope').disabled)openModal('THE LAST ENVELOPE',C.finalReason?.title||'My favourite person',`<p class="modal-copy">${C.finalReason?.text||'You are my favourite person.'}</p>`);});
   document.addEventListener('click',e=>{
     const stat=e.target.closest('[data-stat]'); if(stat){const s=C.stats[+stat.dataset.stat];openModal('CHARACTER FILE',s.name,`<p class="modal-copy">${s.note||''}</p>`);}
     const note=e.target.closest('[data-note]'); if(note){const i=+note.dataset.note,n=C.notes[i];mark(`note-${i}`);openModal(n.tag||'A LITTLE NOTE',n.title,`<p class="modal-copy">${n.text}</p>`);updateProgress();}
-    const reason=e.target.closest('[data-reason]');if(reason){const n=C.reasons[+reason.dataset.reason];openModal('A LITTLE TRUTH',n.title,`<p class="modal-copy">${n.text}</p>`);}
+
     const ability=e.target.closest('[data-ability]');if(ability){const a=C.abilities[+ability.dataset.ability];openModal('SPECIAL ABILITY',a.title,`<p class="modal-copy">${a.text}</p>`);}
     const memory=e.target.closest('[data-memory-title]');if(memory)openModal('A LITTLE MEMORY',memory.dataset.memoryTitle,`<p class="modal-copy">${memory.dataset.memoryText}</p>`);
     const photo=e.target.closest('[data-memory]');if(photo){const key=photo.dataset.memory;openModal('A MOMENT TO KEEP','A day worth keeping',`${photoHTML(key,'modal-photo')}<p class="modal-small">UPLOAD A PHOTO USING THE CONTROL BELOW THE COLLAGE.</p>`);}

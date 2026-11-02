@@ -1,4 +1,4 @@
-# Hasan — Chapter 23 | Cinematic Edition
+# Hasan — Chapter 24 | Cinematic Edition
 
 A responsive, static birthday storytelling website. This is a refinement of the existing project: the original five-senses chapters and letter experience remain, with a cinematic superhero visual direction and repaired navigation/interactions.
 
@@ -8,7 +8,7 @@ Open `index.html` in a modern browser. `Hasan-Birthday-Preview.html` is a standa
 ## Personalise
 Edit `content.js`:
 - `stats`, `abilities`, `passives`, `superpowers` — character dossier
-- `notes`, `reasons`, `finalReason` — personal notes and letters
+- `notes`, `reasons`, `finalReason`, `reasonImagePositions` — personal notes, carousel copy and image crop positions
 - `games` — mini-mission wording
 - `senses` and `finalLetter` — five-senses chapters and final letter
 - `media` — optional relative paths to image/audio assets
@@ -29,3 +29,7 @@ The site uses Barlow Condensed for display typography, DM Sans for interface tex
 
 ## Publish
 Upload the complete folder to static hosting. No backend or build step is required.
+
+
+## Reasons photo carousel
+The Reasons I Love You section is a 3D flip carousel. Add up to six photos using the upload control, or set `media.reasons` to relative paths in `content.js`. Change each crop using `reasonImagePositions` (for example `50% 35%`). The carousel supports arrows and touch swipes; changing slides resets the flip state.
