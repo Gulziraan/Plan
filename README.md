@@ -1,35 +1,33 @@
-# Hasan — Chapter 24 | Cinematic Edition
+# Хасан — глава 23
 
-A responsive, static birthday storytelling website. This is a refinement of the existing project: the original five-senses chapters and letter experience remain, with a cinematic superhero visual direction and repaired navigation/interactions.
+Адаптивный сайт-поздравление. Это развитие существующего проекта: сохранены пять глав, посвящённых чувствам, личные заметки и финальное письмо. Добавлены выразительная визуальная подача, крупные фотозоны, анимации и исправления интерактивных элементов.
 
-## Open
-Open `index.html` in a modern browser. `Hasan-Birthday-Preview.html` is a standalone version with CSS and JavaScript embedded.
+## Как открыть
 
-## Personalise
-Edit `content.js`:
-- `stats`, `abilities`, `passives`, `superpowers` — character dossier
-- `notes`, `reasons`, `finalReason`, `reasonImagePositions` — personal notes, carousel copy and image crop positions
-- `games` — mini-mission wording
-- `senses` and `finalLetter` — five-senses chapters and final letter
-- `media` — optional relative paths to image/audio assets
+Открой файл `index.html` в современном браузере. Файл предпросмотра `Hasan-23-Russian-Redesign-Preview.html` содержит стили и сценарии внутри одной HTML-страницы.
 
-Use the in-page upload controls to add photos/audio for the current browser. Browser uploads are saved locally on that device and are not automatically included when you share the ZIP. For a shareable version, place files in `assets/` and use relative paths in `content.js`.
+## Как добавить свои материалы
 
-## Interactions
-- Character stats and ability details open in a modal.
-- The hammer interaction triggers a brief lightning flash and a personal message.
-- Notes and envelopes reveal their copy.
-- Four small missions unlock the achievement and transition.
-- Five senses chapters can be opened in any order; progress is saved locally.
-- The final page unlocks after all five senses chapters are marked complete.
-- Uploaded media and progress are stored in this browser's localStorage.
+В самом сайте есть кнопки загрузки фотографий и аудио. Фотографии автоматически уменьшаются перед сохранением, чтобы занимать меньше места. Материалы сохраняются в памяти браузера на текущем устройстве и не переносятся автоматически вместе с ZIP-архивом.
 
-## Typography
-The site uses Barlow Condensed for display typography, DM Sans for interface text, Cormorant Garamond for editorial copy, and Parisienne for handwritten accents. Google Fonts are loaded when internet is available; system fallbacks are declared for offline use.
+Чтобы изменить тексты, открой `content.js`:
+- `stats`, `abilities`, `passives`, `superpowers` — характеристики и способности Хасана;
+- `notes`, `reasons`, `finalReason` — личные заметки и карусель воспоминаний;
+- `games` — вопросы и небольшие задания;
+- `senses` и `finalLetter` — пять глав о чувствах и финальное письмо;
+- `media` — пути к дополнительным изображениям и аудио.
 
-## Publish
-Upload the complete folder to static hosting. No backend or build step is required.
+## Что можно делать на сайте
 
+- Нажимать на характеристики и способности, чтобы открывать подробности.
+- Поднимать молот и запускать эффект молнии.
+- Переворачивать карточки воспоминаний и листать фотокарусель.
+- Загружать фотографии в первый экран, профиль, галерею и каждую главу о чувствах.
+- Добавлять аудиозапись к главе о слухе.
+- Выполнять четыре небольших задания и открывать достижение.
+- Проходить пять глав в любом порядке. Прогресс сохраняется в браузере.
+- Открывать финальную страницу после завершения всех пяти глав.
 
-## Reasons photo carousel
-The Reasons I Love You section is a 3D flip carousel. Add up to six photos using the upload control, or set `media.reasons` to relative paths in `content.js`. Change each crop using `reasonImagePositions` (for example `50% 35%`). The carousel supports arrows and touch swipes; changing slides resets the flip state.
+## Публикация
+
+Загрузи всю папку проекта на статический хостинг. Серверная часть и отдельная сборка не нужны. Для загрузки шрифтов из Google Fonts потребуется подключение к интернету; без него используются системные шрифты.
