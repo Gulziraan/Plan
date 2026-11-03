@@ -1,138 +1,177 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#28070d" />
-  <meta name="description" content="Маленький мир, созданный специально для Хасана. С днём рождения, 23!" />
-  <title>Хасан — Глава 23</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#710f22">
+  <meta name="description" content="Особенная история для Хасана. Глава 24.">
+  <title>Хасан — Глава 24</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
+
   <header class="topbar">
-    <a class="wordmark" href="#" data-home>Х<span>.</span></a>
-    <div class="topbar-center"><span>ИЗДАНИЕ, СОЗДАННОЕ ДЛЯ ТЕБЯ</span><i></i><span>ЛЕГЕНДАРНОЕ ИЗДАНИЕ</span></div>
-    <button class="restart-link" id="restartTop" type="button">НАЧАТЬ СНАЧАЛА ↗</button>
+    <a href="#" class="logo" data-home>Х<span>.</span></a>
+    <div class="topbar-caption">ОСОБЕННОЕ ИЗДАНИЕ <i></i> ГЛАВА 24</div>
+    <button class="top-action" id="restartTop">НАЧАТЬ СНАЧАЛА ↗</button>
   </header>
 
-  <main id="app">
-    <section class="scene active" id="welcome" aria-labelledby="welcomeTitle">
-      <div class="welcome-layout">
-        <div class="welcome-copy">
-          <p class="eyebrow"><span class="eyebrow-line"></span> ОСОБЕННОЕ ИЗДАНИЕ · № 23</p>
-          <h1 id="welcomeTitle">Некоторым героям<br>не нужна<br><em>мантия.</em></h1>
-          <p class="welcome-sub">Кому-то нужен молот. Кому-то — суперспособности.<br><strong>А кому-то достаточно просто быть Хасаном.</strong></p><div class="hero-reveal"><span>✦ НЕКОТОРЫМ ГЕРОЯМ НЕ НУЖНА МАНТИЯ.</span><b>Кому-то нужен молот. Кому-то — суперспособности.<br><em>А кому-то достаточно просто быть Хасаном.</em></b></div>
-          <div class="welcome-bottom"><button class="primary-btn" id="beginBtn">НАЧНЁМ <span>↗</span></button><span class="tiny-note">НЕ СПЕШИ · ЭТОТ МИР СОЗДАН ДЛЯ ТЕБЯ</span></div>
+  <main>
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="scene active hero-scene" id="welcome">
+      <div class="hero-bg-number">24</div>
+      <div class="hero-stripe"></div>
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> ОСОБЕННОЕ ИЗДАНИЕ · ТОЛЬКО ДЛЯ ТЕБЯ</p>
+          <p class="hero-pretitle">НЕКОТОРЫМ ГЕРОЯМ</p>
+          <h1>НЕ НУЖНА<br><em>МАНТИЯ.</em></h1>
+          <p class="hero-description">
+            Кому-то нужен молот. Кому-то — суперспособности.
+            А кому-то достаточно просто быть Хасаном.
+          </p>
+          <button class="button button-light" id="beginBtn">
+            ОТКРЫТЬ ИСТОРИЮ <span>↗</span>
+          </button>
+          <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ. БЕЗ ПОТРЕБНОСТИ В СПАСЕНИИ МИРА.</p>
         </div>
-        <div class="welcome-art">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="sun-disc">23</div><div class="hero-name-backdrop">ХАСАН</div><div class="storm-halo" aria-hidden="true"></div><div class="hammer-mark" aria-hidden="true"><svg viewBox="0 0 120 120" role="img"><path d="M26 18h68l-8 28H34zM48 43h24l-7 58H55zM40 16l-8-8h56l-8 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg></div>
-          <div class="photo-frame hero-photo" data-photo="hero"><div class="photo-placeholder"><span class="placeholder-mark">Х.</span><small>ЗАГРУЗИ ЕГО ЛЮБИМОЕ ФОТО</small></div><label class="photo-upload-overlay">＋ ДОБАВИТЬ ФОТО<input type="file" accept="image/*" data-upload="hero" hidden></label></div>
-          <div class="ribbon-label">С ДНЁМ<br>РОЖДЕНИЯ</div>
-          <div class="stamp">СОЗДАНО<br>С ЛЮБОВЬЮ<br><b>♥</b></div>
-          <span class="art-caption">ГЛАВНЫЙ ГЕРОЙ · УРОВЕНЬ 23</span>
+        <div class="hero-visual">
+          <div class="hero-photo photo-slot" data-photo="hero">
+            <div class="photo-placeholder"><b>Х.</b><span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span></div>
+          </div>
+          <div class="hero-tag">ГЛАВНЫЙ ГЕРОЙ<br><strong>ОДИН ТАКОЙ</strong></div>
+          <div class="hero-lightning">ϟ</div>
+          <div class="hero-caption">ХАСАН · УРОВЕНЬ 24</div>
         </div>
       </div>
-      <div class="welcome-footer"><span>ГЛАВА 23</span><span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА МЕЛОЧЕЙ.</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></div>
+      <div class="hero-bottom"><span>ГЛАВА 24</span><span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span><span>♥</span></div>
     </section>
 
-    <section class="scene" id="profile" aria-labelledby="profileTitle">
-      <div class="section-heading"><p class="eyebrow">ЧАСТЬ I — ГЛАВНЫЙ ГЕРОЙ</p><span class="chapter-no">01 / 07</span></div>
-      <div class="profile-layout">
-        <div class="profile-image-wrap"><div class="profile-image" data-photo="portrait"><div class="photo-placeholder"><span class="placeholder-mark">23</span><small>ЗАГРУЗИ ПОРТРЕТ ХАСАНА</small></div></div><span class="image-index">РИС. 01 — ОРИГИНАЛ</span><span class="handwritten profile-note">единственный в своём роде.</span><label class="frame-upload profile-upload">＋ ДОБАВИТЬ ПОРТРЕТ<input type="file" accept="image/*" data-upload="portrait" hidden></label></div>
-        <div class="profile-content">
+    <!-- ПРОФИЛЬ -->
+    <section class="scene" id="profile">
+      <div class="section-top"><span>ЧАСТЬ I / ЛЕГЕНДА</span><span>01 — 05</span></div>
+      <div class="profile-hero">
+        <div class="profile-photo photo-slot" data-photo="portrait">
+          <div class="photo-placeholder"><b>24</b><span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span></div>
+        </div>
+        <div class="profile-panel">
           <p class="eyebrow">ДОСЬЕ ПЕРСОНАЖА · ОБНОВЛЕНО СЕГОДНЯ</p>
-          <div class="profile-level"><span>УРОВЕНЬ</span><b>23</b><i>ЛЕГЕНДАРНОЕ ИЗДАНИЕ</i></div><h2 id="profileTitle">ХАСАН</h2><p class="profile-subtitle">СТРАТЕГ</p>
-          <div class="character-rank"><span class="rarity-gem">✦</span><span>ЛЕГЕНДАРНЫЙ</span><i></i><span>КЛАСС: СТРАТЕГ</span></div><div class="hero-designation"><span>ВСЕЛЕННАЯ</span><b>МОЯ ЛЮБИМАЯ ВСЕЛЕННАЯ</b><i>ТОТ, КТО СПРАВИТСЯ С ЧЕМ УГОДНО</i></div>
-          <p class="profile-intro">Человек редкого выпуска. Впечатляет без лишнего шума. Иногда его невозможно победить в споре.</p>
-          <p class="character-description">Вдумчивый и уравновешенный герой, который умеет видеть картину целиком. <em>Замени это описание на своё.</em></p>
-          <div class="profile-meta"><div><small>ИМЯ</small><b>Хасан</b></div><div><small>ТЕКУЩАЯ ГЛАВА</small><b>23</b></div><div><small>РЕДКОСТЬ</small><b>Единственный экземпляр</b></div></div>
-          <div class="stats" id="stats"></div>
-          <p class="micro-hint">НАЖМИ НА ХАРАКТЕРИСТИКУ, ЧТОБЫ УЗНАТЬ БОЛЬШЕ</p>
-          <div class="skill-block"><div class="skill-heading"><span>ОСОБЫЕ СПОСОБНОСТИ</span><small>ОТКРОЙ ДОСЬЕ</small></div><div class="ability-list" id="abilityList"></div></div>
-          <div class="passive-block"><span class="skill-heading-text">ПАССИВНЫЕ НАВЫКИ</span><div id="passiveSkills" class="passive-skills"></div></div>
-          <div class="weakness-line"><span>ИЗВЕСТНАЯ СЛАБОСТЬ</span><b id="weaknessText"></b></div>
-          <div class="superpower-line"><span>✧ ГЛАВНАЯ СУПЕРСИЛА</span><b id="superpowerText"></b></div><div class="hero-powers"><p class="skill-heading-text">СУПЕРСПОСОБНОСТИ · ЗАМЕТКИ</p><div id="heroPowers"></div></div><div class="hammer-trial"><div class="hammer-visual" aria-hidden="true"><svg viewBox="0 0 160 160"><path d="M34 28h92l-10 37H44zM67 61h27l-9 83H76zM44 25l-9-12h90l-9 12" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/></svg></div><div><p class="eyebrow">ИСПЫТАНИЕ ДОСТОЙНОГО</p><h3>ТОЛЬКО ДОСТОЙНЫЙ<br><em>СМОЖЕТ ЕГО ПОДНЯТЬ.</em></h3><p>Всего одна попытка. Страховка от грома не понадобится.</p><button class="hammer-button" id="liftHammer" type="button">ПОПРОБОВАТЬ ПОДНЯТЬ МОЛОТ ↗</button><p class="hammer-response" id="hammerResponse" aria-live="polite"></p></div></div>
-          <button class="text-btn next-btn" data-next="admire">ДАЛЬШЕ — САМОЕ ИНТЕРЕСНОЕ <span>↗</span></button>
+          <p class="profile-overline">ЛЕГЕНДА В СВОЕЙ ВСЕЛЕННОЙ</p>
+          <h2>ХАСАН<span>.</span></h2>
+          <div class="profile-labels">
+            <span>УРОВЕНЬ <b>24</b></span>
+            <span>КЛАСС <b>СТРАТЕГ</b></span>
+            <span>РЕДКОСТЬ <b>ЛЕГЕНДАРНЫЙ</b></span>
+          </div>
+          <p class="profile-quote">Тот, кто может справиться практически со всем.</p>
+          <div class="profile-universe">ОСОБАЯ КАТЕГОРИЯ: МОЙ ЛЮБИМЫЙ ЧЕЛОВЕК</div>
         </div>
       </div>
-    </section>
 
-    <section class="scene" id="admire" aria-labelledby="admireTitle">
-      <div class="section-heading"><p class="eyebrow">ЧАСТЬ I — МАЛЕНЬКИЕ ДЕТАЛИ</p><span class="chapter-no">02 / 07</span></div>
-      <div class="center-heading"><p class="eyebrow">МОИ НАБЛЮДЕНИЯ</p><h2 id="admireTitle">Что делает тебя<br><em>тобой.</em></h2><p class="epic-to-intimate">Но твои лучшие качества — даже не суперспособности.</p><p>Некоторые вещи заслуживают большего, чем мимолётный комплимент.<br>Открой несколько заметок. Я давно их собираю.</p></div>
-      <div class="note-grid" id="noteGrid"></div>
-      <div class="section-bottom"><span class="tiny-note">КАЖДАЯ ЗАМЕТКА — О ЧЁМ-ТО СВОЁ.</span><button class="text-btn next-btn" data-next="reasons">Я ХОЧУ ПОКАЗАТЬ ТЕБЕ ЕЩЁ <span>↗</span></button></div>
-    </section>
-
-    <section class="scene" id="reasons" aria-labelledby="reasonsTitle">
-      <div class="section-heading"><p class="eyebrow">ЧАСТЬ I — МОИ ЧУВСТВА</p><span class="chapter-no">03 / 07</span></div>
-      <div class="reasons-heading"><div><p class="eyebrow">НЕСКОЛЬКО ВЕЩЕЙ, КОТОРЫЕ Я ХОЧУ СКАЗАТЬ</p><h2 id="reasonsTitle">Причины,<br><em>за которые я тебя люблю.</em></h2><p class="epic-to-intimate">Самое любимое в моём супергерое — то, что он настоящий.</p></div><p class="reasons-side-copy">Даже супергероям важно знать, как сильно их любят. Несколько моментов, фотографий и маленьких истин, которые я хочу тебе оставить.</p></div>
-      <div class="reason-carousel" id="reasonCarousel" aria-label="Причины, за которые я тебя люблю">
-        <button class="carousel-arrow carousel-prev" id="reasonPrev" aria-label="Предыдущая причина">←</button>
-        <div class="reason-stage" id="reasonStage"></div>
-        <button class="carousel-arrow carousel-next" id="reasonNext" aria-label="Следующая причина">→</button>
+      <div class="stats-section">
+        <div class="section-title">
+          <p class="eyebrow">ХАРАКТЕРИСТИКИ ПЕРСОНАЖА</p>
+          <h3>СИЛЬНЫЕ <em>СТОРОНЫ.</em></h3>
+        </div>
+        <div class="stats-grid" id="stats"></div>
       </div>
-      <div class="carousel-footer"><span id="reasonCounter">01 / 06</span><span class="carousel-hint">НАЖМИ НА ЦЕНТРАЛЬНОЕ ФОТО, ЧТОБЫ ПЕРЕВЕРНУТЬ · ЛИСТАЙ СВАЙПОМ</span><span class="carousel-progress"><i id="reasonProgress"></i></span></div>
-      <div class="reason-upload-row"><span>СОЗДАЙ СВОЮ ГАЛЕРЕЮ</span><label class="upload-control">＋ ДОБАВИТЬ / ЗАМЕНИТЬ ФОТОГРАФИИ<input id="reasonPhotoUpload" type="file" accept="image/*" multiple hidden></label></div>
-      <div class="section-bottom"><span class="tiny-note">О НЕКОТОРЫХ ВЕЩАХ ЛУЧШЕ СКАЗАТЬ ЛИЧНО.</span><button class="text-btn next-btn" data-next="missions">К ТВОИМ ЗАДАНИЯМ <span>↗</span></button></div>
-    </section>
 
-    <section class="scene" id="missions" aria-labelledby="missionsTitle">
-      <div class="section-heading"><p class="eyebrow">ЧАСТЬ I — ИНТЕРАКТИВНОЕ ИЗДАНИЕ</p><span class="chapter-no">04 / 07</span></div>
-      <div class="center-heading"><p class="eyebrow">ЧЕТЫРЕ НЕБОЛЬШИХ ИСПЫТАНИЯ. БЕЗ ДАВЛЕНИЯ.</p><h2 id="missionsTitle">Именинные<br><em>задания.</em></h2><p>У каждого главного героя есть побочные задания.<br>Эти придуманы для одного совершенно особенного игрока.</p></div>
-      <div class="mission-list">
-        <article class="mission-panel" id="mission-power"><div class="mission-top"><span>ЗАДАНИЕ 01</span><span class="mission-status" data-status="power">НЕ НАЧАТО</span></div><h3>Выбери свою <em>суперсилу.</em></h3><p class="mission-description">Одна способность. Не раздумывай слишком долго. Что выберешь?</p><div class="power-grid" id="powerGrid"></div><div class="mission-result" id="powerResult" aria-live="polite"></div></article>
-        <article class="mission-panel" id="mission-quiz"><div class="mission-top"><span>ЗАДАНИЕ 02</span><span class="mission-status" data-status="quiz">НЕ НАЧАТО</span></div><h3>Насколько хорошо ты <em>знаешь себя?</em></h3><p class="mission-description">Несколько совершенно неофициальных вопросов. Экзаменатор может быть необъективен.</p><div id="quizArea"></div></article>
-        <article class="mission-panel" id="mission-memory"><div class="mission-top"><span>ЗАДАНИЕ 03</span><span class="mission-status" data-status="memory">НЕ НАЧАТО</span></div><h3>Игра на <em>память.</em></h3><p class="mission-description">Соедини каждую фотографию с её подписью. Когда подготовишь снимки, замени примеры в файле с контентом.</p><div class="memory-game-grid" id="memoryGame"></div><p class="game-feedback" id="memoryFeedback" aria-live="polite">Найди все три пары.</p></article>
-        <article class="mission-panel" id="mission-secret"><div class="mission-top"><span>ЗАДАНИЕ 04</span><span class="mission-status" data-status="secret">НЕ НАЧАТО</span></div><h3>Деталь, которая <em>прячется на виду.</em></h3><p class="mission-description" id="secretPrompt"></p><div class="secret-options" id="secretOptions"></div><div class="mission-result" id="secretResult" aria-live="polite"></div></article>
+      <div class="hammer-section">
+        <div class="hammer-copy">
+          <p class="eyebrow">ИСПЫТАНИЕ ДОСТОЙНОГО</p>
+          <h3>ТОЛЬКО ДОСТОЙНЫЙ<br>ПОДНИМЕТ <em>МОЛОТ.</em></h3>
+          <p>Говорят, не каждый способен поднять Мьёльнир. Но у некоторых, кажется, особые правила.</p>
+          <button class="button button-red" id="hammerBtn">ПОПРОБОВАТЬ СИЛУ <span>ϟ</span></button>
+          <p class="hammer-result" id="hammerResult" aria-live="polite"></p>
+        </div>
+        <button class="hammer-art" id="hammerArt" aria-label="Нажми, чтобы поднять молот">
+          <span class="hammer-rune">ᛟ</span><span class="hammer-icon">⚒</span>
+          <span class="hammer-hint">НАЖМИ НА МОЛОТ</span>
+        </button>
       </div>
-      <div class="section-bottom"><span class="tiny-note">БЕЗ БАЛЛОВ. ПРОСТО НЕМНОГО ВЕСЕЛЬЯ.</span><button class="text-btn next-btn" data-next="achievement">ПОСМОТРЕТЬ ДОСТИЖЕНИЕ <span>↗</span></button></div>
+      <div class="scene-nav"><button class="text-link" data-next="admire">ДАЛЬШЕ — О ТОМ, КАКОЙ ТЫ <span>↗</span></button></div>
     </section>
 
-    <section class="scene achievement-scene" id="achievement" aria-labelledby="achievementTitle">
-      <div class="achievement-orbit"><span>✦</span><i></i><b>23</b></div>
-      <p class="eyebrow">ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ · ЗАСЛУЖЕННЫЙ ТИТУЛ</p>
-      <h2 id="achievementTitle">Единственный<br><em>в своём роде.</em></h2>
-      <div class="achievement-rule"></div>
-      <p class="achievement-copy">23 года быть собой.<br><em>И всё так же — мой любимый человек.</em></p>
-      <div class="achievement-seal">✦<small>ЛЕГЕНДАРНОЕ<br>ИЗДАНИЕ</small></div>
-      <p class="achievement-hint" id="achievementHint">Выполни четыре задания, чтобы открыть своё достижение.</p>
-      <button class="primary-btn" id="achievementContinue" disabled>ОТКРЫТЬ СЛЕДУЮЩУЮ ГЛАВУ <span>↗</span></button>
+    <!-- КАЧЕСТВА -->
+    <section class="scene" id="admire">
+      <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
+      <div class="chapter-heading">
+        <p class="eyebrow">НЕ ВСЁ ПОПАДАЕТ В ДОСЬЕ</p>
+        <h2>ЧТО ДЕЛАЕТ<br>ТЕБЯ <em>ТОБОЙ.</em></h2>
+        <p>Но самое лучшее в тебе — даже не суперспособности.</p>
+      </div>
+      <div class="quality-list" id="noteGrid"></div>
+      <div class="scene-nav"><button class="text-link" data-next="transition">Я ХОЧУ ПОКАЗАТЬ ТЕБЕ ЕЩЁ <span>↗</span></button></div>
     </section>
 
-    <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
-      <div class="transition-ornament">✳</div><p class="eyebrow">А ТЕПЕРЬ — НЕМНОГО ДРУГОЙ ВЗГЛЯД</p>
-      <h2 id="transitionTitle">Теперь, когда ты знаешь,<br>каким я <em>тебя вижу...</em></h2>
-      <div class="transition-rule"></div>
-      <p class="transition-copy">Позволь показать, что я к тебе чувствую.<br>Не всё сразу. Понемногу.</p>
-      <button class="primary-btn" data-next="senses">ПЕРЕВЕРНУТЬ СТРАНИЦУ <span>↗</span></button>
-      <span class="transition-foot">ЧАСТЬ II — МОИ ЧУВСТВА</span>
+    <!-- ПЕРЕХОД -->
+    <section class="scene transition-scene" id="transition">
+      <div class="transition-symbol">ϟ</div>
+      <p class="eyebrow">А ТЕПЕРЬ — САМОЕ ЛИЧНОЕ</p>
+      <h2>ЭТО ИСТОРИЯ<br>НЕ О <em>СУПЕРСИЛЕ.</em></h2>
+      <p>Она о том, что я чувствую рядом с тобой. И о маленьких вещах, из которых складывается большое счастье.</p>
+      <button class="button button-light" data-next="senses">ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗</button>
     </section>
 
-    <section class="scene" id="senses" aria-labelledby="sensesTitle">
-      <div class="section-heading"><p class="eyebrow">ЧАСТЬ II — ПЯТЬ СПОСОБОВ СКАЗАТЬ О ГЛАВНОМ</p><span class="chapter-no">07 / 07</span></div>
-      <div class="senses-intro"><div><p class="eyebrow">ИССЛЕДОВАНИЕ ЛЮБВИ</p><h2 id="sensesTitle">Пять чувств.<br><em>И в каждом — ты.</em></h2></div><p>Пять небольших глав. В каждой — особенное воспоминание. Открывай в любом порядке: последняя страница подождёт.</p></div>
-      <div class="progress-wrap"><div class="progress-label"><span>ТВОЯ ИСТОРИЯ</span><span id="progressCount">ОТКРЫТО: 0 ИЗ 5</span></div><div class="progress-track"><div id="progressFill"></div></div><div class="progress-symbols" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div>
-      <div class="sense-list" id="senseList"></div>
+    <!-- ПЯТЬ ЧУВСТВ -->
+    <section class="scene" id="senses">
+      <div class="section-top"><span>ЧАСТЬ II / МОИ ЧУВСТВА</span><span>03 — 05</span></div>
+      <div class="senses-heading">
+        <div><p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p><h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2></div>
+        <p>Каждая глава — маленькая часть нашей истории. Открывай их в любом порядке.</p>
+      </div>
+      <div class="progress">
+        <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
+        <div class="progress-track"><i id="progressFill"></i></div>
+        <div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+      </div>
+      <div id="senseList" class="sense-list"></div>
     </section>
 
-    <section class="scene" id="final" aria-labelledby="finalTitle">
-      <div class="final-top"><p class="eyebrow">ПОСЛЕДНЯЯ СТРАНИЦА · И МОЯ ЛЮБИМАЯ</p><span>23 — ∞</span></div>
-      <div class="final-composition"><div class="final-photo" data-photo="final"><div class="photo-placeholder"><span class="placeholder-mark">♥</span><small>ОДНА ФОТОГРАФИЯ,<br>ЧТОБЫ СОХРАНИТЬ НАВСЕГДА</small></div><label class="photo-upload-overlay">＋ ДОБАВИТЬ ФОТО<input type="file" accept="image/*" data-upload="final" hidden></label></div><div class="final-letter-area"><p class="handwritten">моему любимому человеку</p><h2 id="finalTitle">Пять чувств.<br>Бесчисленные воспоминания.<br><em>Один любимый человек.</em></h2><div class="letter-envelope" id="finalEnvelope"><div class="envelope-back"></div><div class="letter-paper"><span class="letter-date">ПИСЬМО ДЛЯ ТЕБЯ · 23</span><p id="finalLetterText">Любимый,</p><p class="letter-placeholder" id="finalLetterBody">Здесь будет твоё письмо.</p><p class="letter-sign"><span id="finalLetterSignature">Всегда твоя,</span> <span>♡</span></p></div><button class="envelope-flap" id="openFinal" aria-label="Открыть письмо"><span>ОТКРЫТЬ ПИСЬМО</span></button></div><p class="final-instruction">НЕСКОЛЬКО СЛОВ, ТОЛЬКО ДЛЯ ТЕБЯ.</p></div></div>
-      <div class="final-end"><span>С ДНЁМ РОЖДЕНИЯ, ЛЮБИМЫЙ!</span><span>СОЗДАНО ОТ ВСЕГО СЕРДЦА <b>♥</b></span></div>
-      <button class="restart-final" id="restartFinal">ПРОЧИТАТЬ ЕЩЁ РАЗ ↗</button>
+    <!-- ФИНАЛ -->
+    <section class="scene final-scene" id="final">
+      <div class="section-top"><span>ПОСЛЕДНЯЯ ГЛАВА</span><span>24 — ∞</span></div>
+      <div class="final-layout">
+        <div class="final-photo photo-slot" data-photo="final">
+          <div class="photo-placeholder"><b>♥</b><span>НАШ СНИМОК</span></div>
+        </div>
+        <div class="final-copy">
+          <p class="eyebrow">И МОЯ САМАЯ ЛЮБИМАЯ СТРАНИЦА</p>
+          <h2>ПЯТЬ ЧУВСТВ.<br>ТЫСЯЧИ МОМЕНТОВ.<br><em>ОДИН ЛЮБИМЫЙ.</em></h2>
+          <div class="envelope" id="finalEnvelope">
+            <div class="letter">
+              <p class="letter-date">ПИСЬМО ДЛЯ ТЕБЯ · ГЛАВА 24</p>
+              <h3 id="finalLetterText"></h3>
+              <p id="finalLetterBody"></p>
+              <p class="letter-sign" id="finalLetterSignature"></p>
+            </div>
+            <button class="envelope-flap" id="openFinal">ОТКРЫТЬ ПИСЬМО ♥</button>
+          </div>
+        </div>
+      </div>
+      <p class="final-footer">С ДНЁМ РОЖДЕНИЯ, МОЯ ЛЮБОВЬ. <span>♥</span></p>
+      <button class="text-link restart-final" id="restartFinal">ПРОЧИТАТЬ ЕЩЁ РАЗ ↗</button>
     </section>
   </main>
 
-  <footer class="site-footer"><span>H. / ГЛАВА 23</span><span>УНИКАЛЬНОЕ ИЗДАНИЕ · С ЛЮБОВЬЮ</span></footer>
+  <footer class="site-footer"><span>Х. / ГЛАВА 24</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></footer>
 
-  <div class="modal" id="detailModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Закрыть">×</button><div class="modal-kicker" id="modalKicker"></div><h3 id="modalTitle"></h3><div id="modalBody"></div></div></div>
-  <div class="toast" id="toast" role="status"></div>
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-close aria-label="Закрыть">×</button>
+      <p class="eyebrow" id="modalKicker"></p>
+      <h3 id="modalTitle"></h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <script src="content.js"></script>
   <script src="app.js"></script>
 </body>
