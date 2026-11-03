@@ -7,14 +7,11 @@
   <meta name="theme-color" content="#710f22">
   <meta name="description" content="Особенная история для Хасана. Глава 24.">
   <title>Хасан — Глава 24</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="grain" aria-hidden="true"></div>
 
@@ -25,84 +22,52 @@
   </header>
 
   <main>
-
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="scene active hero-scene" id="welcome">
       <div class="hero-bg-number">24</div>
       <div class="hero-stripe"></div>
-
       <div class="hero-layout">
         <div class="hero-copy">
           <p class="eyebrow"><span></span> ОСОБЕННОЕ ИЗДАНИЕ · ТОЛЬКО ДЛЯ ТЕБЯ</p>
           <p class="hero-pretitle">НЕКОТОРЫМ ГЕРОЯМ</p>
           <h1>НЕ НУЖНА<br><em>МАНТИЯ.</em></h1>
-
           <p class="hero-description">
             Кому-то нужен молот. Кому-то — суперспособности.
             А кому-то достаточно просто быть Хасаном.
           </p>
-
           <button class="button button-light" id="beginBtn">
             ОТКРЫТЬ ИСТОРИЮ <span>↗</span>
           </button>
-
-          <p class="hero-small">
-            СОЗДАНО С ЛЮБОВЬЮ. БЕЗ ПОТРЕБНОСТИ В СПАСЕНИИ МИРА.
-          </p>
+          <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ. БЕЗ ПОТРЕБНОСТИ В СПАСЕНИИ МИРА.</p>
         </div>
-
         <div class="hero-visual">
           <div class="hero-photo photo-slot" data-photo="hero">
-            <div class="photo-placeholder">
-              <b>Х.</b>
-              <span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span>
-            </div>
+            <div class="photo-placeholder"><b>Х.</b><span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span></div>
           </div>
-
-          <div class="hero-tag">
-            ГЛАВНЫЙ ГЕРОЙ<br>
-            <strong>ОДИН ТАКОЙ</strong>
-          </div>
-
+          <div class="hero-tag">ГЛАВНЫЙ ГЕРОЙ<br><strong>ОДИН ТАКОЙ</strong></div>
           <div class="hero-lightning">ϟ</div>
           <div class="hero-caption">ХАСАН · УРОВЕНЬ 24</div>
         </div>
       </div>
-
-      <div class="hero-bottom">
-        <span>ГЛАВА 24</span>
-        <span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span>
-        <span>♥</span>
-      </div>
+      <div class="hero-bottom"><span>ГЛАВА 24</span><span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span><span>♥</span></div>
     </section>
-
 
     <!-- ПРОФИЛЬ -->
     <section class="scene" id="profile">
-      <div class="section-top">
-        <span>ЧАСТЬ I / ЛЕГЕНДА</span>
-        <span>01 — 05</span>
-      </div>
-
+      <div class="section-top"><span>ЧАСТЬ I / ЛЕГЕНДА</span><span>01 — 05</span></div>
       <div class="profile-hero">
         <div class="profile-photo photo-slot" data-photo="portrait">
-          <div class="photo-placeholder">
-            <b>24</b>
-            <span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span>
-          </div>
+          <div class="photo-placeholder"><b>24</b><span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span></div>
         </div>
-
         <div class="profile-panel">
           <p class="eyebrow">ДОСЬЕ ПЕРСОНАЖА · ОБНОВЛЕНО СЕГОДНЯ</p>
           <p class="profile-overline">ЛЕГЕНДА В СВОЕЙ ВСЕЛЕННОЙ</p>
           <h2>ХАСАН<span>.</span></h2>
-
           <div class="profile-labels">
             <span>УРОВЕНЬ <b>24</b></span>
             <span>КЛАСС <b>СТРАТЕГ</b></span>
             <span>РЕДКОСТЬ <b>ЛЕГЕНДАРНЫЙ</b></span>
           </div>
-
           <p class="profile-quote">Тот, кто может справиться практически со всем.</p>
           <div class="profile-universe">ОСОБАЯ КАТЕГОРИЯ: МОЙ ЛЮБИМЫЙ ЧЕЛОВЕК</div>
         </div>
@@ -116,278 +81,118 @@
         <div class="stats-grid" id="stats"></div>
       </div>
 
-      <div class="hammer-section">
-        <div class="hammer-copy">
-          <p class="eyebrow">ИСПЫТАНИЕ ДОСТОЙНОГО</p>
-          <h3>ТОЛЬКО ДОСТОЙНЫЙ<br>ПОДНИМЕТ <em>МОЛОТ.</em></h3>
-          <p>
-            Говорят, не каждый способен поднять Мьёльнир.
-            Но у некоторых, кажется, особые правила.
-          </p>
-          <button class="button button-red" id="hammerBtn">
-            ПОПРОБОВАТЬ СИЛУ <span>ϟ</span>
-          </button>
-          <p class="hammer-result" id="hammerResult" aria-live="polite"></p>
-        </div>
-
-        <button class="hammer-art" id="hammerArt" aria-label="Нажми, чтобы поднять молот">
-          <span class="hammer-rune">ᛟ</span>
-          <span class="hammer-icon">⚒</span>
-          <span class="hammer-hint">НАЖМИ НА МОЛОТ</span>
-        </button>
-      </div>
-
-      <div class="scene-nav">
-        <button class="text-link" data-next="admire">
-          ДАЛЬШЕ — О ТОМ, КАКОЙ ТЫ <span>↗</span>
-        </button>
-      </div>
+      <div class="scene-nav"><button class="text-link" data-next="hammer">К ОДНОМУ НЕБОЛЬШОМУ ИСПЫТАНИЮ <span>↗</span></button></div>
     </section>
 
 
-    <!-- СУЩЕСТВУЮЩАЯ ГЛАВА: КАЧЕСТВА -->
-    <section class="scene" id="admire">
-      <div class="section-top">
-        <span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span>
-        <span>02 — 05</span>
+    <!-- ОТДЕЛЬНАЯ КИНЕМАТОГРАФИЧНАЯ ГЛАВА: МЬЁЛЬНИР -->
+    <section class="scene hammer-scene" id="hammer" aria-labelledby="hammerTitle">
+      <div class="hammer-atmosphere" aria-hidden="true"><span class="storm-flash flash-one"></span><span class="storm-flash flash-two"></span><span class="distant-ridge"></span></div>
+      <div class="hammer-topline"><span>ОТДЕЛЬНАЯ ГЛАВА · МЬЁЛЬНИР</span><span>АСГАРД / 01</span></div>
+      <div class="hammer-intro" id="hammerIntro">
+        <p class="eyebrow">ЛЕГЕНДА ГОВОРИТ</p>
+        <h2 id="hammerTitle">ГОВОРЯТ, ТОЛЬКО ДОСТОЙНЫЙ<br>СПОСОБЕН ПОДНЯТЬ <em>МЬЁЛЬНИР.</em></h2>
+        <p>Кажется, у нас есть один кандидат.</p>
       </div>
+      <div class="hammer-arena" id="hammerArena">
+        <div class="stone-platform"><div class="stone-crack crack-a"></div><div class="stone-crack crack-b"></div><div class="stone-crack crack-c"></div><div class="stone-core"></div></div>
+        <div class="hammer-aura"></div>
+        <button class="mjolnir-control" id="mjolnirControl" type="button" aria-label="Удерживай, чтобы поднять Мьёльнир">
+          <svg class="mjolnir-svg" viewBox="0 0 260 390" role="img" aria-label="Серебряный молот Мьёльнир">
+            <defs>
+              <linearGradient id="headMetal" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f4f1eb"/><stop offset=".18" stop-color="#8e969d"/><stop offset=".38" stop-color="#e5e7e5"/><stop offset=".62" stop-color="#59616b"/><stop offset=".82" stop-color="#c6c9c8"/><stop offset="1" stop-color="#414852"/></linearGradient>
+              <linearGradient id="handleMetal" x1="0" x2="1"><stop offset="0" stop-color="#252832"/><stop offset=".28" stop-color="#b6a18a"/><stop offset=".5" stop-color="#51483f"/><stop offset=".76" stop-color="#c9b8a1"/><stop offset="1" stop-color="#272a31"/></linearGradient>
+              <linearGradient id="topFace" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#858e98"/><stop offset="1" stop-color="#313943"/></linearGradient>
+              <filter id="metalShadow" x="-60%" y="-50%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="8"/><feOffset dy="10"/><feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g filter="url(#metalShadow)">
+              <path d="M116 190 L144 190 L153 355 Q130 374 107 355 Z" fill="url(#handleMetal)" stroke="#d7c8b3" stroke-width="2"/>
+              <path d="M111 222 L149 222 M112 239 L150 239 M113 256 L151 256 M114 273 L152 273 M115 290 L153 290 M116 307 L154 307" stroke="#1d2028" stroke-width="5" opacity=".8"/>
+              <path d="M105 341 Q130 354 155 341 L158 359 Q130 383 102 359Z" fill="#a58d72" stroke="#e0d0ba" stroke-width="2"/>
+              <path d="M34 67 Q34 53 49 48 L211 48 Q226 53 226 67 L218 164 Q215 180 198 185 L62 185 Q45 180 42 164Z" fill="url(#headMetal)" stroke="#e5e6e4" stroke-width="3"/>
+              <path d="M47 61 L213 61 L207 162 Q205 171 193 174 L67 174 Q55 171 53 161Z" fill="none" stroke="#323943" stroke-width="4" opacity=".85"/>
+              <path d="M34 68 L226 68 L218 89 L42 89Z" fill="url(#topFace)" opacity=".95"/>
+              <path d="M56 102 L204 102 M59 151 L201 151" stroke="#fff" stroke-width="2" opacity=".23"/>
+              <path d="M130 92 L141 111 L130 130 L119 111Z" fill="#6f1b2c" stroke="#f0d7b5" stroke-width="2"/>
+              <path d="M130 98 L130 124 M119 111 L141 111" stroke="#f7e9d5" stroke-width="2" opacity=".8"/>
+              <path d="M73 118 Q83 109 92 118 M168 118 Q177 109 187 118" fill="none" stroke="#f6f2e9" stroke-width="2" opacity=".55"/>
+              <path d="M44 78 L53 88 M216 78 L207 88" stroke="#fff" stroke-width="3" opacity=".7"/>
+            </g>
+          </svg>
+          <span class="hammer-grip-glow"></span>
+        </button>
+        <div class="energy-arcs" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="charge-meter" aria-hidden="true"><span id="chargeFill"></span></div>
+        <p class="charge-caption" id="chargeCaption">ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ</p>
+      </div>
+      <div class="hammer-instruction" id="hammerInstruction"><span class="instruction-mark">✦</span><span>Нажми и удерживай молот.<br><small>Или коснись его три раза.</small></span></div>
+      <div class="hammer-victory" id="hammerVictory" aria-live="polite" hidden>
+        <p class="eyebrow">ЛЕГЕНДА ПОДТВЕРЖДЕНА</p><h3>МЬЁЛЬНИР ПРИЗНАЛ ТЕБЯ <em>ДОСТОЙНЫМ.</em></h3>
+        <p>Впрочем, у меня сомнений и не было.</p>
+        <button class="button button-light" id="revealHammerLetter">ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗</button>
+      </div>
+      <div class="hammer-letter" id="hammerLetter" hidden>
+        <div class="letter-hammer-ghost" aria-hidden="true">ϟ</div>
+        <p class="eyebrow">НЕ ОТ ЛЕГЕНДЫ. ОТ МЕНЯ.</p>
+        <h3>ТЫ ЗНАЕШЬ, Я ИНОГДА ДУМАЮ,<br>ЧТО ТЕБЕ ВПОЛНЕ ПОДОШЛА БЫ <em>РОЛЬ ТОРА.</em></h3>
+        <div class="hammer-letter-body">
+          <p>Не только потому, что ты сильный, умный и способен справиться практически с чем угодно. А потому, что я правда верю в тебя.</p>
+          <p>Я хочу, чтобы у тебя получалось всё, к чему ты стремишься. Чтобы сбывались даже те желания, о которых ты пока никому не рассказываешь. Чтобы жизнь давала тебе возможности, которыми ты сможешь воспользоваться.</p>
+          <p>Ты достоин гораздо большего, чем сам иногда можешь себе представить.</p>
+          <p>И я очень хочу быть рядом, видеть, как у тебя всё получается, гордиться тобой и напоминать тебе, какой ты невероятный.</p>
+          <p>А если вдруг забудешь, кто ты, — я напомню.</p>
+        </div>
+        <p class="hammer-final-line">Мьёльнир признал тебя достойным.<br><em>Я — уже давно.</em></p>
+        <div class="hammer-letter-actions"><button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button><button class="hammer-replay" id="replayHammer">ПОВТОРИТЬ СЦЕНУ ↻</button></div>
+      </div>
+    </section>
 
+        <!-- КАЧЕСТВА -->
+    <section class="scene" id="admire">
+      <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
       <div class="chapter-heading">
         <p class="eyebrow">НЕ ВСЁ ПОПАДАЕТ В ДОСЬЕ</p>
         <h2>ЧТО ДЕЛАЕТ<br>ТЕБЯ <em>ТОБОЙ.</em></h2>
         <p>Но самое лучшее в тебе — даже не суперспособности.</p>
       </div>
-
       <div class="quality-list" id="noteGrid"></div>
-
-      <div class="scene-nav">
-        <button class="text-link" data-next="standard">
-          А ТЕПЕРЬ — О ТВОЕЙ ПЛАНКЕ <span>↗</span>
-        </button>
-      </div>
+      <div class="scene-nav"><button class="text-link" data-next="transition">Я ХОЧУ ПОКАЗАТЬ ТЕБЕ ЕЩЁ <span>↗</span></button></div>
     </section>
 
-
-    <!-- НОВАЯ ГЛАВА 3: ТВОЯ ПЛАНКА -->
-    <section class="scene chapter-standard" id="standard">
-      <div class="section-top">
-        <span>ЧАСТЬ II / УРОВЕНЬ ЛИЧНОСТИ</span>
-        <span>03 — 05</span>
-      </div>
-
-      <div class="editorial-intro">
-        <div class="editorial-intro-copy">
-          <p class="eyebrow">НЕ ПРОСТО КАЧЕСТВА</p>
-          <h2>ТВОЯ<br><em>ПЛАНКА.</em></h2>
-          <p class="editorial-lead">
-            Есть люди, которыми просто восхищаешься.
-            И есть люди, которые сами становятся ориентиром.
-          </p>
-        </div>
-
-        <div class="editorial-intro-side">
-          <span class="giant-quote">“</span>
-          <p>
-            Мне нравится не только то, чего ты добиваешься,
-            но и то, как ты думаешь, выбираешь и идёшь к своему.
-          </p>
-          <span class="editorial-index">ХАСАН / 24</span>
-        </div>
-      </div>
-
-      <div class="standard-scenes" id="standardScenes">
-        <!-- Заполняется из content.js -->
-      </div>
-
-      <div class="chapter-outro">
-        <p class="eyebrow">И ВСЁ ЖЕ</p>
-        <h3>ДАЖЕ У ЛЕГЕНД<br>ЕСТЬ СВОИ <em>ОСОБЕННОСТИ.</em></h3>
-        <button class="button button-red" data-next="unfiltered">
-          УЗНАТЬ ТЕБЯ БЛИЖЕ <span>↗</span>
-        </button>
-      </div>
-    </section>
-
-
-    <!-- НОВАЯ ГЛАВА 4: БЕЗ ФИЛЬТРОВ -->
-    <section class="scene chapter-unfiltered" id="unfiltered">
-      <div class="section-top">
-        <span>ЧАСТЬ III / БЕЗ ОФИЦИАЛЬНОГО ДОСЬЕ</span>
-        <span>04 — 05</span>
-      </div>
-
-      <div class="unfiltered-hero">
-        <div class="unfiltered-hero-copy">
-          <p class="eyebrow">НЕСЕРЬЁЗНОЕ ДОПОЛНЕНИЕ К ЛЕГЕНДЕ</p>
-          <h2>БЕЗ<br><em>ФИЛЬТРОВ.</em></h2>
-          <p>
-            Даже у легенд есть свои особенности.
-            И некоторые из них мне особенно дороги.
-          </p>
-        </div>
-
-        <div class="unfiltered-hero-photo photo-slot" data-photo="unfiltered">
-          <div class="photo-placeholder">
-            <b>Х.</b>
-            <span>ФОТО ДЛЯ ЭТОЙ ГЛАВЫ</span>
-          </div>
-        </div>
-
-        <span class="unfiltered-stamp">НЕ ДЛЯ ПЕЧАТИ</span>
-      </div>
-
-      <div class="unfiltered-intro">
-        <p class="eyebrow">НЕБОЛЬШОЕ УТОЧНЕНИЕ</p>
-        <h3>ИДЕАЛЬНЫХ ЛЮДЕЙ<br>НЕ СУЩЕСТВУЕТ.</h3>
-        <p>
-          Но есть люди, чьи особенности со временем становятся
-          частью того, за что их любишь.
-        </p>
-      </div>
-
-      <div class="unfiltered-grid" id="unfilteredGrid">
-        <!-- Заполняется из content.js -->
-      </div>
-
-      <div class="chapter-outro unfiltered-outro">
-        <p class="eyebrow">А ЕСЛИ СОВСЕМ ЧЕСТНО</p>
-        <h3>ЗА ВСЕМИ ЭТИМИ<br>СЛОВАМИ ЕСТЬ <em>ОДНО.</em></h3>
-        <button class="button button-light" data-next="love">
-          ПЕРЕЙТИ К ГЛАВНОМУ <span>↗</span>
-        </button>
-      </div>
-    </section>
-
-
-    <!-- НОВАЯ ГЛАВА 5: ЗА ЧТО Я ТЕБЯ ЛЮБЛЮ -->
-    <section class="scene chapter-love" id="love">
-      <div class="section-top">
-        <span>ЧАСТЬ IV / САМОЕ ЛИЧНОЕ</span>
-        <span>05 — 05</span>
-      </div>
-
-      <div class="love-heading">
-        <div>
-          <p class="eyebrow">НЕ СПИСОК ДОСТОИНСТВ. МОИ ЧУВСТВА.</p>
-          <h2>ЗА ЧТО Я<br>ТЕБЯ <em>ЛЮБЛЮ.</em></h2>
-        </div>
-
-        <p>
-          Здесь не будет универсальных причин.
-          Только то, что имеет значение именно для меня.
-        </p>
-      </div>
-
-      <div class="love-carousel" id="loveCarousel">
-        <button class="carousel-arrow carousel-prev" id="lovePrev" aria-label="Предыдущая причина">
-          ←
-        </button>
-
-        <div class="love-track-window">
-          <div class="love-track" id="loveTrack">
-            <!-- Карточки создаются из content.js -->
-          </div>
-        </div>
-
-        <button class="carousel-arrow carousel-next" id="loveNext" aria-label="Следующая причина">
-          →
-        </button>
-      </div>
-
-      <div class="love-carousel-footer">
-        <span id="loveCounter">01 / 01</span>
-        <p>НАЖМИ НА ФОТО, ЧТОБЫ УЗНАТЬ, ЧТО ЗА НИМ</p>
-        <div class="love-dots" id="loveDots"></div>
-      </div>
-
-      <div class="love-bottom-note">
-        <span>И ЭТО ТОЛЬКО МАЛЕНЬКАЯ ЧАСТЬ.</span>
-        <span>♥</span>
-      </div>
-
-      <div class="scene-nav">
-        <button class="text-link" data-next="transition">
-          ПРОДОЛЖИТЬ НАШУ ИСТОРИЮ <span>↗</span>
-        </button>
-      </div>
-    </section>
-
-
-    <!-- СУЩЕСТВУЮЩИЙ ПЕРЕХОД К ПЯТИ ЧУВСТВАМ -->
+    <!-- ПЕРЕХОД -->
     <section class="scene transition-scene" id="transition">
       <div class="transition-symbol">ϟ</div>
       <p class="eyebrow">А ТЕПЕРЬ — САМОЕ ЛИЧНОЕ</p>
       <h2>ЭТО ИСТОРИЯ<br>НЕ О <em>СУПЕРСИЛЕ.</em></h2>
-      <p>
-        Она о том, что я чувствую рядом с тобой.
-        И о маленьких вещах, из которых складывается большое счастье.
-      </p>
-      <button class="button button-light" data-next="senses">
-        ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗
-      </button>
+      <p>Она о том, что я чувствую рядом с тобой. И о маленьких вещах, из которых складывается большое счастье.</p>
+      <button class="button button-light" data-next="senses">ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗</button>
     </section>
 
-
-    <!-- СУЩЕСТВУЮЩИЕ ПЯТЬ ЧУВСТВ И МИССИИ -->
+    <!-- ПЯТЬ ЧУВСТВ -->
     <section class="scene" id="senses">
-      <div class="section-top">
-        <span>ЧАСТЬ V / МОИ ЧУВСТВА</span>
-        <span>06 — 10</span>
-      </div>
-
+      <div class="section-top"><span>ЧАСТЬ II / МОИ ЧУВСТВА</span><span>03 — 05</span></div>
       <div class="senses-heading">
-        <div>
-          <p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p>
-          <h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2>
-        </div>
-        <p>
-          Каждая глава — маленькая часть нашей истории.
-          Открывай их в любом порядке.
-        </p>
+        <div><p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p><h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2></div>
+        <p>Каждая глава — маленькая часть нашей истории. Открывай их в любом порядке.</p>
       </div>
-
       <div class="progress">
-        <div>
-          <span>ТВОЯ ИСТОРИЯ</span>
-          <b id="progressCount">0 ИЗ 5 ОТКРЫТО</b>
-        </div>
-
-        <div class="progress-track">
-          <i id="progressFill"></i>
-        </div>
-
-        <div class="progress-numbers" id="progressSymbols">
-          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
-        </div>
+        <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
+        <div class="progress-track"><i id="progressFill"></i></div>
+        <div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
       </div>
-
       <div id="senseList" class="sense-list"></div>
     </section>
 
-
-    <!-- СУЩЕСТВУЮЩИЙ ФИНАЛ -->
+    <!-- ФИНАЛ -->
     <section class="scene final-scene" id="final">
-      <div class="section-top">
-        <span>ПОСЛЕДНЯЯ ГЛАВА</span>
-        <span>24 — ∞</span>
-      </div>
-
+      <div class="section-top"><span>ПОСЛЕДНЯЯ ГЛАВА</span><span>24 — ∞</span></div>
       <div class="final-layout">
         <div class="final-photo photo-slot" data-photo="final">
-          <div class="photo-placeholder">
-            <b>♥</b>
-            <span>НАШ СНИМОК</span>
-          </div>
+          <div class="photo-placeholder"><b>♥</b><span>НАШ СНИМОК</span></div>
         </div>
-
         <div class="final-copy">
           <p class="eyebrow">И МОЯ САМАЯ ЛЮБИМАЯ СТРАНИЦА</p>
-          <h2>
-            ПЯТЬ ЧУВСТВ.<br>
-            ТЫСЯЧИ МОМЕНТОВ.<br>
-            <em>ОДИН ЛЮБИМЫЙ.</em>
-          </h2>
-
+          <h2>ПЯТЬ ЧУВСТВ.<br>ТЫСЯЧИ МОМЕНТОВ.<br><em>ОДИН ЛЮБИМЫЙ.</em></h2>
           <div class="envelope" id="finalEnvelope">
             <div class="letter">
               <p class="letter-date">ПИСЬМО ДЛЯ ТЕБЯ · ГЛАВА 24</p>
@@ -395,32 +200,19 @@
               <p id="finalLetterBody"></p>
               <p class="letter-sign" id="finalLetterSignature"></p>
             </div>
-
-            <button class="envelope-flap" id="openFinal">
-              ОТКРЫТЬ ПИСЬМО ♥
-            </button>
+            <button class="envelope-flap" id="openFinal">ОТКРЫТЬ ПИСЬМО ♥</button>
           </div>
         </div>
       </div>
-
       <p class="final-footer">С ДНЁМ РОЖДЕНИЯ, МОЯ ЛЮБОВЬ. <span>♥</span></p>
-      <button class="text-link restart-final" id="restartFinal">
-        ПРОЧИТАТЬ ЕЩЁ РАЗ ↗
-      </button>
+      <button class="text-link restart-final" id="restartFinal">ПРОЧИТАТЬ ЕЩЁ РАЗ ↗</button>
     </section>
-
   </main>
 
-  <footer class="site-footer">
-    <span>Х. / ГЛАВА 24</span>
-    <span>СОЗДАНО С ЛЮБОВЬЮ</span>
-  </footer>
+  <footer class="site-footer"><span>Х. / ГЛАВА 24</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></footer>
 
-
-  <!-- ОБЩЕЕ МОДАЛЬНОЕ ОКНО -->
   <div class="modal" id="detailModal" aria-hidden="true">
     <div class="modal-backdrop" data-close></div>
-
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" data-close aria-label="Закрыть">×</button>
       <p class="eyebrow" id="modalKicker"></p>
@@ -428,7 +220,6 @@
       <div id="modalBody"></div>
     </div>
   </div>
-
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="content.js"></script>
