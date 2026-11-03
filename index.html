@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -81,13 +80,18 @@
         <div class="stats-grid" id="stats"></div>
       </div>
 
-      <div class="scene-nav"><button class="text-link" data-next="hammer">К ОДНОМУ НЕБОЛЬШОМУ ИСПЫТАНИЮ <span>↗</span></button></div>
+      <div class="scene-nav">
+        <button class="text-link" data-next="hammer">К ОДНОМУ НЕБОЛЬШОМУ ИСПЫТАНИЮ <span>↗</span></button>
+      </div>
     </section>
-
 
     <!-- ОТДЕЛЬНАЯ КИНЕМАТОГРАФИЧНАЯ ГЛАВА: МЬЁЛЬНИР -->
     <section class="scene hammer-scene" id="hammer" aria-labelledby="hammerTitle">
-      <div class="hammer-atmosphere" aria-hidden="true"><span class="storm-flash flash-one"></span><span class="storm-flash flash-two"></span><span class="distant-ridge"></span></div>
+      <div class="hammer-atmosphere" aria-hidden="true">
+        <span class="storm-flash flash-one"></span>
+        <span class="storm-flash flash-two"></span>
+        <span class="distant-ridge"></span>
+      </div>
       <div class="hammer-topline"><span>ОТДЕЛЬНАЯ ГЛАВА · МЬЁЛЬНИР</span><span>АСГАРД / 01</span></div>
       <div class="hammer-intro" id="hammerIntro">
         <p class="eyebrow">ЛЕГЕНДА ГОВОРИТ</p>
@@ -95,15 +99,42 @@
         <p>Кажется, у нас есть один кандидат.</p>
       </div>
       <div class="hammer-arena" id="hammerArena">
-        <div class="stone-platform"><div class="stone-crack crack-a"></div><div class="stone-crack crack-b"></div><div class="stone-crack crack-c"></div><div class="stone-core"></div></div>
+        <div class="stone-platform">
+          <div class="stone-crack crack-a"></div>
+          <div class="stone-crack crack-b"></div>
+          <div class="stone-crack crack-c"></div>
+          <div class="stone-core"></div>
+        </div>
         <div class="hammer-aura"></div>
         <button class="mjolnir-control" id="mjolnirControl" type="button" aria-label="Удерживай, чтобы поднять Мьёльнир">
           <svg class="mjolnir-svg" viewBox="0 0 260 390" role="img" aria-label="Серебряный молот Мьёльнир">
             <defs>
-              <linearGradient id="headMetal" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f4f1eb"/><stop offset=".18" stop-color="#8e969d"/><stop offset=".38" stop-color="#e5e7e5"/><stop offset=".62" stop-color="#59616b"/><stop offset=".82" stop-color="#c6c9c8"/><stop offset="1" stop-color="#414852"/></linearGradient>
-              <linearGradient id="handleMetal" x1="0" x2="1"><stop offset="0" stop-color="#252832"/><stop offset=".28" stop-color="#b6a18a"/><stop offset=".5" stop-color="#51483f"/><stop offset=".76" stop-color="#c9b8a1"/><stop offset="1" stop-color="#272a31"/></linearGradient>
-              <linearGradient id="topFace" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#858e98"/><stop offset="1" stop-color="#313943"/></linearGradient>
-              <filter id="metalShadow" x="-60%" y="-50%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="8"/><feOffset dy="10"/><feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <linearGradient id="headMetal" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#f4f1eb"/>
+                <stop offset=".18" stop-color="#8e969d"/>
+                <stop offset=".38" stop-color="#e5e7e5"/>
+                <stop offset=".62" stop-color="#59616b"/>
+                <stop offset=".82" stop-color="#c6c9c8"/>
+                <stop offset="1" stop-color="#414852"/>
+              </linearGradient>
+              <linearGradient id="handleMetal" x1="0" x2="1">
+                <stop offset="0" stop-color="#252832"/>
+                <stop offset=".28" stop-color="#b6a18a"/>
+                <stop offset=".5" stop-color="#51483f"/>
+                <stop offset=".76" stop-color="#c9b8a1"/>
+                <stop offset="1" stop-color="#272a31"/>
+              </linearGradient>
+              <linearGradient id="topFace" x1="0" x2="1" y1="0" y2="1">
+                <stop stop-color="#fff"/>
+                <stop offset=".5" stop-color="#858e98"/>
+                <stop offset="1" stop-color="#313943"/>
+              </linearGradient>
+              <filter id="metalShadow" x="-60%" y="-50%" width="220%" height="220%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+                <feOffset dy="10"/>
+                <feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
             </defs>
             <g filter="url(#metalShadow)">
               <path d="M116 190 L144 190 L153 355 Q130 374 107 355 Z" fill="url(#handleMetal)" stroke="#d7c8b3" stroke-width="2"/>
@@ -125,9 +156,13 @@
         <div class="charge-meter" aria-hidden="true"><span id="chargeFill"></span></div>
         <p class="charge-caption" id="chargeCaption">ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ</p>
       </div>
-      <div class="hammer-instruction" id="hammerInstruction"><span class="instruction-mark">✦</span><span>Нажми и удерживай молот.<br><small>Или коснись его три раза.</small></span></div>
+      <div class="hammer-instruction" id="hammerInstruction">
+        <span class="instruction-mark">✦</span>
+        <span>Нажми и удерживай молот.<br><small>Или коснись его три раза.</small></span>
+      </div>
       <div class="hammer-victory" id="hammerVictory" aria-live="polite" hidden>
-        <p class="eyebrow">ЛЕГЕНДА ПОДТВЕРЖДЕНА</p><h3>МЬЁЛЬНИР ПРИЗНАЛ ТЕБЯ <em>ДОСТОЙНЫМ.</em></h3>
+        <p class="eyebrow">ЛЕГЕНДА ПОДТВЕРЖДЕНА</p>
+        <h3>МЬЁЛЬНИР ПРИЗНАЛ ТЕБЯ <em>ДОСТОЙНЫМ.</em></h3>
         <p>Впрочем, у меня сомнений и не было.</p>
         <button class="button button-light" id="revealHammerLetter">ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗</button>
       </div>
@@ -143,11 +178,14 @@
           <p>А если вдруг забудешь, кто ты, — я напомню.</p>
         </div>
         <p class="hammer-final-line">Мьёльнир признал тебя достойным.<br><em>Я — уже давно.</em></p>
-        <div class="hammer-letter-actions"><button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button><button class="hammer-replay" id="replayHammer">ПОВТОРИТЬ СЦЕНУ ↻</button></div>
+        <div class="hammer-letter-actions">
+          <button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
+          <button class="hammer-replay" id="replayHammer">ПОВТОРИТЬ СЦЕНУ ↻</button>
+        </div>
       </div>
     </section>
 
-        <!-- КАЧЕСТВА -->
+    <!-- КАЧЕСТВА -->
     <section class="scene" id="admire">
       <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
       <div class="chapter-heading">
@@ -156,7 +194,9 @@
         <p>Но самое лучшее в тебе — даже не суперспособности.</p>
       </div>
       <div class="quality-list" id="noteGrid"></div>
-      <div class="scene-nav"><button class="text-link" data-next="love">Я ХОЧУ СКАЗАТЬ ТЕБЕ ЕЩЁ НЕЧТО <span>↗</span></button></div>
+      <div class="scene-nav">
+        <button class="text-link" data-next="love">Я ХОЧУ СКАЗАТЬ ТЕБЕ ЕЩЁ НЕЧТО <span>↗</span></button>
+      </div>
     </section>
 
     <!-- ОТДЕЛЬНАЯ ГЛАВА О ЛЮБВИ -->
@@ -171,13 +211,21 @@
         <p class="love-side-copy">Не за один большой поступок и не за идеальность. За множество маленьких вещей, из которых складывается моё большое чувство к тебе.</p>
       </div>
       <div class="love-carousel" aria-label="Причины, за которые я люблю Хасана">
-        <button class="love-arrow" id="lovePrev" type="button" aria-label="Предыдущая причина">←</button>
         <div class="love-stage" id="loveStage"></div>
-        <button class="love-arrow" id="loveNext" type="button" aria-label="Следующая причина">→</button>
       </div>
-      <div class="love-carousel-footer"><span id="loveCounter">01 / 06</span><span>НАЖМИ НА ЦЕНТРАЛЬНЫЙ КАДР, ЧТОБЫ ПРОЧИТАТЬ</span><i><b id="loveProgress"></b></i></div>
-      <div class="love-personalize"><span id="lovePhotoHint">ФОТОГРАФИЯ ДЛЯ ПРИЧИНЫ 01</span><label class="love-upload-button">＋ ДОБАВИТЬ ФОТО<input id="lovePhotoUpload" type="file" accept="image/*" data-upload="love-0" hidden></label><span class="love-personalize-note">ФОТО ИЗМЕНЯЕТСЯ ДЛЯ КАЖДОЙ КАРТОЧКИ ОТДЕЛЬНО</span></div>
-      <div class="scene-nav"><button class="text-link" data-next="transition">А ТЕПЕРЬ — НАША ИСТОРИЯ <span>↗</span></button></div>
+      <div class="love-carousel-footer">
+        <span id="loveCounter">01 / 06</span>
+        <span>СВАЙПАЙ В СТОРОНУ ИЛИ НАЖМИ НА ЦЕНТРАЛЬНЫЙ КАДР</span>
+        <i><b id="loveProgress"></b></i>
+      </div>
+      <div class="love-personalize">
+        <span id="lovePhotoHint">ФОТОГРАФИЯ ДЛЯ ПРИЧИНЫ 01</span>
+        <label class="love-upload-button">＋ ДОБАВИТЬ ФОТО<input id="lovePhotoUpload" type="file" accept="image/*" data-upload="love-0" hidden></label>
+        <span class="love-personalize-note">ФОТО ИЗМЕНЯЕТСЯ ДЛЯ КАЖДОЙ КАРТОЧКИ ОТДЕЛЬНО</span>
+      </div>
+      <div class="scene-nav">
+        <button class="text-link" data-next="transition">А ТЕПЕРЬ — НАША ИСТОРИЯ <span>↗</span></button>
+      </div>
     </section>
 
     <!-- ПЕРЕХОД -->
@@ -193,18 +241,23 @@
     <section class="scene" id="senses">
       <div class="section-top"><span>ЧАСТЬ II / МОИ ЧУВСТВА</span><span>03 — 05</span></div>
       <div class="senses-heading">
-        <div><p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p><h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2></div>
+        <div>
+          <p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p>
+          <h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2>
+        </div>
         <p>Каждая глава — маленькая часть нашей истории. Открывай их в любом порядке.</p>
       </div>
       <div class="progress">
         <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
         <div class="progress-track"><i id="progressFill"></i></div>
-        <div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+        <div class="progress-numbers" id="progressSymbols">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+        </div>
       </div>
       <div id="senseList" class="sense-list"></div>
     </section>
 
-    <!-- ФИНАЛ -->
+    <!-- ФИНАЛЬНАЯ ГЛАВА САЙТА -->
     <section class="scene final-scene" id="final">
       <div class="section-top"><span>ПОСЛЕДНЯЯ ГЛАВА</span><span>24 — ∞</span></div>
       <div class="final-layout">
