@@ -16,11 +16,11 @@
 
   const RIDDLE_ORDER = ["sight", "sound", "taste", "touch", "scent"];
   const RIDDLE_LETTERS = {
-    sight: "В",
-    sound: "Е",
-    taste: "Ч",
-    touch: "Н",
-    scent: "О"
+    sight: "Ч",
+    sound: "О",
+    taste: "В",
+    touch: "Е",
+    scent: "Н"
   };
   const FINAL_CODE = "ВЕЧНО";
 
