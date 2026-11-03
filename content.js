@@ -4,8 +4,8 @@ window.BIRTHDAY_CONTENT = {
   age: 24,
 
   media: {
-    hero: "",
-    portrait: "",
+    hero: "assets/love/01.jpg",
+    portrait: "assets/love/02.jpg",
     final: "",
     audio: "",
     perfume: ""
