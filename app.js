@@ -22,7 +22,7 @@
   try { progress = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]")); } catch (_) {}
   try { assets = JSON.parse(localStorage.getItem(ASSET_KEY) || "{}"); } catch (_) {}
 
-  const scenes = ["welcome", "profile", "hammer", "admire", "transition", "senses", "final"];
+  const scenes = ["welcome", "profile", "hammer", "admire", "love", "transition", "senses", "final"];
 
   function saveAssets() {
     try {
@@ -40,6 +40,7 @@
     $$(".scene").forEach(scene => scene.classList.toggle("active", scene.id === id));
     window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     if (id === "senses") renderSenses();
+    if (id === "love") renderLoveReasons();
     if (id === "final") updateProgress();
   }
 
@@ -123,6 +124,51 @@
         </div>
       </article>`).join("");
   }
+
+  let loveIndex = 0;
+  let loveFlipped = false;
+  let loveTouchStart = 0;
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  function renderLoveReasons() {
+    const stage = $("#loveStage");
+    if (!stage || !Array.isArray(C.loveReasons) || !C.loveReasons.length) return;
+    const items = C.loveReasons;
+    const total = items.length;
+    stage.innerHTML = [-1, 0, 1].map(offset => {
+      const index = (loveIndex + offset + total) % total;
+      const item = items[index];
+      const image = assets[`love-${index}`] || "";
+      const pos = (C.loveImagePositions || [])[index] || "50% 50%";
+      return `<button class="love-card ${offset === 0 ? "center" : offset < 0 ? "left" : "right"} ${offset === 0 && loveFlipped ? "flipped" : ""}" data-love-offset="${offset}" type="button" aria-label="${offset === 0 ? "Открыть причину" : `Показать: ${escapeHTML(item.title)}`}" ${offset === 0 ? "" : "tabindex=-1"}>
+        <span class="love-card-inner">
+          <span class="love-front">${image ? `<img src="${image}" alt="Ваше совместное воспоминание" style="object-position:${pos}">` : `<span class="love-photo-placeholder"><b>Х.</b><small>МЕСТО ДЛЯ ВАШЕГО ФОТО</small></span>`}<span class="love-front-copy"><small>ПРИЧИНА ${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}</small><strong>${escapeHTML(item.title)}</strong></span></span>
+          <span class="love-back"><small>ОДНА ИЗ ПРИЧИН</small><strong>${escapeHTML(item.title)}</strong><span>${escapeHTML(item.text)}</span><i>С ЛЮБОВЬЮ · Х.</i></span>
+        </span>
+      </button>`;
+    }).join("");
+    const counter = $("#loveCounter"); if (counter) counter.textContent = `${String(loveIndex + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+    const progress = $("#loveProgress"); if (progress) progress.style.width = `${((loveIndex + 1) / total) * 100}%`;
+  }
+  function shiftLove(direction) {
+    const total = (C.loveReasons || []).length;
+    if (!total) return;
+    loveIndex = (loveIndex + direction + total) % total;
+    loveFlipped = false;
+    renderLoveReasons();
+  }
+  $("#lovePrev")?.addEventListener("click", () => shiftLove(-1));
+  $("#loveNext")?.addEventListener("click", () => shiftLove(1));
+  $("#loveStage")?.addEventListener("click", event => {
+    const card = event.target.closest("[data-love-offset]"); if (!card) return;
+    const offset = Number(card.dataset.loveOffset);
+    if (offset) shiftLove(offset);
+    else { loveFlipped = !loveFlipped; renderLoveReasons(); }
+  });
+  $("#loveStage")?.addEventListener("touchstart", event => { loveTouchStart = event.changedTouches[0].clientX; }, { passive: true });
+  $("#loveStage")?.addEventListener("touchend", event => {
+    const delta = event.changedTouches[0].clientX - loveTouchStart;
+    if (Math.abs(delta) > 45) shiftLove(delta < 0 ? 1 : -1);
+  }, { passive: true });
 
   function renderSenses() {
     const root = $("#senseList");
@@ -483,6 +529,7 @@
   // Начальная отрисовка
   renderStats();
   renderQualities();
+  renderLoveReasons();
   applyFixedPhotos();
   updateProgress();
 })();
