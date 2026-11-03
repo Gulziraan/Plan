@@ -291,7 +291,8 @@
     stage.innerHTML = [-1, 0, 1].map(offset => {
       const index = (loveIndex + offset + total) % total;
       const item = items[index];
-      const image = assets[`love-${index}`] || "";
+      // Uploaded browser photo overrides the portable file stored in assets/love/.
+      const image = assets[`love-${index}`] || item.image || "";
       const pos = (C.loveImagePositions || [])[index] || "50% 50%";
       const center = offset === 0;
 
@@ -309,7 +310,7 @@
           <span class="love-card-inner">
             <span class="love-front">
               ${image
-                ? `<img src="${image}" alt="Фотография для причины ${index + 1}" style="object-position:${pos}">`
+                ? `<img src="${image}" alt="Фотография для причины ${index + 1}" style="object-position:${pos}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="love-photo-placeholder" hidden><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
                 : `<span class="love-photo-placeholder"><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
               }
               <span class="love-front-meta">
@@ -915,7 +916,7 @@
         applyFixedPhotos();
       }
 
-      toast("Материал сохранён в этом браузере.");
+      toast(key.startsWith("love-") ? "Фото добавлено в этом браузере. Для переноса помести его в assets/love/ и укажи путь в content.js." : "Материал сохранён в этом браузере.");
     } catch (error) {
       console.error(error);
       toast("Не удалось загрузить файл. Попробуй другой.");
