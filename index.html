@@ -7,11 +7,14 @@
   <meta name="theme-color" content="#710f22">
   <meta name="description" content="Особенная история для Хасана. Глава 24.">
   <title>Хасан — Глава 24</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="grain" aria-hidden="true"></div>
 
@@ -22,52 +25,84 @@
   </header>
 
   <main>
+
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="scene active hero-scene" id="welcome">
       <div class="hero-bg-number">24</div>
       <div class="hero-stripe"></div>
+
       <div class="hero-layout">
         <div class="hero-copy">
           <p class="eyebrow"><span></span> ОСОБЕННОЕ ИЗДАНИЕ · ТОЛЬКО ДЛЯ ТЕБЯ</p>
           <p class="hero-pretitle">НЕКОТОРЫМ ГЕРОЯМ</p>
           <h1>НЕ НУЖНА<br><em>МАНТИЯ.</em></h1>
+
           <p class="hero-description">
             Кому-то нужен молот. Кому-то — суперспособности.
             А кому-то достаточно просто быть Хасаном.
           </p>
+
           <button class="button button-light" id="beginBtn">
             ОТКРЫТЬ ИСТОРИЮ <span>↗</span>
           </button>
-          <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ. БЕЗ ПОТРЕБНОСТИ В СПАСЕНИИ МИРА.</p>
+
+          <p class="hero-small">
+            СОЗДАНО С ЛЮБОВЬЮ. БЕЗ ПОТРЕБНОСТИ В СПАСЕНИИ МИРА.
+          </p>
         </div>
+
         <div class="hero-visual">
           <div class="hero-photo photo-slot" data-photo="hero">
-            <div class="photo-placeholder"><b>Х.</b><span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span></div>
+            <div class="photo-placeholder">
+              <b>Х.</b>
+              <span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span>
+            </div>
           </div>
-          <div class="hero-tag">ГЛАВНЫЙ ГЕРОЙ<br><strong>ОДИН ТАКОЙ</strong></div>
+
+          <div class="hero-tag">
+            ГЛАВНЫЙ ГЕРОЙ<br>
+            <strong>ОДИН ТАКОЙ</strong>
+          </div>
+
           <div class="hero-lightning">ϟ</div>
           <div class="hero-caption">ХАСАН · УРОВЕНЬ 24</div>
         </div>
       </div>
-      <div class="hero-bottom"><span>ГЛАВА 24</span><span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span><span>♥</span></div>
+
+      <div class="hero-bottom">
+        <span>ГЛАВА 24</span>
+        <span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span>
+        <span>♥</span>
+      </div>
     </section>
+
 
     <!-- ПРОФИЛЬ -->
     <section class="scene" id="profile">
-      <div class="section-top"><span>ЧАСТЬ I / ЛЕГЕНДА</span><span>01 — 05</span></div>
+      <div class="section-top">
+        <span>ЧАСТЬ I / ЛЕГЕНДА</span>
+        <span>01 — 05</span>
+      </div>
+
       <div class="profile-hero">
         <div class="profile-photo photo-slot" data-photo="portrait">
-          <div class="photo-placeholder"><b>24</b><span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span></div>
+          <div class="photo-placeholder">
+            <b>24</b>
+            <span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span>
+          </div>
         </div>
+
         <div class="profile-panel">
           <p class="eyebrow">ДОСЬЕ ПЕРСОНАЖА · ОБНОВЛЕНО СЕГОДНЯ</p>
           <p class="profile-overline">ЛЕГЕНДА В СВОЕЙ ВСЕЛЕННОЙ</p>
           <h2>ХАСАН<span>.</span></h2>
+
           <div class="profile-labels">
             <span>УРОВЕНЬ <b>24</b></span>
             <span>КЛАСС <b>СТРАТЕГ</b></span>
             <span>РЕДКОСТЬ <b>ЛЕГЕНДАРНЫЙ</b></span>
           </div>
+
           <p class="profile-quote">Тот, кто может справиться практически со всем.</p>
           <div class="profile-universe">ОСОБАЯ КАТЕГОРИЯ: МОЙ ЛЮБИМЫЙ ЧЕЛОВЕК</div>
         </div>
@@ -85,64 +120,274 @@
         <div class="hammer-copy">
           <p class="eyebrow">ИСПЫТАНИЕ ДОСТОЙНОГО</p>
           <h3>ТОЛЬКО ДОСТОЙНЫЙ<br>ПОДНИМЕТ <em>МОЛОТ.</em></h3>
-          <p>Говорят, не каждый способен поднять Мьёльнир. Но у некоторых, кажется, особые правила.</p>
-          <button class="button button-red" id="hammerBtn">ПОПРОБОВАТЬ СИЛУ <span>ϟ</span></button>
+          <p>
+            Говорят, не каждый способен поднять Мьёльнир.
+            Но у некоторых, кажется, особые правила.
+          </p>
+          <button class="button button-red" id="hammerBtn">
+            ПОПРОБОВАТЬ СИЛУ <span>ϟ</span>
+          </button>
           <p class="hammer-result" id="hammerResult" aria-live="polite"></p>
         </div>
+
         <button class="hammer-art" id="hammerArt" aria-label="Нажми, чтобы поднять молот">
-          <span class="hammer-rune">ᛟ</span><span class="hammer-icon">⚒</span>
+          <span class="hammer-rune">ᛟ</span>
+          <span class="hammer-icon">⚒</span>
           <span class="hammer-hint">НАЖМИ НА МОЛОТ</span>
         </button>
       </div>
-      <div class="scene-nav"><button class="text-link" data-next="admire">ДАЛЬШЕ — О ТОМ, КАКОЙ ТЫ <span>↗</span></button></div>
+
+      <div class="scene-nav">
+        <button class="text-link" data-next="admire">
+          ДАЛЬШЕ — О ТОМ, КАКОЙ ТЫ <span>↗</span>
+        </button>
+      </div>
     </section>
 
-    <!-- КАЧЕСТВА -->
+
+    <!-- СУЩЕСТВУЮЩАЯ ГЛАВА: КАЧЕСТВА -->
     <section class="scene" id="admire">
-      <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
+      <div class="section-top">
+        <span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span>
+        <span>02 — 05</span>
+      </div>
+
       <div class="chapter-heading">
         <p class="eyebrow">НЕ ВСЁ ПОПАДАЕТ В ДОСЬЕ</p>
         <h2>ЧТО ДЕЛАЕТ<br>ТЕБЯ <em>ТОБОЙ.</em></h2>
         <p>Но самое лучшее в тебе — даже не суперспособности.</p>
       </div>
+
       <div class="quality-list" id="noteGrid"></div>
-      <div class="scene-nav"><button class="text-link" data-next="transition">Я ХОЧУ ПОКАЗАТЬ ТЕБЕ ЕЩЁ <span>↗</span></button></div>
+
+      <div class="scene-nav">
+        <button class="text-link" data-next="standard">
+          А ТЕПЕРЬ — О ТВОЕЙ ПЛАНКЕ <span>↗</span>
+        </button>
+      </div>
     </section>
 
-    <!-- ПЕРЕХОД -->
+
+    <!-- НОВАЯ ГЛАВА 3: ТВОЯ ПЛАНКА -->
+    <section class="scene chapter-standard" id="standard">
+      <div class="section-top">
+        <span>ЧАСТЬ II / УРОВЕНЬ ЛИЧНОСТИ</span>
+        <span>03 — 05</span>
+      </div>
+
+      <div class="editorial-intro">
+        <div class="editorial-intro-copy">
+          <p class="eyebrow">НЕ ПРОСТО КАЧЕСТВА</p>
+          <h2>ТВОЯ<br><em>ПЛАНКА.</em></h2>
+          <p class="editorial-lead">
+            Есть люди, которыми просто восхищаешься.
+            И есть люди, которые сами становятся ориентиром.
+          </p>
+        </div>
+
+        <div class="editorial-intro-side">
+          <span class="giant-quote">“</span>
+          <p>
+            Мне нравится не только то, чего ты добиваешься,
+            но и то, как ты думаешь, выбираешь и идёшь к своему.
+          </p>
+          <span class="editorial-index">ХАСАН / 24</span>
+        </div>
+      </div>
+
+      <div class="standard-scenes" id="standardScenes">
+        <!-- Заполняется из content.js -->
+      </div>
+
+      <div class="chapter-outro">
+        <p class="eyebrow">И ВСЁ ЖЕ</p>
+        <h3>ДАЖЕ У ЛЕГЕНД<br>ЕСТЬ СВОИ <em>ОСОБЕННОСТИ.</em></h3>
+        <button class="button button-red" data-next="unfiltered">
+          УЗНАТЬ ТЕБЯ БЛИЖЕ <span>↗</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- НОВАЯ ГЛАВА 4: БЕЗ ФИЛЬТРОВ -->
+    <section class="scene chapter-unfiltered" id="unfiltered">
+      <div class="section-top">
+        <span>ЧАСТЬ III / БЕЗ ОФИЦИАЛЬНОГО ДОСЬЕ</span>
+        <span>04 — 05</span>
+      </div>
+
+      <div class="unfiltered-hero">
+        <div class="unfiltered-hero-copy">
+          <p class="eyebrow">НЕСЕРЬЁЗНОЕ ДОПОЛНЕНИЕ К ЛЕГЕНДЕ</p>
+          <h2>БЕЗ<br><em>ФИЛЬТРОВ.</em></h2>
+          <p>
+            Даже у легенд есть свои особенности.
+            И некоторые из них мне особенно дороги.
+          </p>
+        </div>
+
+        <div class="unfiltered-hero-photo photo-slot" data-photo="unfiltered">
+          <div class="photo-placeholder">
+            <b>Х.</b>
+            <span>ФОТО ДЛЯ ЭТОЙ ГЛАВЫ</span>
+          </div>
+        </div>
+
+        <span class="unfiltered-stamp">НЕ ДЛЯ ПЕЧАТИ</span>
+      </div>
+
+      <div class="unfiltered-intro">
+        <p class="eyebrow">НЕБОЛЬШОЕ УТОЧНЕНИЕ</p>
+        <h3>ИДЕАЛЬНЫХ ЛЮДЕЙ<br>НЕ СУЩЕСТВУЕТ.</h3>
+        <p>
+          Но есть люди, чьи особенности со временем становятся
+          частью того, за что их любишь.
+        </p>
+      </div>
+
+      <div class="unfiltered-grid" id="unfilteredGrid">
+        <!-- Заполняется из content.js -->
+      </div>
+
+      <div class="chapter-outro unfiltered-outro">
+        <p class="eyebrow">А ЕСЛИ СОВСЕМ ЧЕСТНО</p>
+        <h3>ЗА ВСЕМИ ЭТИМИ<br>СЛОВАМИ ЕСТЬ <em>ОДНО.</em></h3>
+        <button class="button button-light" data-next="love">
+          ПЕРЕЙТИ К ГЛАВНОМУ <span>↗</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- НОВАЯ ГЛАВА 5: ЗА ЧТО Я ТЕБЯ ЛЮБЛЮ -->
+    <section class="scene chapter-love" id="love">
+      <div class="section-top">
+        <span>ЧАСТЬ IV / САМОЕ ЛИЧНОЕ</span>
+        <span>05 — 05</span>
+      </div>
+
+      <div class="love-heading">
+        <div>
+          <p class="eyebrow">НЕ СПИСОК ДОСТОИНСТВ. МОИ ЧУВСТВА.</p>
+          <h2>ЗА ЧТО Я<br>ТЕБЯ <em>ЛЮБЛЮ.</em></h2>
+        </div>
+
+        <p>
+          Здесь не будет универсальных причин.
+          Только то, что имеет значение именно для меня.
+        </p>
+      </div>
+
+      <div class="love-carousel" id="loveCarousel">
+        <button class="carousel-arrow carousel-prev" id="lovePrev" aria-label="Предыдущая причина">
+          ←
+        </button>
+
+        <div class="love-track-window">
+          <div class="love-track" id="loveTrack">
+            <!-- Карточки создаются из content.js -->
+          </div>
+        </div>
+
+        <button class="carousel-arrow carousel-next" id="loveNext" aria-label="Следующая причина">
+          →
+        </button>
+      </div>
+
+      <div class="love-carousel-footer">
+        <span id="loveCounter">01 / 01</span>
+        <p>НАЖМИ НА ФОТО, ЧТОБЫ УЗНАТЬ, ЧТО ЗА НИМ</p>
+        <div class="love-dots" id="loveDots"></div>
+      </div>
+
+      <div class="love-bottom-note">
+        <span>И ЭТО ТОЛЬКО МАЛЕНЬКАЯ ЧАСТЬ.</span>
+        <span>♥</span>
+      </div>
+
+      <div class="scene-nav">
+        <button class="text-link" data-next="transition">
+          ПРОДОЛЖИТЬ НАШУ ИСТОРИЮ <span>↗</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- СУЩЕСТВУЮЩИЙ ПЕРЕХОД К ПЯТИ ЧУВСТВАМ -->
     <section class="scene transition-scene" id="transition">
       <div class="transition-symbol">ϟ</div>
       <p class="eyebrow">А ТЕПЕРЬ — САМОЕ ЛИЧНОЕ</p>
       <h2>ЭТО ИСТОРИЯ<br>НЕ О <em>СУПЕРСИЛЕ.</em></h2>
-      <p>Она о том, что я чувствую рядом с тобой. И о маленьких вещах, из которых складывается большое счастье.</p>
-      <button class="button button-light" data-next="senses">ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗</button>
+      <p>
+        Она о том, что я чувствую рядом с тобой.
+        И о маленьких вещах, из которых складывается большое счастье.
+      </p>
+      <button class="button button-light" data-next="senses">
+        ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗
+      </button>
     </section>
 
-    <!-- ПЯТЬ ЧУВСТВ -->
+
+    <!-- СУЩЕСТВУЮЩИЕ ПЯТЬ ЧУВСТВ И МИССИИ -->
     <section class="scene" id="senses">
-      <div class="section-top"><span>ЧАСТЬ II / МОИ ЧУВСТВА</span><span>03 — 05</span></div>
+      <div class="section-top">
+        <span>ЧАСТЬ V / МОИ ЧУВСТВА</span>
+        <span>06 — 10</span>
+      </div>
+
       <div class="senses-heading">
-        <div><p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p><h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2></div>
-        <p>Каждая глава — маленькая часть нашей истории. Открывай их в любом порядке.</p>
+        <div>
+          <p class="eyebrow">ПЯТЬ СПОСОБОВ СКАЗАТЬ</p>
+          <h2>ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2>
+        </div>
+        <p>
+          Каждая глава — маленькая часть нашей истории.
+          Открывай их в любом порядке.
+        </p>
       </div>
+
       <div class="progress">
-        <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
-        <div class="progress-track"><i id="progressFill"></i></div>
-        <div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+        <div>
+          <span>ТВОЯ ИСТОРИЯ</span>
+          <b id="progressCount">0 ИЗ 5 ОТКРЫТО</b>
+        </div>
+
+        <div class="progress-track">
+          <i id="progressFill"></i>
+        </div>
+
+        <div class="progress-numbers" id="progressSymbols">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+        </div>
       </div>
+
       <div id="senseList" class="sense-list"></div>
     </section>
 
-    <!-- ФИНАЛ -->
+
+    <!-- СУЩЕСТВУЮЩИЙ ФИНАЛ -->
     <section class="scene final-scene" id="final">
-      <div class="section-top"><span>ПОСЛЕДНЯЯ ГЛАВА</span><span>24 — ∞</span></div>
+      <div class="section-top">
+        <span>ПОСЛЕДНЯЯ ГЛАВА</span>
+        <span>24 — ∞</span>
+      </div>
+
       <div class="final-layout">
         <div class="final-photo photo-slot" data-photo="final">
-          <div class="photo-placeholder"><b>♥</b><span>НАШ СНИМОК</span></div>
+          <div class="photo-placeholder">
+            <b>♥</b>
+            <span>НАШ СНИМОК</span>
+          </div>
         </div>
+
         <div class="final-copy">
           <p class="eyebrow">И МОЯ САМАЯ ЛЮБИМАЯ СТРАНИЦА</p>
-          <h2>ПЯТЬ ЧУВСТВ.<br>ТЫСЯЧИ МОМЕНТОВ.<br><em>ОДИН ЛЮБИМЫЙ.</em></h2>
+          <h2>
+            ПЯТЬ ЧУВСТВ.<br>
+            ТЫСЯЧИ МОМЕНТОВ.<br>
+            <em>ОДИН ЛЮБИМЫЙ.</em>
+          </h2>
+
           <div class="envelope" id="finalEnvelope">
             <div class="letter">
               <p class="letter-date">ПИСЬМО ДЛЯ ТЕБЯ · ГЛАВА 24</p>
@@ -150,19 +395,32 @@
               <p id="finalLetterBody"></p>
               <p class="letter-sign" id="finalLetterSignature"></p>
             </div>
-            <button class="envelope-flap" id="openFinal">ОТКРЫТЬ ПИСЬМО ♥</button>
+
+            <button class="envelope-flap" id="openFinal">
+              ОТКРЫТЬ ПИСЬМО ♥
+            </button>
           </div>
         </div>
       </div>
+
       <p class="final-footer">С ДНЁМ РОЖДЕНИЯ, МОЯ ЛЮБОВЬ. <span>♥</span></p>
-      <button class="text-link restart-final" id="restartFinal">ПРОЧИТАТЬ ЕЩЁ РАЗ ↗</button>
+      <button class="text-link restart-final" id="restartFinal">
+        ПРОЧИТАТЬ ЕЩЁ РАЗ ↗
+      </button>
     </section>
+
   </main>
 
-  <footer class="site-footer"><span>Х. / ГЛАВА 24</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></footer>
+  <footer class="site-footer">
+    <span>Х. / ГЛАВА 24</span>
+    <span>СОЗДАНО С ЛЮБОВЬЮ</span>
+  </footer>
 
+
+  <!-- ОБЩЕЕ МОДАЛЬНОЕ ОКНО -->
   <div class="modal" id="detailModal" aria-hidden="true">
     <div class="modal-backdrop" data-close></div>
+
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" data-close aria-label="Закрыть">×</button>
       <p class="eyebrow" id="modalKicker"></p>
@@ -170,6 +428,7 @@
       <div id="modalBody"></div>
     </div>
   </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="content.js"></script>
