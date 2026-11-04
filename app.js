@@ -296,8 +296,25 @@
     stage.innerHTML = [-1, 0, 1].map(offset => {
       const index = (loveIndex + offset + total) % total;
       const item = items[index];
-      // Uploaded browser photo overrides the portable file stored in assets/love/.
-      const image = assets[`love-${index}`] || item.image || "";
+      // Browser upload takes priority. Otherwise try the configured path and
+      // common portable layouts (assets/1.jpg or assets/love/01.jpg).
+      const uploadedImage = assets[`love-${index}`] || "";
+      const configuredImage = item.image || "";
+      const number = String(index + 1);
+      const paddedNumber = number.padStart(2, "0");
+      const extensions = ["jpg", "jpeg", "png", "webp"];
+      const portableCandidates = extensions.flatMap(ext => [
+        `assets/love/${paddedNumber}.${ext}`,
+        `assets/love/${number}.${ext}`,
+        `assets/${paddedNumber}.${ext}`,
+        `assets/${number}.${ext}`
+      ]);
+      const imageCandidates = [...new Set([
+        uploadedImage,
+        configuredImage,
+        ...portableCandidates
+      ].filter(Boolean))];
+      const image = imageCandidates[0] || "";
       const pos = (C.loveImagePositions || [])[index] || "50% 50%";
       const center = offset === 0;
 
@@ -315,7 +332,7 @@
           <span class="love-card-inner">
             <span class="love-front">
               ${image
-                ? `<img src="${image}" alt="Фотография для причины ${index + 1}" style="object-position:${pos}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="love-photo-placeholder" hidden><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
+                ? `<img src="${image}" data-love-sources="${escapeHTML(JSON.stringify(imageCandidates.slice(1)))}" alt="Фотография для причины ${index + 1}" style="object-position:${pos}"><span class="love-photo-placeholder" hidden><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
                 : `<span class="love-photo-placeholder"><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
               }
               <span class="love-front-meta">
@@ -334,6 +351,27 @@
           </span>
         </button>`;
     }).join("");
+
+    // If a path differs in case, extension, or folder layout, try the
+    // remaining known locations before showing the placeholder.
+    stage.querySelectorAll(".love-front img[data-love-sources]").forEach(img => {
+      let fallbacks = [];
+      try {
+        fallbacks = JSON.parse(img.dataset.loveSources || "[]");
+      } catch (_) {
+        fallbacks = [];
+      }
+      let next = 0;
+      img.addEventListener("error", () => {
+        if (next < fallbacks.length) {
+          img.src = fallbacks[next++];
+          return;
+        }
+        img.hidden = true;
+        const placeholder = img.nextElementSibling;
+        if (placeholder) placeholder.hidden = false;
+      }, { once: false });
+    });
 
     const counter = $("#loveCounter");
     if (counter) {
