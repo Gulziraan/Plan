@@ -1949,3 +1949,43 @@ audio { width: 100%; max-width: 450px; }
     animation:none!important;
   }
 }
+
+/* Ненавязчивый переход мимо испытания Мьёльнира */
+.hammer-skip-wrap {
+  display:flex;
+  justify-content:center;
+  margin:18px auto 0;
+  position:relative;
+  z-index:6;
+}
+.hammer-skip {
+  border:0;
+  border-bottom:1px solid #d6b77e55;
+  padding:7px 2px;
+  background:transparent;
+  color:#c9aaa5;
+  font:800 8px/1.4 var(--sans);
+  letter-spacing:.17em;
+  cursor:pointer;
+  opacity:.72;
+  transition:color .25s, opacity .25s, border-color .25s;
+}
+.hammer-skip span {
+  color:var(--gold);
+  margin-left:7px;
+  font-size:12px;
+}
+.hammer-skip:hover,
+.hammer-skip:focus-visible {
+  color:var(--cream);
+  opacity:1;
+  border-color:var(--gold);
+}
+.hammer-skip:focus-visible {
+  outline:1px solid var(--gold);
+  outline-offset:5px;
+}
+@media (max-width:600px) {
+  .hammer-skip-wrap { margin-top:14px; }
+  .hammer-skip { font-size:8px; padding:9px 4px; }
+}
