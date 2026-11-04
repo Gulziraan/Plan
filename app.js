@@ -207,11 +207,16 @@
     $("#detailModal").setAttribute("aria-hidden", "true");
   }
 
-  function photoMarkup(key, className = "memory-photo") {
-    const src = assets[key] || C.media?.[key] || "";
+  function photoMarkup(key, className = "memory-photo", fallbackSrc = "") {
+    // key may be an uploaded browser asset key (e.g. "sight-0")
+    // or a portable path from content.js (e.g. "assets/qua/01.jpg").
+    const src = assets[key] || C.media?.[key] || fallbackSrc || (String(key).includes("/") ? key : "");
 
     if (src) {
-      return `<div class="${className}"><img src="${src}" alt="Фотография Хасана"></div>`;
+      return `<div class="${className}">
+        <img src="${src}" alt="Фотография Хасана" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <div class="photo-placeholder" hidden><b>♡</b><span>ДОБАВЬ ФОТОГРАФИЮ</span></div>
+      </div>`;
     }
 
     return `
@@ -446,7 +451,7 @@
           <div class="memory-photo-grid">
             ${s.memories.map((m, i) => `
               <button class="memory-photo-item" data-memory="${s.id}-${i}" type="button">
-                ${photoMarkup(`${s.id}-${i}`)}
+                ${photoMarkup(`${s.id}-${i}`, "memory-photo", m.image || "")}
                 <span>${m.title}</span>
               </button>
             `).join("")}
@@ -528,7 +533,7 @@
                 </button>
               `).join("")}
               ${uploadControl("＋ ДОБАВИТЬ ФОТО АРОМАТА", "image/*", "perfume")}
-              ${assets.perfume ? `<img class="perfume-upload" src="${assets.perfume}" alt="Фотография парфюма">` : ""}
+              ${(assets.perfume || C.media?.perfume) ? `<img class="perfume-upload" src="${assets.perfume || C.media.perfume}" alt="Фотография парфюма">` : ""}
             </div>
           </div>`;
       }
@@ -931,7 +936,7 @@
       const src = assets[key] || C.media?.[key] || "";
 
       if (src) {
-        element.innerHTML = `<img src="${src}" alt="Фотография Хасана">`;
+        element.innerHTML = `<img src="${src}" alt="Фотография Хасана" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="photo-placeholder" hidden><b>♡</b><span>ДОБАВЬ ФОТОГРАФИЮ</span></div>`;
       }
     });
   }
