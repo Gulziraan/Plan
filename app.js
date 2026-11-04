@@ -208,7 +208,12 @@
   }
 
   function photoMarkup(key, className = "memory-photo") {
-    const src = assets[key] || C.media?.[key] || "";
+    // Поддерживаем оба варианта:
+    // 1) ключи загруженных в браузере файлов (например, "sight-0");
+    // 2) прямые пути к изображениям в папке проекта (например, "assets/11.jpg").
+    const isFilePath = typeof key === "string" &&
+      /^(assets\/|\.\/|https?:\/\/)/i.test(key);
+    const src = assets[key] || (isFilePath ? key : C.media?.[key]) || "";
 
     if (src) {
       return `<div class="${className}"><img src="${src}" alt="Фотография Хасана"></div>`;
