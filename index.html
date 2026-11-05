@@ -200,7 +200,23 @@
       </div>
       <div class="quality-list" id="noteGrid"></div>
       <div class="scene-nav">
-        <button class="text-link" data-next="love">Я ХОЧУ СКАЗАТЬ ТЕБЕ ЕЩЁ НЕЧТО <span>↗</span></button>
+        <button class="text-link" data-next="transition">Я ХОЧУ СКАЗАТЬ ТЕБЕ ЕЩЁ НЕЧТО <span>↗</span></button>
+      </div>
+    </section>
+
+    <!-- ВВОДНАЯ ГЛАВА К ПЯТИ ЧУВСТВАМ -->
+    <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
+      <div class="transition-orbit" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+      <div class="transition-content">
+        <p class="eyebrow">ЧАСТЬ II / БЛИЖЕ, ЧЕМ СЛОВА</p>
+        <h2 id="transitionTitle">ЭТО НЕ ПРО<br><em>СУПЕРСИЛУ.</em></h2>
+        <p class="transition-lead">Не про умение поднимать молоты, спасать мир или побеждать злодеев.</p>
+        <p class="transition-copy">Это про кое-что гораздо более личное. Про то, что невозможно измерить, но можно почувствовать. Про детали, из которых складывается именно ты.</p>
+        <p class="transition-last">И я решила рассказать тебе о них через пять чувств.</p>
+        <div class="transition-senses" aria-label="Пять чувств">
+          <span title="Зрение">◉</span><span title="Слух">♫</span><span title="Вкус">✳</span><span title="Прикосновения">♡</span><span title="Запах">✧</span>
+        </div>
+        <button class="button button-light" data-next="senses">ПОЧУВСТВУЙ ЭТУ ИСТОРИЮ <span>↗</span></button>
       </div>
     </section>
 
@@ -233,14 +249,7 @@
       </div>
     </section>
 
-    <!-- ПЕРЕХОД -->
-    <section class="scene transition-scene" id="transition">
-      <div class="transition-symbol">ϟ</div>
-      <p class="eyebrow">А ТЕПЕРЬ — САМОЕ ЛИЧНОЕ</p>
-      <h2>ЭТО ИСТОРИЯ<br>НЕ О <em>СУПЕРСИЛЕ.</em></h2>
-      <p>Она о том, что я чувствую рядом с тобой. И о маленьких вещах, из которых складывается большое счастье.</p>
-      <button class="button button-light" data-next="senses">ПЕРЕВЕРНУТЬ СТРАНИЦУ ↗</button>
-    </section>
+
 
     <!-- ПЯТЬ ЧУВСТВ -->
     <section class="scene" id="senses">
@@ -262,29 +271,37 @@
       <div id="senseList" class="sense-list"></div>
     </section>
 
-    <!-- ФИНАЛЬНАЯ ГЛАВА САЙТА -->
-    <section class="scene final-scene" id="final">
-      <div class="section-top"><span>ПОСЛЕДНЯЯ ГЛАВА</span><span>24 — ∞</span></div>
-      <div class="final-layout">
-        <div class="final-photo photo-slot" data-photo="final">
-          <div class="photo-placeholder"><b>♥</b><span>НАШ СНИМОК</span></div>
-        </div>
-        <div class="final-copy">
-          <p class="eyebrow">И МОЯ САМАЯ ЛЮБИМАЯ СТРАНИЦА</p>
-          <h2>ПЯТЬ ЧУВСТВ.<br>ТЫСЯЧИ МОМЕНТОВ.<br><em>ОДИН ЛЮБИМЫЙ.</em></h2>
-          <div class="envelope" id="finalEnvelope">
-            <div class="letter">
-              <p class="letter-date">ПИСЬМО ДЛЯ ТЕБЯ · ГЛАВА 24</p>
-              <h3 id="finalLetterText"></h3>
-              <p id="finalLetterBody"></p>
-              <p class="letter-sign" id="finalLetterSignature"></p>
-            </div>
-            <button class="envelope-flap" id="openFinal">ОТКРЫТЬ ПИСЬМО ♥</button>
-          </div>
-        </div>
+    <!-- ЛИЧНОЕ ПИСЬМО И ФОТОГАЛЕРЕЯ -->
+    <section class="scene letter-gallery-scene" id="letter" aria-labelledby="personalLetterTitle">
+      <div class="letter-opening">
+        <p class="eyebrow">ПОСЛЕ ВСЕХ ПЯТИ ЧУВСТВ</p>
+        <span class="letter-opening-mark" aria-hidden="true">♡</span>
+        <h2 id="personalLetterTitle">А ТЕПЕРЬ —<br><em>МОИ СЛОВА.</em></h2>
+        <p>Есть вещи, которые хочется сказать не загадками.</p>
       </div>
-      <p class="final-footer">С ДНЁМ РОЖДЕНИЯ, МОЯ ЛЮБОВЬ. <span>♥</span></p>
-      <button class="text-link restart-final" id="restartFinal">ПРОЧИТАТЬ ЕЩЁ РАЗ ↗</button>
+
+      <article class="personal-letter" aria-label="Личное письмо">
+        <div class="personal-letter-top"><span>ЛИЧНОЕ ПОСЛАНИЕ</span><span>ГЛАВА 24 · ТОЛЬКО ДЛЯ ТЕБЯ</span></div>
+        <p class="personal-letter-salutation" id="personalLetterSalutation"></p>
+        <div class="personal-letter-body" id="personalLetterBody">
+          <p class="letter-empty-hint">ЗДЕСЬ БУДЕТ ТВОЁ ПИСЬМО<br><small>Добавь текст в объект personalLetter файла content.js</small></p>
+        </div>
+        <p class="personal-letter-signature" id="personalLetterSignature"></p>
+        <div class="personal-letter-end" aria-hidden="true">✦</div>
+      </article>
+
+      <section class="memory-gallery" aria-labelledby="memoryGalleryTitle">
+        <div class="memory-gallery-heading">
+          <div>
+            <p class="eyebrow">НАШ АРХИВ / МОМЕНТЫ, К КОТОРЫМ ХОЧЕТСЯ ВОЗВРАЩАТЬСЯ</p>
+            <h2 id="memoryGalleryTitle">ОСОБЕННЫЕ МОМЕНТЫ,<br><em>КОТОРЫЕ Я ОЧЕНЬ ЛЮБЛЮ.</em></h2>
+          </div>
+          <p>Неидеальные, смешные, тёплые. Просто наши.</p>
+        </div>
+        <div class="memory-gallery-grid" id="memoryGalleryGrid"></div>
+        <p class="memory-gallery-note">КАЖДЫЙ КАДР — ЧАСТЬ НАШЕЙ ИСТОРИИ <span>♥</span></p>
+      </section>
+      <button class="text-link restart-final" id="restartFinal">ПРОЙТИ ИСТОРИЮ ЕЩЁ РАЗ ↗</button>
     </section>
   </main>
 

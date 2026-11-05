@@ -93,15 +93,15 @@
     };
   } catch (_) {}
 
+  // В пользовательском маршруте оставлены только главы новой истории.
+  // Старые экраны профиля, Мьёльнира и карусели не удаляем из исходников,
+  // но они больше не входят в последовательность прохождения.
   const scenes = [
     "welcome",
-    "profile",
-    "hammer",
     "admire",
-    "love",
     "transition",
     "senses",
-    "final"
+    "letter"
   ];
 
   function saveProgress() {
@@ -130,6 +130,11 @@
   function showScene(id) {
     if (!scenes.includes(id)) return;
 
+    if (id === "letter" && !riddleState.unlocked) {
+      toast("Сначала нужно разгадать финальный шифр.");
+      return;
+    }
+
     currentScene = id;
     $$(".scene").forEach(scene => {
       scene.classList.toggle("active", scene.id === id);
@@ -150,8 +155,9 @@
       renderLoveReasons();
     }
 
-    if (id === "final") {
-      updateProgress();
+    if (id === "letter") {
+      renderPersonalLetter();
+      renderMemoryGallery();
     }
   }
 
@@ -919,24 +925,17 @@ const resolveImagePath = (path) => {
         <div class="secret-inner">
           <p class="eyebrow">ДОСТУП ПОДТВЕРЖДЁН</p>
           <span class="secret-symbol">∞</span>
-          <h2>ЭТО СЛОВО —<br><em>НЕ ПРОСТО ОТВЕТ.</em></h2>
+          <h2>ТЫ НАШЁЛ<br><em>ГЛАВНОЕ СЛОВО.</em></h2>
           <p class="secret-lead">
-            Все пять букв сложились в одно слово. Но на самом деле
-            оно было здесь с самого начала.
+            Пять чувств. Пять букв. И смысл, который был здесь с самого начала.
           </p>
           <div class="secret-message">
             <span>В · Е · Ч · Н · О</span>
             <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
-            <p>
-              За то, какой ты. За то, как я чувствую себя рядом с тобой.
-              За наши моменты, привычки, разговоры, смех и даже за самые
-              обычные дни. Мне хочется проживать с тобой ещё очень много
-              таких дней — и всё, что будет между ними.
-            </p>
-            <p class="handwritten">С днём рождения, мой любимый человек.</p>
+            <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
           </div>
           <button class="button button-light" type="button" id="secretContinue">
-            ПРОЧИТАТЬ ПОСЛЕДНЮЮ ГЛАВУ ↗
+            ОТКРЫТЬ МОЁ ПИСЬМО <span>↗</span>
           </button>
         </div>
       `;
@@ -944,7 +943,7 @@ const resolveImagePath = (path) => {
       $("#senses")?.appendChild(secret);
 
       $("#secretContinue")?.addEventListener("click", () => {
-        showScene("final");
+        showScene("letter");
       });
     }
 
@@ -1082,6 +1081,10 @@ const resolveImagePath = (path) => {
     localStorage.removeItem(PROGRESS_KEY);
     localStorage.removeItem(RIDDLE_KEY);
 
+    if (beginButton) {
+      beginButton.innerHTML = 'ОТКРЫТЬ ИСТОРИЮ <span>↗</span>';
+    }
+
     $("#riddleCipher")?.remove();
     $("#secretChapter")?.remove();
 
@@ -1091,7 +1094,13 @@ const resolveImagePath = (path) => {
 
   // ОСНОВНЫЕ КНОПКИ И НАВИГАЦИЯ
 
-  $("#beginBtn")?.addEventListener("click", () => showScene("profile"));
+  const beginButton = $("#beginBtn");
+  if (beginButton && riddleState.unlocked) {
+    beginButton.innerHTML = 'ПЕРЕЙТИ К ПИСЬМУ <span>↗</span>';
+  }
+  beginButton?.addEventListener("click", () => {
+    showScene(riddleState.unlocked ? "letter" : "admire");
+  });
 
   $$("[data-next]").forEach(button => {
     button.addEventListener("click", () => showScene(button.dataset.next));
@@ -1473,11 +1482,54 @@ const resolveImagePath = (path) => {
     if (input) handleUpload(input);
   });
 
-  // ПИСЬМО
+  // ЛИЧНОЕ ПИСЬМО: текст редактируется в content.js, случайное письмо не подставляется.
+  function renderPersonalLetter() {
+    const letter = C.personalLetter || {};
+    const salutation = $("#personalLetterSalutation");
+    const body = $("#personalLetterBody");
+    const signature = $("#personalLetterSignature");
 
-  $("#finalLetterText").textContent = C.finalLetter.salutation;
-  $("#finalLetterBody").textContent = C.finalLetter.body;
-  $("#finalLetterSignature").textContent = C.finalLetter.signature;
+    if (salutation) salutation.textContent = letter.salutation || "";
+    if (signature) signature.textContent = letter.signature || "";
+
+    if (body) {
+      const paragraphs = String(letter.body || "")
+        .split(/\n\s*\n/)
+        .map(value => value.trim())
+        .filter(Boolean);
+
+      body.innerHTML = paragraphs.length
+        ? paragraphs.map(value => `<p>${escapeHTML(value).replace(/\n/g, "<br>")}</p>`).join("")
+        : `<p class="letter-empty-hint">ЗДЕСЬ БУДЕТ ТВОЁ ПИСЬМО<br><small>Добавь текст в объект personalLetter файла content.js</small></p>`;
+    }
+  }
+
+  // Фотографии галереи задаются массивом galleryPhotos в content.js.
+  // Чтобы добавить кадр: положи файл в assets/ и добавь его путь в массив.
+  function renderMemoryGallery() {
+    const grid = $("#memoryGalleryGrid");
+    if (!grid) return;
+
+    const photos = Array.isArray(C.galleryPhotos) ? C.galleryPhotos : [];
+    const available = photos.filter(item => item && item.src);
+
+    grid.innerHTML = available.map((item, index) => `
+      <figure class="memory-gallery-item gallery-shape-${(index % 6) + 1}">
+        <img
+          src="${escapeHTML(item.src)}"
+          alt="${escapeHTML(item.alt || `Наш момент ${index + 1}`)}"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    `).join("");
+
+    grid.querySelectorAll("img").forEach(img => {
+      img.addEventListener("error", () => {
+        img.closest(".memory-gallery-item")?.remove();
+      }, { once: true });
+    });
+  }
 
   // НАЧАЛЬНАЯ ОТРИСОВКА
 
@@ -1485,6 +1537,8 @@ const resolveImagePath = (path) => {
   renderQualities();
   renderLoveReasons();
   renderSenses();
+  renderPersonalLetter();
+  renderMemoryGallery();
   applyFixedPhotos();
   updateProgress();
   restoreRiddleState();
