@@ -98,6 +98,8 @@
   // но они больше не входят в последовательность прохождения.
   const scenes = [
     "welcome",
+    "profile",
+    "hammer",
     "admire",
     "transition",
     "senses",
@@ -1099,7 +1101,7 @@ const resolveImagePath = (path) => {
     beginButton.innerHTML = 'ПЕРЕЙТИ К ПИСЬМУ <span>↗</span>';
   }
   beginButton?.addEventListener("click", () => {
-    showScene(riddleState.unlocked ? "letter" : "admire");
+    showScene(riddleState.unlocked ? "letter" : "profile");
   });
 
   $$("[data-next]").forEach(button => {
