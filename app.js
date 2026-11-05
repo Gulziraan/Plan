@@ -79,9 +79,7 @@
     progress = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]"));
   } catch (_) {}
 
-  try {
-    assets = JSON.parse(localStorage.getItem(ASSET_KEY) || "{}");
-  } catch (_) {}
+  assets = {};
 
   try {
     const stored = JSON.parse(localStorage.getItem(RIDDLE_KEY) || "{}");
@@ -120,15 +118,8 @@
   }
 
   function saveAssets() {
-    try {
-      localStorage.setItem(ASSET_KEY, JSON.stringify(assets));
-      return true;
-    } catch (_) {
-      toast("Не хватило места в памяти браузера. Попробуй изображение меньшего размера.");
-      return false;
-    }
-  }
-
+  return true;
+}
   function showScene(id) {
     if (!scenes.includes(id)) return;
 
