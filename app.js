@@ -285,114 +285,194 @@
     "'": "&#39;"
   }[ch]));
 
-  function renderLoveReasons() {
-    const stage = $("#loveStage");
-    if (!stage || !Array.isArray(C.loveReasons) || !C.loveReasons.length) return;
+  
+function renderLoveReasons() {
+  const stage = $("#loveStage");
+  if (!stage || !Array.isArray(C.loveReasons) || !C.loveReasons.length) return;
 
-    const items = C.loveReasons;
-    const total = items.length;
-    loveIndex = ((loveIndex % total) + total) % total;
+  const items = C.loveReasons;
+  const total = items.length;
 
-    stage.innerHTML = [-1, 0, 1].map(offset => {
-      const index = (loveIndex + offset + total) % total;
-      const item = items[index];
-      // Browser upload takes priority. Otherwise try the configured path and
-      // common portable layouts (assets/1.jpg or assets/love/01.jpg).
-      const uploadedImage = assets[`love-${index}`] || "";
-      const configuredImage = item.image || "";
-      const number = String(index + 1);
-      const paddedNumber = number.padStart(2, "0");
-      const extensions = ["jpg", "jpeg", "png", "webp"];
-      const portableCandidates = extensions.flatMap(ext => [
-        `assets/love/${paddedNumber}.${ext}`,
-        `assets/love/${number}.${ext}`,
-        `assets/${paddedNumber}.${ext}`,
-        `assets/${number}.${ext}`
-      ]);
-      const imageCandidates = [...new Set([
-        uploadedImage,
-        configuredImage,
-        ...portableCandidates
-      ].filter(Boolean))];
-      const image = imageCandidates[0] || "";
-      const pos = (C.loveImagePositions || [])[index] || "50% 50%";
-      const center = offset === 0;
+  loveIndex = ((loveIndex % total) + total) % total;
 
-      return `
-        <button
-          class="love-card ${center ? "center" : offset < 0 ? "left" : "right"} ${center && loveFlipped ? "flipped" : ""}"
-          data-love-offset="${offset}"
-          data-love-index="${index}"
-          type="button"
-          aria-label="${center
-            ? (loveFlipped ? "Вернуться к фотографии" : "Перевернуть карточку и прочитать")
-            : `Перейти к причине: ${escapeHTML(item.title)}`}"
-          ${center ? "" : "tabindex=-1"}
-        >
-          <span class="love-card-inner">
-            <span class="love-front">
-              ${image
-                ? `<img src="${image}" data-love-sources="${escapeHTML(JSON.stringify(imageCandidates.slice(1)))}" alt="Фотография для причины ${index + 1}" style="object-position:${pos}"><span class="love-photo-placeholder" hidden><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
-                : `<span class="love-photo-placeholder"><b>H.</b><small>ВАШ ФОТОКАДР</small><i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i></span>`
-              }
-              <span class="love-front-meta">
-                <small>ЛИЧНОЕ / ${String(index + 1).padStart(2, "0")}</small>
-                <b>ПЕРЕВЕРНИ МЕНЯ <span>↗</span></b>
-              </span>
-            </span>
-            <span class="love-back">
-              <span class="love-back-index">${String(index + 1).padStart(2, "0")} <i>—</i> ${String(total).padStart(2, "0")}</span>
-              <small>ЗА ЧТО Я ТЕБЯ ЛЮБЛЮ</small>
-              <strong>${escapeHTML(item.title)}</strong>
-              <span class="love-reason-text">${escapeHTML(item.text)}</span>
-              ${item.caption ? `<i class="love-caption">${escapeHTML(item.caption)}</i>` : ""}
-              <span class="love-back-sign">МОЁ ЛЮБИМОЕ — ТЫ.</span>
+  // Корректно формируем адрес фотографии
+  // с учётом GitHub Pages и вложенности репозитория.
+  const resolveImagePath = (path) => {
+    if (!path || typeof path !== "string") return "";
+
+    if (/^(data:|blob:|https?:\/\/)/i.test(path)) {
+      return path;
+    }
+
+    return new URL(path.replace(/^\.?\//, ""), document.baseURI).href;
+  };
+
+  stage.innerHTML = [-1, 0, 1].map(offset => {
+    const index = (loveIndex + offset + total) % total;
+    const item = items[index] || {};
+
+    const number = String(index + 1);
+    const padded = number.padStart(2, "0");
+
+    // Путь из content.js — основной источник фотографии.
+    const configuredImage = item.image || "";
+
+    // Альтернативные пути, если основной файл не найден.
+    const extensions = ["jpg", "jpeg", "png", "webp"];
+
+    const alternatives = extensions.flatMap(ext => [
+      `assets/${number}.${ext}`,
+      `assets/${padded}.${ext}`
+    ]);
+
+    // Загруженная через браузер фотография — последний вариант.
+    const uploadedImage = assets[`love-${index}`] || "";
+
+    const rawCandidates = [
+      configuredImage,
+      ...alternatives,
+      uploadedImage
+    ].filter(Boolean);
+
+    const imageCandidates = [...new Set(rawCandidates)]
+      .map(resolveImagePath)
+      .filter(Boolean);
+
+    const image = imageCandidates[0] || "";
+
+    const pos = (C.loveImagePositions || [])[index] || "50% 50%";
+    const center = offset === 0;
+
+    return `
+      <button
+        class="love-card ${center ? "center" : offset < 0 ? "left" : "right"} ${center && loveFlipped ? "flipped" : ""}"
+        data-love-offset="${offset}"
+        data-love-index="${index}"
+        type="button"
+        aria-label="${center
+          ? (loveFlipped ? "Вернуться к фотографии" : "Перевернуть карточку и прочитать")
+          : `Перейти к причине: ${escapeHTML(item.title || "")}`}"
+        ${center ? "" : "tabindex=-1"}
+      >
+        <span class="love-card-inner">
+
+          <span class="love-front">
+            ${
+              image
+                ? `
+                  <img
+                    src="${escapeHTML(image)}"
+                    data-love-sources="${escapeHTML(JSON.stringify(imageCandidates.slice(1)))}"
+                    alt="Фотография ${index + 1}"
+                    style="object-position:${escapeHTML(pos)}"
+                  >
+                  <span class="love-photo-placeholder" hidden>
+                    <b>H.</b>
+                    <small>ВАШ ФОТОКАДР</small>
+                    <i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i>
+                  </span>
+                `
+                : `
+                  <span class="love-photo-placeholder">
+                    <b>H.</b>
+                    <small>ВАШ ФОТОКАДР</small>
+                    <i>ДОБАВЬ СЮДА ФОТОГРАФИЮ</i>
+                  </span>
+                `
+            }
+
+            <span class="love-front-meta">
+              <small>ЛИЧНОЕ / ${String(index + 1).padStart(2, "0")}</small>
+              <b>ПЕРЕВЕРНИ МЕНЯ <span>↗</span></b>
             </span>
           </span>
-        </button>`;
-    }).join("");
 
-    // If a path differs in case, extension, or folder layout, try the
-    // remaining known locations before showing the placeholder.
-    stage.querySelectorAll(".love-front img[data-love-sources]").forEach(img => {
-      let fallbacks = [];
-      try {
-        fallbacks = JSON.parse(img.dataset.loveSources || "[]");
-      } catch (_) {
-        fallbacks = [];
+          <span class="love-back">
+            <span class="love-back-index">
+              ${String(index + 1).padStart(2, "0")}
+              <i>—</i>
+              ${String(total).padStart(2, "0")}
+            </span>
+
+            <small>ЗА ЧТО Я ТЕБЯ ЛЮБЛЮ</small>
+
+            <strong>${escapeHTML(item.title || "")}</strong>
+
+            <span class="love-reason-text">
+              ${escapeHTML(item.text || "")}
+            </span>
+
+            ${
+              item.caption
+                ? `<i class="love-caption">${escapeHTML(item.caption)}</i>`
+                : ""
+            }
+
+            <span class="love-back-sign">МОЁ ЛЮБИМОЕ — ТЫ.</span>
+          </span>
+
+        </span>
+      </button>
+    `;
+  }).join("");
+
+  // Если фотография не найдена, пробуем следующие варианты.
+  stage.querySelectorAll(".love-front img[data-love-sources]").forEach(img => {
+    let fallbacks = [];
+
+    try {
+      fallbacks = JSON.parse(img.dataset.loveSources || "[]");
+    } catch (_) {}
+
+    let next = 0;
+
+    img.addEventListener("error", () => {
+      if (next < fallbacks.length) {
+        img.src = fallbacks[next++];
+        return;
       }
-      let next = 0;
-      img.addEventListener("error", () => {
-        if (next < fallbacks.length) {
-          img.src = fallbacks[next++];
-          return;
-        }
-        img.hidden = true;
-        const placeholder = img.nextElementSibling;
-        if (placeholder) placeholder.hidden = false;
-      }, { once: false });
+
+      img.hidden = true;
+
+      const placeholder = img.nextElementSibling;
+      if (placeholder) {
+        placeholder.hidden = false;
+      }
     });
+  });
 
-    const counter = $("#loveCounter");
-    if (counter) {
-      counter.textContent = `${String(loveIndex + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
-    }
+  // Счётчик карточек
+  const counter = $("#loveCounter");
 
-    const progressBar = $("#loveProgress");
-    if (progressBar) {
-      progressBar.style.width = `${((loveIndex + 1) / total) * 100}%`;
-    }
-
-    const hint = $("#lovePhotoHint");
-    if (hint) {
-      hint.textContent = `ФОТОГРАФИЯ ДЛЯ ПРИЧИНЫ ${String(loveIndex + 1).padStart(2, "0")}`;
-    }
-
-    const upload = $("#lovePhotoUpload");
-    if (upload) {
-      upload.dataset.upload = `love-${loveIndex}`;
-    }
+  if (counter) {
+    counter.textContent =
+      `${String(loveIndex + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
   }
+
+  // Индикатор прогресса
+  const progressBar = $("#loveProgress");
+
+  if (progressBar) {
+    progressBar.style.width =
+      `${((loveIndex + 1) / total) * 100}%`;
+  }
+
+  // Подсказка
+  const hint = $("#lovePhotoHint");
+
+  if (hint) {
+    hint.textContent =
+      `ФОТОГРАФИЯ ДЛЯ ПРИЧИНЫ ${String(loveIndex + 1).padStart(2, "0")}`;
+  }
+
+  // Загрузка фотографии через браузер
+  const upload = $("#lovePhotoUpload");
+
+  if (upload) {
+    upload.dataset.upload = `love-${loveIndex}`;
+  }
+}
+
 
   function shiftLove(direction) {
     const total = (C.loveReasons || []).length;
