@@ -297,15 +297,26 @@ function renderLoveReasons() {
 
   // Корректно формируем адрес фотографии
   // с учётом GitHub Pages и вложенности репозитория.
-  const resolveImagePath = (path) => {
-    if (!path || typeof path !== "string") return "";
+  const appScript = Array.from(document.scripts).find(script => {
+  if (!script.src) return false;
 
-    if (/^(data:|blob:|https?:\/\/)/i.test(path)) {
-      return path;
-    }
+  return new URL(script.src, window.location.href)
+    .pathname.endsWith("/app.js");
+});
 
-    return new URL(path.replace(/^\.?\//, ""), document.baseURI).href;
-  };
+const siteRoot = appScript
+  ? new URL(".", appScript.src)
+  : new URL("./", window.location.href);
+
+const resolveImagePath = (path) => {
+  if (!path || typeof path !== "string") return "";
+
+  if (/^(data:|blob:|https?:\/\/)/i.test(path)) {
+    return path;
+  }
+
+  return new URL(path.replace(/^\/+/, ""), siteRoot).href;
+};
 
   stage.innerHTML = [-1, 0, 1].map(offset => {
     const index = (loveIndex + offset + total) % total;
