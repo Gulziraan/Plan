@@ -79,7 +79,9 @@
     progress = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]"));
   } catch (_) {}
 
-  assets = {};
+  try {
+  localStorage.removeItem(ASSET_KEY);
+} catch (_) {}
 
   try {
     const stored = JSON.parse(localStorage.getItem(RIDDLE_KEY) || "{}");
