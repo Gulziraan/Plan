@@ -4,11 +4,11 @@ window.BIRTHDAY_CONTENT = {
   age: 24,
 
   media: {
-    hero: "assets/01.jpg",
-    portrait: "assets/02.jpg",
-    final: "assets/03.jpg",
+    hero: "assets/m1.jpg",
+    portrait: "assets/m2.jpg",
+    final: "assets/m3.jpg",
     audio: "",
-    perfume: "assets/04.jpg"
+    perfume: "assets/m4.jpg"
   },
 
   stats: [
