@@ -1404,6 +1404,9 @@ audio { width: 100%; max-width: 450px; }
   background:radial-gradient(ellipse at 50% 35%,#8d3946,#35101c 68%,#17080e);
   color:#fff4e8;
 }
+.love-photo-placeholder[hidden] {
+  display: none !important;
+}
 .love-photo-placeholder b {
   font:700 clamp(100px,17vw,190px)/.8 var(--display);
   color:#ffffff20;
