@@ -2320,33 +2320,43 @@ audio { width: 100%; max-width: 450px; }
 }
 
 
-/* Пять чувств: индивидуальный ритм глав без изменения их интерактивных блоков */
-.sense-chapter .sense-heading .eyebrow {
-  color: var(--gold);
-  letter-spacing: .16em;
+/* Пять чувств — личные тексты и отдельный ритм каждой главы */
+.transition-content { max-width: 900px; }
+.transition-lead {
+  max-width: 720px;
+  font-size: clamp(21px, 2.25vw, 28px);
+  line-height: 1.48;
+}
+.transition-copy {
+  max-width: 700px;
+  line-height: 1.7;
+}
+.transition-last {
+  max-width: 690px;
   line-height: 1.5;
 }
-.sense-chapter .sense-description {
-  max-width: 720px;
-  margin: 22px 0 30px;
+
+.sense-heading .eyebrow {
+  color: var(--gold);
+  letter-spacing: .16em;
+}
+.sense-description {
+  max-width: 760px;
+  margin: 24px 0 30px;
+  font: clamp(18px, 1.45vw, 21px)/1.65 var(--serif);
   color: #ead5d0;
-  font: clamp(18px, 1.45vw, 21px)/1.62 var(--serif);
 }
 .sense-sight .sense-description {
-  max-width: 690px;
-  padding-left: 18px;
+  max-width: 700px;
+  padding-left: 19px;
   border-left: 1px solid #d6b46c88;
 }
-.sense-sound .sense-description {
-  max-width: 740px;
-  padding-bottom: 17px;
-  border-bottom: 1px solid #d6b46c55;
-}
+.sense-sound .sense-heading { align-items: flex-start; }
+.sense-sound .sense-symbol { padding-top: 10px; }
 .sense-taste .sense-description {
   max-width: 650px;
   margin-left: auto;
-  margin-right: 5%;
-  text-align: left;
+  margin-right: 4%;
 }
 .sense-touch .sense-description {
   max-width: 680px;
@@ -2354,25 +2364,29 @@ audio { width: 100%; max-width: 450px; }
 }
 .sense-scent .sense-description {
   max-width: 700px;
-  padding: 16px 20px;
+  padding-top: 18px;
   border-top: 1px solid #d6b46c55;
-  border-bottom: 1px solid #d6b46c55;
 }
+
 .secret-lead {
   max-width: 700px;
   margin: 25px auto 35px;
   color: #e8d0ca;
   text-align: left;
-  font: 20px/1.62 var(--serif);
+  font: 20px/1.65 var(--serif);
 }
-.secret-lead p { margin: 0 0 14px; }
+.secret-lead p { margin: 0 0 15px; }
 .secret-lead p:last-child { margin-bottom: 0; }
-@media (max-width: 800px) {
+
+@media(max-width:800px) {
   .sense-taste .sense-description { margin-left: 0; margin-right: 0; }
 }
-@media (max-width: 520px) {
-  .sense-chapter .sense-description { font-size: 17px; line-height: 1.58; }
+@media(max-width:520px) {
+  .transition-lead { font-size: 20px; line-height: 1.5; }
+  .transition-copy { font-size: 16px; line-height: 1.65; }
+  .transition-last { font-size: 18px; }
+  .sense-description { font-size: 17px; line-height: 1.6; }
   .sense-sight .sense-description { padding-left: 13px; }
-  .sense-scent .sense-description { padding: 13px 14px; }
-  .secret-lead { font-size: 17px; line-height: 1.62; }
+  .sense-scent .sense-description { padding-top: 13px; }
+  .secret-lead { font-size: 17px; line-height: 1.65; }
 }
