@@ -573,95 +573,82 @@ const resolveImagePath = (path) => {
     const root = $("#senseList");
     if (!root) return;
 
-    root.innerHTML = C.senses.map(s => {
+    const storyPhotos = ["assets/01.jpg", "assets/02.jpg", "assets/2.jpg"];
+    root.innerHTML = C.senses.map((s, chapterIndex) => {
       let content = "";
 
       if (s.kind === "photos") {
         content = `
-          <div class="memory-photo-grid">
+          <div class="sight-gallery">
+            <figure class="sight-feature-photo"><img src="${storyPhotos[0]}" alt="Совместное воспоминание" loading="lazy"><figcaption>С ТОГО САМОГО НАЧАЛА</figcaption></figure>
+            <div class="sight-side-photos">
+              <figure><img src="${storyPhotos[1]}" alt="Совместное воспоминание" loading="lazy"><figcaption>ОДИН ИЗ НАШИХ МОМЕНТОВ</figcaption></figure>
+              <figure><img src="${storyPhotos[2]}" alt="Совместное воспоминание" loading="lazy"><figcaption>ИСТОРИЯ, КОТОРУЮ Я ЛЮБЛЮ</figcaption></figure>
+            </div>
+          </div>
+          <div class="memory-photo-grid memory-photo-grid-extra">
             ${s.memories.map((m, i) => `
               <button class="memory-photo-item" data-memory="${s.id}-${i}" type="button">
-                ${photoMarkup(`${s.id}-${i}`)}
-                <span>${m.title}</span>
-              </button>
-            `).join("")}
+                ${photoMarkup(`${s.id}-${i}`)}<span>${m.title}</span>
+              </button>`).join("")}
           </div>
-          ${uploadControl("＋ ДОБАВИТЬ ФОТО", "image/*", `${s.id}-upload`)}`;
+          ${uploadControl("＋ ДОБАВИТЬ СВОЁ ФОТО", "image/*", `${s.id}-upload`)}`;
       }
 
       if (s.kind === "audio") {
         const audioSource = assets.audio || C.media.audio || "";
-
         content = `
-          <div class="audio-station">
-            <div class="vinyl" id="vinyl"><div class="vinyl-label">НАША<br>МУЗЫКА</div></div>
-            <div class="audio-info">
-              <p class="eyebrow">НАША МУЗЫКА</p>
-              <h4 id="audioName">${assets.audioName || "Песня, которая напоминает о нас"}</h4>
-              <audio id="personalAudio" controls ${audioSource ? `src="${audioSource}"` : ""}></audio>
-              ${uploadControl("＋ ЗАГРУЗИТЬ АУДИО", "audio/*", "audio")}
+          <div class="audio-editorial">
+            <div class="audio-wave-art" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="audio-station">
+              <div class="vinyl" id="vinyl"><div class="vinyl-label">НАША<br>МУЗЫКА</div></div>
+              <div class="audio-info">
+                <p class="eyebrow">ГОЛОСА · РАЗГОВОРЫ · МУЗЫКА</p>
+                <h4 id="audioName">${assets.audioName || "То, что хочется переслушивать"}</h4>
+                <p class="audio-editorial-note">Иногда достаточно услышать знакомый голос, чтобы снова оказаться в определённом моменте.</p>
+                <audio id="personalAudio" controls ${audioSource ? `src="${audioSource}"` : ""}></audio>
+                ${uploadControl("＋ ДОБАВИТЬ АУДИО", "audio/*", "audio")}
+              </div>
             </div>
           </div>
-          <div class="memory-text-grid">
-            ${s.memories.map(m => `
-              <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}">
-                <b>${m.title}</b><span>ОТКРЫТЬ ↗</span>
-              </button>
-            `).join("")}
+          <div class="memory-text-grid sound-memories">${s.memories.map(m => `
+            <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
           </div>`;
       }
 
       if (s.kind === "cards") {
         content = `
-          <div class="taste-grid">
-            ${s.memories.map((m, i) => `
-              <button class="taste-card" data-memory-title="${m.title}" data-memory-text="${m.text}">
-                <span class="taste-number">0${i + 1}</span>
-                <span class="taste-ornament">${["✿", "☕", "❦"][i]}</span>
-                <b>${m.title}</b>
-                <small>ОТКРЫТЬ ВОСПОМИНАНИЕ ↗</small>
-              </button>
-            `).join("")}
+          <div class="taste-editorial-top"><span>КОФЕ</span><i>·</i><span>СЛАДОСТИ</span><i>·</i><span>ЗАБОТА</span></div>
+          <div class="taste-grid">${s.memories.map((m, i) => `
+            <button class="taste-card taste-card-${i + 1}" data-memory-title="${m.title}" data-memory-text="${m.text}">
+              <span class="taste-number">0${i + 1}</span><span class="taste-ornament">${["К", "С", "З"][i]}</span>
+              <b>${m.title}</b><small>ВОСПОМИНАНИЕ · ОТКРЫТЬ ↗</small>
+            </button>`).join("")}
           </div>`;
       }
 
       if (s.kind === "letter") {
         content = `
-          <div class="touch-layout">
-            <div class="fabric-note">
+          <div class="touch-editorial">
+            <div class="touch-fabric-field" aria-hidden="true"><span class="touch-thread"></span><span class="touch-light"></span><span class="touch-word">ближе</span></div>
+            <div class="touch-note">
               <span class="handwritten">маленькое напоминание</span>
-              <p>Есть места, в которых чувствуешь себя дома. А есть люди.</p>
-              <span>♡</span>
-            </div>
-            <div class="memory-text-grid">
-              ${s.memories.map(m => `
-                <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}">
-                  <b>${m.title}</b><span>ОТКРЫТЬ ↗</span>
-                </button>
-              `).join("")}
+              <p>Есть моменты, которые остаются с нами не потому, что были большими, а потому, что мы что-то почувствовали.</p>
+              <span class="touch-note-mark">—</span>
             </div>
           </div>
-          <div class="certificate">
-            <p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p>
-            <strong>Один полноценный<br><em>массаж.</em></strong>
-            <p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p>
-            <span class="handwritten">с любовью, всегда</span>
-          </div>`;
+          <div class="memory-text-grid touch-memories">${s.memories.map(m => `
+            <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
+          </div>
+          <div class="certificate"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>`;
       }
 
       if (s.kind === "scent") {
         content = `
-          <div class="scent-layout">
-            <div class="perfume-illustration">
-              <div class="perfume-cap"></div>
-              <div class="perfume-bottle">№ 24</div>
-            </div>
-            <div class="scent-notes">
-              ${s.memories.map(m => `
-                <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}">
-                  <b>${m.title}</b><span>ОТКРЫТЬ ↗</span>
-                </button>
-              `).join("")}
+          <div class="scent-editorial">
+            <div class="scent-atmosphere" aria-hidden="true"><span class="scent-orbit scent-orbit-one"></span><span class="scent-orbit scent-orbit-two"></span><div class="perfume-illustration"><div class="perfume-cap"></div><div class="perfume-bottle">№ 24</div></div><span class="scent-glint">✧</span></div>
+            <div class="scent-notes"><p class="eyebrow">ЗАПАХ, КОТОРЫЙ СТАЛ ЗНАКОМЫМ</p>${s.memories.map(m => `
+              <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
               ${uploadControl("＋ ДОБАВИТЬ ФОТО АРОМАТА", "image/*", "perfume")}
               ${assets.perfume ? `<img class="perfume-upload" src="${assets.perfume}" alt="Фотография парфюма">` : ""}
             </div>
@@ -670,64 +657,39 @@ const resolveImagePath = (path) => {
 
       const solved = riddleState.solved.includes(s.id);
       const riddle = RIDDLES[s.id];
+      const layouts = { sight: "story-layout-sight", sound: "story-layout-sound", taste: "story-layout-taste", touch: "story-layout-touch", scent: "story-layout-scent" };
 
       return `
-        <article class="sense-chapter sense-${s.id}" id="chapter-${s.id}">
-          <div class="sense-number">${s.number}</div>
+        <article class="sense-chapter sense-${s.id} ${layouts[s.id]}" id="chapter-${s.id}" style="--chapter-index:${chapterIndex}">
+          <div class="sense-number"><span>${s.number}</span><i></i></div>
           <div class="sense-main">
             <div class="sense-heading">
-              <div>
-                <p class="eyebrow">${s.theme}</p>
-                <h3>${s.name}</h3>
-                ${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}
-              </div>
-              <span class="sense-symbol">${s.symbol}</span>
+              <div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3></div>
+              <span class="sense-symbol" aria-hidden="true">${s.symbol}</span>
             </div>
-
-            <p class="sense-description">${s.description}</p>
+            <p class="sense-description">${s.description.replace(/\n/g, "<br>")}</p>
             <div class="sense-content">${content}</div>
-
+            <div class="chapter-invitation"><span>НАШЕ ВОСПОМИНАНИЕ · ${s.number} / 05</span><p>${s.prompt}</p></div>
             <section class="riddle-panel ${solved ? "is-solved" : ""}" data-riddle="${s.id}">
-              <div class="riddle-panel-top">
-                <span class="riddle-index">СЕКРЕТНЫЙ УРОВЕНЬ</span>
-                <span class="riddle-status">${solved ? "РАЗГАДАНО ✓" : "ОЖИДАЕТ РЕШЕНИЯ"}</span>
-              </div>
-              <p class="eyebrow">${riddle.title}</p>
-              <p class="riddle-intro">${riddle.intro}</p>
+              <div class="riddle-panel-top"><span class="riddle-index">МАЛЕНЬКОЕ ИСПЫТАНИЕ</span><span class="riddle-status">${solved ? "РАЗГАДАНО ✓" : "ТВОЯ ОЧЕРЕДЬ"}</span></div>
+              <p class="eyebrow">${riddle.title}</p><p class="riddle-intro">${riddle.intro}</p>
               <h4 class="riddle-question">${riddle.question}</h4>
               ${renderRiddleControl(s.id, solved)}
               <button class="riddle-hint" type="button" data-hint="${s.id}">ПОЛУЧИТЬ ПОДСКАЗКУ</button>
-              <p class="riddle-feedback" id="feedback-${s.id}" aria-live="polite">
-                ${solved ? riddle.success : ""}
-              </p>
-              ${solved ? `
-                <div class="earned-letter">
-                  <span>ТВОЯ БУКВА</span>
-                  <strong>${RIDDLE_LETTERS[s.id]}</strong>
-                </div>
-              ` : ""}
+              <p class="riddle-feedback" id="feedback-${s.id}" aria-live="polite">${solved ? riddle.success : ""}</p>
+              ${solved ? `<div class="earned-letter"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS[s.id]}</strong></div><p class="chapter-reaction">${s.reaction}</p>` : ""}
             </section>
           </div>
         </article>`;
     }).join("") + `
-      <div class="unlock-final">
-        <p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p>
-        <h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3>
-        <button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>
-          ПЕРЕЙТИ К ШИФРУ ↗
-        </button>
-      </div>`;
+      <div class="unlock-final"><p class="eyebrow">ПЯТЬ ГЛАВ · ПЯТЬ БУКВ</p><h3>ИСТОРИЯ<br><em>ЕЩЁ НЕ ЗАКОНЧЕНА.</em></h3><p>Когда соберёшь все пять букв, откроется последнее сообщение.</p>
+        <button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div>`;
 
     const audio = $("#personalAudio");
-
     if (audio) {
       audio.addEventListener("play", () => $("#vinyl")?.classList.add("playing"));
-
-      ["pause", "ended"].forEach(eventName => {
-        audio.addEventListener(eventName, () => $("#vinyl")?.classList.remove("playing"));
-      });
+      ["pause", "ended"].forEach(eventName => audio.addEventListener(eventName, () => $("#vinyl")?.classList.remove("playing")));
     }
-
     updateProgress();
   }
 
@@ -918,16 +880,17 @@ const resolveImagePath = (path) => {
 
       secret.innerHTML = `
         <div class="secret-inner">
-          <p class="eyebrow">ДОСТУП ПОДТВЕРЖДЁН</p>
-          <span class="secret-symbol">∞</span>
-          <h2>ТЫ НАШЁЛ<br><em>ГЛАВНОЕ СЛОВО.</em></h2>
+          <p class="eyebrow">ПЯТЬ ЧУВСТВ · ОДНА ИСТОРИЯ</p>
+          <div class="secret-senses-mark" aria-hidden="true"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
+          <h2>ТЫ СТАЛ<br><em>МОИМ САМЫМ РОДНЫМ</em></h2>
           <div class="secret-lead">
-            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось. Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
+            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось.</p>
+            <p>Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
             <p>Я люблю всё, что связано с тобой. И мне хочется ещё много раз переживать с тобой самые обычные моменты, потому что именно они становятся такими дорогими, когда мы вместе.</p>
             <p>Я очень счастлива, что однажды наши пути пересеклись. И ещё счастливее от того, что теперь у меня есть ты.</p>
           </div>
           <div class="secret-message">
-            <span>В · Е · Ч · Н · О</span>
+            <span>ПЯТЬ ЧУВСТВ · ПЯТЬ ЧАСТЕЙ НАШЕЙ ИСТОРИИ</span>
             <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
             <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
           </div>
@@ -1279,6 +1242,14 @@ const resolveImagePath = (path) => {
   // МОДАЛЬНЫЕ ОКНА И ДЕЙСТВИЯ
 
   document.addEventListener("click", event => {
+    const sensesScroll = event.target.closest("[data-scroll-senses]");
+    if (sensesScroll) {
+      document.getElementById(sensesScroll.dataset.scrollSenses)?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+    }
+
     const stat = event.target.closest("[data-stat]");
 
     if (stat) {
