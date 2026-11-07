@@ -679,7 +679,7 @@ const resolveImagePath = (path) => {
               <div>
                 <p class="eyebrow">${s.theme}</p>
                 <h3>${s.name}</h3>
-                <p class="sense-tagline">${s.tagline}</p>
+                ${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}
               </div>
               <span class="sense-symbol">${s.symbol}</span>
             </div>
@@ -921,9 +921,11 @@ const resolveImagePath = (path) => {
           <p class="eyebrow">ДОСТУП ПОДТВЕРЖДЁН</p>
           <span class="secret-symbol">∞</span>
           <h2>ТЫ НАШЁЛ<br><em>ГЛАВНОЕ СЛОВО.</em></h2>
-          <p class="secret-lead">
-            Пять чувств. Пять букв. И смысл, который был здесь с самого начала.
-          </p>
+          <div class="secret-lead">
+            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось. Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
+            <p>Я люблю всё, что связано с тобой. И мне хочется ещё много раз переживать с тобой самые обычные моменты, потому что именно они становятся такими дорогими, когда мы вместе.</p>
+            <p>Я очень счастлива, что однажды наши пути пересеклись. И ещё счастливее от того, что теперь у меня есть ты.</p>
+          </div>
           <div class="secret-message">
             <span>В · Е · Ч · Н · О</span>
             <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
