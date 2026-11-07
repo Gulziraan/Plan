@@ -11,6 +11,13 @@ window.BIRTHDAY_CONTENT = {
     perfume: "assets/m4.jpg"
   },
 
+  // Пути можно заменить на реальные аудиофайлы, не меняя логику плеера.
+  audioTracks: [
+    { id: "hasan", title: "ТВОЁ ПЕРВОЕ ГОЛОСОВОЕ", description: "Одно из первых сообщений, которое я до сих пор хочу сохранить.", src: "assets/audio/hasan-first-voice.mp3", tone: "plum" },
+    { id: "mine", title: "МОЁ ПЕРВОЕ ГОЛОСОВОЕ", description: "Мой голос из того времени, когда мы только начинали узнавать друг друга.", src: "assets/audio/my-first-voice.mp3", tone: "rose" },
+    { id: "song", title: "НАША ПЕСНЯ", description: "Музыка, которая теперь ассоциируется у меня с нами.", src: "assets/audio/our-song.mp3", tone: "record" }
+  ],
+
   stats: [
     { name: "ИНТЕЛЛЕКТ", value: 96, note: "Ты замечаешь детали, которые другие могли бы пропустить. И умеешь смотреть на ситуацию глубже." },
     { name: "СТРАТЕГИЯ", value: 99, note: "Ты умеешь находить решения и видеть выход там, где сначала его не видно." },

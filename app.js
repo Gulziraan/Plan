@@ -569,128 +569,227 @@ const resolveImagePath = (path) => {
 
   // ПЯТЬ ГЛАВ И ИХ ИСХОДНЫЙ КОНТЕНТ
 
+  function fingerprintSvg(side) {
+    const paths = Array.from({ length: 15 }, (_, i) => {
+      const rx = 13 + i * 3.15;
+      const ry = 18 + i * 4.05;
+      const y = 112 + (i % 3) * 1.2;
+      return `<ellipse cx="100" cy="${y}" rx="${rx}" ry="${ry}" fill="none" stroke="url(#${side}-ink)" stroke-width="1.45" stroke-dasharray="${Math.round(105 + i * 5)} ${Math.round(12 + i * 1.7)}" transform="rotate(${side === 'left' ? -8 : 8} 100 112)"/>`;
+    }).join('');
+    return `<svg class="fingerprint-svg" viewBox="0 0 200 230" aria-hidden="true"><defs><linearGradient id="${side}-ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2d5b5"/><stop offset=".52" stop-color="#c28d69"/><stop offset="1" stop-color="#f8e6d0"/></linearGradient></defs>${paths}<path d="M100 32 C68 38 48 66 49 99 M100 45 C76 50 62 70 63 96 M100 58 C84 62 76 76 77 96 M100 72 C92 76 90 85 91 96" fill="none" stroke="url(#${side}-ink)" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+  }
+
   function renderSenses() {
     const root = $("#senseList");
     if (!root) return;
 
-    const storyPhotos = ["assets/01.jpg", "assets/02.jpg", "assets/2.jpg"];
-    root.innerHTML = C.senses.map((s, chapterIndex) => {
+    const audioTracks = C.audioTracks || [
+      { id: "hasan", title: "ТВОЁ ПЕРВОЕ ГОЛОСОВОЕ", description: "Одно из первых сообщений, которое я до сих пор хочу сохранить.", src: "assets/audio/hasan-first-voice.mp3", tone: "plum" },
+      { id: "mine", title: "МОЁ ПЕРВОЕ ГОЛОСОВОЕ", description: "Мой голос из того времени, когда мы только начинали узнавать друг друга.", src: "assets/audio/my-first-voice.mp3", tone: "rose" },
+      { id: "song", title: "НАША ПЕСНЯ", description: "Музыка, которая теперь ассоциируется у меня с нами.", src: "assets/audio/our-song.mp3", tone: "record" }
+    ];
+
+    root.innerHTML = C.senses.map(s => {
       let content = "";
 
       if (s.kind === "photos") {
-        content = `
-          <div class="sight-gallery">
-            <figure class="sight-feature-photo"><img src="${storyPhotos[0]}" alt="Совместное воспоминание" loading="lazy"><figcaption>С ТОГО САМОГО НАЧАЛА</figcaption></figure>
-            <div class="sight-side-photos">
-              <figure><img src="${storyPhotos[1]}" alt="Совместное воспоминание" loading="lazy"><figcaption>ОДИН ИЗ НАШИХ МОМЕНТОВ</figcaption></figure>
-              <figure><img src="${storyPhotos[2]}" alt="Совместное воспоминание" loading="lazy"><figcaption>ИСТОРИЯ, КОТОРУЮ Я ЛЮБЛЮ</figcaption></figure>
-            </div>
-          </div>
-          <div class="memory-photo-grid memory-photo-grid-extra">
-            ${s.memories.map((m, i) => `
-              <button class="memory-photo-item" data-memory="${s.id}-${i}" type="button">
-                ${photoMarkup(`${s.id}-${i}`)}<span>${m.title}</span>
-              </button>`).join("")}
-          </div>
-          ${uploadControl("＋ ДОБАВИТЬ СВОЁ ФОТО", "image/*", `${s.id}-upload`)}`;
+        const photos = [
+          { src: "assets/01.jpg", title: s.memories[0]?.title || "01", cls: "is-featured" },
+          { src: "assets/02.jpg", title: s.memories[1]?.title || "02", cls: "" },
+          { src: "assets/2.jpg", title: s.memories[2]?.title || "03", cls: "" }
+        ];
+        content = `<div class="sight-editorial-gallery">${photos.map(photo => `
+          <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
+        `).join("")}</div>`;
       }
 
       if (s.kind === "audio") {
-        const audioSource = assets.audio || C.media.audio || "";
         content = `
-          <div class="audio-editorial">
-            <div class="audio-wave-art" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="audio-station">
-              <div class="vinyl" id="vinyl"><div class="vinyl-label">НАША<br>МУЗЫКА</div></div>
-              <div class="audio-info">
-                <p class="eyebrow">ГОЛОСА · РАЗГОВОРЫ · МУЗЫКА</p>
-                <h4 id="audioName">${assets.audioName || "То, что хочется переслушивать"}</h4>
-                <p class="audio-editorial-note">Иногда достаточно услышать знакомый голос, чтобы снова оказаться в определённом моменте.</p>
-                <audio id="personalAudio" controls ${audioSource ? `src="${audioSource}"` : ""}></audio>
-                ${uploadControl("＋ ДОБАВИТЬ АУДИО", "audio/*", "audio")}
+          <div class="audio-story-heading"><span>ЗВУКОВОЙ АРХИВ · 01—03</span><h4>ТРИ ГОЛОСА НАШЕЙ ИСТОРИИ</h4></div>
+          <div class="audio-story-list">${audioTracks.map((track, i) => `
+            <article class="audio-story-track tone-${track.tone}" data-audio-track="${track.id}">
+              <div class="audio-track-art" aria-hidden="true">${track.id === "song" ? '<div class="audio-record"><i></i></div>' : `<div class="audio-wave wave-${i + 1}">${Array.from({length: 27}, (_, n) => `<i style="--bar:${18 + ((n * 17 + i * 11) % 65)}%"></i>`).join("")}</div>`}</div>
+              <div class="audio-track-copy"><span class="audio-track-index">0${i + 1} / AUDIO MEMORY</span><b>${track.title}</b><p>${track.description}</p>
+                <div class="audio-player-controls">
+                  <button type="button" class="audio-play" data-audio-toggle="${track.id}" aria-label="Воспроизвести" disabled>▶</button>
+                  <div class="audio-timeline"><input type="range" min="0" max="100" value="0" step="0.1" data-audio-seek="${track.id}" aria-label="Позиция воспроизведения" disabled><div><span data-audio-current="${track.id}">00:00</span><span data-audio-duration="${track.id}">АУДИОЗАПИСЬ СКОРО ПОЯВИТСЯ</span></div></div>
+                </div>
+                <audio preload="metadata" data-audio-element="${track.id}" src="${track.src}"></audio>
+                <p class="audio-missing" data-audio-missing="${track.id}">Аудиозапись скоро появится</p>
               </div>
-            </div>
-          </div>
-          <div class="memory-text-grid sound-memories">${s.memories.map(m => `
-            <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
-          </div>`;
+            </article>`).join("")}</div>`;
       }
 
       if (s.kind === "cards") {
         content = `
-          <div class="taste-editorial-top"><span>КОФЕ</span><i>·</i><span>СЛАДОСТИ</span><i>·</i><span>ЗАБОТА</span></div>
-          <div class="taste-grid">${s.memories.map((m, i) => `
-            <button class="taste-card taste-card-${i + 1}" data-memory-title="${m.title}" data-memory-text="${m.text}">
-              <span class="taste-number">0${i + 1}</span><span class="taste-ornament">${["К", "С", "З"][i]}</span>
-              <b>${m.title}</b><small>ВОСПОМИНАНИЕ · ОТКРЫТЬ ↗</small>
-            </button>`).join("")}
+          <div class="cafe-scene">
+            <div class="cafe-photo-art" aria-hidden="true"><div class="cafe-window-light"></div><div class="cafe-table"></div><div class="cafe-cup"><i></i></div><div class="cafe-dessert"><i></i><b></b></div><span class="cafe-caption">A SLOW MOMENT, JUST FOR US</span></div>
+            <div class="cafe-scene-title"><span>МАЛЕНЬКАЯ ИСТОРИЯ О ЗАБОТЕ</span><h4>НАШ МАЛЕНЬКИЙ ЗАКАЗ</h4></div>
           </div>`;
       }
 
       if (s.kind === "letter") {
         content = `
-          <div class="touch-editorial">
-            <div class="touch-fabric-field" aria-hidden="true"><span class="touch-thread"></span><span class="touch-light"></span><span class="touch-word">ближе</span></div>
-            <div class="touch-note">
-              <span class="handwritten">маленькое напоминание</span>
-              <p>Есть моменты, которые остаются с нами не потому, что были большими, а потому, что мы что-то почувствовали.</p>
-              <span class="touch-note-mark">—</span>
+          <div class="touch-experience" data-touch-experience>
+            <div class="touch-art-stage" data-touch-surface role="button" tabindex="0" aria-label="Нажми и удерживай отпечаток пальца">
+              <div class="touch-art-kicker">ОДНО ПРИКОСНОВЕНИЕ</div>
+              <div class="fingerprint-pair"><div class="fingerprint-print print-left">${fingerprintSvg('left')}</div><div class="fingerprint-print print-right">${fingerprintSvg('right')}</div></div>
+              <div class="touch-art-instruction">Прикоснись к отпечатку и немного задержи палец.</div>
+              <div class="touch-art-hint">Иногда даже самое маленькое прикосновение может оставить большое чувство.</div>
+              <div class="touch-progress"><i></i></div>
+              <div class="touch-reveal-copy" hidden><p>Помню наше первое свидание и то случайное прикосновение. Возможно, для тебя это был совсем обычный момент, но я до сих пор помню, какое приятное волнение тогда почувствовала.</p><p>И сейчас мне нравится мысль, что из таких маленьких моментов постепенно складывается что-то настолько большое и важное для меня.</p></div>
             </div>
           </div>
-          <div class="memory-text-grid touch-memories">${s.memories.map(m => `
-            <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
-          </div>
-          <div class="certificate"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>`;
+`;
       }
 
       if (s.kind === "scent") {
         content = `
-          <div class="scent-editorial">
-            <div class="scent-atmosphere" aria-hidden="true"><span class="scent-orbit scent-orbit-one"></span><span class="scent-orbit scent-orbit-two"></span><div class="perfume-illustration"><div class="perfume-cap"></div><div class="perfume-bottle">№ 24</div></div><span class="scent-glint">✧</span></div>
-            <div class="scent-notes"><p class="eyebrow">ЗАПАХ, КОТОРЫЙ СТАЛ ЗНАКОМЫМ</p>${s.memories.map(m => `
-              <button class="memory-text-card" data-memory-title="${m.title}" data-memory-text="${m.text}"><b>${m.title}</b><span>ОТКРЫТЬ ↗</span></button>`).join("")}
-              ${uploadControl("＋ ДОБАВИТЬ ФОТО АРОМАТА", "image/*", "perfume")}
-              ${assets.perfume ? `<img class="perfume-upload" src="${assets.perfume}" alt="Фотография парфюма">` : ""}
-            </div>
+          <div class="scent-sensory-scene" data-scent-scene>
+            <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
+            <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
+            <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
+            <div class="scent-trail" aria-hidden="true"></div>
           </div>`;
       }
 
       const solved = riddleState.solved.includes(s.id);
       const riddle = RIDDLES[s.id];
-      const layouts = { sight: "story-layout-sight", sound: "story-layout-sound", taste: "story-layout-taste", touch: "story-layout-touch", scent: "story-layout-scent" };
+      const tasteReceipt = s.id === "taste" ? `
+        <div class="cafe-receipt">
+          <div class="receipt-top"><b>OUR LITTLE CAFÉ</b><span>МАЛЕНЬКИЕ РАДОСТИ · ОСОБЕННЫЙ ЗАКАЗ</span></div>
+          <div class="receipt-rule"></div>
+          <div class="receipt-row"><span>Кофе + десерт</span><b>10</b></div><div class="receipt-row"><span>Десерт + чай</span><b>8</b></div><div class="receipt-row"><span>Кофе + чай</span><b>6</b></div>
+          <div class="receipt-rule receipt-dashed"></div><h4>А СКОЛЬКО СТОИТ ДЕСЕРТ?</h4><p>Найди ответ в нашем маленьком чеке.</p>
+          ${renderRiddleControl(s.id, solved)}
+          <button class="riddle-hint" type="button" data-hint="taste">ПОЛУЧИТЬ ПОДСКАЗКУ</button>
+          <p class="riddle-feedback" id="feedback-taste" aria-live="polite">${solved ? RIDDLES.taste.success : ""}</p>
+          ${solved ? `<div class="earned-letter receipt-earned"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS.taste}</strong></div><div class="receipt-stamp">ОПЛАЧЕНО · ✓</div><p class="receipt-after">Кажется, у этого заказа есть кое-что поважнее цены. Мне всегда нравилось, что ты умел радовать меня такими простыми вещами.</p>` : ''}
+        </div>` : "";
+      const standardRiddle = s.id === "taste" ? "" : `
+        ${s.id === "touch" ? '<div class="touch-braille-label">МАЛЕНЬКОЕ ИСПЫТАНИЕ · ШРИФТ БРАЙЛЯ</div>' : ''}
+        <section class="riddle-panel ${solved ? "is-solved" : ""}" data-riddle="${s.id}">
+          <div class="riddle-panel-top"><span class="riddle-index">СЕКРЕТНЫЙ УРОВЕНЬ</span><span class="riddle-status">${solved ? "РАЗГАДАНО ✓" : "ОЖИДАЕТ РЕШЕНИЯ"}</span></div>
+          <p class="eyebrow">${riddle.title}</p><p class="riddle-intro">${riddle.intro}</p><h4 class="riddle-question">${riddle.question}</h4>
+          ${renderRiddleControl(s.id, solved)}
+          <button class="riddle-hint" type="button" data-hint="${s.id}">ПОЛУЧИТЬ ПОДСКАЗКУ</button>
+          <p class="riddle-feedback" id="feedback-${s.id}" aria-live="polite">${solved ? riddle.success : ""}</p>
+          ${solved ? `<div class="earned-letter"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS[s.id]}</strong></div>` : ""}
+        </section>`;
 
       return `
-        <article class="sense-chapter sense-${s.id} ${layouts[s.id]}" id="chapter-${s.id}" style="--chapter-index:${chapterIndex}">
-          <div class="sense-number"><span>${s.number}</span><i></i></div>
-          <div class="sense-main">
-            <div class="sense-heading">
-              <div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3></div>
-              <span class="sense-symbol" aria-hidden="true">${s.symbol}</span>
-            </div>
-            <p class="sense-description">${s.description.replace(/\n/g, "<br>")}</p>
-            <div class="sense-content">${content}</div>
-            <div class="chapter-invitation"><span>НАШЕ ВОСПОМИНАНИЕ · ${s.number} / 05</span><p>${s.prompt}</p></div>
-            <section class="riddle-panel ${solved ? "is-solved" : ""}" data-riddle="${s.id}">
-              <div class="riddle-panel-top"><span class="riddle-index">МАЛЕНЬКОЕ ИСПЫТАНИЕ</span><span class="riddle-status">${solved ? "РАЗГАДАНО ✓" : "ТВОЯ ОЧЕРЕДЬ"}</span></div>
-              <p class="eyebrow">${riddle.title}</p><p class="riddle-intro">${riddle.intro}</p>
-              <h4 class="riddle-question">${riddle.question}</h4>
-              ${renderRiddleControl(s.id, solved)}
-              <button class="riddle-hint" type="button" data-hint="${s.id}">ПОЛУЧИТЬ ПОДСКАЗКУ</button>
-              <p class="riddle-feedback" id="feedback-${s.id}" aria-live="polite">${solved ? riddle.success : ""}</p>
-              ${solved ? `<div class="earned-letter"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS[s.id]}</strong></div><p class="chapter-reaction">${s.reaction}</p>` : ""}
-            </section>
+        <article class="sense-chapter sense-${s.id}" id="chapter-${s.id}">
+          <div class="sense-number">${s.number}</div><div class="sense-main">
+            <div class="sense-heading"><div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3>${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}</div><span class="sense-symbol">${s.symbol}</span></div>
+            <p class="sense-description">${s.description}</p><div class="sense-content">${content}</div>
+            ${tasteReceipt}${standardRiddle}
+            ${s.id === "touch" ? `<div class="certificate certificate-quiet"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>` : ""}
           </div>
         </article>`;
     }).join("") + `
-      <div class="unlock-final"><p class="eyebrow">ПЯТЬ ГЛАВ · ПЯТЬ БУКВ</p><h3>ИСТОРИЯ<br><em>ЕЩЁ НЕ ЗАКОНЧЕНА.</em></h3><p>Когда соберёшь все пять букв, откроется последнее сообщение.</p>
-        <button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div>`;
+      <div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div>`;
 
-    const audio = $("#personalAudio");
-    if (audio) {
-      audio.addEventListener("play", () => $("#vinyl")?.classList.add("playing"));
-      ["pause", "ended"].forEach(eventName => audio.addEventListener(eventName, () => $("#vinyl")?.classList.remove("playing")));
-    }
+    setupAudioPlayers();
+    setupTouchScene();
+    setupScentScene();
     updateProgress();
+  }
+
+  function formatAudioTime(seconds) {
+    if (!Number.isFinite(seconds)) return "00:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
+
+  function setupAudioPlayers() {
+    const tracks = $$('[data-audio-element]');
+    tracks.forEach(audio => {
+      const id = audio.dataset.audioElement;
+      const play = $(`[data-audio-toggle="${id}"]`);
+      const seek = $(`[data-audio-seek="${id}"]`);
+      const current = $(`[data-audio-current="${id}"]`);
+      const duration = $(`[data-audio-duration="${id}"]`);
+      const missing = $(`[data-audio-missing="${id}"]`);
+      const ready = () => {
+        if (!Number.isNaN(audio.duration) && audio.duration > 0) {
+          play.disabled = false; seek.disabled = false;
+          duration.textContent = formatAudioTime(audio.duration);
+          missing.hidden = true;
+        }
+      };
+      audio.addEventListener("loadedmetadata", ready);
+      audio.addEventListener("durationchange", ready);
+      audio.addEventListener("timeupdate", () => {
+        current.textContent = formatAudioTime(audio.currentTime);
+        if (Number.isFinite(audio.duration) && audio.duration > 0) seek.value = (audio.currentTime / audio.duration) * 100;
+      });
+      audio.addEventListener("play", () => { play.textContent = "Ⅱ"; play.setAttribute("aria-label", "Пауза"); audio.closest(".audio-story-track").classList.add("is-playing"); });
+      const stop = () => { play.textContent = "▶"; play.setAttribute("aria-label", "Воспроизвести"); audio.closest(".audio-story-track").classList.remove("is-playing"); };
+      audio.addEventListener("pause", stop); audio.addEventListener("ended", stop);
+      audio.addEventListener("error", () => { play.disabled = true; seek.disabled = true; missing.hidden = false; });
+      if (audio.readyState >= 1) ready();
+      if (audio.error || !audio.currentSrc) missing.hidden = false;
+      play.addEventListener("click", async () => {
+        if (audio.paused) {
+          tracks.forEach(other => { if (other !== audio) other.pause(); });
+          try { await audio.play(); } catch (_) { missing.hidden = false; }
+        } else audio.pause();
+      });
+      seek.addEventListener("input", () => { if (Number.isFinite(audio.duration)) audio.currentTime = (Number(seek.value) / 100) * audio.duration; });
+    });
+  }
+
+  function setupTouchScene() {
+    const surface = $("[data-touch-surface]");
+    if (!surface) return;
+    let timer = null;
+    let started = 0;
+    let completed = false;
+    const progress = $(".touch-progress i", surface);
+    const cancel = () => { if (timer) clearTimeout(timer); timer = null; if (!completed) surface.classList.remove("is-charging"); };
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      surface.classList.remove("is-charging"); surface.classList.add("is-awakening");
+      if (navigator.vibrate) { try { navigator.vibrate(35); } catch (_) {} }
+      window.setTimeout(() => surface.classList.add("is-joined"), 250);
+      window.setTimeout(() => {
+        surface.classList.add("is-complete");
+        const copy = $(".touch-reveal-copy", surface); if (copy) copy.hidden = false;
+        const instruction = $(".touch-art-instruction", surface); if (instruction) instruction.textContent = "ДВА ПРИКОСНОВЕНИЯ. ОДНО ОБЩЕЕ ЧУВСТВО.";
+      }, 2350);
+    };
+    const start = event => {
+      if (completed || event.button > 0) return;
+      started = Date.now(); surface.classList.add("is-charging");
+      if (progress) progress.style.transform = "scaleX(0)";
+      timer = window.setTimeout(finish, 1150);
+    };
+    surface.addEventListener("pointerdown", start);
+    surface.addEventListener("pointerup", cancel);
+    surface.addEventListener("pointercancel", cancel);
+    surface.addEventListener("pointerleave", cancel);
+    surface.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); start({button:0}); timer = window.setTimeout(finish, 1150); } });
+    surface.addEventListener("contextmenu", event => event.preventDefault());
+  }
+
+  function setupScentScene() {
+    const scene = $("[data-scent-scene]");
+    if (!scene) return;
+    const trail = $(".scent-trail", scene);
+    scene.addEventListener("pointermove", event => {
+      const rect = scene.getBoundingClientRect();
+      scene.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+      scene.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+      scene.classList.add("is-stirred");
+      if (trail) { trail.style.left = `${event.clientX - rect.left}px`; trail.style.top = `${event.clientY - rect.top}px`; }
+    });
+    scene.addEventListener("pointerleave", () => scene.classList.remove("is-stirred"));
+    $("[data-scent-reveal]", scene)?.addEventListener("click", () => {
+      scene.classList.add("is-revealed");
+      const message = $("[data-scent-message]", scene); if (message) message.hidden = false;
+    });
   }
 
   function renderRiddleControl(id, solved) {
