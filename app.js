@@ -619,6 +619,9 @@ const resolveImagePath = (path) => {
     ];
 
     root.innerHTML = C.senses.map(s => {
+      // Состояние главы вычисляется до построения её визуального содержимого.
+      // Это необходимо, в частности, для шаблона игры «Найди три отличия».
+      const solved = riddleState.solved.includes(s.id);
       let content = "";
 
       if (s.kind === "photos") {
@@ -696,7 +699,6 @@ const resolveImagePath = (path) => {
           </div>`;
       }
 
-      const solved = riddleState.solved.includes(s.id);
       const riddle = RIDDLES[s.id];
       const tasteReceipt = s.id === "taste" ? `
         <div class="cafe-receipt">
