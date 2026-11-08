@@ -2799,3 +2799,27 @@ audio { width: 100%; max-width: 450px; }
   clip-path:polygon(50% 100%,7% 48%,0 34%,1% 17%,12% 5%,27% 2%,42% 10%,50% 22%,58% 10%,73% 2%,88% 5%,99% 17%,100% 34%,93% 48%);
   transition:clip-path 1.6s ease,filter 1.6s ease;
 }
+
+/* Local task: find three differences — scoped to the sight chapter */
+#senses .spot-difference { margin:34px 0 10px; padding:clamp(18px,3vw,30px); border:1px solid #b98e6b55; background:linear-gradient(145deg,#2b1b29dd,#3b2635cc); box-shadow:0 18px 42px #120b1244; }
+#senses .spot-difference-heading { text-align:center; margin:0 auto 22px; max-width:620px; }
+#senses .spot-difference-heading>span { color:#c9a17f; font-size:9px; letter-spacing:.2em; }
+#senses .spot-difference-heading h4 { margin:9px 0; color:#f0dfd2; font:clamp(22px,3vw,30px)/1.1 var(--display); letter-spacing:.06em; }
+#senses .spot-difference-heading p { color:#d9c7bd; font:16px/1.5 var(--serif); }
+#senses .spot-difference-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:start; }
+#senses .spot-difference-pair figure { margin:0; min-width:0; }
+#senses .spot-difference-pair figcaption { margin:0 0 8px; color:#c9a17f; font-size:9px; letter-spacing:.18em; text-align:center; }
+#senses .spot-difference-pair img { display:block; width:100%; height:auto; border:1px solid #c7a48766; }
+#senses .spot-image-wrap { position:relative; line-height:0; }
+#senses .spot-hit { position:absolute; left:var(--x); top:var(--y); width:clamp(35px,5vw,52px); aspect-ratio:1; transform:translate(-50%,-50%); border:1px solid transparent; border-radius:50%; background:transparent; cursor:crosshair; padding:0; }
+#senses .spot-hit:focus-visible { outline:2px solid #e5c39e; outline-offset:2px; }
+#senses .spot-hit.is-found { border:2px solid #e7c6a3; background:#e7c6a322; box-shadow:0 0 0 5px #e7c6a322,0 0 22px #e7c6a377; }
+#senses .spot-progress { display:flex; justify-content:center; align-items:center; gap:12px; margin:18px 0 5px; color:#d6c2b6; font-size:10px; letter-spacing:.18em; }
+#senses .spot-progress strong { color:#e8c49e; font:22px var(--display); letter-spacing:.06em; }
+#senses .spot-feedback { min-height:24px; text-align:center; color:#d9c7bd; font:italic 16px var(--serif); }
+#senses .sense-taste .cafe-receipt h4 { max-width:100%; }
+#senses .sense-taste .riddle-answer-row, #senses .sense-scent .riddle-answer-row { margin-top:16px; }
+@media(max-width:620px) {
+  #senses .spot-difference-pair { grid-template-columns:1fr; gap:18px; }
+  #senses .spot-hit { width:42px; }
+}

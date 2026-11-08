@@ -26,12 +26,12 @@
 
   const RIDDLES = {
     sight: {
-      title: "ЗАГАДКА ЗРЕНИЯ",
-      intro: "Посмотри внимательно. Иногда важнее не то, что изображено, а то, что повторяется.",
-      question: "Продолжи последовательность: треугольник → круг → треугольник → ?",
-      hint: "Фигуры чередуются.",
-      answer: ["круг", "окружность"],
-      success: "Ты заметил закономерность. Первая буква найдена."
+      title: "НАЙДИ ТРИ ОТЛИЧИЯ",
+      intro: "Сравни две версии нашей фотографии и найди все три изменения.",
+      question: "Нажми на каждое отличие на нижней фотографии.",
+      hint: "Присмотрись к деталям фона и одежды.",
+      answer: [],
+      success: "Все три отличия найдены. Буква открыта."
     },
     sound: {
       title: "ЗАГАДКА СЛУХА",
@@ -42,12 +42,12 @@
       success: "Ты услышал правильный ответ. Вторая буква твоя."
     },
     taste: {
-      title: "ЗАГАДКА ВКУСА",
-      intro: "Три вкуса, три неизвестных. Найди значение среднего элемента.",
-      question: "Кофе + десерт = 10. Десерт + чай = 8. Кофе + чай = 6. Сколько стоит десерт?",
-      hint: "Сложи первые два равенства и вычти третье. Получишь удвоенное значение десерта.",
-      answer: ["6", "шесть"],
-      success: "Расчёт верный. Третья буква найдена."
+      title: "ВОСПОМИНАНИЕ ОБ УГОЩЕНИИ",
+      intro: "Какой едой я угостила тебя впервые?",
+      question: "Какой едой я угостила тебя впервые?",
+      hint: "Москва",
+      answer: ["бургер", "бургеры"],
+      success: "Ты вспомнил. Буква найдена."
     },
     touch: {
       title: "ЗАГАДКА ПРИКОСНОВЕНИЯ",
@@ -58,11 +58,11 @@
       success: "Ты разгадал тактильный код. Четвёртая буква найдена."
     },
     scent: {
-      title: "ЗАГАДКА АРОМАТА",
-      intro: "У каждого аромата есть своя композиция. Собери её в правильном порядке.",
-      question: "Расположи ноты от самого лёгкого впечатления к самому глубокому: цитрус, цветы, древесина.",
-      hint: "Сначала свежесть, затем сердце аромата, в конце — база.",
-      answer: [],
+      title: "ЛИЧНАЯ АССОЦИАЦИЯ",
+      intro: "Какой запах у меня ассоциируется с тобой?",
+      question: "Какой запах у меня ассоциируется с тобой?",
+      hint: "То, что ты проспорил мне 😏",
+      answer: ["кофе"],
       success: "Композиция собрана. Пятая буква найдена."
     }
   };
@@ -623,13 +623,27 @@ const resolveImagePath = (path) => {
 
       if (s.kind === "photos") {
         const photos = [
-          { src: "assets/F1.PNG", title: s.memories[0]?.title || "01", cls: "is-featured" },
-          { src: "assets/F2.PNG", title: s.memories[1]?.title || "02", cls: "" },
-          { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
+          { src: "assets/01.jpg", title: s.memories[0]?.title || "01", cls: "is-featured" },
+          { src: "assets/02.jpg", title: s.memories[1]?.title || "02", cls: "" },
+          { src: "assets/2.jpg", title: s.memories[2]?.title || "03", cls: "" }
         ];
         content = `<div class="sight-editorial-gallery">${photos.map(photo => `
           <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
-        `).join("")}</div>`;
+        `).join("")}</div>
+        <section class="spot-difference" data-spot-game>
+          <div class="spot-difference-heading"><span>МАЛЕНЬКАЯ ПРОВЕРКА ВНИМАНИЯ</span><h4>НАЙДИ ТРИ ОТЛИЧИЯ</h4><p>В одной из версий фотографии спрятаны три небольших изменения. Нажимай на них на нижнем снимке.</p></div>
+          <div class="spot-difference-pair">
+            <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/02.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
+            <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/spot-differences-02.jpg" alt="Изменённая версия фотографии" loading="lazy">
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="1" style="--x:15%;--y:13%" aria-label="Найти первое отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="2" style="--x:82%;--y:25%" aria-label="Найти второе отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="3" style="--x:67%;--y:83%" aria-label="Найти третье отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+            </div></figure>
+          </div>
+          <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.solved.includes("sight") ? "3/3" : "0/3"}</strong></div>
+          <p class="spot-feedback" data-spot-feedback aria-live="polite">${riddleState.solved.includes("sight") ? "Все три отличия найдены!" : "Найди все три отличия."}</p>
+          ${solved ? `<div class="earned-letter"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS.sight}</strong></div>` : ''}
+        </section>`;
       }
 
       if (s.kind === "audio") {
@@ -688,14 +702,13 @@ const resolveImagePath = (path) => {
         <div class="cafe-receipt">
           <div class="receipt-top"><b>OUR LITTLE CAFÉ</b><span>МАЛЕНЬКИЕ РАДОСТИ · ОСОБЕННЫЙ ЗАКАЗ</span></div>
           <div class="receipt-rule"></div>
-          <div class="receipt-row"><span>Кофе + десерт</span><b>10</b></div><div class="receipt-row"><span>Десерт + чай</span><b>8</b></div><div class="receipt-row"><span>Кофе + чай</span><b>6</b></div>
-          <div class="receipt-rule receipt-dashed"></div><h4>А СКОЛЬКО СТОИТ ДЕСЕРТ?</h4><p>Найди ответ в нашем маленьком чеке.</p>
+          <div class="receipt-rule receipt-dashed"></div><h4>КАКОЙ ЕДОЙ Я УГОСТИЛА ТЕБЯ ВПЕРВЫЕ?</h4>
           ${renderRiddleControl(s.id, solved)}
-          <button class="riddle-hint" type="button" data-hint="taste">ПОЛУЧИТЬ ПОДСКАЗКУ</button>
+          <button class="riddle-hint" type="button" data-hint="taste">ПОДСКАЗКА</button>
           <p class="riddle-feedback" id="feedback-taste" aria-live="polite">${solved ? RIDDLES.taste.success : ""}</p>
           ${solved ? `<div class="earned-letter receipt-earned"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS.taste}</strong></div><div class="receipt-stamp">ОПЛАЧЕНО · ✓</div><p class="receipt-after">Кажется, у этого заказа есть кое-что поважнее цены. Мне всегда нравилось, что ты умел радовать меня такими простыми вещами.</p>` : ''}
         </div>` : "";
-      const standardRiddle = s.id === "taste" ? "" : `
+      const standardRiddle = ["taste", "sight"].includes(s.id) ? "" : `
         ${s.id === "touch" ? '<div class="touch-braille-label">МАЛЕНЬКОЕ ИСПЫТАНИЕ · ШРИФТ БРАЙЛЯ</div>' : ''}
         <section class="riddle-panel ${solved ? "is-solved" : ""}" data-riddle="${s.id}">
           <div class="riddle-panel-top"><span class="riddle-index">СЕКРЕТНЫЙ УРОВЕНЬ</span><span class="riddle-status">${solved ? "РАЗГАДАНО ✓" : "ОЖИДАЕТ РЕШЕНИЯ"}</span></div>
@@ -826,23 +839,11 @@ const resolveImagePath = (path) => {
       return `<p class="riddle-already-solved">ЭТА ЗАГАДКА УЖЕ РАЗГАДАНА. БУКВА СОХРАНЕНА.</p>`;
     }
 
-    if (id === "scent") {
-      return `
-        <div class="scent-sequence" data-scent-sequence>
-          <button type="button" data-scent-note="citrus">ЦИТРУС</button>
-          <button type="button" data-scent-note="floral">ЦВЕТЫ</button>
-          <button type="button" data-scent-note="wood">ДРЕВЕСИНА</button>
-        </div>
-        <p class="scent-selected" id="scentSelected">ВЫБРАНО: —</p>
-        <button class="riddle-submit" type="button" data-scent-check>ПРОВЕРИТЬ ПОРЯДОК ↗</button>
-        <button class="riddle-reset" type="button" data-scent-reset>НАЧАТЬ ЗАНОВО</button>`;
-    }
-
     const placeholders = {
-      sight: "ТВОЙ ОТВЕТ",
       sound: "ВВЕДИ БУКВУ",
-      taste: "ЧИСЛО ИЛИ СЛОВО",
-      touch: "ВВЕДИ БУКВУ"
+      taste: "ВВЕДИ ОТВЕТ",
+      touch: "ВВЕДИ БУКВУ",
+      scent: "ВВЕДИ ОТВЕТ"
     };
 
     return `
@@ -1414,6 +1415,21 @@ const resolveImagePath = (path) => {
           item.title,
           `<p>${item.text}</p>`
         );
+      }
+    }
+
+    const difference = event.target.closest("[data-difference]");
+    if (difference) {
+      const game = difference.closest("[data-spot-game]");
+      if (game && !difference.classList.contains("is-found")) {
+        difference.classList.add("is-found");
+        difference.disabled = true;
+        const found = game.querySelectorAll("[data-difference].is-found").length;
+        const count = game.querySelector("[data-spot-count]");
+        const feedback = game.querySelector("[data-spot-feedback]");
+        if (count) count.textContent = `${found}/3`;
+        if (feedback) feedback.textContent = found === 3 ? "Все три отличия найдены!" : "Есть! Продолжай искать.";
+        if (found === 3 && !riddleState.solved.includes("sight")) solveRiddle("sight");
       }
     }
 
