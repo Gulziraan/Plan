@@ -637,9 +637,9 @@ const resolveImagePath = (path) => {
 
       if (s.kind === "photos") {
         const photos = [
-          { src: "assets/01.jpg", title: s.memories[0]?.title || "01", cls: "is-featured" },
-          { src: "assets/02.jpg", title: s.memories[1]?.title || "02", cls: "" },
-          { src: "assets/2.jpg", title: s.memories[2]?.title || "03", cls: "" }
+          { src: "assets/F1.PNG", title: s.memories[0]?.title || "01", cls: "is-featured" },
+          { src: "assets/F2.PNG", title: s.memories[1]?.title || "02", cls: "" },
+          { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
         ];
         content = `<div class="sight-editorial-gallery">${photos.map(photo => `
           <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
@@ -647,8 +647,8 @@ const resolveImagePath = (path) => {
         <section class="spot-difference" data-spot-game>
           <div class="spot-difference-heading"><span>МАЛЕНЬКАЯ ПРОВЕРКА ВНИМАНИЯ</span><h4>НАЙДИ ТРИ ОТЛИЧИЯ</h4><p>В одной из версий фотографии спрятаны три небольших изменения. Нажимай на них на нижнем снимке.</p></div>
           <div class="spot-difference-pair">
-            <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/02.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
-            <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/spot-differences-02.jpg" alt="Изменённая версия фотографии" loading="lazy">
+            <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/O1.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
+            <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/spot-differences-O2.jpg" alt="Изменённая версия фотографии" loading="lazy">
               <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="1" style="--x:15%;--y:13%" aria-label="Найти первое отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
               <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="2" style="--x:82%;--y:25%" aria-label="Найти второе отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
               <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="3" style="--x:67%;--y:83%" aria-label="Найти третье отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
