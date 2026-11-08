@@ -649,9 +649,9 @@ const resolveImagePath = (path) => {
           <div class="spot-difference-pair">
             <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/O1.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
             <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/O2.jpg" alt="Изменённая версия фотографии" loading="lazy">
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="1" style="--x:15%;--y:13%" aria-label="Найти первое отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="2" style="--x:82%;--y:25%" aria-label="Найти второе отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="3" style="--x:67%;--y:83%" aria-label="Найти третье отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="1" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="2" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="3" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
             </div></figure>
           </div>
           <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.solved.includes("sight") ? "3/3" : "0/3"}</strong></div>
