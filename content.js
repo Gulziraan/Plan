@@ -6,7 +6,7 @@ window.BIRTHDAY_CONTENT = {
   media: {
     hero: "assets/m1.PNG",
     portrait: "assets/m2.PNG",
-    final: "assets/m3.jpg",
+    final: "assets/m3.JPG",
     audio: "",
     perfume: "assets/m4.jpg"
   },
