@@ -2823,3 +2823,7 @@ audio { width: 100%; max-width: 450px; }
   #senses .spot-difference-pair { grid-template-columns:1fr; gap:18px; }
   #senses .spot-hit { width:42px; }
 }
+
+/* Ошибка одной главы не должна скрывать остальные задания. */
+#senses .sense-render-error { color:#eadbd3; border-top:1px solid #c49a7838; }
+#senses .sense-render-error p { color:#e1cec6; font:16px/1.6 var(--serif); }

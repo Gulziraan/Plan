@@ -618,7 +618,18 @@ const resolveImagePath = (path) => {
       { id: "song", title: "НАША ПЕСНЯ", description: "Музыка, которая теперь ассоциируется у меня с нами.", src: "assets/audio/our-song.mp3", tone: "record" }
     ];
 
-    root.innerHTML = C.senses.map(s => {
+    // Не позволяем одной повреждённой главе оборвать отрисовку всего раздела.
+    // Данные проверяем отдельно, чтобы ошибка была видна в консоли, а не превращалась
+    // в пустой экран после вводной части.
+    const senseItems = Array.isArray(C.senses) ? C.senses : [];
+    if (!senseItems.length) {
+      console.error("Не удалось отрисовать «Пять чувств»: content.js не содержит массив senses.", C);
+      root.innerHTML = '<p class="sense-render-error">Не удалось загрузить главы. Обнови страницу и проверь файл content.js.</p>';
+      return;
+    }
+
+    root.innerHTML = senseItems.map(s => {
+      try {
       // Состояние главы вычисляется до построения её визуального содержимого.
       // Это необходимо, в частности, для шаблона игры «Найди три отличия».
       const solved = riddleState.solved.includes(s.id);
@@ -730,6 +741,10 @@ const resolveImagePath = (path) => {
             ${s.id === "touch" ? `<div class="certificate certificate-quiet"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>` : ""}
           </div>
         </article>`;
+      } catch (error) {
+        console.error(`Ошибка при отрисовке главы «${s?.id || "без id"}»:`, error);
+        return `<article class="sense-chapter sense-render-error"><div class="sense-number">${s?.number || "—"}</div><div class="sense-main"><div class="sense-heading"><h3>${s?.name || "Глава"}</h3></div><p>Не удалось отобразить эту главу. Остальные задания доступны ниже.</p></div></article>`;
+      }
     }).join("") + `
       <div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div>`;
 
