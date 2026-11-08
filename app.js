@@ -96,10 +96,12 @@
   // Полный пользовательский маршрут: ни одна из существующих глав не выпадает.
   const scenes = [
     "welcome",
+    "archiveHub",
     "profile",
     "hammer",
     "admire",
     "love",
+    "memories",
     "transition",
     "senses",
     "letter"
@@ -134,10 +136,8 @@
 
     if (id === "senses") renderSenses();
     if (id === "love") renderLoveReasons();
-    if (id === "letter") {
-      renderPersonalLetter();
-      renderMemoryGallery();
-    }
+    if (id === "letter") renderPersonalLetter();
+    if (id === "memories") renderMemoryGallery();
 
     revealSceneContent(id);
   }
@@ -180,10 +180,12 @@
 
     const chapterLabels = {
       welcome: ["ПРОЛОГ", "ВСЁ НАЧИНАЕТСЯ С ТЕБЯ"],
+      archiveHub: ["THE WORTHY ARCHIVE", "ЦЕНТРАЛЬНЫЙ ЗАЛ"],
       profile: ["ГЛАВА 01", "ЧЕЛОВЕК ЗА ЛЕГЕНДОЙ"],
       hammer: ["ГЛАВА 02", "ДОСТОИНСТВО И СИЛА"],
       admire: ["ГЛАВА 03", "ТО, ЧТО ДЕЛАЕТ ТЕБЯ ТОБОЙ"],
       love: ["ГЛАВА 04", "МОИ ПРИЧИНЫ"],
+      memories: ["CHAMBER III", "КОМНАТА ВОСПОМИНАНИЙ"],
       transition: ["ИНТЕРЛЮДИЯ", "ПЯТЬ ЧУВСТВ. ОДНА ИСТОРИЯ."],
       senses: ["ГЛАВА 05", "ВСПОМНИ, КАК ВСЁ НАЧАЛОСЬ"],
       letter: ["ЭПИЛОГ", "САМЫЕ ВАЖНЫЕ СЛОВА"]
@@ -1262,8 +1264,9 @@ const resolveImagePath = (path) => {
     beginButton.innerHTML = 'ПЕРЕЙТИ К ПИСЬМУ <span>↗</span>';
   }
   beginButton?.addEventListener("click", () => {
-    showScene(riddleState.unlocked ? "letter" : "profile");
+    showScene("archiveHub");
   });
+  $("#skipPrologue")?.addEventListener("click", () => showScene("archiveHub"));
 
   $$("[data-next]").forEach(button => {
     button.addEventListener("click", () => showScene(button.dataset.next));
@@ -1278,6 +1281,30 @@ const resolveImagePath = (path) => {
 
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
+
+  // НАВИГАЦИЯ ПО THE WORTHY ARCHIVE
+  const roomTitles = { profile: "THE SUBJECT", hammer: "THE WORTHY", admire: "THE MAN", love: "THE REASONS", memories: "MEMORY ARCHIVE", transition: "FIVE SENSES", senses: "FIVE SENSES", letter: "ONLY YOU" };
+  const archiveReturn = $("#archiveReturn");
+  const roomName = $("#archiveRoomName");
+  const originalActivateScene = activateScene;
+  activateScene = function(id) {
+    originalActivateScene(id);
+    if (archiveReturn) archiveReturn.classList.toggle("is-visible", id !== "welcome" && id !== "archiveHub");
+    if (roomName) roomName.textContent = roomTitles[id] || "THE ARCHIVE";
+    if (id === "archiveHub") {
+      const solved = riddleState.solved.length;
+      const progressNode = $("#hubProgress");
+      if (progressNode) progressNode.textContent = `${solved} / 5 ЗАДАНИЙ ОТКРЫТО`;
+      const finalDoor = $(".portal-final");
+      if (finalDoor) { finalDoor.dataset.locked = String(!riddleState.unlocked); finalDoor.querySelector("small").textContent = riddleState.unlocked ? "ONLY YOU · ДОСТУПНО" : "ONLY YOU · ЗАКРЫТО"; }
+    }
+  };
+  $$('[data-room]').forEach(button => button.addEventListener('click', () => {
+    const target = button.dataset.room;
+    if (target === 'letter' && !riddleState.unlocked) { toast('Последняя комната откроется после пяти чувств и финального кода.'); return; }
+    showScene(target);
+  }));
+  $$('[data-return-hub]').forEach(button => button.addEventListener('click', () => showScene('archiveHub')));
 
   // ИНТЕРАКТИВНАЯ СЦЕНА МЬЁЛЬНИРА
 

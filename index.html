@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#171018">
   <meta name="description" content="Особенная история для Хасана. Глава 24.">
-  <title>Хасан — Глава 24</title>
+  <title>THE WORTHY ARCHIVE — Хасан · 24</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div id="worldRoot" aria-hidden="true"><canvas id="worldCanvas"></canvas><div class="world-vignette"></div></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="cinema-cut" id="cinemaCut" aria-hidden="true" data-mode="default">
     <div class="cinema-cut-noise"></div>
@@ -22,11 +23,30 @@
 
   <header class="topbar">
     <a href="#" class="logo" data-home>Х<span>.</span></a>
-    <div class="topbar-caption">ОСОБЕННОЕ ИЗДАНИЕ <i></i> ГЛАВА 24</div>
+    <div class="topbar-caption">THE WORTHY ARCHIVE <i></i> ХАСАН · 24</div>
     <button class="top-action" id="restartTop">НАЧАТЬ СНАЧАЛА ↗</button>
   </header>
 
   <main>
+    <!-- THE WORTHY ARCHIVE: центральный интерактивный зал -->
+    <section class="scene archive-hub" id="archiveHub" aria-label="Центральный зал архива">
+      <div class="hub-heading">
+        <p class="eyebrow">THE WORTHY ARCHIVE · PRIVATE COLLECTION</p>
+        <h1>Мир, созданный<br><em>вокруг тебя.</em></h1>
+        <p>Выбери дверь. Некоторые истории открываются постепенно.</p>
+      </div>
+      <div class="hub-portals" aria-label="Помещения архива">
+        <button class="hub-portal portal-profile" data-room="profile"><span class="portal-index">00</span><b>ЛИЧНОЕ ДОСЬЕ</b><small>THE SUBJECT</small><i>↗</i></button>
+        <button class="hub-portal portal-worthy" data-room="hammer"><span class="portal-index">I</span><b>ЗАЛ ДОСТОИНСТВА</b><small>THE WORTHY</small><i>↗</i></button>
+        <button class="hub-portal portal-man" data-room="admire"><span class="portal-index">II</span><b>ЧЕЛОВЕК ЗА ОБРАЗОМ</b><small>THE MAN</small><i>↗</i></button>
+        <button class="hub-portal portal-memory" data-room="love"><span class="portal-index">III</span><b>ЗА ЧТО Я ТЕБЯ ЛЮБЛЮ</b><small>THE REASONS</small><i>↗</i></button>
+        <button class="hub-portal portal-gallery" data-room="memories"><span class="portal-index">IV</span><b>КОМНАТА ВОСПОМИНАНИЙ</b><small>MEMORY ARCHIVE</small><i>↗</i></button>
+        <button class="hub-portal portal-senses" data-room="transition"><span class="portal-index">V</span><b>ПЯТЬ ЧУВСТВ</b><small>FIVE SENSES</small><i>↗</i></button>
+        <button class="hub-portal portal-final" data-room="letter" data-locked="true"><span class="portal-index">VI</span><b>ПОСЛЕДНЯЯ КОМНАТА</b><small>ONLY YOU · ЗАКРЫТО</small><i>⌑</i></button>
+      </div>
+      <div class="hub-footer"><span>ХАСАН · 24</span><span>ИССЛЕДУЙ В СВОЁМ ТЕМПЕ</span><span id="hubProgress">АРХИВ ОТКРЫТ</span></div>
+    </section>
+
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="scene active hero-scene" id="welcome">
       <div class="hero-bg-number">24</div>
@@ -44,6 +64,7 @@
             ОТКРЫТЬ ИСТОРИЮ <span>↗</span>
           </button>
           <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ.</p>
+          <button class="prologue-skip" type="button" id="skipPrologue">ПРОПУСТИТЬ ВСТУПЛЕНИЕ ↗</button>
         </div>
         <div class="hero-visual">
           <div class="hero-photo photo-slot" data-photo="hero">
@@ -290,6 +311,23 @@
       <div id="senseList" class="sense-list"></div>
     </section>
 
+    <!-- CHAMBER III: независимая комната фотографий -->
+    <section class="scene memories-room" id="memories" aria-labelledby="memoryGalleryTitle">
+      <div class="section-top"><span>THE WORTHY ARCHIVE / CHAMBER III</span><span>MEMORIES</span></div>
+      <section class="memory-gallery" aria-labelledby="memoryGalleryTitle">
+        <div class="memory-gallery-heading">
+          <div>
+            <p class="eyebrow">НАШ АРХИВ / МОМЕНТЫ, К КОТОРЫМ ХОЧЕТСЯ ВОЗВРАЩАТЬСЯ</p>
+            <h2 id="memoryGalleryTitle">ОСОБЕННЫЕ МОМЕНТЫ,<br><em>КОТОРЫЕ Я ОЧЕНЬ ЛЮБЛЮ.</em></h2>
+          </div>
+          <p>Неидеальные, смешные, тёплые. Просто наши.</p>
+        </div>
+        <div class="memory-gallery-grid" id="memoryGalleryGrid"></div>
+        <p class="memory-gallery-note">КАЖДЫЙ КАДР — ЧАСТЬ НАШЕЙ ИСТОРИИ <span>♥</span></p>
+      </section>
+      <div class="scene-nav"><button class="text-link" data-next="transition">ПЕРЕЙТИ К ПЯТИ ЧУВСТВАМ <span>↗</span></button></div>
+    </section>
+
     <!-- ЛИЧНОЕ ПИСЬМО И ФОТОГАЛЕРЕЯ -->
     <section class="scene letter-gallery-scene" id="letter" aria-labelledby="personalLetterTitle">
       <div class="letter-opening">
@@ -309,22 +347,12 @@
         <div class="personal-letter-end" aria-hidden="true">✦</div>
       </article>
 
-      <section class="memory-gallery" aria-labelledby="memoryGalleryTitle">
-        <div class="memory-gallery-heading">
-          <div>
-            <p class="eyebrow">НАШ АРХИВ / МОМЕНТЫ, К КОТОРЫМ ХОЧЕТСЯ ВОЗВРАЩАТЬСЯ</p>
-            <h2 id="memoryGalleryTitle">ОСОБЕННЫЕ МОМЕНТЫ,<br><em>КОТОРЫЕ Я ОЧЕНЬ ЛЮБЛЮ.</em></h2>
-          </div>
-          <p>Неидеальные, смешные, тёплые. Просто наши.</p>
-        </div>
-        <div class="memory-gallery-grid" id="memoryGalleryGrid"></div>
-        <p class="memory-gallery-note">КАЖДЫЙ КАДР — ЧАСТЬ НАШЕЙ ИСТОРИИ <span>♥</span></p>
-      </section>
+
       <button class="text-link restart-final" id="restartFinal">ПРОЙТИ ИСТОРИЮ ЕЩЁ РАЗ ↗</button>
     </section>
   </main>
 
-  <footer class="site-footer"><span>Х. / ГЛАВА 24</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></footer>
+  <footer class="site-footer"><span>THE WORTHY ARCHIVE / ХАСАН · 24</span><span>СОЗДАНО С ЛЮБОВЬЮ</span></footer>
 
   <div class="modal" id="detailModal" aria-hidden="true">
     <div class="modal-backdrop" data-close></div>
@@ -336,6 +364,8 @@
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <nav class="archive-return" id="archiveReturn" aria-label="Навигация по архиву"><button type="button" data-return-hub>↖ <span>ЦЕНТРАЛЬНЫЙ ЗАЛ</span></button><span id="archiveRoomName">THE ARCHIVE</span></nav>
+  <script type="module" src="world3d.js"></script>
 
   <script src="content.js"></script>
   <script src="app.js"></script>
