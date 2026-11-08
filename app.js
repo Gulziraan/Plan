@@ -93,14 +93,13 @@
     };
   } catch (_) {}
 
-  // В пользовательском маршруте оставлены только главы новой истории.
-  // Старые экраны профиля, Мьёльнира и карусели не удаляем из исходников,
-  // но они больше не входят в последовательность прохождения.
+  // Полный пользовательский маршрут: ни одна из существующих глав не выпадает.
   const scenes = [
     "welcome",
     "profile",
     "hammer",
     "admire",
+    "love",
     "transition",
     "senses",
     "letter"
@@ -122,38 +121,96 @@
   function saveAssets() {
   return true;
 }
-  function showScene(id) {
-    if (!scenes.includes(id)) return;
+  let sceneTransitionToken = 0;
 
-    if (id === "letter" && !riddleState.unlocked) {
-      toast("Сначала нужно разгадать финальный шифр.");
-      return;
-    }
-
+  function activateScene(id) {
     currentScene = id;
     $$(".scene").forEach(scene => {
       scene.classList.toggle("active", scene.id === id);
     });
 
-    window.scrollTo({
-      top: 0,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth"
-    });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
 
-    if (id === "senses") {
-      renderSenses();
-    }
-
-    if (id === "love") {
-      renderLoveReasons();
-    }
-
+    if (id === "senses") renderSenses();
+    if (id === "love") renderLoveReasons();
     if (id === "letter") {
       renderPersonalLetter();
       renderMemoryGallery();
     }
+
+    revealSceneContent(id);
+  }
+
+  function revealSceneContent(id) {
+    const scene = document.getElementById(id);
+    if (!scene) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const targets = scene.querySelectorAll(
+      ".quality-card, .stat-row, .sense-chapter, .memory-gallery-item, .personal-letter, .love-heading, .love-card"
+    );
+    targets.forEach((element, index) => {
+      element.classList.remove("cinema-reveal");
+      if (reducedMotion) return;
+      element.style.setProperty("--reveal-order", Math.min(index, 8));
+      requestAnimationFrame(() => element.classList.add("cinema-reveal"));
+    });
+  }
+
+  function showScene(id) {
+    if (!scenes.includes(id)) return;
+    if (id === "letter" && !riddleState.unlocked) {
+      toast("Сначала нужно разгадать финальный шифр.");
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (id === currentScene || reducedMotion) {
+      activateScene(id);
+      return;
+    }
+
+    const cut = $("#cinemaCut");
+    const kicker = $("#cinemaCutKicker");
+    const title = $("#cinemaCutTitle");
+    if (!cut) {
+      activateScene(id);
+      return;
+    }
+
+    const chapterLabels = {
+      welcome: ["ПРОЛОГ", "ВСЁ НАЧИНАЕТСЯ С ТЕБЯ"],
+      profile: ["ГЛАВА 01", "ЧЕЛОВЕК ЗА ЛЕГЕНДОЙ"],
+      hammer: ["ГЛАВА 02", "ДОСТОИНСТВО И СИЛА"],
+      admire: ["ГЛАВА 03", "ТО, ЧТО ДЕЛАЕТ ТЕБЯ ТОБОЙ"],
+      love: ["ГЛАВА 04", "МОИ ПРИЧИНЫ"],
+      transition: ["ИНТЕРЛЮДИЯ", "ПЯТЬ ЧУВСТВ. ОДНА ИСТОРИЯ."],
+      senses: ["ГЛАВА 05", "ВСПОМНИ, КАК ВСЁ НАЧАЛОСЬ"],
+      letter: ["ЭПИЛОГ", "САМЫЕ ВАЖНЫЕ СЛОВА"]
+    };
+    const [chapter, heading] = chapterLabels[id] || ["СЛЕДУЮЩАЯ ГЛАВА", "ИСТОРИЯ ПРОДОЛЖАЕТСЯ"];
+    if (kicker) kicker.textContent = chapter;
+    if (title) title.textContent = heading;
+
+    const mode = id === "hammer" || currentScene === "hammer" ? "storm"
+      : id === "letter" ? "paper"
+      : id === "love" || id === "senses" ? "memory" : "default";
+    cut.dataset.mode = mode;
+    const token = ++sceneTransitionToken;
+    cut.classList.remove("is-opening");
+    cut.classList.add("is-active");
+    cut.setAttribute("aria-hidden", "false");
+
+    window.setTimeout(() => {
+      if (token !== sceneTransitionToken) return;
+      activateScene(id);
+      cut.classList.add("is-opening");
+      window.setTimeout(() => {
+        if (token !== sceneTransitionToken) return;
+        cut.classList.remove("is-active", "is-opening");
+        cut.setAttribute("aria-hidden", "true");
+      }, 680);
+    }, 480);
   }
 
   function toast(message) {
