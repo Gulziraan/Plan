@@ -570,13 +570,42 @@ const resolveImagePath = (path) => {
   // ПЯТЬ ГЛАВ И ИХ ИСХОДНЫЙ КОНТЕНТ
 
   function fingerprintSvg(side) {
-    const paths = Array.from({ length: 15 }, (_, i) => {
-      const rx = 13 + i * 3.15;
-      const ry = 18 + i * 4.05;
-      const y = 112 + (i % 3) * 1.2;
-      return `<ellipse cx="100" cy="${y}" rx="${rx}" ry="${ry}" fill="none" stroke="url(#${side}-ink)" stroke-width="1.45" stroke-dasharray="${Math.round(105 + i * 5)} ${Math.round(12 + i * 1.7)}" transform="rotate(${side === 'left' ? -8 : 8} 100 112)"/>`;
-    }).join('');
-    return `<svg class="fingerprint-svg" viewBox="0 0 200 230" aria-hidden="true"><defs><linearGradient id="${side}-ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2d5b5"/><stop offset=".52" stop-color="#c28d69"/><stop offset="1" stop-color="#f8e6d0"/></linearGradient></defs>${paths}<path d="M100 32 C68 38 48 66 49 99 M100 45 C76 50 62 70 63 96 M100 58 C84 62 76 76 77 96 M100 72 C92 76 90 85 91 96" fill="none" stroke="url(#${side}-ink)" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+    // Графика построена из органичных линий папиллярного узора:
+    // не эллипсы и не пунктир, а непрерывные дуги с естественными окончаниями.
+    const ridges = [];
+    for (let i = 0; i < 17; i++) {
+      const inset = i * 4.15;
+      const left = 24 + inset * 0.72;
+      const right = 176 - inset * 0.72;
+      const top = 18 + inset * 0.78;
+      const bottom = 208 - inset * 0.58;
+      const crown = 8 + inset * 0.92;
+      const wobble = (i % 3 - 1) * 1.6;
+      // Каждая гряда — открытая арка с мягко загнутыми концами.
+      ridges.push(`<path d="M ${left + 5} ${bottom - 8}
+        C ${left - 2} ${bottom - 48}, ${left + 1 + wobble} ${top + 44}, 100 ${crown}
+        C ${right - 1 + wobble} ${top + 42}, ${right + 3} ${bottom - 50}, ${right - 5} ${bottom - 8}" />`);
+    }
+    // Центральный завиток и короткие разветвляющиеся гряды делают рисунок
+    // похожим на реальный петлевой отпечаток, а не на набор концентрических овалов.
+    const core = [
+      'M 68 139 C 57 111 68 77 96 67 C 124 58 146 79 145 105 C 144 128 126 145 105 143 C 87 141 79 126 84 111 C 88 99 102 94 113 101',
+      'M 59 151 C 43 112 62 66 96 54 C 135 41 160 72 157 108 C 155 139 132 160 104 157',
+      'M 78 153 C 65 130 69 103 86 88 C 105 71 132 81 137 103 C 141 121 128 137 111 137',
+      'M 45 130 C 38 91 59 48 94 39',
+      'M 155 145 C 174 119 174 83 159 59',
+      'M 34 164 C 22 126 25 91 42 65',
+      'M 166 166 C 184 137 185 103 177 79'
+    ];
+    const ink = '#29272a';
+    const highlight = '#494449';
+    const ridgeMarkup = ridges.map((d, i) => `<path d="${d.replace(/\s+/g, ' ')}" stroke="${i % 4 === 0 ? highlight : ink}" stroke-width="${i % 5 === 0 ? 2.15 : 1.75}"/>`).join('');
+    const coreMarkup = core.map((d, i) => `<path d="${d}" stroke="${i % 3 === 0 ? highlight : ink}" stroke-width="1.8"/>`).join('');
+    return `<svg class="fingerprint-svg" viewBox="0 0 200 230" aria-hidden="true" focusable="false">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">${ridgeMarkup}${coreMarkup}
+        <path d="M 52 176 C 42 188 42 199 49 207 M 148 176 C 158 188 158 199 151 207" stroke="${ink}" stroke-width="1.7"/>
+      </g>
+    </svg>`;
   }
 
   function renderSenses() {

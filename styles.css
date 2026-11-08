@@ -2717,23 +2717,25 @@ audio { width: 100%; max-width: 450px; }
 #senses .touch-art-stage { position:relative; display:flex; min-height:520px; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; padding:35px 20px; border:1px solid #bd916d77; background:radial-gradient(ellipse at 50% 48%,#673748 0,#3b202f 45%,#21131f 100%); box-shadow:inset 0 0 70px #110a14aa,0 22px 50px #11070d55; cursor:pointer; user-select:none; touch-action:none; }
 #senses .touch-art-stage:before { content:""; position:absolute; inset:15px; border:1px solid #c49a7844; pointer-events:none; }
 #senses .touch-art-kicker { z-index:1; color:#d6b18e; font-size:10px; letter-spacing:.24em; }
-#senses .fingerprint-pair { position:relative; display:flex; justify-content:center; align-items:center; width:min(100%,600px); height:270px; margin:18px auto; }
-#senses .fingerprint-print { position:absolute; width:230px; height:250px; display:grid; place-items:center; opacity:.95; filter:drop-shadow(0 0 9px #e4b98b22); transition:transform 2s cubic-bezier(.2,.7,.2,1),opacity 1.3s,filter 1.3s; }
-#senses .print-left { left:calc(50% - 145px); transform:rotate(-12deg); }
-#senses .print-right { left:calc(50% - 80px); opacity:0; transform:translateX(80px) rotate(14deg) scale(.82); }
+#senses .fingerprint-pair { position:relative; display:flex; justify-content:center; align-items:center; width:min(100%,640px); height:300px; margin:18px auto; }
+#senses .fingerprint-print { position:absolute; display:grid; place-items:center; opacity:1; filter:drop-shadow(0 3px 3px #09080b66); transform-origin:50% 55%; transition:transform 2.1s cubic-bezier(.2,.7,.2,1),opacity 1.3s,filter 1.3s; }
+/* Первый отпечаток — компактнее; второй появляется заметно крупнее, как отдельное прикосновение. */
+#senses .print-left { left:calc(50% - 176px); width:190px; height:226px; transform:rotate(-24deg); }
+#senses .print-right { left:calc(50% - 58px); width:238px; height:282px; opacity:0; transform:translate(105px,22px) rotate(24deg) scale(.78); }
 #senses .fingerprint-svg { width:100%; height:100%; overflow:visible; }
 #senses .print-right .fingerprint-svg { transform:scaleX(-1); }
-#senses .touch-art-stage.is-charging .print-left { filter:drop-shadow(0 0 18px #f3c994aa); }
-#senses .touch-art-stage.is-charging .fingerprint-svg { animation:fingerprintPulse .7s ease-in-out infinite alternate; }
+#senses .fingerprint-svg path { vector-effect:non-scaling-stroke; }
+#senses .touch-art-stage.is-charging .print-left { filter:drop-shadow(0 0 10px #a6a0a655); }
+#senses .touch-art-stage.is-charging .print-left .fingerprint-svg { animation:fingerprintPulse .7s ease-in-out infinite alternate; }
 #senses .touch-progress { width:min(190px,60%); height:2px; background:#ffffff24; overflow:hidden; margin:10px 0; }
 #senses .touch-progress i { display:block; height:100%; width:100%; background:#e6bd91; transform:scaleX(0); transform-origin:left; transition:transform 1.15s linear; }
 #senses .touch-art-stage.is-charging .touch-progress i { transform:scaleX(1)!important; }
 #senses .touch-art-instruction { color:#f1dfd1; font:22px var(--serif); text-align:center; }
 #senses .touch-art-hint { max-width:430px; margin-top:9px; color:#c9aaa7; font:italic 16px var(--serif); text-align:center; }
-#senses .touch-art-stage.is-awakening .print-right { opacity:.95; transform:translateX(0) rotate(8deg) scale(1); }
-#senses .touch-art-stage.is-joined .print-left { transform:translateX(42px) rotate(-28deg) scale(.9); }
-#senses .touch-art-stage.is-joined .print-right { transform:translateX(-42px) rotate(28deg) scale(.9); }
-#senses .touch-art-stage.is-joined .fingerprint-pair { filter:drop-shadow(0 0 18px #e9b98b77); }
+#senses .touch-art-stage.is-awakening .print-right { opacity:1; transform:translate(0,0) rotate(24deg) scale(1); filter:drop-shadow(0 0 10px #a6a0a644); }
+#senses .touch-art-stage.is-joined .print-left { transform:translate(35px,5px) rotate(-42deg) scale(1); }
+#senses .touch-art-stage.is-joined .print-right { transform:translate(-35px,-2px) rotate(42deg) scale(1.04); }
+#senses .touch-art-stage.is-joined .fingerprint-pair { filter:drop-shadow(0 0 14px #9b969b55); }
 #senses .touch-reveal-copy { position:relative; z-index:2; max-width:690px; margin:4px auto 0; padding:16px 22px; color:#f4e3d5; background:#251520bb; border-top:1px solid #d2a77b88; text-align:center; animation:appear 1.2s ease both; }
 #senses .touch-reveal-copy p { font:20px/1.5 var(--serif); }
 #senses .touch-braille-label { margin:36px 0 12px; color:#cda982; font-size:9px; letter-spacing:.18em; }
@@ -2779,7 +2781,7 @@ audio { width: 100%; max-width: 450px; }
   #senses .cafe-receipt { padding:23px 20px 35px; }
   #senses .cafe-receipt .riddle-answer-row { flex-wrap:wrap; }
   #senses .touch-art-stage { min-height:460px; padding:25px 14px; }
-  #senses .fingerprint-pair { height:225px; transform:scale(.78); width:125%; }
+  #senses .fingerprint-pair { height:245px; transform:scale(.78); width:125%; }
   #senses .touch-art-instruction { font-size:19px; }
   #senses .touch-reveal-copy p { font-size:17px; }
   #senses .scent-sensory-scene { min-height:400px; }
