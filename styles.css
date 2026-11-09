@@ -3753,3 +3753,311 @@ button,a{transition:color .25s ease,background-color .25s ease,border-color .25s
  .site-footer{font-size:7px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* ==========================================================
+   HASAN / EDITORIAL SCRAPBOOK SYSTEM — unified vertical story
+   ========================================================== */
+:root{
+  --paper:#fff9ef;
+  --paper-2:#f4eadc;
+  --paper-3:#e9ddcf;
+  --ink:#292326;
+  --ink-2:#4e4546;
+  --muted-ink:#71666a;
+  --wine:#76212b;
+  --wine-deep:#54151f;
+  --wine-soft:#a34e5a;
+  --sky:#8fc7e2;
+  --sky-deep:#4e91b7;
+  --sky-pale:#dceef5;
+  --champagne:#c5a77e;
+  --line:rgba(65,48,48,.19);
+  --sans:"Manrope",Arial,sans-serif;
+  --display:"Oswald",Impact,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --space-x:clamp(20px,7vw,112px);
+  --type-body:clamp(16px,1.2vw,18px);
+}
+html{background:var(--paper);scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.65;
+  overflow-x:clip;
+}
+.grain{opacity:.045;mix-blend-mode:multiply;z-index:50}
+.topbar{
+  position:sticky;top:0;z-index:40;
+  height:70px;padding:0 var(--space-x);
+  background:rgba(255,249,239,.94);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+.logo{font:600 39px/1 var(--display);color:var(--wine)}
+.logo span{color:var(--sky-deep)}
+.topbar-caption{color:var(--muted-ink)}
+.topbar-caption i{background:var(--sky-deep)}
+.top-action{color:var(--wine)}
+main{width:100%;overflow:clip}
+main>.scene,
+main>.scene.active,
+main>.scene.opened,
+main>.scene:not(.opened){
+  display:block!important;
+  position:relative;
+  min-height:0;
+  height:auto;
+  padding:clamp(48px,6vw,88px) var(--space-x) clamp(58px,7vw,100px);
+  scroll-margin-top:82px;
+  animation:none;
+  overflow:visible;
+}
+main>#welcome{padding-top:clamp(24px,4vw,58px);padding-bottom:30px}
+main>#senses:not(.is-unlocked),
+main>#letter:not(.is-unlocked){display:none!important}
+.scene.locked{display:none!important}
+.scene:not(.hero-scene){background-color:var(--paper)}
+.eyebrow,.section-top,.hero-bottom,.hero-small,.hero-caption,.profile-labels,.profile-universe,.hammer-hint,.progress,.site-footer{
+  font-family:var(--sans);font-size:10px;letter-spacing:.14em;font-weight:800
+}
+.eyebrow{color:var(--wine)}
+.section-top{color:var(--wine);border-color:var(--line)}
+.button{border-radius:3px;min-height:50px;font-size:10px;letter-spacing:.12em}
+.button-light,.button-red{background:var(--wine);color:#fffaf3}
+.button:hover{box-shadow:0 12px 28px #53151f20}
+.text-link{color:var(--wine)}
+.text-link span{color:var(--sky-deep)}
+.scene-nav{border-color:var(--line);margin-top:42px}
+h1,h2,h3,h4{overflow-wrap:normal;text-wrap:balance}
+p{overflow-wrap:break-word}
+
+/* Cover — cream paper, sky-blue field, burgundy editorial type. */
+#welcome{
+  background:
+    radial-gradient(circle at 83% 22%,#ffffffb8 0 12%,transparent 33%),
+    linear-gradient(125deg,#fff9ef 0%,#f4eadc 58%,#dceef5 100%);
+  color:var(--ink);
+}
+.hero-layout{min-height:clamp(560px,68vw,760px);max-width:1480px;grid-template-columns:.92fr 1.08fr;gap:clamp(24px,5vw,80px)}
+.hero-copy{max-width:650px}
+.hero-copy>.eyebrow{color:var(--wine)}
+.hero-copy h1{font:700 clamp(64px,8.4vw,124px)/.9 var(--display);letter-spacing:-.035em;color:var(--wine);text-transform:uppercase}
+.hero-copy h1 em{color:var(--sky-deep);font-style:normal}
+.hero-description{font:clamp(18px,1.55vw,22px)/1.55 var(--serif);color:var(--ink-2)}
+.hero-description .hero-greeting-ending{color:var(--wine)}
+.hero-photo{border-radius:3px;box-shadow:0 26px 55px #44332d25}
+.hero-photo:after{border:1px solid #fff}
+.hero-tag{background:var(--wine);color:#fff9ef;border-left:4px solid var(--sky);transform:rotate(-2deg)}
+.hero-tag strong{font:600 27px var(--display)}
+.hero-lightning{color:var(--wine-soft)}
+.hero-caption{color:var(--wine)}
+.hero-bg-number{color:#76212b0d}
+.hero-stripe{background:#8fc7e226}
+.hero-bottom{border-color:#76212b35;color:var(--wine)}
+
+/* Profile — layered editorial spread, not a full-screen scene. */
+#profile{background:linear-gradient(135deg,#dceef5 0%,#f7f1e8 55%,#fff9ef 100%)}
+.profile-hero{grid-template-columns:1fr .94fr;min-height:clamp(430px,46vw,600px);margin-top:42px}
+.profile-photo{min-height:clamp(430px,46vw,600px);clip-path:none;box-shadow:12px 14px 0 #8fc7e255}
+.profile-panel{
+  margin:28px 0 28px -34px;
+  background:linear-gradient(145deg,#812c38,#5b1925);
+  box-shadow:0 18px 42px #4d263322;
+  padding:clamp(28px,5vw,68px);
+}
+.profile-panel h2{font:700 clamp(58px,7vw,92px)/.9 var(--display);color:#fff9ef}
+.profile-panel .eyebrow{color:#f1d5c8}
+.profile-overline{color:#a9d9ed}
+.profile-description{font:clamp(18px,1.45vw,21px)/1.55 var(--serif);color:#fff3e9}
+.profile-labels{gap:14px}
+.profile-labels span{color:#f1d5c8}
+.profile-labels b{color:#fff}
+.profile-universe{color:#a9d9ed;border-color:#ffffff40}
+.stats-section{padding:clamp(55px,7vw,90px) 0 28px}
+.section-title h3{font:700 clamp(42px,6vw,76px)/.98 var(--display);color:var(--wine)}
+.section-title h3 em{color:var(--sky-deep)}
+.stats-grid{gap:12px 20px}
+.stat-row{background:#fffaf4;border:1px solid #76212b22;color:var(--ink);box-shadow:0 8px 22px #392a2410}
+.stat-name{color:var(--ink)}
+.stat-meter{background:#d9eaf0}
+.stat-meter i{background:linear-gradient(90deg,var(--sky-deep),var(--wine-soft))}
+.stat-value{color:var(--wine)}
+
+/* Mjölnir chapter — cool sky, silver object, wine-red accents. */
+#hammer{
+  background:
+    radial-gradient(ellipse at 70% 25%,#ffffffb0,transparent 35%),
+    linear-gradient(130deg,#d9edf5 0%,#b9dce9 52%,#f8f0e5 100%);
+  color:var(--ink);
+}
+#hammer .hammer-topline{color:var(--wine);border-color:#76212b35}
+#hammer .eyebrow{color:var(--wine)}
+#hammer h2,#hammer h3{color:var(--wine)}
+#hammer h2 em,#hammer h3 em{color:var(--sky-deep)}
+#hammer p:not(.eyebrow){color:var(--ink-2)}
+#hammer .hammer-skip{color:var(--wine)}
+#hammer .hammer-letter{color:var(--ink)}
+#hammer .hammer-letter-body p{color:var(--ink-2)}
+#hammer .hammer-final-line{color:var(--wine)}
+#hammer .hammer-arena{background:radial-gradient(ellipse,#ffffffa8,transparent 68%)}
+#hammer .hammer-aura{opacity:.6}
+#hammer .charge-caption{color:var(--wine)}
+#hammer .charge-meter{background:#76212b25}
+#hammer .charge-meter span{background:linear-gradient(90deg,var(--sky-deep),var(--wine-soft))}
+#hammer .hammer-instruction{color:var(--wine)}
+#hammer .hammer-victory,#hammer .hammer-letter{background:#fff9efed;color:var(--ink);border:1px solid #76212b22;box-shadow:0 20px 45px #26343a18;padding:clamp(24px,4vw,48px)}
+#hammer .hammer-victory p,#hammer .hammer-letter p{color:var(--ink-2)}
+
+/* Character qualities — alternating scrapbook spreads and paper notes. */
+#admire{background:linear-gradient(180deg,#fff9ef,#f1e8dc 65%,#dceef5)}
+#admire .chapter-heading h2{font:700 clamp(48px,7vw,92px)/.95 var(--display);color:var(--wine)}
+#admire .chapter-heading h2 em{color:var(--sky-deep)}
+#admire .chapter-heading>p:last-child{color:var(--ink-2)}
+#admire .quality-list{gap:clamp(22px,3vw,38px)}
+#admire .quality-card{
+  grid-template-columns:minmax(240px,.9fr) minmax(0,1.1fr);
+  min-height:300px;background:#fffaf4;border:1px solid #76212b20;
+  box-shadow:0 14px 32px #3c2c2512;
+}
+#admire .quality-card:nth-child(even){grid-template-columns:minmax(0,1.1fr) minmax(240px,.9fr)}
+#admire .quality-photo{background:#c4dfeb;min-height:300px}
+#admire .quality-copy{padding:clamp(25px,4vw,58px)}
+#admire .quality-copy h3{font:600 clamp(32px,4vw,51px)/1 var(--display);color:var(--wine)}
+#admire .quality-copy p{font:clamp(16px,1.25vw,19px)/1.65 var(--sans);color:var(--ink-2)}
+#admire .quality-caption{color:var(--sky-deep);font-size:10px;letter-spacing:.12em}
+
+/* A soft blue interlude, still part of the same scroll. */
+#transition{
+  display:block!important;min-height:0;align-items:initial;justify-content:initial;
+  background:linear-gradient(125deg,#d7ebf4 0%,#fff9ef 52%,#f1e4d8 100%);
+  color:var(--ink);
+}
+#transition .transition-content{max-width:900px;padding:clamp(24px,4vw,52px) 0}
+#transition h2{font:700 clamp(48px,7vw,90px)/.98 var(--display);color:var(--wine)}
+#transition h2 em{color:var(--sky-deep)}
+#transition .transition-lead{color:var(--wine)}
+#transition .transition-copy,#transition .transition-last{color:var(--ink-2)}
+#transition:after{border-color:#76212b38;box-shadow:0 0 0 18px #8fc7e218,0 0 0 42px #76212b08}
+#transition .transition-orbit{color:#4e91b755}
+#transition .transition-senses{color:var(--wine)}
+#transition .transition-senses span{border-color:#4e91b766}
+
+/* Five senses — one continuous editorial chapter. */
+#senses{background:linear-gradient(180deg,#fff9ef 0%,#e8f2f4 48%,#f7eee4 100%);color:var(--ink)}
+#senses .senses-intro h2{color:var(--wine)}
+#senses .senses-intro h2 em{color:var(--sky-deep)}
+#senses .senses-intro-text,#senses .senses-intro-copy p:not(.eyebrow){color:var(--ink-2)}
+#senses .senses-intro-photo{box-shadow:14px 14px 0 #8fc7e255}
+#senses .senses-intro-photo figcaption{color:var(--wine)}
+#senses .progress{color:var(--ink-2)}
+#senses .progress b{color:var(--wine)}
+#senses .progress-track{background:#76212b22}
+#senses .progress-track i{background:linear-gradient(90deg,var(--sky-deep),var(--wine))}
+#senses .progress-numbers span{color:var(--muted-ink)}
+#senses .progress-numbers span.done{color:var(--wine)}
+#senses .sense-chapter{border-color:#76212b28}
+#senses .sense-number{color:var(--sky-deep)}
+#senses .sense-heading h3{color:var(--wine)}
+#senses .sense-description{color:var(--ink-2)}
+#senses .sense-symbol{color:var(--sky-deep)}
+#senses .riddle-panel,#senses .cafe-receipt,#senses .certificate{
+  background:#fffaf3;color:var(--ink);border-color:#76212b28;
+  box-shadow:0 14px 34px #392a2410;
+}
+#senses .riddle-question,#senses .riddle-intro{color:var(--ink)}
+#senses .riddle-input{background:#fff;border:1px solid #76666a;color:var(--ink);min-height:48px}
+#senses .riddle-input::placeholder{color:#71666a}
+#senses .riddle-hint{color:var(--wine)}
+#senses .riddle-feedback{color:var(--ink-2)}
+#senses .earned-letter{background:#dceef5;color:var(--wine)}
+#senses .spot-difference{background:#fffaf3;color:var(--ink);border:1px solid #76212b28}
+#senses .spot-difference p,#senses .spot-difference-heading p{color:var(--ink-2)}
+#senses .spot-progress strong{color:var(--wine)}
+#senses .spot-hit.is-found{border-color:var(--sky-deep);background:#8fc7e255}
+#senses .audio-story-track{background:#fffaf3;color:var(--ink);border-color:#76212b24}
+#senses .audio-track-copy p{color:var(--ink-2)}
+#senses .scent-sensory-scene{border:1px solid #76212b20;box-shadow:0 18px 38px #392a2412}
+#senses .unlock-final{background:linear-gradient(130deg,#dceef5,#fff9ef);color:var(--ink);border:1px solid #76212b22}
+#senses .unlock-final h3{color:var(--wine)}
+#senses .riddle-cipher{background:#fffaf3;color:var(--ink);border:1px solid #76212b2a;box-shadow:0 16px 38px #392a2412}
+#senses .riddle-cipher h2{color:var(--wine)}
+#senses .cipher-letter{background:#dceef5;color:var(--wine)}
+#senses .cipher-input{background:#fff;border:1px solid #7a6870;color:var(--wine)}
+#senses .secret-chapter{background:linear-gradient(130deg,#792632,#4e1722);color:#fff9ef}
+#senses .secret-chapter .eyebrow,#senses .secret-chapter p{color:#fff1e9}
+#senses .secret-chapter h2,#senses .secret-chapter h3{color:#fff9ef}
+#senses .secret-chapter h2 em{color:#a9d9ed}
+
+/* Letter and photo archive — warm stationery with a sky-blue accent. */
+#letter{background:linear-gradient(135deg,#f6ecdf 0%,#fff9ef 48%,#dceef5 100%);color:var(--ink)}
+#letter .letter-opening h2{color:var(--wine)}
+#letter .letter-opening h2 em{color:var(--sky-deep)}
+#letter .letter-opening>p:not(.eyebrow){color:var(--ink-2)}
+#letter .personal-letter{background:#fffdf8;color:var(--ink);border:1px solid #76212b25;box-shadow:0 22px 52px #392a2417}
+#letter .personal-letter:before{border-color:#8fc7e277}
+#letter .personal-letter-top{color:var(--wine);border-color:var(--line)}
+#letter .personal-letter-salutation,#letter .personal-letter-signature{color:var(--wine)}
+#letter .personal-letter-body{color:var(--ink-2)}
+#letter .personal-letter-end{color:var(--sky-deep)}
+#letter .memory-gallery-heading h2{color:var(--wine)}
+#letter .memory-gallery-heading h2 em{color:var(--sky-deep)}
+#letter .memory-gallery-heading>p{color:var(--ink-2)}
+#letter .memory-gallery-note{color:var(--muted-ink);border-color:var(--line)}
+#letter .memory-gallery-note span{color:var(--wine)}
+.site-footer{background:#dceef5;color:var(--wine);border-color:#76212b25}
+
+/* All text remains readable over photographs and decorative surfaces. */
+.photo-placeholder{background:linear-gradient(135deg,#6b2734,#263d4b);color:#fff}
+.photo-placeholder span{color:#fff}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--sky-deep)!important;outline-offset:3px}
+#senses .riddle-submit,#senses .senses-begin{background:var(--wine);color:#fff9ef}
+#senses .riddle-submit:disabled,#senses .button:disabled{opacity:.45}
+#senses .riddle-feedback.is-wrong{color:#9d2635}
+#senses .riddle-feedback.is-hint{color:#315f78;background:#e3f1f6;padding:10px 14px}
+#senses .riddle-already-solved{color:#315f78;background:#e3f1f6;padding:12px 15px}
+#senses .spot-difference-heading span,#senses .spot-progress span{color:var(--wine)}
+#senses .spot-difference-pair figcaption{color:var(--wine)}
+#senses .senses-intro-bottom{color:var(--wine)}
+#senses .senses-intro-motifs{color:var(--sky-deep)}
+#senses .sense-content{color:var(--ink)}
+#senses .cafe-receipt h4{color:var(--wine)}
+#senses .touch-braille-label{color:var(--wine)}
+#senses .certificate strong{color:var(--wine)}
+#senses .certificate strong em{color:var(--sky-deep)}
+
+@media(max-width:760px){
+  :root{--space-x:5vw}
+  .topbar{height:62px}
+  .topbar-caption{font-size:7px;gap:7px;letter-spacing:.1em}
+  .top-action{font-size:7px}
+  main>.scene{padding:38px var(--space-x) 58px}
+  #welcome{padding-top:22px}
+  .hero-layout{min-height:0}
+  .hero-copy h1{font-size:clamp(58px,15vw,86px);line-height:.91}
+  .hero-visual{height:clamp(330px,100vw,460px);min-height:0}
+  .hero-description{font-size:18px}
+  .hero-bottom{font-size:7px;gap:8px}
+  .profile-panel{margin:-22px 0 0 14px}
+  .profile-panel h2{font-size:clamp(54px,15vw,78px)}
+  .stats-grid{grid-template-columns:1fr}
+  #hammer .hammer-arena{min-height:320px}
+  #hammer .hammer-intro h2{font-size:clamp(42px,12vw,62px)}
+  #admire .quality-card,#admire .quality-card:nth-child(even){display:flex;flex-direction:column}
+  #admire .quality-card:nth-child(even) .quality-photo{order:0}
+  #admire .quality-photo{height:clamp(220px,65vw,330px);min-height:0}
+  #admire .quality-copy{padding:24px}
+  #transition .transition-content{padding:18px 0}
+  #transition h2{font-size:clamp(42px,12vw,62px)}
+  #senses .sense-chapter{grid-template-columns:25px minmax(0,1fr);gap:10px}
+  #senses .spot-difference-pair{grid-template-columns:1fr}
+  #senses .senses-intro-photo{width:88%}
+  #senses .riddle-answer-row{display:flex;flex-direction:column;align-items:stretch}
+  #senses .riddle-answer-row .riddle-submit{width:100%}
+  #letter .memory-gallery-grid{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scroll-reveal{opacity:1!important;transform:none!important}
+}

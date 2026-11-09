@@ -10,11 +10,15 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  const PROGRESS_KEY = "hasan-chapter-24-progress";
+  const STATE_KEY = "hasan-birthday-experience-v2";
+  const LEGACY_PROGRESS_KEY = "hasan-chapter-24-progress";
+  const LEGACY_RIDDLE_KEY = "hasan-chapter-24-riddle-progress";
   const ASSET_KEY = "hasan-chapter-24-assets";
-  const RIDDLE_KEY = "hasan-chapter-24-riddle-progress";
 
   const RIDDLE_ORDER = ["sight", "sound", "taste", "touch", "scent"];
+  // Порядок прохождения заданий не меняется. Для финального слова буквы
+  // собираются в отдельном порядке: В-Е-Ч-Н-О.
+  const CODE_ORDER = ["taste", "touch", "sight", "scent", "sound"];
   const RIDDLE_LETTERS = {
     sight: "Ч",
     sound: "О",
@@ -67,87 +71,120 @@
     }
   };
 
-  let progress = new Set();
   let assets = {};
   let riddleState = {
     solved: [],
-    unlocked: false
+    sightFound: [],
+    sensesOpened: false,
+    unlocked: false,
+    hammerDone: false
   };
   let currentScene = "welcome";
 
+  // Восстанавливаем состояние до первой отрисовки. Старые ключи читаются
+  // только для миграции; далее используется один версионируемый ключ.
   try {
-    progress = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]"));
-  } catch (_) {}
-
-  try {
-  localStorage.removeItem(ASSET_KEY);
-} catch (_) {}
-
-  try {
-    const stored = JSON.parse(localStorage.getItem(RIDDLE_KEY) || "{}");
-    // Игра «Найди три отличия» начинается заново при каждой загрузке страницы.
-    // Прогресс остальных четырёх загадок при этом сохраняется.
+    const current = JSON.parse(localStorage.getItem(STATE_KEY) || "null");
+    if (current && current.version === 2) {
+      riddleState = {
+        solved: Array.isArray(current.solved)
+          ? RIDDLE_ORDER.filter(id => current.solved.includes(id))
+          : [],
+        sightFound: Array.isArray(current.sightFound)
+          ? [1, 2, 3].filter(n => current.sightFound.includes(n))
+          : [],
+        sensesOpened: current.sensesOpened === true,
+        unlocked: current.unlocked === true,
+        hammerDone: current.hammerDone === true
+      };
+    } else {
+      const legacyRiddles = JSON.parse(localStorage.getItem(LEGACY_RIDDLE_KEY) || "{}");
+      const legacyProgress = JSON.parse(localStorage.getItem(LEGACY_PROGRESS_KEY) || "[]");
+      const legacySolved = Array.isArray(legacyRiddles.solved) ? legacyRiddles.solved : [];
+      const legacySet = new Set([...legacySolved, ...(Array.isArray(legacyProgress) ? legacyProgress : [])]);
+      riddleState = {
+        solved: RIDDLE_ORDER.filter(id => legacySet.has(id)),
+        sightFound: legacySet.has("sight") ? [1, 2, 3] : [],
+        sensesOpened: legacyRiddles.unlocked === true || legacySet.size > 0,
+        unlocked: legacyRiddles.unlocked === true,
+        hammerDone: legacySet.has("mjolnir-lifted")
+      };
+      if (current || (legacyRiddles && Array.isArray(legacyRiddles.solved) && legacyRiddles.solved.length) || (Array.isArray(legacyProgress) && legacyProgress.length)) {
+        // Миграция выполняется только после успешного чтения старых данных.
+        localStorage.setItem(STATE_KEY, JSON.stringify({
+          version: 2,
+          ...riddleState
+        }));
+      }
+    }
+  } catch (error) {
+    console.warn("Не удалось прочитать сохранённый прогресс. Запускаем чистое состояние.", error);
     riddleState = {
-      solved: Array.isArray(stored.solved)
-        ? stored.solved.filter(id => RIDDLE_ORDER.includes(id) && id !== "sight")
-        : [],
-      unlocked: stored.unlocked === true
+      solved: [],
+      sightFound: [],
+      sensesOpened: false,
+      unlocked: false,
+      hammerDone: false
     };
-    localStorage.setItem(RIDDLE_KEY, JSON.stringify(riddleState));
-    progress.delete("sight");
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify([...progress]));
-  } catch (_) {}
+  }
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
   const scenes = ["welcome", "profile", "hammer", "admire", "transition", "senses", "letter"];
 
-  function saveProgress() {
+  function persistState() {
     try {
-      localStorage.setItem(PROGRESS_KEY, JSON.stringify([...progress]));
-    } catch (_) {}
+      localStorage.setItem(STATE_KEY, JSON.stringify({
+        version: 2,
+        solved: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)),
+        letters: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)).map(id => RIDDLE_LETTERS[id]),
+        sightFound: [1, 2, 3].filter(n => riddleState.sightFound.includes(n)),
+        sensesOpened: riddleState.sensesOpened === true,
+        unlocked: riddleState.unlocked === true,
+        hammerDone: riddleState.hammerDone === true
+      }));
+    } catch (error) {
+      console.error("Не удалось сохранить прогресс в localStorage.", error);
+      toast("Не удалось сохранить прогресс. Проверь настройки браузера.");
+    }
     updateProgress();
   }
 
   function saveRiddles() {
-    try {
-      localStorage.setItem(RIDDLE_KEY, JSON.stringify(riddleState));
-    } catch (_) {}
+    persistState();
   }
 
   function saveAssets() {
-  return true;
-}
+    // Пользовательские загрузки не должны перезаписывать исходные материалы.
+    return true;
+  }
+
   function showScene(id) {
     const targetIndex = scenes.indexOf(id);
     if (targetIndex < 0) return;
+
+    if (id === "senses") {
+      riddleState.sensesOpened = true;
+      persistState();
+      document.getElementById("senses")?.classList.add("is-unlocked");
+      renderSenses();
+    }
 
     if (id === "letter" && !riddleState.unlocked) {
       toast("Сначала нужно разгадать финальный шифр.");
       return;
     }
 
-    // Открываем разделы последовательно, но никогда не скрываем уже открытые.
-    scenes.slice(0, targetIndex + 1).forEach(sceneId => {
-      const section = document.getElementById(sceneId);
-      if (section) {
-        section.classList.remove("locked");
-        section.classList.add("opened");
-      }
-    });
+    if (id === "letter") {
+      document.getElementById("letter")?.classList.add("is-unlocked");
+      renderPersonalLetter();
+      renderMemoryGallery();
+    }
 
     currentScene = id;
-    $$(".scene").forEach(scene => scene.classList.toggle("active", scene.id === id));
-
     const target = document.getElementById(id);
     if (target) {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    }
-
-    if (id === "senses") renderSenses();
-    if (id === "letter") {
-      renderPersonalLetter();
-      renderMemoryGallery();
     }
   }
 
@@ -185,9 +222,8 @@
     });
 
     const finalButton = $("#finalAccess");
-    if (finalButton) {
-      finalButton.disabled = count !== 5;
-    }
+    if (finalButton) finalButton.disabled = count !== 5;
+    if (count === 5) renderCipher();
   }
 
   function openModal(kicker, title, body) {
@@ -354,13 +390,13 @@
           <div class="spot-difference-pair">
             <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/O1.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
             <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/O2.jpg" alt="Изменённая версия фотографии" loading="lazy">
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="1" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="2" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.solved.includes("sight") ? "is-found" : ""}" data-difference="3" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.solved.includes("sight") ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(1) ? "is-found" : ""}" data-difference="1" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.sightFound.includes(1) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(2) ? "is-found" : ""}" data-difference="2" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.sightFound.includes(2) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(3) ? "is-found" : ""}" data-difference="3" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.sightFound.includes(3) ? "disabled" : ""}></button>
             </div></figure>
           </div>
-          <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.solved.includes("sight") ? "3/3" : "0/3"}</strong></div>
-          <p class="spot-feedback" data-spot-feedback aria-live="polite">${riddleState.solved.includes("sight") ? "Все три отличия найдены!" : "Найди все три отличия."}</p>
+          <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.sightFound.length}/3</strong></div>
+          <p class="spot-feedback" data-spot-feedback aria-live="polite">${riddleState.solved.includes("sight") ? "Все три отличия найдены!" : riddleState.sightFound.length ? "Отличия сохранены. Продолжай искать." : "Найди все три отличия."}</p>
           ${solved ? `<div class="earned-letter"><span>ТВОЯ БУКВА</span><strong>${RIDDLE_LETTERS.sight}</strong></div>` : ''}
         </section>`;
       }
@@ -597,10 +633,6 @@
     riddleState.solved.push(id);
     saveRiddles();
 
-    // Сохраняем совместимость с прежней системой прогресса.
-    progress.add(id);
-    saveProgress();
-
     renderSenses();
     toast(`Буква «${RIDDLE_LETTERS[id]}» найдена.`);
   }
@@ -673,7 +705,7 @@
         и собери слово.
       </p>
       <div class="cipher-letters" aria-label="Пять букв">
-        ${RIDDLE_ORDER.map((id, index) => `
+        ${CODE_ORDER.map((id, index) => `
           <div class="cipher-letter">
             <span>0${index + 1}</span>
             <b>${RIDDLE_LETTERS[id]}</b>
@@ -681,7 +713,7 @@
         `).join("")}
       </div>
       <div class="cipher-inputs" aria-label="Поле для пяти букв">
-        ${RIDDLE_ORDER.map((_, index) => `
+        ${CODE_ORDER.map((_, index) => `
           <input
             class="cipher-input"
             type="text"
@@ -713,7 +745,11 @@
 
     if (entered === FINAL_CODE) {
       riddleState.unlocked = true;
+      riddleState.sensesOpened = true;
       saveRiddles();
+      document.getElementById("letter")?.classList.add("is-unlocked");
+      renderPersonalLetter();
+      renderMemoryGallery();
       openSecretChapter();
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
@@ -721,7 +757,7 @@
     }
   }
 
-  function openSecretChapter() {
+  function openSecretChapter(shouldScroll = true) {
     let secret = $("#secretChapter");
 
     if (!secret) {
@@ -759,21 +795,27 @@
     }
 
     secret.classList.add("visible");
-    secret.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-      block: "start"
-    });
-
-    toast("Шифр разгадан. Открыта последняя глава.");
+    if (shouldScroll) {
+      secret.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+      toast("Шифр разгадан. Открыта последняя глава.");
+    }
   }
 
   function restoreRiddleState() {
-    if (riddleState.solved.length === 5) {
-      renderCipher();
+    if (riddleState.sensesOpened || riddleState.solved.length) {
+      riddleState.sensesOpened = true;
+      document.getElementById("senses")?.classList.add("is-unlocked");
+      renderSenses();
     }
-
+    if (riddleState.solved.length === 5) renderCipher();
     if (riddleState.unlocked && riddleState.solved.length === 5) {
-      openSecretChapter();
+      document.getElementById("letter")?.classList.add("is-unlocked");
+      renderPersonalLetter();
+      renderMemoryGallery();
+      openSecretChapter(false);
     }
   }
 
@@ -883,12 +925,18 @@
       return;
     }
 
-    progress.clear();
-    riddleState = { solved: [], unlocked: false };
+    riddleState = {
+      solved: [],
+      sightFound: [],
+      sensesOpened: false,
+      unlocked: false,
+      hammerDone: false
+    };
     scentSequences.clear();
 
-    localStorage.removeItem(PROGRESS_KEY);
-    localStorage.removeItem(RIDDLE_KEY);
+    localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(LEGACY_PROGRESS_KEY);
+    localStorage.removeItem(LEGACY_RIDDLE_KEY);
 
     if (beginButton) {
       beginButton.innerHTML = 'ОТКРЫТЬ ИСТОРИЮ <span>↗</span>';
@@ -900,9 +948,7 @@
     scenes.forEach((sceneId, index) => {
       const section = document.getElementById(sceneId);
       if (!section) return;
-      section.classList.toggle("locked", index !== 0);
-      section.classList.toggle("opened", index === 0);
-      section.classList.toggle("active", index === 0);
+      section.classList.remove("locked", "opened", "active", "is-unlocked");
     });
     showScene("welcome");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -928,13 +974,16 @@
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
 
-  // При первом открытии доступен только первый раздел. Сохранённый прогресс загадок остаётся.
-  scenes.forEach((sceneId, index) => {
-    const section = document.getElementById(sceneId);
-    if (!section) return;
-    section.classList.toggle("locked", index !== 0);
-    section.classList.toggle("opened", index === 0);
-  });
+  // Вступительные главы всегда видны в одном вертикальном документе.
+  // Закрыты только «Пять чувств» и финал — они раскрываются по условиям.
+  document.getElementById("senses")?.classList.toggle(
+    "is-unlocked",
+    riddleState.sensesOpened || riddleState.solved.length > 0
+  );
+  document.getElementById("letter")?.classList.toggle(
+    "is-unlocked",
+    riddleState.unlocked && riddleState.solved.length === 5
+  );
 
   // Ненавязчивое появление крупных элементов при обычной прокрутке.
   const revealTargets = $$(".scene h2, .scene h3, .scene .profile-hero, .scene .stats-section, .scene .quality-list, .scene .sense-chapter, .scene .personal-letter, .scene .letter-opening");
@@ -971,7 +1020,7 @@
     let holdStarted = 0;
     let taps = 0;
     let tapReset = null;
-    let completed = false;
+    let completed = riddleState.hammerDone === true;
     let isHolding = false;
 
     const duration = reduced.matches ? 900 : 2350;
@@ -987,6 +1036,15 @@
         : amount < 70
           ? "ЭНЕРГИЯ МОЛОТА · НАРАСТАЕТ"
           : "ЭНЕРГИЯ МОЛОТА · НА ПРЕДЕЛЕ";
+    }
+
+    if (completed) {
+      control.classList.add("lifted");
+      arena.classList.add("released");
+      setCharge(100);
+      instruction.hidden = true;
+      victory.hidden = false;
+      victory.classList.add("revealed");
     }
 
     function win() {
@@ -1013,10 +1071,8 @@
     }
 
     function markHammerProgress() {
-      try {
-        progress.add("mjolnir-lifted");
-        localStorage.setItem(PROGRESS_KEY, JSON.stringify([...progress]));
-      } catch (_) {}
+      riddleState.hammerDone = true;
+      persistState();
     }
 
     function registerTap() {
@@ -1172,7 +1228,13 @@
       if (game && !difference.classList.contains("is-found")) {
         difference.classList.add("is-found");
         difference.disabled = true;
-        const found = game.querySelectorAll("[data-difference].is-found").length;
+        const differenceNumber = Number(difference.dataset.difference);
+        if ([1, 2, 3].includes(differenceNumber) && !riddleState.sightFound.includes(differenceNumber)) {
+          riddleState.sightFound.push(differenceNumber);
+          riddleState.sightFound.sort((a, b) => a - b);
+          persistState();
+        }
+        const found = riddleState.sightFound.length;
         const count = game.querySelector("[data-spot-count]");
         const feedback = game.querySelector("[data-spot-feedback]");
         if (count) count.textContent = `${found}/3`;
