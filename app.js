@@ -85,12 +85,17 @@
 
   try {
     const stored = JSON.parse(localStorage.getItem(RIDDLE_KEY) || "{}");
+    // Игра «Найди три отличия» начинается заново при каждой загрузке страницы.
+    // Прогресс остальных четырёх загадок при этом сохраняется.
     riddleState = {
       solved: Array.isArray(stored.solved)
-        ? stored.solved.filter(id => RIDDLE_ORDER.includes(id))
+        ? stored.solved.filter(id => RIDDLE_ORDER.includes(id) && id !== "sight")
         : [],
       unlocked: stored.unlocked === true
     };
+    localStorage.setItem(RIDDLE_KEY, JSON.stringify(riddleState));
+    progress.delete("sight");
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify([...progress]));
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
