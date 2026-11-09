@@ -135,6 +135,17 @@ window.BIRTHDAY_CONTENT = {
     }
   ],
 
+  // Фотографии для финальной галереи «Особенные моменты».
+  galleryPhotos: [
+    { src: "assets/01.jpg", alt: "Наш момент 1" },
+    { src: "assets/02.jpg", alt: "Наш момент 2" },
+    { src: "assets/1.jpg", alt: "Наш момент 3" },
+    { src: "assets/2.jpg", alt: "Наш момент 4" },
+    { src: "assets/3.jpg", alt: "Наш момент 5" },
+    { src: "assets/5.jpg", alt: "Наш момент 6" },
+    { src: "assets/6.jpg", alt: "Наш момент 7" }
+  ],
+
   // Личное письмо для финальной сцены. Абзацы разделяются пустой строкой.
   personalLetter: {
     salutation: "Мой любимый Хасан,",

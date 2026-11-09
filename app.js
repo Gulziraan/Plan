@@ -145,7 +145,10 @@
     }
 
     if (id === "senses") renderSenses();
-    if (id === "letter") renderPersonalLetter();
+    if (id === "letter") {
+      renderPersonalLetter();
+      renderMemoryGallery();
+    }
   }
 
   function toast(message) {
@@ -1361,12 +1364,34 @@
     }
   }
 
+  // Галерея реальных фотографий из массива galleryPhotos в content.js.
+  function renderMemoryGallery() {
+    const grid = $("#memoryGalleryGrid");
+    if (!grid) return;
+
+    const photos = Array.isArray(C.galleryPhotos) ? C.galleryPhotos : [];
+    const available = photos.filter(item => item && item.src);
+
+    grid.innerHTML = available.map((item, index) => `
+      <figure class="memory-gallery-item gallery-shape-${(index % 6) + 1}">
+        <img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.alt || `Наш момент ${index + 1}`)}" loading="lazy" decoding="async">
+      </figure>
+    `).join("");
+
+    grid.querySelectorAll("img").forEach(img => {
+      img.addEventListener("error", () => {
+        img.closest(".memory-gallery-item")?.remove();
+      }, { once: true });
+    });
+  }
+
   // НАЧАЛЬНАЯ ОТРИСОВКА
 
   renderStats();
   renderQualities();
   renderSenses();
   renderPersonalLetter();
+  renderMemoryGallery();
   applyFixedPhotos();
   updateProgress();
   restoreRiddleState();

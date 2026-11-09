@@ -3387,7 +3387,6 @@ main > .scene:not(.opened) { display: none !important; }
 .scene-nav { padding-top: clamp(38px, 6vw, 82px); }
 .scene-nav .text-link, .button, .text-link { touch-action: manipulation; }
 #letter { padding-bottom: clamp(90px, 12vw, 160px); }
-#letter .memory-gallery { display: none !important; }
 @media (max-width: 680px) {
   html { scroll-padding-top: 62px; }
   .page-progress { top: 60px; }
