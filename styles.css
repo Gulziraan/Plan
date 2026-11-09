@@ -3415,3 +3415,49 @@ main > .scene:not(.opened) { display: none !important; }
 #letter .eyebrow, #letter .personal-letter-top { color:#79545a; }
 #letter h2, #letter p { color:#241a1d; }
 @media (prefers-reduced-motion: reduce) { .scroll-reveal, .scroll-reveal.is-visible { opacity:1; transform:none; filter:none; transition:none; } }
+
+
+/* User refinements — remove the fixed reading-position strip and restore the burgundy identity before Five Senses. */
+.page-progress { display:none !important; }
+#profile {
+  background: radial-gradient(ellipse at 18% 28%, rgba(177,31,61,.28), transparent 42%),
+              linear-gradient(135deg,#3c0b1b 0%,#641329 48%,#250b16 100%);
+}
+#hammer {
+  background: radial-gradient(ellipse at 50% 62%,rgba(170,35,62,.28),transparent 43%),
+              radial-gradient(ellipse at 50% 100%,rgba(104,12,36,.5),transparent 58%),
+              linear-gradient(160deg,#170a11 0%,#3a0c1d 52%,#160910 100%);
+}
+#hammer:before {
+  background:linear-gradient(112deg,transparent 0 35%,rgba(197,167,131,.08) 52%,transparent 70%),
+             radial-gradient(ellipse at 50% 100%,rgba(190,29,61,.22),transparent 55%);
+}
+#admire { background:radial-gradient(ellipse at 82% 10%,rgba(183,44,69,.24),transparent 38%),linear-gradient(145deg,#3d0b1c 0%,#641329 54%,#270b17 100%); color:var(--cream); }
+#admire .eyebrow, #admire .section-top, #admire .quality-caption, #admire .quality-index { color:#e3b6a9; }
+#admire h2, #admire h3, #admire p { color:var(--cream); }
+#admire .chapter-heading>p:last-child, #admire .quality-copy p { color:#e6d0cb; }
+#admire .quality-card { background:linear-gradient(100deg,rgba(255,255,255,.055),rgba(20,0,8,.12)); border-color:rgba(239,204,195,.24); }
+#admire .quality-photo { background:#32101d; }
+#transition {
+  background:radial-gradient(ellipse at 78% 48%,rgba(214,57,83,.25),transparent 42%),
+             radial-gradient(ellipse at 16% 88%,rgba(102,11,39,.42),transparent 45%),
+             linear-gradient(130deg,#260914 0%,#71152c 52%,#2b0a18 100%);
+}
+#transition .transition-lead { color:#fff0e8; }
+#transition .transition-copy { color:#e7cbd0; }
+#transition .transition-last { color:#f0c6a0; }
+#transition .transition-scene h2 em, .transition-scene h2 em { color:#e8b9a8; }
+
+/* Difference targets must be invisible until the player finds them. */
+#senses .spot-hit,
+#senses .spot-hit:hover {
+  border:1px solid transparent !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+#senses .spot-hit.is-found {
+  border:2px solid #e7c6a3 !important;
+  background:#e7c6a322 !important;
+  box-shadow:0 0 0 5px #e7c6a322,0 0 22px #e7c6a377 !important;
+}
+#senses .spot-hit:focus-visible { outline:2px solid #e5c39e; outline-offset:2px; }

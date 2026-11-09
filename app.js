@@ -141,15 +141,6 @@
 
     if (id === "senses") renderSenses();
     if (id === "letter") renderPersonalLetter();
-    updatePageProgress();
-  }
-
-  function updatePageProgress() {
-    const fill = $("#pageProgressFill");
-    if (!fill) return;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-    fill.style.transform = `scaleX(${ratio})`;
   }
 
   function toast(message) {
@@ -936,9 +927,6 @@
     section.classList.toggle("locked", index !== 0);
     section.classList.toggle("opened", index === 0);
   });
-  window.addEventListener("scroll", updatePageProgress, { passive: true });
-  window.addEventListener("resize", updatePageProgress);
-  updatePageProgress();
 
   // Ненавязчивое появление крупных элементов при обычной прокрутке.
   const revealTargets = $$(".scene h2, .scene h3, .scene .profile-hero, .scene .stats-section, .scene .quality-list, .scene .sense-chapter, .scene .personal-letter, .scene .letter-opening");
@@ -1364,7 +1352,7 @@
 
       body.innerHTML = paragraphs.length
         ? paragraphs.map(value => `<p>${escapeHTML(value).replace(/\n/g, "<br>")}</p>`).join("")
-        : `<p class="letter-empty-hint">ЗДЕСЬ БУДЕТ ТВОЁ ПИСЬМО<br><small>Добавь текст в объект personalLetter файла content.js</small></p>`;
+        : "";
     }
   }
 
