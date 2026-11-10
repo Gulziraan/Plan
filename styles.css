@@ -6109,614 +6109,33 @@ main>.scene:not(#welcome){
 }
 
 
-/* v11 FIX — Mjölnir background: force warm beige, remove any inherited stripe layers,
-   and draw visible glowing lightning independently of SVG rendering. */
-#hammer,
-section#hammer.hammer-scene{
-  background-color:#f5ecde!important;
-  background-image:
-    radial-gradient(ellipse at 50% 38%,rgba(255,255,255,.92),rgba(255,248,233,.28) 48%,transparent 72%),
-    radial-gradient(ellipse at 7% 20%,rgba(225,232,229,.22),transparent 35%),
-    linear-gradient(180deg,#f8f0e2 0%,#f3eadb 58%,#eee3d3 100%)!important;
-}
-#hammer::before,
-#hammer::after{
-  background-image:none!important;
-}
-#hammer .hammer-atmosphere{
-  display:block!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:1!important;
-  opacity:1!important;
-  visibility:visible!important;
-  overflow:hidden!important;
-  pointer-events:none!important;
-  background:none!important;
-}
-#hammer .hammer-atmosphere::before,
-#hammer .hammer-atmosphere::after{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  top:-4%!important;
-  height:108%!important;
-  width:clamp(90px,18vw,230px)!important;
-  opacity:.72!important;
-  background:linear-gradient(180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(194,237,255,.8) 18%,
-    #ffffff 43%,
-    rgba(151,218,255,.92) 66%,
-    rgba(255,255,255,0) 100%)!important;
-  clip-path:polygon(66% 0,55% 13%,72% 20%,43% 35%,58% 39%,25% 57%,43% 60%,12% 79%,30% 83%,8% 100%,21% 80%,5% 77%,37% 57%,20% 54%,51% 37%,35% 33%,63% 19%,47% 14%)!important;
-  filter:drop-shadow(0 0 5px #c5edff)
-         drop-shadow(0 0 13px #83d5ff)
-         drop-shadow(0 0 27px rgba(92,184,255,.8))!important;
-  animation:visibleLightning 3.7s steps(1,end) infinite!important;
-}
-#hammer .hammer-atmosphere::before{left:1%!important}
-#hammer .hammer-atmosphere::after{
-  right:1%!important;
-  transform:scaleX(-1)!important;
-  animation-delay:-1.9s!important;
-}
-#hammer .hammer-lightning{
-  display:block!important;
-  visibility:visible!important;
-  position:absolute!important;
-  z-index:2!important;
-  top:-2%!important;
-  width:clamp(125px,27vw,370px)!important;
-  height:105%!important;
-  opacity:.7!important;
-  overflow:visible!important;
-  animation:visibleLightningGlow 3.4s ease-in-out infinite!important;
-  filter:drop-shadow(0 0 7px #b8eaff)
-         drop-shadow(0 0 17px #7ccfff)
-         drop-shadow(0 0 34px rgba(91,181,255,.7))!important;
-}
-#hammer .hammer-lightning .lightning-core{
-  display:block!important;
-  fill:none!important;
-  stroke:#fff!important;
-  stroke-width:4.5!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
-  opacity:1!important;
-}
-#hammer .hammer-lightning .lightning-branch{
-  display:block!important;
-  fill:none!important;
-  stroke:#dff7ff!important;
-  stroke-width:2.8!important;
-  opacity:.95!important;
-}
-#hammer .lightning-left{left:-1%!important}
-#hammer .lightning-right{right:-1%!important}
-#hammer .lightning-center{
-  left:50%!important;
-  transform:translateX(-50%)!important;
-  width:clamp(70px,12vw,150px)!important;
-  opacity:.28!important;
-}
-@keyframes visibleLightning{
-  0%,72%,75%,100%{opacity:.24}
-  73%{opacity:1}
-  74%{opacity:.12}
-  74.5%{opacity:.9}
-}
-@keyframes visibleLightningGlow{
-  0%,100%{opacity:.38}
-  8%{opacity:.9}
-  10%{opacity:.26}
-  48%{opacity:.5}
-  49%{opacity:1}
-  51%{opacity:.34}
-}
-#hammer:has(.hammer-arena.surging) .hammer-atmosphere::before,
-#hammer:has(.hammer-arena.surging) .hammer-atmosphere::after{
-  opacity:1!important;
-  animation-duration:.75s!important;
-  filter:drop-shadow(0 0 9px #fff)
-         drop-shadow(0 0 24px #85d7ff)
-         drop-shadow(0 0 48px #54baff)!important;
-}
-#hammer:has(.hammer-arena.surging) .hammer-lightning{
-  opacity:1!important;
-  animation-duration:.65s!important;
-  filter:drop-shadow(0 0 10px #fff)
-         drop-shadow(0 0 28px #82d7ff)
-         drop-shadow(0 0 55px #50b8ff)!important;
-}
-#hammer .hammer-topline,
-#hammer .hammer-intro,
-#hammer .hammer-arena,
-#hammer .hammer-instruction,
-#hammer .hammer-skip,
-#hammer .hammer-victory,
-#hammer .hammer-letter{
-  z-index:3!important;
-  position:relative!important;
-}
-@media(max-width:700px){
-  #hammer .hammer-atmosphere::before,
-  #hammer .hammer-atmosphere::after{
-    width:clamp(78px,23vw,130px)!important;
-    opacity:.52!important;
-  }
-  #hammer .hammer-lightning{width:clamp(100px,31vw,190px)!important;opacity:.55!important}
-}
-@media(prefers-reduced-motion:reduce){
-  #hammer .hammer-atmosphere::before,
-  #hammer .hammer-atmosphere::after,
-  #hammer .hammer-lightning{animation:none!important;opacity:.55!important}
-}
 
+/* ==========================================================
+   v22 — clean, consolidated corrections for the three scenes
+   ========================================================== */
 
-/* Profile: keep the portrait as a real image card, remove the ornate overlay. */
-#profile .profile-photo.portrait-card{position:relative!important;display:block!important;width:min(100%,330px)!important;aspect-ratio:4/5!important;min-height:0!important;margin:0 auto!important;padding:10px!important;overflow:hidden!important;background:#fffdf7!important;border:1px solid rgba(101,22,18,.14)!important;border-radius:3px!important;box-shadow:0 16px 38px rgba(72,42,30,.15),0 3px 8px rgba(72,42,30,.08)!important}
-#profile .profile-photo.portrait-card .profile-reference-image{position:static!important;display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 24%!important;border:0!important;box-shadow:none!important}
-#profile .profile-frame-art{display:none!important}
-@media(max-width:760px){#profile .profile-photo.portrait-card{width:min(68vw,270px)!important;aspect-ratio:4/5!important}}
-@media(max-width:390px){#profile .profile-photo.portrait-card{width:72vw!important}}
-
-/* Экран после Мьёльнира: бежевый фон и молнии только за фигурой Хасана. */
-#style.style-scene{background:#f3eadb!important;color:#651612!important}
-#style .style-stage{background:#f3eadb!important;isolation:isolate!important}
-#style .style-stage::before,#style .style-stage::after{content:""!important;position:absolute!important;z-index:1!important;top:2%!important;width:clamp(105px,17vw,210px)!important;height:92%!important;pointer-events:none!important;opacity:.5!important;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(150,207,239,.9) 38%,rgba(255,255,255,.95) 70%,rgba(135,194,231,.85))!important;clip-path:polygon(54% 0,38% 27%,57% 27%,22% 61%,43% 61%,12% 100%,69% 56%,49% 56%,82% 23%,60% 23%,76% 0)!important;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 13px rgba(91,181,255,.95)) drop-shadow(0 0 28px rgba(91,181,255,.7))!important;animation:styleLightningFlash 3.8s steps(1,end) infinite!important}
-#style .style-stage::before{left:5%!important}
-#style .style-stage::after{right:5%!important;transform:scaleX(-1)!important;animation-delay:-1.9s!important}
-#style .style-person{z-index:2!important}
-#style .style-title,#style .style-file{z-index:4!important}
-#style .style-highlights,#style .style-next{background:#f3eadb!important}
-#style .style-highlights h3{background:rgba(243,234,219,.92)!important}
-@keyframes styleLightningFlash{0%,67%,70%,100%{opacity:.12}68%{opacity:.85}69%{opacity:.18}69.5%{opacity:.72}}
-@media(max-width:760px){#style .style-stage::before,#style .style-stage::after{width:clamp(68px,19vw,105px)!important;opacity:.42!important}#style .style-stage::before{left:1%!important}#style .style-stage::after{right:1%!important}}
-@media(prefers-reduced-motion:reduce){#style .style-stage::before,#style .style-stage::after{animation:none!important;opacity:.35!important}}
-
-
-
-/* v13 — финальное переопределение именно экрана с Хасаном во весь рост.
-   Размещено в самом конце файла, чтобы перебить в том числе мобильные media rules. */
-html body section#style.style-scene,
-html body section#style.style-scene .style-stage,
-html body section#style.style-scene .style-highlights,
-html body section#style.style-scene .style-next {
-  background-color: #f3eadb !important;
-  background-image: none !important;
-}
-html body section#style.style-scene .style-stage {
-  position: relative !important;
-  isolation: isolate !important;
-  overflow: hidden !important;
-}
-html body section#style.style-scene .style-stage::before,
-html body section#style.style-scene .style-stage::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  z-index: 1 !important;
-  top: 4% !important;
-  width: clamp(90px, 14vw, 175px) !important;
-  height: 88% !important;
-  opacity: .55 !important;
-  pointer-events: none !important;
-  background: linear-gradient(180deg, #fff 0%, #9ed8ff 35%, #fff 52%, #8bc8f4 100%) !important;
-  clip-path: polygon(57% 0, 42% 24%, 60% 24%, 27% 57%, 48% 57%, 12% 100%, 72% 53%, 51% 53%, 86% 19%, 64% 19%, 78% 0) !important;
-  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px rgba(86,177,255,.95)) drop-shadow(0 0 25px rgba(86,177,255,.7)) !important;
-  animation: hasanSceneLightning 3.6s steps(1,end) infinite !important;
-}
-html body section#style.style-scene .style-stage::before { left: 4% !important; }
-html body section#style.style-scene .style-stage::after {
-  right: 4% !important;
-  transform: scaleX(-1) !important;
-  animation-delay: -1.8s !important;
-}
-html body section#style.style-scene .style-person { z-index: 2 !important; }
-html body section#style.style-scene .style-title,
-html body section#style.style-scene .style-file { z-index: 3 !important; }
-html body section#style.style-scene .style-highlights h3 {
-  background: #f3eadb !important;
-}
-@keyframes hasanSceneLightning {
-  0%, 64%, 68%, 100% { opacity: .08; }
-  65% { opacity: .85; }
-  66% { opacity: .2; }
-  67% { opacity: .7; }
-}
-@media (max-width: 760px) {
-  html body section#style.style-scene .style-stage,
-  html body section#style.style-scene .style-highlights,
-  html body section#style.style-scene .style-next {
-    background-color: #f3eadb !important;
-    background-image: none !important;
-  }
-  html body section#style.style-scene .style-stage::before,
-  html body section#style.style-scene .style-stage::after {
-    width: clamp(58px, 16vw, 95px) !important;
-    opacity: .45 !important;
-  }
-  html body section#style.style-scene .style-stage::before { left: 0 !important; }
-  html body section#style.style-scene .style-stage::after { right: 0 !important; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html body section#style.style-scene .style-stage::before,
-  html body section#style.style-scene .style-stage::after {
-    animation: none !important;
-    opacity: .35 !important;
-  }
-}
-
-
-
-/* v14 — визуально объединяем экран Мьёльнира и следующий экран с Хасаном.
-   Общий тёплый бежевый тон, мягкий переход, более тёмные приглушённые молнии. */
-html body section#hammer.hammer-scene {
-  background-color: #f3eadb !important;
-  background-image:
-    linear-gradient(
-      180deg,
-      #f4ecdf 0%,
-      #f3eadb 48%,
-      #f3eadb 100%
-    ) !important;
-}
-html body section#style.style-scene,
-html body section#style.style-scene .style-stage,
-html body section#style.style-scene .style-highlights,
-html body section#style.style-scene .style-next {
-  background-color: #f3eadb !important;
-  background-image: none !important;
-}
-
-/* Убираем яркие белые пятна/ореолы, сохраняя лёгкую атмосферу. */
-html body section#hammer.hammer-scene::before,
-html body section#hammer.hammer-scene::after {
-  opacity: .035 !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-html body section#hammer.hammer-scene .hammer-atmosphere::before,
-html body section#hammer.hammer-scene .hammer-atmosphere::after {
-  opacity: .38 !important;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(112,157,181,.58) 24%,
-    rgba(75,119,145,.78) 50%,
-    rgba(112,157,181,.58) 76%,
-    rgba(255,255,255,0) 100%
-  ) !important;
-  filter:
-    drop-shadow(0 0 4px rgba(91,133,157,.72))
-    drop-shadow(0 0 12px rgba(73,117,144,.48)) !important;
-}
-html body section#hammer.hammer-scene .hammer-lightning {
-  opacity: .48 !important;
-  filter:
-    drop-shadow(0 0 4px rgba(85,129,153,.7))
-    drop-shadow(0 0 12px rgba(67,111,139,.55))
-    drop-shadow(0 0 23px rgba(67,111,139,.32)) !important;
-}
-html body section#hammer.hammer-scene .hammer-lightning .lightning-core {
-  stroke: #668ba1 !important;
-  opacity: .92 !important;
-}
-html body section#hammer.hammer-scene .hammer-lightning .lightning-branch {
-  stroke: #789caf !important;
-  opacity: .85 !important;
-}
-
-/* Силовые вспышки во время взаимодействия тоже остаются приглушёнными. */
-html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-atmosphere::before,
-html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-atmosphere::after {
-  opacity: .62 !important;
-  filter:
-    drop-shadow(0 0 5px rgba(102,146,169,.82))
-    drop-shadow(0 0 15px rgba(70,119,148,.62)) !important;
-}
-html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-lightning {
-  opacity: .68 !important;
-  filter:
-    drop-shadow(0 0 5px rgba(102,146,169,.82))
-    drop-shadow(0 0 16px rgba(70,119,148,.62))
-    drop-shadow(0 0 28px rgba(70,119,148,.38)) !important;
-}
-
-/* На следующем экране молнии продолжают тот же визуальный мотив,
-   но не выглядят белыми/неоновыми и не спорят с фотографией. */
-html body section#style.style-scene .style-stage::before,
-html body section#style.style-scene .style-stage::after {
-  background: linear-gradient(
-    180deg,
-    rgba(119,157,177,.15) 0%,
-    rgba(87,133,158,.82) 35%,
-    rgba(104,149,172,.9) 54%,
-    rgba(87,133,158,.76) 78%,
-    rgba(119,157,177,.12) 100%
-  ) !important;
-  filter:
-    drop-shadow(0 0 4px rgba(88,130,153,.72))
-    drop-shadow(0 0 11px rgba(75,117,141,.48))
-    drop-shadow(0 0 20px rgba(75,117,141,.25)) !important;
-  opacity: .42 !important;
-}
-@keyframes hasanSceneLightning {
-  0%, 64%, 68%, 100% { opacity: .08; }
-  65% { opacity: .62; }
-  66% { opacity: .16; }
-  67% { opacity: .48; }
-}
-
-/* Нижний край первого экрана и верх второго имеют один тон — нет цветового обрыва. */
-html body section#hammer.hammer-scene {
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-}
-html body section#style.style-scene {
-  border-top: 0 !important;
-  box-shadow: none !important;
-}
-
-
-
-/* v15 — EXACTLY THE SAME BACKGROUND COLOR ON BOTH CONNECTED SCENES.
-   This block intentionally uses the same flat color and removes all gradients. */
-:root {
-  --hasan-connected-scene-bg: #f3eadb;
-}
-html body section#hammer,
-html body section#hammer.hammer-scene,
-html body section#style,
-html body section#style.style-scene,
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background: var(--hasan-connected-scene-bg) !important;
-  background-color: var(--hasan-connected-scene-bg) !important;
-  background-image: none !important;
-}
-html body section#hammer::before,
-html body section#hammer::after,
-html body section#style::before,
-html body section#style::after {
-  background: none !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-/* Keep the lightning visible, but subdued; it must not tint the background. */
-html body section#hammer .hammer-atmosphere {
-  background: transparent !important;
-}
-html body section#hammer .hammer-atmosphere::before,
-html body section#hammer .hammer-atmosphere::after {
-  opacity: .34 !important;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(101,139,160,.66) 25%,
-    rgba(73,111,135,.84) 50%,
-    rgba(101,139,160,.62) 75%,
-    rgba(255,255,255,0) 100%
-  ) !important;
-  filter:
-    drop-shadow(0 0 4px rgba(82,120,143,.62))
-    drop-shadow(0 0 11px rgba(68,105,128,.42)) !important;
-}
-html body section#hammer .hammer-lightning {
-  opacity: .42 !important;
-  filter:
-    drop-shadow(0 0 4px rgba(82,120,143,.65))
-    drop-shadow(0 0 11px rgba(68,105,128,.45))
-    drop-shadow(0 0 20px rgba(68,105,128,.25)) !important;
-}
-html body section#hammer .hammer-lightning .lightning-core {
-  stroke: #66899e !important;
-}
-html body section#hammer .hammer-lightning .lightning-branch {
-  stroke: #7899aa !important;
-}
-html body section#style .style-stage::before,
-html body section#style .style-stage::after {
-  opacity: .38 !important;
-  filter:
-    drop-shadow(0 0 4px rgba(82,120,143,.62))
-    drop-shadow(0 0 11px rgba(68,105,128,.4)) !important;
-}
-
-
-
-/* v16 — оттенок первых экранов + более тонкие и многочисленные молнии */
-:root { --hasan-connected-scene-bg: #f8f4ec; }
-
-html body section#hammer,
-html body section#hammer.hammer-scene,
-html body section#style,
-html body section#style.style-scene,
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background: #f8f4ec !important;
-  background-color: #f8f4ec !important;
-  background-image: none !important;
-}
-
-/* Мьёльнир: тонкие линии вместо широких ярких вспышек. */
-html body section#hammer .hammer-atmosphere::before,
-html body section#hammer .hammer-atmosphere::after {
-  width: clamp(55px, 9vw, 115px) !important;
-  opacity: .30 !important;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(93,130,151,.62) 28%,
-    rgba(73,111,133,.78) 52%,
-    rgba(93,130,151,.56) 76%,
-    rgba(255,255,255,0) 100%
-  ) !important;
-  clip-path: polygon(54% 0, 48% 20%, 61% 20%, 39% 44%, 52% 44%, 24% 72%, 39% 72%, 12% 100%, 47% 69%, 34% 69%, 58% 43%, 45% 43%, 67% 18%, 54% 18%) !important;
-}
-html body section#hammer .hammer-lightning {
-  opacity: .38 !important;
-  filter:
-    drop-shadow(0 0 3px rgba(82,120,143,.62))
-    drop-shadow(0 0 8px rgba(68,105,128,.38)) !important;
-}
-html body section#hammer .hammer-lightning .lightning-core {
-  stroke: #66899e !important;
-  stroke-width: 2.1 !important;
-  opacity: .95 !important;
-}
-html body section#hammer .hammer-lightning .lightning-branch {
-  stroke: #7899aa !important;
-  stroke-width: 1.25 !important;
-  opacity: .82 !important;
-}
-
-/* Следующий экран: такие же тонкие молнии, четыре дополнительных ответвления
-   формируются узкими боковыми силуэтами, не перекрывая фото и подписи. */
-html body section#style .style-stage::before,
-html body section#style .style-stage::after {
-  width: clamp(48px, 7vw, 88px) !important;
-  opacity: .38 !important;
-  background: linear-gradient(
-    180deg,
-    rgba(119,157,177,.12) 0%,
-    rgba(87,133,158,.78) 35%,
-    rgba(104,149,172,.86) 54%,
-    rgba(87,133,158,.72) 78%,
-    rgba(119,157,177,.10) 100%
-  ) !important;
-  clip-path: polygon(57% 0, 49% 21%, 64% 21%, 40% 46%, 54% 46%, 23% 73%, 40% 73%, 9% 100%, 48% 70%, 34% 70%, 59% 45%, 45% 45%, 69% 19%, 55% 19%) !important;
-  filter:
-    drop-shadow(0 0 3px rgba(82,120,143,.62))
-    drop-shadow(0 0 8px rgba(68,105,128,.38)) !important;
-}
-/* Add two fine lightning branches on each side of Hasan, using the stage's
-   existing stacking context so the figure and file labels stay in front. */
-html body section#style .style-person::before,
-html body section#style .style-person::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  z-index: -1 !important;
-  top: 5% !important;
-  width: 32px !important;
-  height: 78% !important;
-  pointer-events: none !important;
-  opacity: .34 !important;
-  background: linear-gradient(180deg, transparent, #66899e 32%, #7899aa 58%, transparent) !important;
-  clip-path: polygon(58% 0, 47% 24%, 62% 24%, 38% 48%, 53% 48%, 18% 76%, 36% 76%, 8% 100%, 49% 72%, 34% 72%, 59% 47%, 45% 47%, 69% 22%, 55% 22%) !important;
-  filter: drop-shadow(0 0 4px rgba(68,105,128,.45)) !important;
-}
-html body section#style .style-person::before { left: -18% !important; }
-html body section#style .style-person::after {
-  right: -18% !important;
-  transform: scaleX(-1) !important;
-}
-
-
-/* v17 — same illustrated storm background on the Mjölnir and Hasan full-body scenes */
-html body section#hammer,
-html body section#style,
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background-color:#d8d0c5!important;
-  background-image:url("assets/hasan-storm-background.png")!important;
-  background-repeat:no-repeat!important;
-  background-size:cover!important;
-  background-position:center center!important;
-  background-attachment:scroll!important;
-}
-/* Lightning is part of the reference background; hide the older synthetic overlays. */
-html body section#hammer .hammer-atmosphere,
-html body section#hammer .hammer-lightning,
-html body section#style .style-stage::before,
-html body section#style .style-stage::after,
-html body section#style .style-person::before,
-html body section#style .style-person::after {display:none!important}
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background-color:transparent!important;
-  background-image:none!important;
-}
-@media(max-width:760px){
-  html body section#hammer,
-  html body section#style {
-    background-size:cover!important;
-    background-position:center center!important;
-  }
-}
-
-
-/* v18 — storm reference softened to match the site's warm editorial palette.
-   The image is only used on the Mjölnir + Hasan scenes; its edges fade into the
-   same ivory-beige base so the transition does not read as a separate poster. */
-html body section#hammer,
-html body section#style {
-  background-color: #f8f4ec !important;
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(248,244,236,.22) 0%,
-      rgba(248,244,236,.08) 48%,
-      rgba(248,244,236,.32) 100%
-    ),
-    url("assets/hasan-storm-background.png") !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  background-position: center center !important;
-}
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background: transparent !important;
-}
-/* Feather the upper/lower edges into the neighboring site's ivory sections. */
-html body section#hammer {
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
-}
-html body section#style {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
-}
-html body section#hammer .hammer-atmosphere,
-html body section#hammer .hammer-lightning,
-html body section#style .style-stage::before,
-html body section#style .style-stage::after,
-html body section#style .style-person::before,
-html body section#style .style-person::after {
-  display: none !important;
-}
-@media(max-width:760px) {
-  html body section#hammer,
-  html body section#style {
-    background-position: center center !important;
-    background-size: cover !important;
-  }
-}
-
-
-
-/* v20 — no image background: shared first-screen ivory + lightning overlays only. */
-html body section#hammer,
-html body section#style,
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background: #fef8e8 !important;
+/* One exact paper tone across welcome, Mjölnir and the full-body scene.
+   Remove gradients/stripe images on these scene surfaces and their inner panels. */
+html body #welcome,
+html body #hammer,
+html body #style,
+html body #style .style-stage,
+html body #style .style-highlights,
+html body #style .style-next {
   background-color: #fef8e8 !important;
   background-image: none !important;
 }
+html body #welcome { background: #fef8e8 !important; }
+html body #hammer { background: #fef8e8 !important; }
+html body #style,
+html body #style .style-stage,
+html body #style .style-highlights,
+html body #style .style-next { background: #fef8e8 !important; }
 
-/* Мьёльнир: restore the existing SVG lightning, but keep every text layer above it. */
-html body section#hammer .hammer-atmosphere {
+/* Mjölnir SVG lightning: two small, thin, dark branches at the outer margins.
+   No atmospheric overlays, glow flashes or background-color animation. */
+html body #hammer .hammer-atmosphere {
   display: block !important;
-  visibility: visible !important;
   position: absolute !important;
   inset: 0 !important;
   z-index: 0 !important;
@@ -6724,286 +6143,250 @@ html body section#hammer .hammer-atmosphere {
   pointer-events: none !important;
   background: transparent !important;
 }
-html body section#hammer .hammer-lightning {
+html body #hammer .hammer-atmosphere::before,
+html body #hammer .hammer-atmosphere::after { display: none !important; }
+html body #hammer .hammer-lightning {
   display: block !important;
-  visibility: visible !important;
   position: absolute !important;
-  top: 0 !important;
-  width: clamp(110px, 19vw, 250px) !important;
-  height: 100% !important;
-  opacity: .43 !important;
+  top: 7% !important;
+  width: 68px !important;
+  height: 58% !important;
+  opacity: .34 !important;
   overflow: visible !important;
-  filter:
-    drop-shadow(0 0 4px rgba(102,174,208,.65))
-    drop-shadow(0 0 12px rgba(102,174,208,.38)) !important;
-  animation: v20LightningPulse 4.8s ease-in-out infinite !important;
+  filter: none !important;
+  animation: none !important;
 }
-html body section#hammer .hammer-lightning .lightning-core {
-  stroke: #78a9c1 !important;
-  stroke-width: 2.3 !important;
+html body #hammer .lightning-left { left: 1.5% !important; }
+html body #hammer .lightning-right { right: 1.5% !important; }
+html body #hammer .lightning-center { display: none !important; }
+html body #hammer .hammer-lightning .lightning-core {
+  stroke: #53636a !important;
+  stroke-width: 1.05 !important;
   opacity: .9 !important;
+  filter: none !important;
+  animation: none !important;
 }
-html body section#hammer .hammer-lightning .lightning-branch {
-  stroke: #8bb9ce !important;
-  stroke-width: 1.35 !important;
-  opacity: .82 !important;
-}
-html body section#hammer .lightning-left { left: -2% !important; }
-html body section#hammer .lightning-right { right: -2% !important; }
-html body section#hammer .lightning-center {
-  width: clamp(52px, 8vw, 105px) !important;
-  opacity: .20 !important;
-}
-html body section#hammer .hammer-topline,
-html body section#hammer .hammer-intro,
-html body section#hammer .hammer-arena,
-html body section#hammer .hammer-instruction,
-html body section#hammer .hammer-skip,
-html body section#hammer .hammer-victory,
-html body section#hammer .hammer-letter {
-  position: relative !important;
-  z-index: 3 !important;
-}
-@keyframes v20LightningPulse {
-  0%, 100% { opacity: .25; }
-  8% { opacity: .52; }
-  9% { opacity: .30; }
-  10% { opacity: .62; }
-  11%, 62% { opacity: .36; }
-  63% { opacity: .58; }
-  64% { opacity: .28; }
+html body #hammer .hammer-lightning .lightning-branch {
+  stroke: #64747a !important;
+  stroke-width: .7 !important;
+  opacity: .8 !important;
+  filter: none !important;
 }
 
-/* Следующий экран: дополнительные тонкие разряды только по краям сцены,
-   позади фигуры, карточек и текста. */
-html body section#style .style-stage {
+/* Hammer layout: title/copy, hammer, instruction are separate flow rows.
+   Reduce the hammer and reserve its own vertical area so nothing can collide. */
+html body #hammer .hammer-topline,
+html body #hammer .hammer-intro,
+html body #hammer .hammer-arena,
+html body #hammer .hammer-instruction,
+html body #hammer .hammer-skip-wrap,
+html body #hammer .hammer-victory,
+html body #hammer .hammer-letter {
+  position: relative !important;
+  z-index: 2 !important;
+}
+html body #hammer .hammer-intro {
+  height: auto !important;
+  overflow: visible !important;
+  margin: 22px auto 0 !important;
+  transform: none !important;
+  text-align: center !important;
+}
+html body #hammer .hammer-intro h2 {
+  max-width: 780px !important;
+  margin: 12px auto 12px !important;
+}
+html body #hammer .hammer-intro > p:last-child {
+  max-width: 620px !important;
+  margin: 0 auto !important;
+}
+html body #hammer .hammer-arena {
+  display: grid !important;
+  position: relative !important;
+  width: min(680px, 100%) !important;
+  height: 365px !important;
+  min-height: 365px !important;
+  margin: 8px auto 0 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+html body #hammer .mjolnir-control {
+  width: clamp(145px, 20vw, 205px) !important;
+  height: clamp(220px, 32vh, 300px) !important;
+  transform: translateY(12px) rotate(-3deg) !important;
+  margin: 0 !important;
+}
+html body #hammer .hammer-arena.surging .mjolnir-control {
+  transform: translateY(4px) rotate(0) !important;
+}
+html body #hammer .stone-platform {
+  width: min(520px, 86%) !important;
+  height: 105px !important;
+  bottom: 12px !important;
+}
+html body #hammer .hammer-aura {
+  width: 220px !important;
+  height: 220px !important;
+}
+html body #hammer .charge-caption {
+  bottom: -18px !important;
+  z-index: 3 !important;
+  font-size: 8px !important;
+}
+html body #hammer .hammer-instruction {
+  display: flex !important;
+  position: relative !important;
+  z-index: 3 !important;
+  margin: 12px auto 0 !important;
+  padding: 0 14px !important;
+  max-width: 540px !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+html body #hammer .hammer-skip-wrap { margin: 12px auto 0 !important; }
+html body #hammer .hammer-victory,
+html body #hammer .hammer-letter {
+  max-width: 850px !important;
+  margin: 24px auto 0 !important;
+}
+@media (max-width: 800px) {
+  html body #hammer .hammer-arena {
+    height: 330px !important;
+    min-height: 330px !important;
+  }
+  html body #hammer .mjolnir-control {
+    width: 158px !important;
+    height: 238px !important;
+    transform: translateY(10px) rotate(-3deg) !important;
+  }
+}
+@media (max-width: 520px) {
+  html body #hammer .hammer-intro { margin-top: 16px !important; }
+  html body #hammer .hammer-intro h2 {
+    font-size: clamp(28px, 7.4vw, 38px) !important;
+    line-height: 1.08 !important;
+  }
+  html body #hammer .hammer-intro > p:last-child {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    padding: 0 8px !important;
+  }
+  html body #hammer .hammer-arena {
+    height: 300px !important;
+    min-height: 300px !important;
+    margin-top: 4px !important;
+  }
+  html body #hammer .mjolnir-control {
+    width: 142px !important;
+    height: 214px !important;
+    transform: translateY(7px) rotate(-3deg) !important;
+  }
+  html body #hammer .stone-platform {
+    height: 82px !important;
+    bottom: 10px !important;
+  }
+  html body #hammer .hammer-instruction {
+    margin-top: 10px !important;
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+  html body #hammer .hammer-lightning {
+    width: 40px !important;
+    height: 48% !important;
+    top: 12% !important;
+    opacity: .25 !important;
+  }
+}
+
+/* Full-body Hasan scene: flat paper surface and small dark lightning at edges.
+   Keep lightning behind the portrait, paper labels and heading. */
+html body #style .style-stage {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
+  background: #fef8e8 !important;
 }
-html body section#style .style-stage::before,
-html body section#style .style-stage::after {
+html body #style .style-stage::before,
+html body #style .style-stage::after {
   content: "" !important;
   display: block !important;
   position: absolute !important;
-  z-index: 1 !important;
-  top: 0 !important;
-  width: clamp(72px, 11vw, 145px) !important;
-  height: 100% !important;
+  z-index: 0 !important;
+  top: 7% !important;
+  width: 30px !important;
+  height: 68% !important;
+  opacity: .3 !important;
   pointer-events: none !important;
-  opacity: .46 !important;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(116,174,204,.9) 22%,
-    rgba(136,190,215,.95) 48%,
-    rgba(105,161,192,.88) 73%,
-    rgba(255,255,255,0) 100%
-  ) !important;
-  clip-path: polygon(58% 0, 46% 17%, 62% 17%, 37% 39%, 53% 39%, 23% 61%, 40% 61%, 8% 100%, 48% 67%, 34% 67%, 59% 42%, 45% 42%, 70% 16%, 55% 16%) !important;
-  filter:
-    drop-shadow(0 0 4px rgba(110,177,211,.75))
-    drop-shadow(0 0 10px rgba(110,177,211,.42)) !important;
-  animation: v20LightningPulse 4.4s ease-in-out infinite !important;
+  background: #53636a !important;
+  clip-path: polygon(57% 0, 48% 20%, 63% 20%, 39% 43%, 53% 43%, 24% 70%, 40% 70%, 10% 100%, 48% 73%, 34% 73%, 59% 46%, 45% 46%, 69% 18%, 55% 18%) !important;
+  filter: none !important;
+  animation: none !important;
 }
-html body section#style .style-stage::before { left: 1% !important; }
-html body section#style .style-stage::after {
-  right: 1% !important;
+html body #style .style-stage::before { left: 2% !important; }
+html body #style .style-stage::after {
+  right: 2% !important;
   transform: scaleX(-1) !important;
-  animation-delay: -2.1s !important;
 }
-html body section#style .style-person { z-index: 2 !important; }
-html body section#style .style-title,
-html body section#style .style-file { z-index: 4 !important; }
+html body #style .style-person { z-index: 2 !important; }
+html body #style .style-title,
+html body #style .style-file { z-index: 3 !important; }
+html body #style .style-highlights,
+html body #style .style-next { background: #fef8e8 !important; }
+@media (max-width: 680px) {
+  html body #style .style-stage::before,
+  html body #style .style-stage::after {
+    width: 18px !important;
+    opacity: .24 !important;
+  }
+}
 
-/* Первый экран: увеличиваем портрет и центрируем его относительно визуального блока. */
-html body #welcome .hero-visual.hero-visual-cover {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-}
+/* Welcome portrait: move the head upward to the visual center of its panel. */
 html body #welcome .hero-head-illustration {
+  left: 50% !important;
+  right: auto !important;
+  top: 46% !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
   width: 88% !important;
   height: 96% !important;
   max-width: 560px !important;
   max-height: 720px !important;
-  left: 50% !important;
-  right: auto !important;
-  bottom: 0 !important;
-  transform: translateX(-50%) !important;
   object-fit: contain !important;
-  object-position: center bottom !important;
+  object-position: center center !important;
 }
 html body #welcome .hero-head-backdrop {
   left: 50% !important;
-  transform: translate(-50%, -46%) !important;
-  width: 72% !important;
-}
-html body #welcome .hero-head-caption {
-  right: 5% !important;
-  bottom: 1% !important;
+  top: 48% !important;
+  transform: translate(-50%, -50%) !important;
 }
 @media (max-width: 680px) {
   html body #welcome .hero-head-illustration {
     width: 84% !important;
     height: 96% !important;
-    max-height: 360px !important;
-    left: 50% !important;
-    right: auto !important;
-    bottom: 0 !important;
-    transform: translateX(-50%) !important;
-  }
-  html body #welcome .hero-head-backdrop { width: 76% !important; }
-  html body #welcome .hero-head-caption { right: 4% !important; }
-  html body section#style .style-stage::before,
-  html body section#style .style-stage::after {
-    width: clamp(42px, 12vw, 76px) !important;
-    opacity: .38 !important;
+    top: 45% !important;
   }
 }
 
 
-
-/* v21 — final correction: identical first-screen paper color, tiny dark lightning,
-   and clear vertical separation between the hammer text and the hammer itself. */
-
-/* Welcome screen's exact solid base color. No gradients, no storm image. */
-html body section#welcome,
-html body section#hammer,
-html body section#style,
-html body section#style .style-stage,
-html body section#style .style-highlights,
-html body section#style .style-next {
-  background: #fef8e8 !important;
-  background-color: #fef8e8 !important;
-  background-image: none !important;
-}
-
-/* Mjölnir: keep lightning behind everything, much smaller, thinner and darker. */
-html body section#hammer .hammer-atmosphere {
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
+/* Preserve the original completed/replay state: the intro collapses only after
+   the message is revealed, and the smaller hammer scene remains intentional. */
+html body #hammer.personal-mode .hammer-intro {
+  height: 0 !important;
   overflow: hidden !important;
-  pointer-events: none !important;
-}
-html body section#hammer .hammer-lightning {
-  width: clamp(54px, 7vw, 92px) !important;
-  height: 74% !important;
-  top: 10% !important;
-  opacity: .26 !important;
-  filter: none !important;
-  animation: v21LightningFlicker 6.2s steps(1,end) infinite !important;
-}
-html body section#hammer .hammer-lightning .lightning-core {
-  stroke: #526a75 !important;
-  stroke-width: 1.15 !important;
-  opacity: .9 !important;
-  filter: none !important;
-}
-html body section#hammer .hammer-lightning .lightning-branch {
-  stroke: #607985 !important;
-  stroke-width: .75 !important;
-  opacity: .78 !important;
-  filter: none !important;
-}
-html body section#hammer .lightning-left { left: 1.5% !important; }
-html body section#hammer .lightning-right { right: 1.5% !important; }
-html body section#hammer .lightning-center { display: none !important; }
-@keyframes v21LightningFlicker {
-  0%, 68%, 72%, 100% { opacity: .16; }
-  69% { opacity: .34; }
-  70% { opacity: .19; }
-  71% { opacity: .29; }
-}
-
-/* Text must stay in its own flow above the arena, never over the hammer. */
-html body section#hammer .hammer-topline,
-html body section#hammer .hammer-intro,
-html body section#hammer .hammer-arena,
-html body section#hammer .hammer-instruction,
-html body section#hammer .hammer-skip-wrap,
-html body section#hammer .hammer-victory,
-html body section#hammer .hammer-letter {
-  position: relative !important;
-  z-index: 2 !important;
-  float: none !important;
-  clear: both !important;
-}
-html body section#hammer .hammer-intro {
-  margin: 0 auto 26px !important;
-  padding-bottom: 0 !important;
-}
-html body section#hammer .hammer-arena {
-  height: clamp(390px, 52vh, 500px) !important;
-  min-height: 390px !important;
-  margin: 24px auto 18px !important;
-  transform: none !important;
-  overflow: visible !important;
-}
-html body section#hammer .mjolnir-control {
-  transform: translateY(0) !important;
   margin: 0 !important;
+  transform: translateY(-18px) !important;
 }
-html body section#hammer .hammer-instruction {
-  margin-top: 14px !important;
+html body #hammer.personal-mode .hammer-arena {
+  height: 210px !important;
+  min-height: 210px !important;
+  transform: scale(.72) !important;
+  margin: 0 auto !important;
 }
-html body section#hammer .charge-caption {
-  position: relative !important;
-  z-index: 3 !important;
-}
-@media (max-width: 680px) {
-  html body section#hammer .hammer-intro {
-    margin-bottom: 18px !important;
-  }
-  html body section#hammer .hammer-arena {
-    height: 370px !important;
-    min-height: 370px !important;
-    margin: 18px auto 14px !important;
-  }
-  html body section#hammer .hammer-lightning {
-    width: 42px !important;
-    height: 66% !important;
-    top: 13% !important;
-    opacity: .20 !important;
-  }
-}
-
-/* Full-body Hasan scene: same paper color, only fine dark lightning at the edges. */
-html body section#style .style-stage {
-  position: relative !important;
-  isolation: isolate !important;
-  overflow: hidden !important;
-}
-html body section#style .style-stage::before,
-html body section#style .style-stage::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  z-index: 1 !important;
-  top: 5% !important;
-  width: 22px !important;
-  height: 78% !important;
-  opacity: .28 !important;
-  pointer-events: none !important;
-  background: #526a75 !important;
-  clip-path: polygon(58% 0, 52% 23%, 68% 23%, 43% 47%, 57% 47%, 24% 76%, 41% 76%, 8% 100%, 48% 73%, 34% 73%, 60% 45%, 46% 45%, 72% 20%, 56% 20%) !important;
-  filter: none !important;
-}
-html body section#style .style-stage::before { left: 2% !important; }
-html body section#style .style-stage::after {
-  right: 2% !important;
-  transform: scaleX(-1) !important;
-}
-html body section#style .style-person { z-index: 2 !important; }
-html body section#style .style-title,
-html body section#style .style-file { z-index: 3 !important; }
-@media (max-width: 680px) {
-  html body section#style .style-stage::before,
-  html body section#style .style-stage::after {
-    width: 14px !important;
-    opacity: .23 !important;
+html body #hammer.personal-mode .stone-platform { bottom: 0 !important; }
+@media (max-width: 520px) {
+  html body #hammer.personal-mode .hammer-arena {
+    height: 150px !important;
+    min-height: 150px !important;
+    transform: scale(.55) !important;
   }
 }
