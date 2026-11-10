@@ -6347,3 +6347,114 @@ html body section#style.style-scene .style-highlights h3 {
     opacity: .35 !important;
   }
 }
+
+
+
+/* v14 — визуально объединяем экран Мьёльнира и следующий экран с Хасаном.
+   Общий тёплый бежевый тон, мягкий переход, более тёмные приглушённые молнии. */
+html body section#hammer.hammer-scene {
+  background-color: #f3eadb !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      #f4ecdf 0%,
+      #f3eadb 48%,
+      #f3eadb 100%
+    ) !important;
+}
+html body section#style.style-scene,
+html body section#style.style-scene .style-stage,
+html body section#style.style-scene .style-highlights,
+html body section#style.style-scene .style-next {
+  background-color: #f3eadb !important;
+  background-image: none !important;
+}
+
+/* Убираем яркие белые пятна/ореолы, сохраняя лёгкую атмосферу. */
+html body section#hammer.hammer-scene::before,
+html body section#hammer.hammer-scene::after {
+  opacity: .035 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html body section#hammer.hammer-scene .hammer-atmosphere::before,
+html body section#hammer.hammer-scene .hammer-atmosphere::after {
+  opacity: .38 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(112,157,181,.58) 24%,
+    rgba(75,119,145,.78) 50%,
+    rgba(112,157,181,.58) 76%,
+    rgba(255,255,255,0) 100%
+  ) !important;
+  filter:
+    drop-shadow(0 0 4px rgba(91,133,157,.72))
+    drop-shadow(0 0 12px rgba(73,117,144,.48)) !important;
+}
+html body section#hammer.hammer-scene .hammer-lightning {
+  opacity: .48 !important;
+  filter:
+    drop-shadow(0 0 4px rgba(85,129,153,.7))
+    drop-shadow(0 0 12px rgba(67,111,139,.55))
+    drop-shadow(0 0 23px rgba(67,111,139,.32)) !important;
+}
+html body section#hammer.hammer-scene .hammer-lightning .lightning-core {
+  stroke: #668ba1 !important;
+  opacity: .92 !important;
+}
+html body section#hammer.hammer-scene .hammer-lightning .lightning-branch {
+  stroke: #789caf !important;
+  opacity: .85 !important;
+}
+
+/* Силовые вспышки во время взаимодействия тоже остаются приглушёнными. */
+html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-atmosphere::before,
+html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-atmosphere::after {
+  opacity: .62 !important;
+  filter:
+    drop-shadow(0 0 5px rgba(102,146,169,.82))
+    drop-shadow(0 0 15px rgba(70,119,148,.62)) !important;
+}
+html body section#hammer.hammer-scene:has(.hammer-arena.surging) .hammer-lightning {
+  opacity: .68 !important;
+  filter:
+    drop-shadow(0 0 5px rgba(102,146,169,.82))
+    drop-shadow(0 0 16px rgba(70,119,148,.62))
+    drop-shadow(0 0 28px rgba(70,119,148,.38)) !important;
+}
+
+/* На следующем экране молнии продолжают тот же визуальный мотив,
+   но не выглядят белыми/неоновыми и не спорят с фотографией. */
+html body section#style.style-scene .style-stage::before,
+html body section#style.style-scene .style-stage::after {
+  background: linear-gradient(
+    180deg,
+    rgba(119,157,177,.15) 0%,
+    rgba(87,133,158,.82) 35%,
+    rgba(104,149,172,.9) 54%,
+    rgba(87,133,158,.76) 78%,
+    rgba(119,157,177,.12) 100%
+  ) !important;
+  filter:
+    drop-shadow(0 0 4px rgba(88,130,153,.72))
+    drop-shadow(0 0 11px rgba(75,117,141,.48))
+    drop-shadow(0 0 20px rgba(75,117,141,.25)) !important;
+  opacity: .42 !important;
+}
+@keyframes hasanSceneLightning {
+  0%, 64%, 68%, 100% { opacity: .08; }
+  65% { opacity: .62; }
+  66% { opacity: .16; }
+  67% { opacity: .48; }
+}
+
+/* Нижний край первого экрана и верх второго имеют один тон — нет цветового обрыва. */
+html body section#hammer.hammer-scene {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+html body section#style.style-scene {
+  border-top: 0 !important;
+  box-shadow: none !important;
+}
