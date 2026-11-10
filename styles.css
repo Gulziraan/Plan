@@ -5383,3 +5383,178 @@ main > .scene:not(#welcome)::before {
 @media (prefers-reduced-motion: reduce) {
   .scene.active { animation: none !important; }
 }
+
+
+/* ==========================================================
+   V8.1 — REFERENCE MATCH CORRECTIONS
+   ========================================================== */
+:root{
+  --v8-cream:#fef8e8;
+  --v8-cream-light:#fffaf0;
+  --v8-wine:#651612;
+  --v8-wine-dark:#651612;
+  --v8-ink:#321d1b;
+  --v8-muted:#76615d;
+}
+html,body{
+  background-color:#fef8e8!important;
+  color:#321d1b!important;
+}
+body{
+  background:
+    linear-gradient(180deg,#fef8e8 0%,#fdf7e9 48%,#fef8e8 100%)!important;
+  background-attachment:scroll!important;
+}
+.topbar.cover-topbar{
+  background:#fef8e8!important;
+  box-shadow:none!important;
+  border:0!important;
+}
+.cover-topbar .logo,
+.cover-nav button,
+.cover-topbar .top-action{
+  color:#651612!important;
+}
+.cover-topbar .logo span{color:#651612!important}
+.cover-nav button{
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  font-size:12px!important;
+}
+.cover-topbar .top-action{
+  font-family:Georgia,"Times New Roman",serif!important;
+}
+main>#welcome{
+  background:#fef8e8!important;
+  color:#321d1b!important;
+}
+#welcome .hero-bg-number{color:rgba(101,22,18,.035)!important}
+#welcome .hero-copy,
+#welcome .hero-copy *{text-shadow:none!important}
+#welcome .hero-copy>.eyebrow{
+  color:#651612!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:700!important;
+}
+#welcome .hero-copy h1{
+  color:#651612!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:700!important;
+  font-size:clamp(58px,6.5vw,88px)!important;
+  line-height:.98!important;
+  letter-spacing:-.045em!important;
+}
+#welcome .hero-copy h1 em{
+  color:#651612!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-weight:700!important;
+}
+#welcome .hero-description,
+#welcome .hero-description p{
+  color:#4b302d!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(15px,1.1vw,17px)!important;
+  line-height:1.5!important;
+}
+#welcome .hero-description .hero-greeting-ending{
+  color:#651612!important;
+  font-weight:700!important;
+}
+#welcome .button-light{
+  background:#651612!important;
+  color:#fffaf0!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+}
+#welcome .hero-small,
+#welcome .hero-bottom{
+  color:#805d57!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+}
+#welcome .hero-bottom:before{display:none!important}
+#welcome:before{
+  display:none!important;
+}
+#welcome .hero-visual.hero-visual-cover{
+  min-height:0!important;
+  height:clamp(390px,54vw,590px)!important;
+  align-self:center!important;
+  overflow:visible!important;
+}
+#welcome .hero-head-backdrop{
+  width:66%!important;
+  background:radial-gradient(circle,rgba(221,232,230,.58),rgba(221,232,230,.15) 52%,transparent 72%)!important;
+}
+#welcome .hero-head-illustration{
+  width:72%!important;
+  height:82%!important;
+  max-height:520px!important;
+  max-width:420px!important;
+  right:7%!important;
+  bottom:4%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:none!important;
+}
+#welcome .hero-head-caption{
+  right:9%!important;
+  bottom:2%!important;
+  color:#651612!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+}
+#welcome .hero-head-caption span{color:#651612!important}
+
+/* The obsolete framed portrait is removed from markup; guard against old CSS residue. */
+#welcome .hero-photo,
+#welcome .hero-photo-legacy,
+#welcome .hero-visual>.photo-slot,
+#welcome .hero-visual>.hero-tag,
+#welcome .hero-visual>.hero-caption,
+#welcome .hero-visual>.hero-lightning{
+  display:none!important;
+}
+
+/* No divider rules between chapters or subsections. */
+main>.scene,
+main>.scene:before,
+main>.scene:after,
+.scene-nav,
+.section-top,
+.hammer-topline,
+#senses .sense-chapter,
+#senses .sense-chapter:before,
+#senses .sense-chapter:after{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+main>.scene:not(#welcome){
+  background:transparent!important;
+}
+@media(max-width:680px){
+  #welcome .hero-copy h1{
+    font-size:clamp(48px,12.5vw,64px)!important;
+  }
+  #welcome .hero-visual.hero-visual-cover{
+    height:clamp(240px,66vw,330px)!important;
+    min-height:0!important;
+    margin-top:2px!important;
+  }
+  #welcome .hero-head-illustration{
+    width:66%!important;
+    height:86%!important;
+    max-height:310px!important;
+    right:12%!important;
+    bottom:1%!important;
+  }
+  #welcome .hero-head-backdrop{width:60%!important}
+  #welcome .hero-head-caption{right:12%!important;bottom:0!important}
+}
+@media(max-width:380px){
+  #welcome .hero-head-illustration{
+    width:62%!important;
+    height:82%!important;
+    right:14%!important;
+  }
+}
