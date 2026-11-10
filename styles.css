@@ -6110,11 +6110,10 @@ main>.scene:not(#welcome){
 
 
 
-/* v23 — minimal visual-only correction based on the earlier project baseline.
-   Do not change .hammer-arena, .mjolnir-control, button geometry or JS mechanics. */
+/* v24 — minimal visual-only patch. All hammer layout and interaction geometry
+   stays exactly as in the original v10 stylesheet. */
 
-/* Exact same flat paper color as the first screen. */
-html body #welcome,
+/* Exact shared background color used by the welcome screen. */
 html body #hammer,
 html body #style,
 html body #style .style-stage,
@@ -6126,98 +6125,77 @@ html body #style .style-next {
 html body #hammer {
   background: #fef8e8 !important;
 }
-html body #hammer::before,
-html body #hammer::after {
-  background: none !important;
-  opacity: 0 !important;
-  box-shadow: none !important;
-}
-html body #style .style-stage {
-  background: #fef8e8 !important;
-}
-
-/* Mjölnir lightning: decorative SVGs only; keep their layer click-through.
-   No background flashing, no geometry changes to the interactive arena. */
-html body #hammer .hammer-atmosphere {
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-}
-html body #hammer .hammer-lightning {
-  display: block !important;
-  position: absolute !important;
-  top: 7% !important;
-  width: clamp(54px, 7vw, 86px) !important;
-  height: 78% !important;
-  opacity: .34 !important;
-  filter: none !important;
-  animation: none !important;
-  pointer-events: none !important;
-}
-html body #hammer .hammer-lightning .lightning-core {
-  stroke: #586d75 !important;
-  stroke-width: 1.25 !important;
-  opacity: .9 !important;
-  filter: none !important;
-  animation: none !important;
-}
-html body #hammer .hammer-lightning .lightning-branch {
-  stroke: #687d84 !important;
-  stroke-width: .8 !important;
-  opacity: .78 !important;
-  filter: none !important;
-  animation: none !important;
-}
-html body #hammer .lightning-left { left: 1% !important; }
-html body #hammer .lightning-right { right: 1% !important; }
-html body #hammer .lightning-center { display: none !important; }
-
-/* Next screen: matching small, thin dark lightning at the outer edges only. */
-html body #style .style-stage {
-  position: relative !important;
-  isolation: isolate !important;
-}
-html body #style .style-stage::before,
-html body #style .style-stage::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  z-index: 1 !important;
-  top: 8% !important;
-  width: 17px !important;
-  height: 62% !important;
-  pointer-events: none !important;
-  opacity: .32 !important;
-  background: #586d75 !important;
-  filter: none !important;
-  animation: none !important;
-  clip-path: polygon(58% 0, 50% 22%, 66% 22%, 42% 44%, 56% 44%, 26% 70%, 42% 70%, 10% 100%, 49% 73%, 35% 73%, 60% 46%, 46% 46%, 71% 20%, 56% 20%) !important;
-}
-html body #style .style-stage::before { left: 2% !important; }
-html body #style .style-stage::after {
-  right: 2% !important;
-  transform: scaleX(-1) !important;
-}
-html body #style .style-person { z-index: 2 !important; }
-html body #style .style-title,
-html body #style .style-file { z-index: 3 !important; }
+html body #style .style-stage,
 html body #style .style-highlights,
 html body #style .style-next {
   background: #fef8e8 !important;
 }
 
-/* First-screen portrait: center it in its visual panel and lift it slightly.
-   Preserve the existing mobile sizing and all other hero layout. */
+/* Decorative lightning only. Keep the original hammer arena, button, SVG size,
+   pointer listeners, positioning and all text spacing untouched. */
+html body #hammer .hammer-atmosphere {
+  pointer-events: none !important;
+}
+html body #hammer .hammer-lightning {
+  pointer-events: none !important;
+  opacity: .26 !important;
+  filter: none !important;
+}
+html body #hammer .hammer-lightning .lightning-core {
+  stroke: #526873 !important;
+  stroke-width: 1.35 !important;
+  opacity: .88 !important;
+  filter: none !important;
+}
+html body #hammer .hammer-lightning .lightning-branch {
+  stroke: #607984 !important;
+  stroke-width: .85 !important;
+  opacity: .78 !important;
+  filter: none !important;
+}
+html body #hammer .lightning-center {
+  display: none !important;
+}
+
+/* The following screen gets two small, static dark lightning marks at the
+   outer edges. They do not cover the portrait, copy or interactive controls. */
+html body #style .style-stage {
+  position: relative;
+  isolation: isolate;
+}
+html body #style .style-stage::before,
+html body #style .style-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 9%;
+  width: 15px;
+  height: 55%;
+  pointer-events: none;
+  opacity: .28;
+  background: #526873;
+  clip-path: polygon(58% 0, 50% 22%, 66% 22%, 42% 44%, 56% 44%, 26% 70%, 42% 70%, 10% 100%, 49% 73%, 35% 73%, 60% 46%, 46% 46%, 71% 20%, 56% 20%);
+}
+html body #style .style-stage::before { left: 2%; }
+html body #style .style-stage::after {
+  right: 2%;
+  transform: scaleX(-1);
+}
+html body #style .style-person,
+html body #style .style-title,
+html body #style .style-file {
+  position: relative;
+  z-index: 1;
+}
+
+/* First screen: move only the head illustration slightly upward and center it;
+   do not alter its width/height or the visual panel dimensions. */
 html body #welcome .hero-head-illustration {
   left: 50% !important;
   right: auto !important;
   bottom: 7% !important;
   top: auto !important;
   transform: translateX(-50%) !important;
-  object-position: center bottom !important;
 }
 @media (max-width: 680px) {
   html body #welcome .hero-head-illustration {
