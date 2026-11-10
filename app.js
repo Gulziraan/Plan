@@ -378,8 +378,8 @@
 
       if (s.kind === "photos") {
         const photos = [
-          { src: "assets/F1.PNG", title: s.memories[0]?.title || "01", cls: "is-featured" },
-          { src: "assets/F2.PNG", title: s.memories[1]?.title || "02", cls: "" },
+          { src: "assets/F2.PNG", title: s.memories[0]?.title || "01", cls: "is-featured" },
+          { src: "assets/F1.PNG", title: s.memories[1]?.title || "02", cls: "" },
           { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
         ];
         content = `<div class="sight-editorial-gallery">${photos.map(photo => `
