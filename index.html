@@ -14,9 +14,14 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <a href="#" class="logo" data-home>Х<span>.</span></a>
-    <div class="topbar-caption">ОДНА ИСТОРИЯ <i></i> ДЛЯ ХАСАНА</div>
+  <header class="topbar cover-topbar">
+    <a href="#" class="logo" data-home aria-label="На главную">Х<span>.</span></a>
+    <nav class="cover-nav" aria-label="Навигация по истории">
+      <button type="button" data-next="profile">О ХАСАНЕ</button>
+      <button type="button" data-next="admire">ЕГО КАЧЕСТВА</button>
+      <button type="button" data-next="senses">ПЯТЬ ЧУВСТВ</button>
+      <button type="button" data-next="letter">ПИСЬМО</button>
+    </nav>
     <button class="top-action" id="restartTop">НАЧАТЬ СНАЧАЛА ↗</button>
   </header>
 
@@ -39,13 +44,13 @@
           </button>
           <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ.</p>
         </div>
-        <div class="hero-visual">
-          <div class="hero-photo photo-slot" data-photo="hero">
+        <div class="hero-visual hero-visual-cover">
+          <div class="hero-photo photo-slot hero-photo-legacy" data-photo="hero" aria-hidden="true">
             <div class="photo-placeholder"><b>Х.</b><span>ЗДЕСЬ БУДЕТ ТВОЁ ФОТО</span></div>
           </div>
-          <div class="hero-tag">ГЛАВНЫЙ ГЕРОЙ<br><strong>ОДИН ТАКОЙ</strong></div>
-          <div class="hero-lightning">ϟ</div>
-          <div class="hero-caption">ХАСАН · УРОВЕНЬ 24</div>
+          <div class="hero-head-backdrop" aria-hidden="true"></div>
+          <img class="hero-head-illustration" src="assets/hasan-birthday-head.png" alt="Иллюстрированный портрет Хасана в праздничном колпачке">
+          <div class="hero-head-caption">ХАСАН <span>·</span> 24</div>
         </div>
       </div>
       <div class="hero-bottom"><span>ГЛАВА 24</span><span>ОДИН ЧЕЛОВЕК. ТЫСЯЧА ПРИЧИН.</span><span>♥</span></div>
