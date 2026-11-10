@@ -5541,21 +5541,27 @@ main>.scene:not(#welcome){
     min-height:0!important;
     margin-top:2px!important;
   }
-  #welcome .hero-head-illustration{
-    width:66%!important;
-    height:86%!important;
-    max-height:310px!important;
-    right:12%!important;
-    bottom:1%!important;
-  }
+  #welcome .hero-head-illustration {
+  width: 76% !important;
+  height: 90% !important;
+  max-height: 360px !important;
+  right: 12% !important;
+  bottom: 5% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
   #welcome .hero-head-backdrop{width:60%!important}
   #welcome .hero-head-caption{right:12%!important;bottom:0!important}
 }
-@media(max-width:380px){
-  #welcome .hero-head-illustration{
-    width:62%!important;
-    height:82%!important;
-    right:14%!important;
+@media(max-width:380px) {
+  #welcome .hero-head-illustration {
+    width: 72% !important;
+    height: 86% !important;
+    max-height: 330px !important;
+    right: 14% !important;
+    bottom: 5% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
   }
 }
 
