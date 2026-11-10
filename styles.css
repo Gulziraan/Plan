@@ -6458,3 +6458,69 @@ html body section#style.style-scene {
   border-top: 0 !important;
   box-shadow: none !important;
 }
+
+
+
+/* v15 — EXACTLY THE SAME BACKGROUND COLOR ON BOTH CONNECTED SCENES.
+   This block intentionally uses the same flat color and removes all gradients. */
+:root {
+  --hasan-connected-scene-bg: #f3eadb;
+}
+html body section#hammer,
+html body section#hammer.hammer-scene,
+html body section#style,
+html body section#style.style-scene,
+html body section#style .style-stage,
+html body section#style .style-highlights,
+html body section#style .style-next {
+  background: var(--hasan-connected-scene-bg) !important;
+  background-color: var(--hasan-connected-scene-bg) !important;
+  background-image: none !important;
+}
+html body section#hammer::before,
+html body section#hammer::after,
+html body section#style::before,
+html body section#style::after {
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+/* Keep the lightning visible, but subdued; it must not tint the background. */
+html body section#hammer .hammer-atmosphere {
+  background: transparent !important;
+}
+html body section#hammer .hammer-atmosphere::before,
+html body section#hammer .hammer-atmosphere::after {
+  opacity: .34 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(101,139,160,.66) 25%,
+    rgba(73,111,135,.84) 50%,
+    rgba(101,139,160,.62) 75%,
+    rgba(255,255,255,0) 100%
+  ) !important;
+  filter:
+    drop-shadow(0 0 4px rgba(82,120,143,.62))
+    drop-shadow(0 0 11px rgba(68,105,128,.42)) !important;
+}
+html body section#hammer .hammer-lightning {
+  opacity: .42 !important;
+  filter:
+    drop-shadow(0 0 4px rgba(82,120,143,.65))
+    drop-shadow(0 0 11px rgba(68,105,128,.45))
+    drop-shadow(0 0 20px rgba(68,105,128,.25)) !important;
+}
+html body section#hammer .hammer-lightning .lightning-core {
+  stroke: #66899e !important;
+}
+html body section#hammer .hammer-lightning .lightning-branch {
+  stroke: #7899aa !important;
+}
+html body section#style .style-stage::before,
+html body section#style .style-stage::after {
+  opacity: .38 !important;
+  filter:
+    drop-shadow(0 0 4px rgba(82,120,143,.62))
+    drop-shadow(0 0 11px rgba(68,105,128,.4)) !important;
+}
