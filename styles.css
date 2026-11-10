@@ -6524,3 +6524,94 @@ html body section#style .style-stage::after {
     drop-shadow(0 0 4px rgba(82,120,143,.62))
     drop-shadow(0 0 11px rgba(68,105,128,.4)) !important;
 }
+
+
+
+/* v16 — оттенок первых экранов + более тонкие и многочисленные молнии */
+:root { --hasan-connected-scene-bg: #f8f4ec; }
+
+html body section#hammer,
+html body section#hammer.hammer-scene,
+html body section#style,
+html body section#style.style-scene,
+html body section#style .style-stage,
+html body section#style .style-highlights,
+html body section#style .style-next {
+  background: #f8f4ec !important;
+  background-color: #f8f4ec !important;
+  background-image: none !important;
+}
+
+/* Мьёльнир: тонкие линии вместо широких ярких вспышек. */
+html body section#hammer .hammer-atmosphere::before,
+html body section#hammer .hammer-atmosphere::after {
+  width: clamp(55px, 9vw, 115px) !important;
+  opacity: .30 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(93,130,151,.62) 28%,
+    rgba(73,111,133,.78) 52%,
+    rgba(93,130,151,.56) 76%,
+    rgba(255,255,255,0) 100%
+  ) !important;
+  clip-path: polygon(54% 0, 48% 20%, 61% 20%, 39% 44%, 52% 44%, 24% 72%, 39% 72%, 12% 100%, 47% 69%, 34% 69%, 58% 43%, 45% 43%, 67% 18%, 54% 18%) !important;
+}
+html body section#hammer .hammer-lightning {
+  opacity: .38 !important;
+  filter:
+    drop-shadow(0 0 3px rgba(82,120,143,.62))
+    drop-shadow(0 0 8px rgba(68,105,128,.38)) !important;
+}
+html body section#hammer .hammer-lightning .lightning-core {
+  stroke: #66899e !important;
+  stroke-width: 2.1 !important;
+  opacity: .95 !important;
+}
+html body section#hammer .hammer-lightning .lightning-branch {
+  stroke: #7899aa !important;
+  stroke-width: 1.25 !important;
+  opacity: .82 !important;
+}
+
+/* Следующий экран: такие же тонкие молнии, четыре дополнительных ответвления
+   формируются узкими боковыми силуэтами, не перекрывая фото и подписи. */
+html body section#style .style-stage::before,
+html body section#style .style-stage::after {
+  width: clamp(48px, 7vw, 88px) !important;
+  opacity: .38 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(119,157,177,.12) 0%,
+    rgba(87,133,158,.78) 35%,
+    rgba(104,149,172,.86) 54%,
+    rgba(87,133,158,.72) 78%,
+    rgba(119,157,177,.10) 100%
+  ) !important;
+  clip-path: polygon(57% 0, 49% 21%, 64% 21%, 40% 46%, 54% 46%, 23% 73%, 40% 73%, 9% 100%, 48% 70%, 34% 70%, 59% 45%, 45% 45%, 69% 19%, 55% 19%) !important;
+  filter:
+    drop-shadow(0 0 3px rgba(82,120,143,.62))
+    drop-shadow(0 0 8px rgba(68,105,128,.38)) !important;
+}
+/* Add two fine lightning branches on each side of Hasan, using the stage's
+   existing stacking context so the figure and file labels stay in front. */
+html body section#style .style-person::before,
+html body section#style .style-person::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  top: 5% !important;
+  width: 32px !important;
+  height: 78% !important;
+  pointer-events: none !important;
+  opacity: .34 !important;
+  background: linear-gradient(180deg, transparent, #66899e 32%, #7899aa 58%, transparent) !important;
+  clip-path: polygon(58% 0, 47% 24%, 62% 24%, 38% 48%, 53% 48%, 18% 76%, 36% 76%, 8% 100%, 49% 72%, 34% 72%, 59% 47%, 45% 47%, 69% 22%, 55% 22%) !important;
+  filter: drop-shadow(0 0 4px rgba(68,105,128,.45)) !important;
+}
+html body section#style .style-person::before { left: -18% !important; }
+html body section#style .style-person::after {
+  right: -18% !important;
+  transform: scaleX(-1) !important;
+}
