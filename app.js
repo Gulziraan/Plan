@@ -129,7 +129,7 @@
   }
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "hammer", "admire", "transition", "senses", "letter"];
+  const scenes = ["welcome", "profile", "hammer", "style", "admire", "transition", "senses", "letter"];
 
   function persistState() {
     try {

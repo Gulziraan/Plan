@@ -57,8 +57,9 @@
     <section class="scene" id="profile">
       <div class="section-top"><span>ЧАСТЬ I / ЛЕГЕНДА</span><span>01 — 05</span></div>
       <div class="profile-hero">
-        <div class="profile-photo photo-slot" data-photo="portrait">
-          <div class="photo-placeholder"><b>24</b><span>ДОБАВЬ ПОРТРЕТ ХАСАНА</span></div>
+        <div class="profile-photo portrait-frame" aria-label="Портрет Хасана в декоративной рамке">
+          <img class="profile-reference-image" src="assets/m1.PNG" alt="Иллюстрация Хасана ко дню рождения">
+          <img class="profile-frame-art" src="assets/ornate-gold-frame.png" alt="" aria-hidden="true">
         </div>
         <div class="profile-panel">
           <p class="eyebrow">МОЙ СУПЕРГЕРОЙ · ОБНОВЛЕНО СЕГОДНЯ</p>
@@ -163,7 +164,7 @@
         <span>Нажми и удерживай молот.<br><small>Или коснись его три раза.</small></span>
       </div>
       <div class="hammer-skip-wrap">
-        <button class="hammer-skip" type="button" data-next="admire" aria-label="Пропустить испытание и перейти к следующей главе">
+        <button class="hammer-skip" type="button" data-next="style" aria-label="Пропустить испытание и перейти к следующей главе">
           ПРОПУСТИТЬ ИСПЫТАНИЕ <span aria-hidden="true">↗</span>
         </button>
       </div>
@@ -186,9 +187,29 @@
         </div>
         <p class="hammer-final-line">Мой самый достойный🏋🏽</p>
         <div class="hammer-letter-actions">
-          <button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
+          <button class="text-link" data-next="style">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
           <button class="hammer-replay" id="replayHammer">ПОВТОРИТЬ СЦЕНУ ↻</button>
         </div>
+      </div>
+    </section>
+
+    <!-- MY CONTENT STYLE / НОВЫЙ ЭКРАН ПОСЛЕ МЬЁЛЬНИРА -->
+    <section class="scene style-scene" id="style" aria-label="Мой герой">
+      <div class="style-stage">
+        <h2 class="style-title">MY CONTENT STYLE</h2>
+        <div class="style-person">
+          <img src="assets/hasan-thor-cutout.png" alt="Хасан в образе Тора">
+        </div>
+        <div class="style-file style-file-one"><span class="file-fold"></span>ЛЮБИМЫЙ</div>
+        <div class="style-file style-file-two"><span class="file-fold"></span>СМЕШНОЙ</div>
+        <div class="style-file style-file-three"><span class="file-fold"></span>СИЛЬНЫЙ</div>
+        <div class="style-file style-file-four"><span class="file-fold"></span>ЗАБОТЛИВЫЙ</div>
+      </div>
+      <div class="style-highlights">
+        <h3>CREATOR<br>HIGHLIGHTS</h3>
+      </div>
+      <div class="scene-nav style-next">
+        <button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
       </div>
     </section>
 
