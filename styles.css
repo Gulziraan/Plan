@@ -6110,12 +6110,10 @@ main>.scene:not(#welcome){
 
 
 
-/* ==========================================================
-   v22 — clean, consolidated corrections for the three scenes
-   ========================================================== */
+/* v23 — minimal visual-only correction based on the earlier project baseline.
+   Do not change .hammer-arena, .mjolnir-control, button geometry or JS mechanics. */
 
-/* One exact paper tone across welcome, Mjölnir and the full-body scene.
-   Remove gradients/stripe images on these scene surfaces and their inner panels. */
+/* Exact same flat paper color as the first screen. */
 html body #welcome,
 html body #hammer,
 html body #style,
@@ -6125,202 +6123,78 @@ html body #style .style-next {
   background-color: #fef8e8 !important;
   background-image: none !important;
 }
-html body #welcome { background: #fef8e8 !important; }
-html body #hammer { background: #fef8e8 !important; }
-html body #style,
-html body #style .style-stage,
-html body #style .style-highlights,
-html body #style .style-next { background: #fef8e8 !important; }
+html body #hammer {
+  background: #fef8e8 !important;
+}
+html body #hammer::before,
+html body #hammer::after {
+  background: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+}
+html body #style .style-stage {
+  background: #fef8e8 !important;
+}
 
-/* Mjölnir SVG lightning: two small, thin, dark branches at the outer margins.
-   No atmospheric overlays, glow flashes or background-color animation. */
+/* Mjölnir lightning: decorative SVGs only; keep their layer click-through.
+   No background flashing, no geometry changes to the interactive arena. */
 html body #hammer .hammer-atmosphere {
   display: block !important;
   position: absolute !important;
   inset: 0 !important;
   z-index: 0 !important;
-  overflow: hidden !important;
   pointer-events: none !important;
-  background: transparent !important;
+  overflow: hidden !important;
 }
-html body #hammer .hammer-atmosphere::before,
-html body #hammer .hammer-atmosphere::after { display: none !important; }
 html body #hammer .hammer-lightning {
   display: block !important;
   position: absolute !important;
   top: 7% !important;
-  width: 68px !important;
-  height: 58% !important;
+  width: clamp(54px, 7vw, 86px) !important;
+  height: 78% !important;
   opacity: .34 !important;
-  overflow: visible !important;
   filter: none !important;
   animation: none !important;
+  pointer-events: none !important;
 }
-html body #hammer .lightning-left { left: 1.5% !important; }
-html body #hammer .lightning-right { right: 1.5% !important; }
-html body #hammer .lightning-center { display: none !important; }
 html body #hammer .hammer-lightning .lightning-core {
-  stroke: #53636a !important;
-  stroke-width: 1.05 !important;
+  stroke: #586d75 !important;
+  stroke-width: 1.25 !important;
   opacity: .9 !important;
   filter: none !important;
   animation: none !important;
 }
 html body #hammer .hammer-lightning .lightning-branch {
-  stroke: #64747a !important;
-  stroke-width: .7 !important;
-  opacity: .8 !important;
+  stroke: #687d84 !important;
+  stroke-width: .8 !important;
+  opacity: .78 !important;
   filter: none !important;
+  animation: none !important;
 }
+html body #hammer .lightning-left { left: 1% !important; }
+html body #hammer .lightning-right { right: 1% !important; }
+html body #hammer .lightning-center { display: none !important; }
 
-/* Hammer layout: title/copy, hammer, instruction are separate flow rows.
-   Reduce the hammer and reserve its own vertical area so nothing can collide. */
-html body #hammer .hammer-topline,
-html body #hammer .hammer-intro,
-html body #hammer .hammer-arena,
-html body #hammer .hammer-instruction,
-html body #hammer .hammer-skip-wrap,
-html body #hammer .hammer-victory,
-html body #hammer .hammer-letter {
-  position: relative !important;
-  z-index: 2 !important;
-}
-html body #hammer .hammer-intro {
-  height: auto !important;
-  overflow: visible !important;
-  margin: 22px auto 0 !important;
-  transform: none !important;
-  text-align: center !important;
-}
-html body #hammer .hammer-intro h2 {
-  max-width: 780px !important;
-  margin: 12px auto 12px !important;
-}
-html body #hammer .hammer-intro > p:last-child {
-  max-width: 620px !important;
-  margin: 0 auto !important;
-}
-html body #hammer .hammer-arena {
-  display: grid !important;
-  position: relative !important;
-  width: min(680px, 100%) !important;
-  height: 365px !important;
-  min-height: 365px !important;
-  margin: 8px auto 0 !important;
-  transform: none !important;
-  overflow: visible !important;
-}
-html body #hammer .mjolnir-control {
-  width: clamp(145px, 20vw, 205px) !important;
-  height: clamp(220px, 32vh, 300px) !important;
-  transform: translateY(12px) rotate(-3deg) !important;
-  margin: 0 !important;
-}
-html body #hammer .hammer-arena.surging .mjolnir-control {
-  transform: translateY(4px) rotate(0) !important;
-}
-html body #hammer .stone-platform {
-  width: min(520px, 86%) !important;
-  height: 105px !important;
-  bottom: 12px !important;
-}
-html body #hammer .hammer-aura {
-  width: 220px !important;
-  height: 220px !important;
-}
-html body #hammer .charge-caption {
-  bottom: -18px !important;
-  z-index: 3 !important;
-  font-size: 8px !important;
-}
-html body #hammer .hammer-instruction {
-  display: flex !important;
-  position: relative !important;
-  z-index: 3 !important;
-  margin: 12px auto 0 !important;
-  padding: 0 14px !important;
-  max-width: 540px !important;
-  text-align: center !important;
-  justify-content: center !important;
-}
-html body #hammer .hammer-skip-wrap { margin: 12px auto 0 !important; }
-html body #hammer .hammer-victory,
-html body #hammer .hammer-letter {
-  max-width: 850px !important;
-  margin: 24px auto 0 !important;
-}
-@media (max-width: 800px) {
-  html body #hammer .hammer-arena {
-    height: 330px !important;
-    min-height: 330px !important;
-  }
-  html body #hammer .mjolnir-control {
-    width: 158px !important;
-    height: 238px !important;
-    transform: translateY(10px) rotate(-3deg) !important;
-  }
-}
-@media (max-width: 520px) {
-  html body #hammer .hammer-intro { margin-top: 16px !important; }
-  html body #hammer .hammer-intro h2 {
-    font-size: clamp(28px, 7.4vw, 38px) !important;
-    line-height: 1.08 !important;
-  }
-  html body #hammer .hammer-intro > p:last-child {
-    font-size: 16px !important;
-    line-height: 1.35 !important;
-    padding: 0 8px !important;
-  }
-  html body #hammer .hammer-arena {
-    height: 300px !important;
-    min-height: 300px !important;
-    margin-top: 4px !important;
-  }
-  html body #hammer .mjolnir-control {
-    width: 142px !important;
-    height: 214px !important;
-    transform: translateY(7px) rotate(-3deg) !important;
-  }
-  html body #hammer .stone-platform {
-    height: 82px !important;
-    bottom: 10px !important;
-  }
-  html body #hammer .hammer-instruction {
-    margin-top: 10px !important;
-    font-size: 15px !important;
-    text-align: center !important;
-  }
-  html body #hammer .hammer-lightning {
-    width: 40px !important;
-    height: 48% !important;
-    top: 12% !important;
-    opacity: .25 !important;
-  }
-}
-
-/* Full-body Hasan scene: flat paper surface and small dark lightning at edges.
-   Keep lightning behind the portrait, paper labels and heading. */
+/* Next screen: matching small, thin dark lightning at the outer edges only. */
 html body #style .style-stage {
   position: relative !important;
   isolation: isolate !important;
-  overflow: hidden !important;
-  background: #fef8e8 !important;
 }
 html body #style .style-stage::before,
 html body #style .style-stage::after {
   content: "" !important;
   display: block !important;
   position: absolute !important;
-  z-index: 0 !important;
-  top: 7% !important;
-  width: 30px !important;
-  height: 68% !important;
-  opacity: .3 !important;
+  z-index: 1 !important;
+  top: 8% !important;
+  width: 17px !important;
+  height: 62% !important;
   pointer-events: none !important;
-  background: #53636a !important;
-  clip-path: polygon(57% 0, 48% 20%, 63% 20%, 39% 43%, 53% 43%, 24% 70%, 40% 70%, 10% 100%, 48% 73%, 34% 73%, 59% 46%, 45% 46%, 69% 18%, 55% 18%) !important;
+  opacity: .32 !important;
+  background: #586d75 !important;
   filter: none !important;
   animation: none !important;
+  clip-path: polygon(58% 0, 50% 22%, 66% 22%, 42% 44%, 56% 44%, 26% 70%, 42% 70%, 10% 100%, 49% 73%, 35% 73%, 60% 46%, 46% 46%, 71% 20%, 56% 20%) !important;
 }
 html body #style .style-stage::before { left: 2% !important; }
 html body #style .style-stage::after {
@@ -6331,62 +6205,26 @@ html body #style .style-person { z-index: 2 !important; }
 html body #style .style-title,
 html body #style .style-file { z-index: 3 !important; }
 html body #style .style-highlights,
-html body #style .style-next { background: #fef8e8 !important; }
-@media (max-width: 680px) {
-  html body #style .style-stage::before,
-  html body #style .style-stage::after {
-    width: 18px !important;
-    opacity: .24 !important;
-  }
+html body #style .style-next {
+  background: #fef8e8 !important;
 }
 
-/* Welcome portrait: move the head upward to the visual center of its panel. */
+/* First-screen portrait: center it in its visual panel and lift it slightly.
+   Preserve the existing mobile sizing and all other hero layout. */
 html body #welcome .hero-head-illustration {
   left: 50% !important;
   right: auto !important;
-  top: 46% !important;
-  bottom: auto !important;
-  transform: translate(-50%, -50%) !important;
-  width: 88% !important;
-  height: 96% !important;
-  max-width: 560px !important;
-  max-height: 720px !important;
-  object-fit: contain !important;
-  object-position: center center !important;
-}
-html body #welcome .hero-head-backdrop {
-  left: 50% !important;
-  top: 48% !important;
-  transform: translate(-50%, -50%) !important;
+  bottom: 7% !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
+  object-position: center bottom !important;
 }
 @media (max-width: 680px) {
   html body #welcome .hero-head-illustration {
-    width: 84% !important;
-    height: 96% !important;
-    top: 45% !important;
-  }
-}
-
-
-/* Preserve the original completed/replay state: the intro collapses only after
-   the message is revealed, and the smaller hammer scene remains intentional. */
-html body #hammer.personal-mode .hammer-intro {
-  height: 0 !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  transform: translateY(-18px) !important;
-}
-html body #hammer.personal-mode .hammer-arena {
-  height: 210px !important;
-  min-height: 210px !important;
-  transform: scale(.72) !important;
-  margin: 0 auto !important;
-}
-html body #hammer.personal-mode .stone-platform { bottom: 0 !important; }
-@media (max-width: 520px) {
-  html body #hammer.personal-mode .hammer-arena {
-    height: 150px !important;
-    min-height: 150px !important;
-    transform: scale(.55) !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 5% !important;
+    top: auto !important;
+    transform: translateX(-50%) !important;
   }
 }
