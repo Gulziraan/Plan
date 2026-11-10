@@ -6274,3 +6274,76 @@ section#hammer.hammer-scene{
 @keyframes styleLightningFlash{0%,67%,70%,100%{opacity:.12}68%{opacity:.85}69%{opacity:.18}69.5%{opacity:.72}}
 @media(max-width:760px){#style .style-stage::before,#style .style-stage::after{width:clamp(68px,19vw,105px)!important;opacity:.42!important}#style .style-stage::before{left:1%!important}#style .style-stage::after{right:1%!important}}
 @media(prefers-reduced-motion:reduce){#style .style-stage::before,#style .style-stage::after{animation:none!important;opacity:.35!important}}
+
+
+
+/* v13 — финальное переопределение именно экрана с Хасаном во весь рост.
+   Размещено в самом конце файла, чтобы перебить в том числе мобильные media rules. */
+html body section#style.style-scene,
+html body section#style.style-scene .style-stage,
+html body section#style.style-scene .style-highlights,
+html body section#style.style-scene .style-next {
+  background-color: #f3eadb !important;
+  background-image: none !important;
+}
+html body section#style.style-scene .style-stage {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+}
+html body section#style.style-scene .style-stage::before,
+html body section#style.style-scene .style-stage::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 1 !important;
+  top: 4% !important;
+  width: clamp(90px, 14vw, 175px) !important;
+  height: 88% !important;
+  opacity: .55 !important;
+  pointer-events: none !important;
+  background: linear-gradient(180deg, #fff 0%, #9ed8ff 35%, #fff 52%, #8bc8f4 100%) !important;
+  clip-path: polygon(57% 0, 42% 24%, 60% 24%, 27% 57%, 48% 57%, 12% 100%, 72% 53%, 51% 53%, 86% 19%, 64% 19%, 78% 0) !important;
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px rgba(86,177,255,.95)) drop-shadow(0 0 25px rgba(86,177,255,.7)) !important;
+  animation: hasanSceneLightning 3.6s steps(1,end) infinite !important;
+}
+html body section#style.style-scene .style-stage::before { left: 4% !important; }
+html body section#style.style-scene .style-stage::after {
+  right: 4% !important;
+  transform: scaleX(-1) !important;
+  animation-delay: -1.8s !important;
+}
+html body section#style.style-scene .style-person { z-index: 2 !important; }
+html body section#style.style-scene .style-title,
+html body section#style.style-scene .style-file { z-index: 3 !important; }
+html body section#style.style-scene .style-highlights h3 {
+  background: #f3eadb !important;
+}
+@keyframes hasanSceneLightning {
+  0%, 64%, 68%, 100% { opacity: .08; }
+  65% { opacity: .85; }
+  66% { opacity: .2; }
+  67% { opacity: .7; }
+}
+@media (max-width: 760px) {
+  html body section#style.style-scene .style-stage,
+  html body section#style.style-scene .style-highlights,
+  html body section#style.style-scene .style-next {
+    background-color: #f3eadb !important;
+    background-image: none !important;
+  }
+  html body section#style.style-scene .style-stage::before,
+  html body section#style.style-scene .style-stage::after {
+    width: clamp(58px, 16vw, 95px) !important;
+    opacity: .45 !important;
+  }
+  html body section#style.style-scene .style-stage::before { left: 0 !important; }
+  html body section#style.style-scene .style-stage::after { right: 0 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body section#style.style-scene .style-stage::before,
+  html body section#style.style-scene .style-stage::after {
+    animation: none !important;
+    opacity: .35 !important;
+  }
+}
