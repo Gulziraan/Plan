@@ -57,9 +57,8 @@
     <section class="scene" id="profile">
       <div class="section-top"><span>ЧАСТЬ I / ЛЕГЕНДА</span><span>01 — 05</span></div>
       <div class="profile-hero">
-        <div class="profile-photo portrait-frame" aria-label="Портрет Хасана в декоративной рамке">
+        <div class="profile-photo portrait-card" aria-label="Портрет Хасана">
           <img class="profile-reference-image" src="assets/m1.PNG" alt="Иллюстрация Хасана ко дню рождения">
-          <img class="profile-frame-art" src="assets/ornate-gold-frame.png" alt="" aria-hidden="true">
         </div>
         <div class="profile-panel">
           <p class="eyebrow">МОЙ СУПЕРГЕРОЙ · ОБНОВЛЕНО СЕГОДНЯ</p>
@@ -91,9 +90,19 @@
     <!-- МЬЁЛЬНИР -->
     <section class="scene hammer-scene" id="hammer" aria-labelledby="hammerTitle">
       <div class="hammer-atmosphere" aria-hidden="true">
-        <span class="storm-flash flash-one"></span>
-        <span class="storm-flash flash-two"></span>
-        <span class="distant-ridge"></span>
+        <svg class="hammer-lightning lightning-left" viewBox="0 0 360 760" preserveAspectRatio="none">
+          <path class="lightning-core" d="M244 -30 L205 76 L235 102 L168 214 L207 230 L106 382 L151 393 L52 548 L93 558 L24 790"/>
+          <path class="lightning-branch" d="M168 214 L103 252 L121 276 L58 342"/>
+          <path class="lightning-branch" d="M106 382 L42 408 L66 438 L10 480"/>
+        </svg>
+        <svg class="hammer-lightning lightning-right" viewBox="0 0 360 760" preserveAspectRatio="none">
+          <path class="lightning-core" d="M116 -25 L158 72 L129 96 L197 207 L158 226 L258 374 L216 389 L310 538 L270 552 L340 790"/>
+          <path class="lightning-branch" d="M197 207 L264 245 L244 270 L302 335"/>
+          <path class="lightning-branch" d="M258 374 L324 405 L300 435 L354 481"/>
+        </svg>
+        <svg class="hammer-lightning lightning-center" viewBox="0 0 240 760" preserveAspectRatio="none">
+          <path class="lightning-core" d="M160 -20 L128 90 L155 111 L103 220 L132 239 L65 365 L99 380 L37 500 L72 515 L18 790"/>
+        </svg>
       </div>
       <div class="hammer-topline"><span>ОТДЕЛЬНАЯ ГЛАВА · МЬЁЛЬНИР</span><span>АСГАРД / 01</span></div>
       <div class="hammer-intro" id="hammerIntro">

@@ -5910,3 +5910,200 @@ main>.scene:not(#welcome){
   #style .style-person{width:72%!important;height:78%!important}
   #style .style-file{width:78px!important;font-size:9px!important}
 }
+
+
+/* ==========================================================
+   v10 — clean portrait card + warm Mjölnir storm
+   ========================================================== */
+
+/* Profile: keep the portrait as a real image card, remove the ornate overlay. */
+#profile .profile-photo.portrait-card{
+  position:relative!important;
+  display:block!important;
+  width:min(100%,330px)!important;
+  aspect-ratio:4/5!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  padding:10px!important;
+  overflow:hidden!important;
+  background:#fffdf7!important;
+  border:1px solid rgba(101,22,18,.14)!important;
+  border-radius:3px!important;
+  box-shadow:0 16px 38px rgba(72,42,30,.15), 0 3px 8px rgba(72,42,30,.08)!important;
+}
+#profile .profile-photo.portrait-card .profile-reference-image{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 24%!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#profile .profile-frame-art{display:none!important}
+@media(max-width:760px){
+  #profile .profile-photo.portrait-card{
+    width:min(68vw,270px)!important;
+    aspect-ratio:4/5!important;
+  }
+}
+@media(max-width:390px){
+  #profile .profile-photo.portrait-card{width:72vw!important}
+}
+
+/* Mjölnir: warm beige paper atmosphere, no blue striping.
+   Lightning is always present as subtle live electrical arcs, then brightens
+   in short irregular pulses while the hammer is being charged. */
+.hammer-scene,
+#hammer{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  color:#332b2a!important;
+  background:
+    radial-gradient(ellipse at 50% 42%,rgba(255,255,255,.92) 0%,rgba(255,248,233,.3) 44%,transparent 72%),
+    radial-gradient(ellipse at 6% 18%,rgba(219,231,232,.28),transparent 38%),
+    linear-gradient(180deg,#f8f0e2 0%,#f3eadb 54%,#eee3d3 100%)!important;
+}
+.hammer-scene:before,
+#hammer:before{
+  inset:0!important;
+  z-index:-2!important;
+  opacity:1!important;
+  background:
+    radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.42),transparent 58%),
+    linear-gradient(115deg,transparent 0 43%,rgba(130,157,166,.06) 50%,transparent 58%)!important;
+}
+.hammer-scene:after,
+#hammer:after{
+  opacity:.12!important;
+  z-index:-1!important;
+}
+.hammer-topline{
+  color:#70242a!important;
+  border-color:rgba(112,36,42,.2)!important;
+}
+.hammer-intro .eyebrow{color:#78242b!important}
+.hammer-intro h2,
+.hammer-victory h3{color:#4e2526!important}
+.hammer-intro h2 em,
+.hammer-victory h3 em{color:#8a3035!important}
+.hammer-intro>p:last-child{color:#514443!important}
+.hammer-skip{color:#78242b!important}
+.hammer-instruction{color:#6f292d!important}
+.hammer-instruction small{color:#80696a!important}
+.hammer-victory>p:not(.eyebrow){color:#594748!important}
+.hammer-letter{color:#3c3030!important}
+.hammer-letter-body p{color:#514443!important}
+.hammer-final-line{color:#78242b!important}
+
+/* Atmosphere layer is independent of the interactive hammer controls. */
+.hammer-atmosphere{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+.hammer-atmosphere .storm-flash,
+.hammer-atmosphere .distant-ridge{display:none!important}
+.hammer-lightning{
+  position:absolute!important;
+  top:-2%!important;
+  width:clamp(130px,28vw,390px)!important;
+  height:105%!important;
+  overflow:visible!important;
+  opacity:.36!important;
+  filter:drop-shadow(0 0 4px rgba(130,202,230,.7))
+         drop-shadow(0 0 13px rgba(119,194,228,.55))
+         drop-shadow(0 0 28px rgba(120,191,225,.28))!important;
+  animation:lightningBreath 4.8s ease-in-out infinite!important;
+}
+.hammer-lightning .lightning-core{
+  fill:none!important;
+  stroke:#e8fbff!important;
+  stroke-width:3.4!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  vector-effect:non-scaling-stroke!important;
+  filter:drop-shadow(0 0 4px #a6e8ff) drop-shadow(0 0 10px #80cfff)!important;
+  stroke-dasharray:820!important;
+  stroke-dashoffset:0!important;
+}
+.hammer-lightning .lightning-branch{
+  fill:none!important;
+  stroke:#d9f5ff!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  vector-effect:non-scaling-stroke!important;
+  filter:drop-shadow(0 0 5px #8bd9ff)!important;
+}
+.lightning-left{left:-1%!important;animation-delay:-1.4s!important}
+.lightning-right{right:-2%!important;animation-delay:-3.1s!important}
+.lightning-center{
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:clamp(70px,12vw,160px)!important;
+  opacity:.13!important;
+  animation-delay:-2.2s!important;
+}
+.lightning-left .lightning-core,
+.lightning-right .lightning-core{
+  animation:lightningStrike 5.4s steps(1,end) infinite!important;
+}
+.lightning-right .lightning-core{animation-delay:-2.7s!important}
+.lightning-center .lightning-core{animation:lightningStrike 6.7s steps(1,end) infinite!important;animation-delay:-4.1s!important}
+@keyframes lightningBreath{
+  0%,100%{opacity:.2}
+  9%{opacity:.48}
+  10%{opacity:.18}
+  42%{opacity:.3}
+  43%{opacity:.62}
+  45%{opacity:.2}
+  74%{opacity:.38}
+}
+@keyframes lightningStrike{
+  0%,88%,91%,100%{opacity:.42}
+  89%{opacity:1;filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 22px #8bdfff) drop-shadow(0 0 45px #6dc8ff)}
+  90%{opacity:.18}
+  90.5%{opacity:.92}
+}
+.hammer-intro,
+.hammer-arena,
+.hammer-instruction,
+.hammer-skip-wrap,
+.hammer-victory,
+.hammer-letter,
+.hammer-topline{
+  position:relative!important;
+  z-index:2!important;
+}
+.hammer-arena:before{
+  background:radial-gradient(ellipse,rgba(255,255,255,.78) 0%,rgba(222,208,190,.22) 42%,transparent 74%)!important;
+}
+.hammer-arena .hammer-aura{
+  filter:drop-shadow(0 0 22px rgba(132,207,238,.55))!important;
+}
+.hammer-scene:has(.hammer-arena.surging) .hammer-lightning{
+  opacity:.78!important;
+  filter:drop-shadow(0 0 8px rgba(173,232,255,.95))
+         drop-shadow(0 0 22px rgba(104,196,255,.9))
+         drop-shadow(0 0 48px rgba(104,196,255,.62))!important;
+}
+.hammer-scene:has(.hammer-arena.surging) .lightning-core{
+  animation-duration:1.1s!important;
+}
+@media(max-width:700px){
+  .hammer-lightning{width:clamp(105px,34vw,210px)!important;opacity:.28!important}
+  .lightning-center{width:75px!important;opacity:.1!important}
+  .hammer-scene:has(.hammer-arena.surging) .hammer-lightning{opacity:.62!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .hammer-lightning,
+  .hammer-lightning .lightning-core{
+    animation:none!important;
+    opacity:.28!important;
+  }
+}
