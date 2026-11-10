@@ -6615,3 +6615,87 @@ html body section#style .style-person::after {
   right: -18% !important;
   transform: scaleX(-1) !important;
 }
+
+
+/* v17 — same illustrated storm background on the Mjölnir and Hasan full-body scenes */
+html body section#hammer,
+html body section#style,
+html body section#style .style-stage,
+html body section#style .style-highlights,
+html body section#style .style-next {
+  background-color:#d8d0c5!important;
+  background-image:url("assets/hasan-storm-background.png")!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-attachment:scroll!important;
+}
+/* Lightning is part of the reference background; hide the older synthetic overlays. */
+html body section#hammer .hammer-atmosphere,
+html body section#hammer .hammer-lightning,
+html body section#style .style-stage::before,
+html body section#style .style-stage::after,
+html body section#style .style-person::before,
+html body section#style .style-person::after {display:none!important}
+html body section#style .style-stage,
+html body section#style .style-highlights,
+html body section#style .style-next {
+  background-color:transparent!important;
+  background-image:none!important;
+}
+@media(max-width:760px){
+  html body section#hammer,
+  html body section#style {
+    background-size:cover!important;
+    background-position:center center!important;
+  }
+}
+
+
+/* v18 — storm reference softened to match the site's warm editorial palette.
+   The image is only used on the Mjölnir + Hasan scenes; its edges fade into the
+   same ivory-beige base so the transition does not read as a separate poster. */
+html body section#hammer,
+html body section#style {
+  background-color: #f8f4ec !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(248,244,236,.22) 0%,
+      rgba(248,244,236,.08) 48%,
+      rgba(248,244,236,.32) 100%
+    ),
+    url("assets/hasan-storm-background.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+html body section#style .style-stage,
+html body section#style .style-highlights,
+html body section#style .style-next {
+  background: transparent !important;
+}
+/* Feather the upper/lower edges into the neighboring site's ivory sections. */
+html body section#hammer {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+}
+html body section#style {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
+}
+html body section#hammer .hammer-atmosphere,
+html body section#hammer .hammer-lightning,
+html body section#style .style-stage::before,
+html body section#style .style-stage::after,
+html body section#style .style-person::before,
+html body section#style .style-person::after {
+  display: none !important;
+}
+@media(max-width:760px) {
+  html body section#hammer,
+  html body section#style {
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+}
