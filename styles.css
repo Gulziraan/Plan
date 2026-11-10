@@ -6252,3 +6252,25 @@ section#hammer.hammer-scene{
   #hammer .hammer-atmosphere::after,
   #hammer .hammer-lightning{animation:none!important;opacity:.55!important}
 }
+
+
+/* Profile: keep the portrait as a real image card, remove the ornate overlay. */
+#profile .profile-photo.portrait-card{position:relative!important;display:block!important;width:min(100%,330px)!important;aspect-ratio:4/5!important;min-height:0!important;margin:0 auto!important;padding:10px!important;overflow:hidden!important;background:#fffdf7!important;border:1px solid rgba(101,22,18,.14)!important;border-radius:3px!important;box-shadow:0 16px 38px rgba(72,42,30,.15),0 3px 8px rgba(72,42,30,.08)!important}
+#profile .profile-photo.portrait-card .profile-reference-image{position:static!important;display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 24%!important;border:0!important;box-shadow:none!important}
+#profile .profile-frame-art{display:none!important}
+@media(max-width:760px){#profile .profile-photo.portrait-card{width:min(68vw,270px)!important;aspect-ratio:4/5!important}}
+@media(max-width:390px){#profile .profile-photo.portrait-card{width:72vw!important}}
+
+/* Экран после Мьёльнира: бежевый фон и молнии только за фигурой Хасана. */
+#style.style-scene{background:#f3eadb!important;color:#651612!important}
+#style .style-stage{background:#f3eadb!important;isolation:isolate!important}
+#style .style-stage::before,#style .style-stage::after{content:""!important;position:absolute!important;z-index:1!important;top:2%!important;width:clamp(105px,17vw,210px)!important;height:92%!important;pointer-events:none!important;opacity:.5!important;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(150,207,239,.9) 38%,rgba(255,255,255,.95) 70%,rgba(135,194,231,.85))!important;clip-path:polygon(54% 0,38% 27%,57% 27%,22% 61%,43% 61%,12% 100%,69% 56%,49% 56%,82% 23%,60% 23%,76% 0)!important;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 13px rgba(91,181,255,.95)) drop-shadow(0 0 28px rgba(91,181,255,.7))!important;animation:styleLightningFlash 3.8s steps(1,end) infinite!important}
+#style .style-stage::before{left:5%!important}
+#style .style-stage::after{right:5%!important;transform:scaleX(-1)!important;animation-delay:-1.9s!important}
+#style .style-person{z-index:2!important}
+#style .style-title,#style .style-file{z-index:4!important}
+#style .style-highlights,#style .style-next{background:#f3eadb!important}
+#style .style-highlights h3{background:rgba(243,234,219,.92)!important}
+@keyframes styleLightningFlash{0%,67%,70%,100%{opacity:.12}68%{opacity:.85}69%{opacity:.18}69.5%{opacity:.72}}
+@media(max-width:760px){#style .style-stage::before,#style .style-stage::after{width:clamp(68px,19vw,105px)!important;opacity:.42!important}#style .style-stage::before{left:1%!important}#style .style-stage::after{right:1%!important}}
+@media(prefers-reduced-motion:reduce){#style .style-stage::before,#style .style-stage::after{animation:none!important;opacity:.35!important}}
