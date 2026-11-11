@@ -6212,3 +6212,68 @@ html body #welcome .hero-head-illustration {
     transform: translateX(-50%) !important;
   }
 }
+
+
+/* ==========================================================
+   USER UPDATE — larger welcome portrait + frameless full profile image
+   ========================================================== */
+
+/* Welcome: make Hasan's head the main visual, like the supplied reference. */
+html body #welcome .hero-head-illustration {
+  width: min(112%, 760px) !important;
+  height: 112% !important;
+  max-width: none !important;
+  max-height: none !important;
+  left: auto !important;
+  right: -6% !important;
+  top: auto !important;
+  bottom: -4% !important;
+  transform: none !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+/* Profile: remove the white photo mount; show the original image edge-to-edge. */
+html body #profile .profile-photo.portrait-card {
+  width: min(100%, 360px) !important;
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+html body #profile .profile-photo.portrait-card .profile-reference-image {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 680px) {
+  html body #welcome .hero-head-illustration {
+    width: 104% !important;
+    height: 104% !important;
+    max-width: none !important;
+    max-height: none !important;
+    right: -3% !important;
+    bottom: -2% !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    object-position: center bottom !important;
+  }
+
+  html body #profile .profile-photo.portrait-card {
+    width: min(78vw, 360px) !important;
+  }
+}
