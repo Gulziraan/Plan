@@ -6669,3 +6669,55 @@ html body #hammer .hammer-victory .button {
     line-height: 1.58 !important;
   }
 }
+
+
+/* Welcome portrait: make Hasan's head substantially larger and center it
+   vertically in the visual area on desktop and mobile. */
+html body #welcome .hero-visual.hero-visual-cover {
+  position: relative !important;
+  overflow: visible !important;
+}
+html body #welcome .hero-head-illustration {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: 50% !important;
+  bottom: auto !important;
+  width: min(132%, 760px) !important;
+  height: 132% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+}
+@media (max-width: 760px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: clamp(300px, 78vw, 440px) !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  html body #welcome .hero-head-illustration {
+    left: 50% !important;
+    right: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    width: 145% !important;
+    height: 145% !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform: translate(-50%, -50%) !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}
+@media (max-width: 380px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: 330px !important;
+  }
+  html body #welcome .hero-head-illustration {
+    width: 150% !important;
+    height: 150% !important;
+  }
+}
