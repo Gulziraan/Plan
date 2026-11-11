@@ -6266,3 +6266,50 @@ html body #profile .profile-photo.portrait-card .profile-reference-image {
     width: 84vw !important;
   }
 }
+
+
+/* Final cleanup: the profile must contain ONLY the supplied PNG.
+   Remove every possible CSS frame/edge/decorative layer around it. */
+html body #profile .profile-hero .profile-photo,
+html body #profile .profile-hero .profile-photo.portrait-card {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+html body #profile .profile-hero .profile-photo::before,
+html body #profile .profile-hero .profile-photo::after,
+html body #profile .profile-hero .profile-photo.portrait-card::before,
+html body #profile .profile-hero .profile-photo.portrait-card::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+html body #profile .profile-hero .profile-photo .profile-reference-image,
+html body #profile .profile-hero .profile-photo.portrait-card .profile-reference-image {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  border-radius: 0 !important;
+}
