@@ -6214,66 +6214,55 @@ html body #welcome .hero-head-illustration {
 }
 
 
-/* ==========================================================
-   USER UPDATE — larger welcome portrait + frameless full profile image
-   ========================================================== */
-
-/* Welcome: make Hasan's head the main visual, like the supplied reference. */
-html body #welcome .hero-head-illustration {
-  width: min(112%, 760px) !important;
-  height: 112% !important;
-  max-width: none !important;
-  max-height: none !important;
-  left: auto !important;
-  right: -6% !important;
-  top: auto !important;
-  bottom: -4% !important;
-  transform: none !important;
-  object-fit: contain !important;
-  object-position: center bottom !important;
-}
-
-/* Profile: remove the white photo mount; show the original image edge-to-edge. */
+/* Profile portrait: show the complete transparent PNG without a paper/card
+   background, tilt, border or shadow. The gold frame is part of m1.PNG. */
 html body #profile .profile-photo.portrait-card {
-  width: min(100%, 360px) !important;
-  aspect-ratio: auto !important;
+  position: relative !important;
+  display: block !important;
+  width: min(100%, 420px) !important;
+  aspect-ratio: 1 / 1 !important;
   height: auto !important;
   min-height: 0 !important;
+  margin: 0 auto !important;
   padding: 0 !important;
   overflow: visible !important;
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  transform: none !important;
 }
-
+html body #profile .profile-photo.portrait-card::before,
+html body #profile .profile-photo.portrait-card::after {
+  content: none !important;
+  display: none !important;
+}
 html body #profile .profile-photo.portrait-card .profile-reference-image {
+  position: static !important;
   display: block !important;
   width: 100% !important;
-  height: auto !important;
-  aspect-ratio: 1 / 1 !important;
+  height: 100% !important;
   object-fit: contain !important;
-  object-position: center !important;
+  object-position: center center !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  background: transparent !important;
+  transform: none !important;
 }
-
-@media (max-width: 680px) {
-  html body #welcome .hero-head-illustration {
-    width: 104% !important;
-    height: 104% !important;
-    max-width: none !important;
-    max-height: none !important;
-    right: -3% !important;
-    bottom: -2% !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    object-position: center bottom !important;
-  }
-
+@media (max-width: 760px) {
   html body #profile .profile-photo.portrait-card {
-    width: min(78vw, 360px) !important;
+    width: min(82vw, 440px) !important;
+    aspect-ratio: 1 / 1 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 390px) {
+  html body #profile .profile-photo.portrait-card {
+    width: 84vw !important;
   }
 }
