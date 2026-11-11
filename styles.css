@@ -6578,3 +6578,94 @@ html body #profile .scene-nav .text-link span {
     font-size: 9px !important;
   }
 }
+
+
+/* ==========================================================
+   Final polish: seamless first/profile transition + Mjolnir
+   ========================================================== */
+
+/* Remove chapter labels around the welcome/profile transition. */
+html body #welcome .hero-bottom,
+html body #welcome .hero-head-caption,
+html body #profile > .section-top {
+  display: none !important;
+}
+
+/* No skip control: the Mjolnir challenge remains interactive and mandatory
+   through the existing hold/tap behavior. */
+html body #hammer .hammer-skip-wrap {
+  display: none !important;
+}
+
+/* A warm, readable reward state that belongs to the site's cream/burgundy
+   editorial visual system, rather than the old pale blue/pink panel. */
+html body #hammer .hammer-victory,
+html body #hammer .hammer-letter {
+  width: min(880px, 100%) !important;
+  max-width: 880px !important;
+  margin: clamp(20px, 3vw, 36px) auto 0 !important;
+  padding: clamp(24px, 5vw, 52px) clamp(20px, 5vw, 58px) !important;
+  color: #3f302d !important;
+  background: #fbf6e9 !important;
+  border: 1px solid rgba(101,22,18,.16) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 16px 44px rgba(35,24,22,.12) !important;
+  text-align: center !important;
+}
+html body #hammer .hammer-victory .eyebrow,
+html body #hammer .hammer-letter .eyebrow {
+  color: #8a6258 !important;
+  font: 700 10px/1.5 Georgia, "Times New Roman", serif !important;
+  letter-spacing: .18em !important;
+}
+html body #hammer .hammer-victory h3,
+html body #hammer .hammer-letter h3 {
+  color: #651612 !important;
+  font: 700 clamp(32px, 5.4vw, 58px)/1.04 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.02em !important;
+  margin: 12px 0 18px !important;
+}
+html body #hammer .hammer-victory h3 em,
+html body #hammer .hammer-letter h3 em {
+  color: #8b302b !important;
+  font-style: italic !important;
+}
+html body #hammer .hammer-victory > p:not(.eyebrow),
+html body #hammer .hammer-letter p,
+html body #hammer .hammer-letter-body p {
+  color: #51413c !important;
+  font: 400 clamp(16px, 1.8vw, 21px)/1.65 Georgia, "Times New Roman", serif !important;
+}
+html body #hammer .hammer-letter .hammer-letter-body {
+  max-width: 700px !important;
+  margin: 0 auto !important;
+}
+html body #hammer .hammer-letter .hammer-final-line {
+  color: #7b2926 !important;
+  font: italic clamp(20px, 2.4vw, 28px)/1.4 Georgia, "Times New Roman", serif !important;
+}
+html body #hammer #revealHammerLetter,
+html body #hammer .hammer-victory .button {
+  color: #fffaf0 !important;
+  background: #711f1c !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+@media (max-width: 700px) {
+  html body #hammer .hammer-victory,
+  html body #hammer .hammer-letter {
+    margin-top: 18px !important;
+    padding: 24px 18px !important;
+  }
+  html body #hammer .hammer-victory h3,
+  html body #hammer .hammer-letter h3 {
+    font-size: clamp(29px, 8vw, 40px) !important;
+  }
+  html body #hammer .hammer-victory > p:not(.eyebrow),
+  html body #hammer .hammer-letter p,
+  html body #hammer .hammer-letter-body p {
+    font-size: 16px !important;
+    line-height: 1.58 !important;
+  }
+}
