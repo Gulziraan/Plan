@@ -6721,3 +6721,82 @@ html body #welcome .hero-head-illustration {
     height: 150% !important;
   }
 }
+
+
+/* SAFE Mjölnir layout correction.
+   Intentionally does NOT change .mjolnir-control dimensions, transform,
+   .hammer-arena dimensions, or any JavaScript interaction behavior. */
+
+/* Decorative lightning must never intercept touch or mouse input. */
+html body #hammer .hammer-atmosphere,
+html body #hammer .hammer-atmosphere * {
+  pointer-events: none !important;
+}
+
+/* Keep the actual interactive button above all arena decoration.
+   Its original width, height and transform remain inherited from the base CSS. */
+html body #hammer #mjolnirControl,
+html body #hammer .mjolnir-control {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+  touch-action: none !important;
+  cursor: grab !important;
+}
+html body #hammer #mjolnirControl:active {
+  cursor: grabbing !important;
+}
+
+/* Move the status readout below the hammer/platform instead of through the handle. */
+html body #hammer .charge-meter {
+  top: auto !important;
+  bottom: -30px !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+}
+html body #hammer .charge-caption {
+  top: auto !important;
+  bottom: -54px !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+  color: #76565a !important;
+  letter-spacing: .14em !important;
+}
+
+/* Keep the instruction in its own clear row, after the status readout. */
+html body #hammer .hammer-instruction {
+  position: relative !important;
+  z-index: 6 !important;
+  margin: 68px auto 0 !important;
+  max-width: min(92%, 420px) !important;
+  padding: 10px 18px !important;
+  border: 1px solid rgba(101,22,18,.14) !important;
+  border-radius: 999px !important;
+  background: rgba(251,246,233,.96) !important;
+  box-shadow: 0 8px 24px rgba(70,42,35,.07) !important;
+  color: #70252a !important;
+  text-align: center !important;
+  pointer-events: none !important;
+}
+html body #hammer .hammer-instruction small {
+  color: #80696a !important;
+}
+html body #hammer .instruction-mark {
+  color: #b78d62 !important;
+}
+
+@media (max-width: 700px) {
+  html body #hammer .charge-meter {
+    bottom: -24px !important;
+  }
+  html body #hammer .charge-caption {
+    bottom: -46px !important;
+    font-size: 7px !important;
+  }
+  html body #hammer .hammer-instruction {
+    margin-top: 58px !important;
+    max-width: 94% !important;
+    padding: 9px 12px !important;
+    font-size: 14px !important;
+  }
+}
