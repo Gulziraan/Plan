@@ -7414,3 +7414,13 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
 #style .style-person img:not(.portrait-changing) {
   opacity: 1 !important;
 }
+
+
+/* Portrait must never remain dimmed after the image replacement finishes. */
+#style .style-person img.portrait-landed {
+  opacity: 1 !important;
+  filter: drop-shadow(0 7px 5px rgba(49,31,24,.18)) !important;
+}
+#style .style-person img:not(.portrait-changing) {
+  opacity: 1 !important;
+}

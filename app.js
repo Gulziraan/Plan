@@ -131,12 +131,18 @@
   // Испытание Мьёльнира начинается заново при каждой новой загрузке сайта.
   // Прогресс остальных загадок при этом сохраняется.
   riddleState.hammerDone = false;
+  // Write the reset immediately, so no old v2/legacy completion flag can
+  // make the next visit look completed. Other puzzle progress is preserved.
   try {
-    const saved = JSON.parse(localStorage.getItem(STATE_KEY) || "null");
-    if (saved && saved.version === 2 && saved.hammerDone === true) {
-      saved.hammerDone = false;
-      localStorage.setItem(STATE_KEY, JSON.stringify(saved));
-    }
+    localStorage.setItem(STATE_KEY, JSON.stringify({
+      version: 2,
+      solved: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)),
+      letters: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)).map(id => RIDDLE_LETTERS[id]),
+      sightFound: [1, 2, 3].filter(n => riddleState.sightFound.includes(n)),
+      sensesOpened: riddleState.sensesOpened === true,
+      unlocked: riddleState.unlocked === true,
+      hammerDone: false
+    }));
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
@@ -1025,8 +1031,15 @@
     const styleScene = $("#style");
     const stylePerson = $("#style .style-person");
     const styleImage = $("#style .style-person img");
+    const initialPortraitSrc = "assets/hasan-thor-before-hammer.png";
     const landedPortraitSrc = "assets/hasan-thor-cutout.png";
     const highlights = $("#creatorHighlights");
+    if (styleImage) {
+      styleImage.src = initialPortraitSrc;
+      styleImage.alt = "Хасан в образе Тора без Мьёльнира";
+      styleImage.classList.remove("portrait-changing", "portrait-landed");
+      stylePerson?.classList.remove("mjolnir-landed");
+    }
     const highlightsToggle = $("#creatorHighlightsToggle");
     const highlightsContent = $("#creatorHighlightsContent");
     const letter = $("#hammerLetter");
@@ -1243,7 +1256,7 @@
       if (caption) caption.textContent = "МЬЁЛЬНИР ПРИЗЕМЛИЛСЯ";
       if (stylePerson) {
         stylePerson.classList.add("mjolnir-landed");
-        if (styleImage && styleImage.getAttribute("src") !== landedPortraitSrc) {
+        if (styleImage) {
           styleImage.classList.remove("portrait-landed");
           styleImage.classList.add("portrait-changing");
           styleImage.alt = "Хасан в образе Тора с Мьёльниром";
@@ -1277,6 +1290,12 @@
       completed = true;
       if (saveProgress) persistHammerCompletion();
       if (instruction) instruction.hidden = true;
+      if (styleImage && styleImage.getAttribute("src") !== initialPortraitSrc) {
+        styleImage.src = initialPortraitSrc;
+        styleImage.alt = "Хасан в образе Тора без Мьёльнира";
+        styleImage.classList.remove("portrait-changing", "portrait-landed");
+      }
+      stylePerson?.classList.remove("mjolnir-landed");
       setCharge(100);
       control.classList.add("lifted");
       arena?.classList.add("released");
@@ -1316,6 +1335,12 @@
       await new Promise(resolve => setTimeout(resolve, reduced.matches ? 0 : 850));
       arena?.classList.remove("released", "surging");
       control.classList.remove("lifted");
+      if (styleImage) {
+        styleImage.src = initialPortraitSrc;
+        styleImage.alt = "Хасан в образе Тора без Мьёльнира";
+        styleImage.classList.remove("portrait-changing", "portrait-landed");
+      }
+      stylePerson?.classList.remove("mjolnir-landed");
       await beginFlight({ saveProgress: false });
     });
   })();
