@@ -7506,3 +7506,121 @@ html body #welcome .hero-head-illustration {
     max-height: 250px !important;
   }
 }
+
+
+/* ==========================================================
+   PROFILE FIX 2 — prevent portrait/details collision.
+   Keep the profile copy beside the portrait unchanged.
+   ========================================================== */
+@media (min-width: 681px) {
+  html body #profile .profile-hero {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
+    align-items: start !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  html body #profile .profile-photo {
+    position: relative !important;
+    height: clamp(520px, 42vw, 680px) !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    align-self: start !important;
+  }
+
+  html body #profile .profile-photo img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  html body #profile .profile-panel {
+    position: relative !important;
+    align-self: start !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+  }
+
+  /* Place the lower three information columns after the full portrait row. */
+  html body #profile .profile-details {
+    position: relative !important;
+    clear: both !important;
+    margin-top: clamp(100px, 11vw, 190px) !important;
+    padding-top: 0 !important;
+    z-index: 2 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  html body #profile .profile-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  html body #profile .profile-photo {
+    position: relative !important;
+    height: clamp(380px, 105vw, 560px) !important;
+    min-height: 0 !important;
+    width: min(94%, 520px) !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+
+  html body #profile .profile-photo img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  html body #profile .profile-panel {
+    position: relative !important;
+    width: 100% !important;
+    margin: 28px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  html body #profile .profile-details {
+    position: relative !important;
+    display: grid !important;
+    margin-top: 44px !important;
+    padding-top: 0 !important;
+    clear: both !important;
+    z-index: 2 !important;
+  }
+}
+
+/* Welcome portrait: 15% larger than the previous medium-size setting. */
+html body #welcome .hero-head-illustration {
+  width: 94.3% !important;
+  height: 94.3% !important;
+  max-width: 575px !important;
+  max-height: 575px !important;
+}
+
+@media (max-width: 680px) {
+  html body #welcome .hero-head-illustration {
+    width: 94.3% !important;
+    height: 94.3% !important;
+    max-width: 380px !important;
+    max-height: 345px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  html body #welcome .hero-head-illustration {
+    width: 89.7% !important;
+    height: 89.7% !important;
+    max-width: 333px !important;
+    max-height: 288px !important;
+  }
+}
