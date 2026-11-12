@@ -7388,3 +7388,19 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
 #hammer .mjolnir-control:before {
   pointer-events: none;
 }
+
+
+/* Portrait state change: the image without a hammer is shown before landing;
+   the existing Thor portrait (with Mjölnir) is revealed after the shared flight. */
+#style .style-person img {
+  transition: opacity .22s ease, filter .45s ease;
+}
+#style .style-person img.portrait-changing {
+  opacity: .18;
+}
+#style .style-person img.portrait-landed {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  #style .style-person img { transition-duration: .01ms !important; }
+}

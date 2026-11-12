@@ -1014,6 +1014,9 @@
     const styleScene = $("#style");
     const stylePerson = $("#style .style-person");
     const styleImage = $("#style .style-person img");
+    const landedPortraitSrc = "assets/hasan-thor-cutout.png";
+    const landedPortraitPreload = new Image();
+    landedPortraitPreload.src = landedPortraitSrc;
     const highlights = $("#creatorHighlights");
     const highlightsToggle = $("#creatorHighlightsToggle");
     const highlightsContent = $("#creatorHighlightsContent");
@@ -1231,6 +1234,22 @@
       if (caption) caption.textContent = "МЬЁЛЬНИР ПРИЗЕМЛИЛСЯ";
       if (stylePerson) {
         stylePerson.classList.add("mjolnir-landed");
+        if (styleImage && styleImage.getAttribute("src") !== landedPortraitSrc) {
+          styleImage.classList.add("portrait-changing");
+          const revealLandedPortrait = () => {
+            styleImage.src = landedPortraitSrc;
+            styleImage.alt = "Хасан в образе Тора с Мьёльниром";
+            styleImage.classList.add("portrait-landed");
+          };
+          if (landedPortraitPreload.complete && landedPortraitPreload.naturalWidth > 0) {
+            revealLandedPortrait();
+          } else {
+            landedPortraitPreload.addEventListener("load", revealLandedPortrait, { once: true });
+            landedPortraitPreload.addEventListener("error", () => {
+              styleImage.classList.remove("portrait-changing");
+            }, { once: true });
+          }
+        }
         const spark = document.createElement("span");
         spark.className = "mjolnir-hand-spark";
         spark.setAttribute("aria-hidden", "true");
