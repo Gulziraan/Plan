@@ -7348,3 +7348,43 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
     padding: 18px 4px !important;
   }
 }
+
+
+/* User-provided Mjölnir artwork. Keep the original button as the interaction target. */
+#hammer .mjolnir-control {
+  overflow: visible;
+}
+#hammer .mjolnir-image {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: auto !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  max-width: none !important;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+.mjolnir-flight-clone .mjolnir-image {
+  display: block !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: auto !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  max-width: none !important;
+  object-fit: contain;
+  pointer-events: none !important;
+}
+#hammer .mjolnir-control:before {
+  pointer-events: none;
+}

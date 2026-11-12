@@ -141,49 +141,7 @@
         </div>
         <div class="hammer-aura"></div>
         <button class="mjolnir-control" id="mjolnirControl" type="button" aria-label="Удерживай, чтобы поднять Мьёльнир">
-          <svg class="mjolnir-svg" viewBox="0 0 260 390" role="img" aria-label="Серебряный молот Мьёльнир">
-            <defs>
-              <linearGradient id="headMetal" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#f4f1eb"/>
-                <stop offset=".18" stop-color="#8e969d"/>
-                <stop offset=".38" stop-color="#e5e7e5"/>
-                <stop offset=".62" stop-color="#59616b"/>
-                <stop offset=".82" stop-color="#c6c9c8"/>
-                <stop offset="1" stop-color="#414852"/>
-              </linearGradient>
-              <linearGradient id="handleMetal" x1="0" x2="1">
-                <stop offset="0" stop-color="#252832"/>
-                <stop offset=".28" stop-color="#b6a18a"/>
-                <stop offset=".5" stop-color="#51483f"/>
-                <stop offset=".76" stop-color="#c9b8a1"/>
-                <stop offset="1" stop-color="#272a31"/>
-              </linearGradient>
-              <linearGradient id="topFace" x1="0" x2="1" y1="0" y2="1">
-                <stop stop-color="#fff"/>
-                <stop offset=".5" stop-color="#858e98"/>
-                <stop offset="1" stop-color="#313943"/>
-              </linearGradient>
-              <filter id="metalShadow" x="-60%" y="-50%" width="220%" height="220%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
-                <feOffset dy="10"/>
-                <feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <g filter="url(#metalShadow)">
-              <path d="M116 190 L144 190 L153 355 Q130 374 107 355 Z" fill="url(#handleMetal)" stroke="#d7c8b3" stroke-width="2"/>
-              <path d="M111 222 L149 222 M112 239 L150 239 M113 256 L151 256 M114 273 L152 273 M115 290 L153 290 M116 307 L154 307" stroke="#1d2028" stroke-width="5" opacity=".8"/>
-              <path d="M105 341 Q130 354 155 341 L158 359 Q130 383 102 359Z" fill="#a58d72" stroke="#e0d0ba" stroke-width="2"/>
-              <path d="M34 67 Q34 53 49 48 L211 48 Q226 53 226 67 L218 164 Q215 180 198 185 L62 185 Q45 180 42 164Z" fill="url(#headMetal)" stroke="#e5e6e4" stroke-width="3"/>
-              <path d="M47 61 L213 61 L207 162 Q205 171 193 174 L67 174 Q55 171 53 161Z" fill="none" stroke="#323943" stroke-width="4" opacity=".85"/>
-              <path d="M34 68 L226 68 L218 89 L42 89Z" fill="url(#topFace)" opacity=".95"/>
-              <path d="M56 102 L204 102 M59 151 L201 151" stroke="#fff" stroke-width="2" opacity=".23"/>
-              <path d="M130 92 L141 111 L130 130 L119 111Z" fill="#6f1b2c" stroke="#f0d7b5" stroke-width="2"/>
-              <path d="M130 98 L130 124 M119 111 L141 111" stroke="#f7e9d5" stroke-width="2" opacity=".8"/>
-              <path d="M73 118 Q83 109 92 118 M168 118 Q177 109 187 118" fill="none" stroke="#f6f2e9" stroke-width="2" opacity=".55"/>
-              <path d="M44 78 L53 88 M216 78 L207 88" stroke="#fff" stroke-width="3" opacity=".7"/>
-            </g>
-          </svg>
+          <img class="mjolnir-image" src="assets/mjolnir-user.png" alt="Мьёльнир" draggable="false">
           <span class="hammer-grip-glow"></span>
         </button>
         <div class="energy-arcs" aria-hidden="true"><i></i><i></i><i></i></div>
