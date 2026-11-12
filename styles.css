@@ -7404,3 +7404,13 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
 @media (prefers-reduced-motion: reduce) {
   #style .style-person img { transition-duration: .01ms !important; }
 }
+
+
+/* Reliable portrait replacement after the hammer lands. */
+#style .style-person img.portrait-changing {
+  opacity: .12 !important;
+}
+#style .style-person img.portrait-landed,
+#style .style-person img:not(.portrait-changing) {
+  opacity: 1 !important;
+}

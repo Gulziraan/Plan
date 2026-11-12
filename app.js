@@ -128,6 +128,17 @@
     };
   }
 
+  // Испытание Мьёльнира начинается заново при каждой новой загрузке сайта.
+  // Прогресс остальных загадок при этом сохраняется.
+  riddleState.hammerDone = false;
+  try {
+    const saved = JSON.parse(localStorage.getItem(STATE_KEY) || "null");
+    if (saved && saved.version === 2 && saved.hammerDone === true) {
+      saved.hammerDone = false;
+      localStorage.setItem(STATE_KEY, JSON.stringify(saved));
+    }
+  } catch (_) {}
+
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
   const scenes = ["welcome", "profile", "hammer", "style", "admire", "transition", "senses", "letter"];
 
@@ -1015,8 +1026,6 @@
     const stylePerson = $("#style .style-person");
     const styleImage = $("#style .style-person img");
     const landedPortraitSrc = "assets/hasan-thor-cutout.png";
-    const landedPortraitPreload = new Image();
-    landedPortraitPreload.src = landedPortraitSrc;
     const highlights = $("#creatorHighlights");
     const highlightsToggle = $("#creatorHighlightsToggle");
     const highlightsContent = $("#creatorHighlightsContent");
@@ -1235,20 +1244,20 @@
       if (stylePerson) {
         stylePerson.classList.add("mjolnir-landed");
         if (styleImage && styleImage.getAttribute("src") !== landedPortraitSrc) {
+          styleImage.classList.remove("portrait-landed");
           styleImage.classList.add("portrait-changing");
-          const revealLandedPortrait = () => {
-            styleImage.src = landedPortraitSrc;
-            styleImage.alt = "Хасан в образе Тора с Мьёльниром";
+          styleImage.alt = "Хасан в образе Тора с Мьёльниром";
+          const finishPortraitSwap = () => {
+            styleImage.classList.remove("portrait-changing");
             styleImage.classList.add("portrait-landed");
           };
-          if (landedPortraitPreload.complete && landedPortraitPreload.naturalWidth > 0) {
-            revealLandedPortrait();
-          } else {
-            landedPortraitPreload.addEventListener("load", revealLandedPortrait, { once: true });
-            landedPortraitPreload.addEventListener("error", () => {
-              styleImage.classList.remove("portrait-changing");
-            }, { once: true });
-          }
+          styleImage.addEventListener("load", finishPortraitSwap, { once: true });
+          styleImage.addEventListener("error", () => {
+            styleImage.classList.remove("portrait-changing");
+            console.error("Не удалось загрузить изображение Хасана с Мьёльниром:", landedPortraitSrc);
+          }, { once: true });
+          styleImage.src = landedPortraitSrc;
+          if (styleImage.complete && styleImage.naturalWidth > 0) finishPortraitSwap();
         }
         const spark = document.createElement("span");
         spark.className = "mjolnir-hand-spark";
