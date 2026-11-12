@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="letter-gate-pending">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff9ef">
+  <meta name="theme-color" content="#4b0807">
   <meta name="description" content="Особенная история для Хасана. Глава 24.">
   <title>Хасан — особенная история</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- ПЕРВОЕ ВСТУПЛЕНИЕ: ЛИЧНОЕ ПИСЬМО -->
+  <section class="letter-intro" id="letterIntro" aria-label="Личное письмо для Хасана">
+    <button class="letter-intro-open" id="letterIntroOpen" type="button"
+      aria-label="Открыть личное письмо для Хасана" aria-controls="welcome">
+      <picture class="letter-intro-art">
+        <source media="(max-aspect-ratio: 3/4)" srcset="assets/letter-intro-portrait.png">
+        <img src="assets/letter-intro-landscape.png"
+          alt="Кружевное кремовое письмо с золотой сургучной печатью на бордовом фоне. Привет, Хасан. У тебя новое письмо на почте. Открой."
+          fetchpriority="high" decoding="async">
+      </picture>
+      <span class="letter-intro-fallback" hidden>
+        <span class="letter-intro-fallback-seal" aria-hidden="true">✿</span>
+        <span class="letter-intro-fallback-greeting">Привет, Хасан</span>
+        <span class="letter-intro-fallback-message">У тебя новое письмо на почте</span>
+        <span class="letter-intro-fallback-action">Открой</span>
+      </span>
+      <span class="letter-intro-flash" aria-hidden="true"></span>
+    </button>
+    <span class="letter-intro-sr">Привет, Хасан. У тебя новое письмо на почте. Открой.</span>
+  </section>
+
   <div class="grain" aria-hidden="true"></div>
 
   <header class="topbar cover-topbar">
@@ -306,6 +328,7 @@
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="letter-intro.js"></script>
   <script src="content.js"></script>
   <script src="app.js"></script>
 </body>

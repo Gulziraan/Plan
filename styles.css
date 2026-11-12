@@ -7624,3 +7624,165 @@ html body #welcome .hero-head-illustration {
     max-height: 288px !important;
   }
 }
+
+
+/* ==========================================================
+   PERSONAL LETTER INTRO — full-screen entry gate
+   Main site remains intact underneath and is revealed after opening.
+   ========================================================== */
+html.letter-gate-pending,
+html.letter-gate-pending body {
+  min-height: 100%;
+  overflow: hidden !important;
+  background: #4b0807 !important;
+}
+html.letter-gate-pending body > .grain,
+html.letter-gate-pending body > .topbar,
+html.letter-gate-pending body > main,
+html.letter-gate-pending body > .site-footer,
+html.letter-gate-pending body > .modal,
+html.letter-gate-pending body > .toast {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.letter-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(116, 20, 17, .42), transparent 62%),
+    #4b0807;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .55s ease, visibility .55s ease;
+  isolation: isolate;
+}
+.letter-intro-open {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.letter-intro-art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.letter-intro-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: scale(1);
+  transition: transform 1.05s cubic-bezier(.2,.72,.22,1), filter .7s ease;
+}
+.letter-intro-open:focus-visible {
+  outline: 3px solid #e8c98b;
+  outline-offset: -8px;
+}
+.letter-intro-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at 50% 48%, rgba(255,244,213,.96), rgba(255,237,195,.35) 28%, transparent 66%);
+  mix-blend-mode: screen;
+}
+.letter-intro-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+.letter-intro-fallback {
+  position: relative;
+  display: none;
+  width: min(82vw, 780px);
+  min-height: min(58vh, 520px);
+  padding: clamp(54px, 8vw, 100px) 8%;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 3vh, 32px);
+  color: #4a160f;
+  text-align: center;
+  background: #f0dfbd;
+  border: 12px double #fff0d4;
+  box-shadow: 0 20px 55px rgba(0,0,0,.32);
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+.letter-intro-fallback[hidden] { display: none !important; }
+.letter-intro.image-failed .letter-intro-art { display: none; }
+.letter-intro.image-failed .letter-intro-fallback { display: flex; }
+.letter-intro-fallback-seal {
+  position: absolute;
+  top: -35px;
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #f5d99a;
+  background: radial-gradient(circle at 35% 28%, #b38b45, #5a330d 72%);
+  border: 3px solid #d5b16b;
+  font-size: 42px;
+}
+.letter-intro-fallback-greeting { font-size: clamp(25px, 4vw, 38px); }
+.letter-intro-fallback-message { font-size: clamp(27px, 4vw, 43px); }
+.letter-intro-fallback-action { font-size: clamp(23px, 3vw, 32px); font-style: italic; }
+.letter-intro.is-opening .letter-intro-art img {
+  transform: scale(1.075) translateY(-2.5%);
+  filter: brightness(1.12) saturate(1.06);
+}
+.letter-intro.is-opening .letter-intro-flash {
+  animation: letterIntroFlash .9s ease-out both;
+}
+.letter-intro.is-opening {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: .72s;
+}
+@keyframes letterIntroFlash {
+  0% { opacity: 0; }
+  28% { opacity: .8; }
+  100% { opacity: 0; }
+}
+@media (max-width: 700px), (max-aspect-ratio: 3/4) {
+  .letter-intro-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter-intro,
+  .letter-intro-art img { transition-duration: .01ms !important; }
+  .letter-intro.is-opening .letter-intro-flash { animation-duration: .01ms !important; }
+}
