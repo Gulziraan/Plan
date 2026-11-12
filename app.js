@@ -1002,8 +1002,7 @@
     revealTargets.forEach(element => element.classList.add("is-visible"));
   }
 
-  // ИНТЕРАКТИВНАЯ СЦЕНА МЬЁЛЬНИРА
-
+  // МЬЁЛЬНИР: удержание, непрерывный shared-element переход и сохранённое состояние.
   (() => {
     const control = $("#mjolnirControl");
     if (!control) return;
@@ -1012,163 +1011,298 @@
     const fill = $("#chargeFill");
     const caption = $("#chargeCaption");
     const instruction = $("#hammerInstruction");
+    const styleScene = $("#style");
+    const stylePerson = $("#style .style-person");
+    const styleImage = $("#style .style-person img");
+    const highlights = $("#creatorHighlights");
+    const highlightsToggle = $("#creatorHighlightsToggle");
+    const highlightsContent = $("#creatorHighlightsContent");
     const victory = $("#hammerVictory");
     const letter = $("#hammerLetter");
+    const revealLetter = $("#revealHammerLetter");
+    const replayButton = $("#replayHammerFlight");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    let holdTimer = null;
+    const HOLD_DURATION = 1350;
     let holdStarted = 0;
-    let taps = 0;
-    let tapReset = null;
-    let completed = riddleState.hammerDone === true;
+    let holdFrame = 0;
     let isHolding = false;
+    let transitioning = false;
+    let flightFrame = 0;
+    let flightNode = null;
+    let activePointerId = null;
+    let completed = riddleState.hammerDone === true;
 
-    const duration = reduced.matches ? 900 : 2350;
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const easeInOut = value => value < .5 ? 4 * value * value * value : 1 - Math.pow(-2 * value + 2, 3) / 2;
 
     function setCharge(value) {
-      const amount = Math.max(0, Math.min(100, value));
-
-      fill.style.width = `${amount}%`;
-      arena.style.setProperty("--charge", amount / 100);
-
-      caption.textContent = amount < 30
+      const amount = clamp(value, 0, 100);
+      if (fill) fill.style.width = `${amount}%`;
+      arena?.style.setProperty("--charge", amount / 100);
+      if (caption) caption.textContent = amount < 30
         ? "ЭНЕРГИЯ МОЛОТА · ПРОБУЖДЕНИЕ"
-        : amount < 70
-          ? "ЭНЕРГИЯ МОЛОТА · НАРАСТАЕТ"
-          : "ЭНЕРГИЯ МОЛОТА · НА ПРЕДЕЛЕ";
+        : amount < 70 ? "ЭНЕРГИЯ МОЛОТА · НАРАСТАЕТ" : "ЭНЕРГИЯ МОЛОТА · НА ПРЕДЕЛЕ";
     }
 
-    if (completed) {
-      control.classList.add("lifted");
-      arena.classList.add("released");
-      setCharge(100);
-      instruction.hidden = true;
-      victory.hidden = false;
-      victory.classList.add("revealed");
-    }
-
-    function win() {
-      if (completed) return;
-
-      completed = true;
-      clearInterval(holdTimer);
-      clearTimeout(tapReset);
-
-      control.classList.add("lifted");
-      arena.classList.add("released");
-
-      setCharge(100);
-      instruction.hidden = true;
-
-      markHammerProgress();
-
-      setTimeout(() => {
-        victory.hidden = false;
-        victory.classList.add("revealed");
-      }, reduced.matches ? 50 : 700);
-
-      toast("МЬЁЛЬНИР ПОДНЯТ ⚡");
-    }
-
-    function markHammerProgress() {
+    function persistHammerCompletion() {
       riddleState.hammerDone = true;
       persistState();
     }
 
-    function registerTap() {
-      taps += 1;
-      setCharge(Math.min(90, taps * 30));
-      caption.textContent = `ЭНЕРГИЯ МОЛОТА · ${taps} / 3`;
+    function setHighlightsReady() {
+      if (replayButton) replayButton.hidden = false;
+      if (highlights) highlights.classList.add("is-unlocked");
+      if (highlightsToggle) highlightsToggle.disabled = false;
+    }
 
-      clearTimeout(tapReset);
+    if (completed) {
+      control.classList.add("already-completed");
+      control.setAttribute("aria-label", "Мьёльнир уже поднят. Можно повторить анимацию на следующем экране.");
+      setCharge(100);
+      if (caption) caption.textContent = "ИСПЫТАНИЕ ПРОЙДЕНО";
+      if (instruction) instruction.hidden = true;
+      setHighlightsReady();
+    }
 
-      tapReset = setTimeout(() => {
-        taps = 0;
+    function cancelHold(reset = true) {
+      if (!isHolding) return;
+      const pointerId = activePointerId;
+      isHolding = false;
+      activePointerId = null;
+      cancelAnimationFrame(holdFrame);
+      control.classList.remove("charging");
+      arena?.classList.remove("surging");
+      try {
+        if (pointerId !== null && control.hasPointerCapture?.(pointerId)) control.releasePointerCapture(pointerId);
+      } catch (_) {}
+      if (reset && !completed) {
         setCharge(0);
-        caption.textContent = "ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ";
-      }, 1800);
+        if (caption) caption.textContent = "ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ";
+      }
+    }
 
-      if (taps >= 3) win();
+    function updateHold() {
+      if (!isHolding || completed || transitioning) return;
+      const amount = clamp(((performance.now() - holdStarted) / HOLD_DURATION) * 100, 0, 100);
+      setCharge(amount);
+      arena?.classList.toggle("surging", amount >= 22);
+      if (amount >= 100) {
+        isHolding = false;
+        cancelAnimationFrame(holdFrame);
+        control.classList.remove("charging");
+        beginFlight({ saveProgress: true });
+        return;
+      }
+      holdFrame = requestAnimationFrame(updateHold);
     }
 
     function startHold(event) {
-      if (completed || (event.button !== undefined && event.button !== 0)) return;
-
+      if (completed || transitioning || isHolding) return;
+      if (event.type === "pointerdown" && event.button !== undefined && event.button !== 0) return;
       event.preventDefault();
-      holdStarted = Date.now();
       isHolding = true;
-
+      activePointerId = event.pointerId ?? null;
+      holdStarted = performance.now();
       control.classList.add("charging");
+      try { if (event.pointerId !== undefined) control.setPointerCapture(event.pointerId); } catch (_) {}
+      holdFrame = requestAnimationFrame(updateHold);
+    }
 
-      if (control.setPointerCapture && event.pointerId !== undefined) {
-        control.setPointerCapture(event.pointerId);
+    function finishHold(event, cancelled = false) {
+      if (!isHolding) return;
+      if (event?.pointerId !== undefined && activePointerId !== null && event.pointerId !== activePointerId) return;
+      const elapsed = performance.now() - holdStarted;
+      cancelHold(false);
+      if (!cancelled && elapsed >= HOLD_DURATION && !completed) beginFlight({ saveProgress: true });
+      else if (!completed) {
+        setCharge(0);
+        if (caption) caption.textContent = "ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ";
       }
-
-      holdTimer = setInterval(() => {
-        const value = Math.min(100, ((Date.now() - holdStarted) / duration) * 100);
-
-        setCharge(value);
-        arena.classList.toggle("surging", value > 24);
-
-        if (value >= 100) win();
-      }, 30);
     }
 
-    function endHold() {
-      if (completed || !isHolding) return;
-
-      isHolding = false;
-
-      const elapsed = Date.now() - holdStarted;
-
-      clearInterval(holdTimer);
-      control.classList.remove("charging");
-      arena.classList.remove("surging");
-
-      if (elapsed < duration) registerTap();
+    function getStickyHeaderHeight() {
+      const header = $(".site-header, header[role='banner'], header");
+      if (!header) return 0;
+      const style = getComputedStyle(header);
+      return style.position === "sticky" || style.position === "fixed" ? header.getBoundingClientRect().height : 0;
     }
 
-    control.addEventListener("click", event => {
-      if (event.detail === 0 && !completed) registerTap();
-    });
+    function createFlightElement(startRect) {
+      const clone = control.cloneNode(true);
+      clone.removeAttribute("id");
+      clone.removeAttribute("aria-label");
+      clone.setAttribute("aria-hidden", "true");
+      clone.className = "mjolnir-flight-clone";
+      Object.assign(clone.style, {
+        position: "fixed", left: `${startRect.left}px`, top: `${startRect.top}px`,
+        width: `${startRect.width}px`, height: `${startRect.height}px`,
+        margin: "0", padding: "0", border: "0", background: "transparent",
+        display: "grid", placeItems: "center", zIndex: "99999", pointerEvents: "none",
+        transform: "none", transformOrigin: "50% 85%", filter: "drop-shadow(0 18px 18px rgba(0,0,0,.48))",
+        willChange: "left, top, width, height, transform, opacity"
+      });
+      clone.querySelector("svg")?.setAttribute("focusable", "false");
+      document.body.appendChild(clone);
+      return clone;
+    }
+
+    function addLandingImpact(x, y) {
+      const impact = document.createElement("span");
+      impact.className = "mjolnir-landing-impact";
+      impact.setAttribute("aria-hidden", "true");
+      Object.assign(impact.style, { position: "fixed", left: `${x}px`, top: `${y}px`, zIndex: "99998", pointerEvents: "none" });
+      document.body.appendChild(impact);
+      impact.addEventListener("animationend", () => impact.remove(), { once: true });
+      setTimeout(() => impact.remove(), 1300);
+    }
+
+    function animateFlight() {
+      return new Promise(resolve => {
+        const sourceRect = control.getBoundingClientRect();
+        const imageRect = styleImage?.getBoundingClientRect();
+        if (!styleImage || !imageRect || !imageRect.width || !imageRect.height) {
+          styleScene?.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "start" });
+          setTimeout(resolve, reduced.matches ? 0 : 850);
+          return;
+        }
+
+        const startScroll = window.scrollY;
+        const headerHeight = getStickyHeaderHeight();
+        const styleTop = styleScene.getBoundingClientRect().top + window.scrollY;
+        const targetScroll = Math.max(0, styleTop - headerHeight - 8);
+        const targetDocX = imageRect.left + window.scrollX + imageRect.width * .515;
+        const targetDocY = imageRect.top + window.scrollY + imageRect.height * .485;
+        const endWidth = clamp(imageRect.width * .19, 46, 104);
+        const endHeight = endWidth * 1.5;
+        const endX = targetDocX - endWidth / 2;
+        const endY = targetDocY - endHeight / 2;
+        const startX = sourceRect.left;
+        const startY = sourceRect.top;
+        const startW = sourceRect.width;
+        const startH = sourceRect.height;
+        const startTime = performance.now();
+        const duration = reduced.matches ? 1 : 1450;
+        flightNode = createFlightElement(sourceRect);
+        control.style.visibility = "hidden";
+        document.body.classList.add("mjolnir-flight-running");
+        document.documentElement.classList.add("mjolnir-flight-running");
+
+        if (reduced.matches) {
+          window.scrollTo(0, targetScroll);
+          Object.assign(flightNode.style, { left: `${endX}px`, top: `${endY}px`, width: `${endWidth}px`, height: `${endHeight}px`, transform: "rotate(42deg)" });
+          finishFlight(targetDocX, targetDocY - targetScroll);
+          resolve();
+          return;
+        }
+
+        const tick = now => {
+          const progress = clamp((now - startTime) / duration, 0, 1);
+          const eased = easeInOut(progress);
+          const scrollY = startScroll + (targetScroll - startScroll) * eased;
+          window.scrollTo(0, scrollY);
+          const viewportTargetY = targetDocY - scrollY;
+          const x = startX + (endX - startX) * eased;
+          const y = startY + (viewportTargetY - startY) * eased;
+          const w = startW + (endWidth - startW) * eased;
+          const h = startH + (endHeight - startH) * eased;
+          flightNode.style.left = `${x}px`;
+          flightNode.style.top = `${y}px`;
+          flightNode.style.width = `${w}px`;
+          flightNode.style.height = `${h}px`;
+          flightNode.style.transform = `rotate(${42 * eased}deg)`;
+          if (progress < 1) flightFrame = requestAnimationFrame(tick);
+          else {
+            finishFlight(targetDocX, targetDocY - targetScroll);
+            resolve();
+          }
+        };
+        flightFrame = requestAnimationFrame(tick);
+      });
+    }
+
+    function finishFlight(x, y) {
+      cancelAnimationFrame(flightFrame);
+      flightNode?.remove();
+      flightNode = null;
+      control.style.visibility = "";
+      document.body.classList.remove("mjolnir-flight-running");
+      document.documentElement.classList.remove("mjolnir-flight-running");
+      control.classList.add("already-completed");
+      arena?.classList.add("released");
+      if (caption) caption.textContent = "МЬЁЛЬНИР ПРИЗЕМЛИЛСЯ";
+      if (stylePerson) {
+        stylePerson.classList.add("mjolnir-landed");
+        const spark = document.createElement("span");
+        spark.className = "mjolnir-hand-spark";
+        spark.setAttribute("aria-hidden", "true");
+        stylePerson.appendChild(spark);
+        spark.addEventListener("animationend", () => spark.remove(), { once: true });
+        setTimeout(() => spark.remove(), 1500);
+      }
+      addLandingImpact(x, y);
+      setHighlightsReady();
+      transitioning = false;
+    }
+
+    async function beginFlight({ saveProgress = false } = {}) {
+      if (transitioning) return;
+      transitioning = true;
+      completed = true;
+      if (saveProgress) persistHammerCompletion();
+      if (instruction) instruction.hidden = true;
+      setCharge(100);
+      control.classList.add("lifted");
+      arena?.classList.add("released");
+      if (caption) caption.textContent = "ЭНЕРГИЯ МОЛОТА · ВЫСВОБОЖДЕНА";
+      await new Promise(resolve => setTimeout(resolve, reduced.matches ? 0 : 180));
+      await animateFlight();
+    }
 
     control.addEventListener("pointerdown", startHold);
-
-    ["pointerup", "pointercancel", "lostpointercapture"].forEach(name => {
-      control.addEventListener(name, endHold);
-    });
-
+    control.addEventListener("pointerup", event => finishHold(event, false));
+    control.addEventListener("pointercancel", event => finishHold(event, true));
+    control.addEventListener("lostpointercapture", event => finishHold(event, true));
     control.addEventListener("contextmenu", event => event.preventDefault());
+    control.addEventListener("dragstart", event => event.preventDefault());
+    control.addEventListener("keydown", event => {
+      if ((event.key === " " || event.key === "Enter") && !event.repeat) startHold({ ...event, type: "keyboard", preventDefault: () => event.preventDefault() });
+    });
+    control.addEventListener("keyup", event => {
+      if (event.key === " " || event.key === "Enter") finishHold(null, false);
+    });
+    control.addEventListener("blur", () => finishHold(null, true));
+    window.addEventListener("blur", () => finishHold(null, true));
+    document.addEventListener("visibilitychange", () => { if (document.hidden) finishHold(null, true); });
+    window.addEventListener("pagehide", () => finishHold(null, true));
 
-    $("#revealHammerLetter")?.addEventListener("click", () => {
-      victory.classList.remove("revealed");
-
-      setTimeout(() => {
-        victory.hidden = true;
-        letter.hidden = false;
-        letter.classList.add("revealed");
-        $("#hammer").classList.add("personal-mode");
-      }, reduced.matches ? 0 : 450);
+    highlightsToggle?.addEventListener("click", () => {
+      const expanded = highlightsToggle.getAttribute("aria-expanded") === "true";
+      highlightsToggle.setAttribute("aria-expanded", String(!expanded));
+      highlightsContent.hidden = expanded;
+      highlights?.classList.toggle("is-expanded", !expanded);
     });
 
-    $("#replayHammer")?.addEventListener("click", () => {
-      completed = false;
-      taps = 0;
-      setCharge(0);
+    revealLetter?.addEventListener("click", () => {
+      if (!letter) return;
+      const opening = letter.hidden;
+      letter.hidden = !opening;
+      if (opening) {
+        letter.classList.remove("revealed");
+        requestAnimationFrame(() => letter.classList.add("revealed"));
+        letter.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "nearest" });
+      } else letter.classList.remove("revealed");
+      revealLetter.textContent = opening ? "СКРЫТЬ СООБЩЕНИЕ ↑" : "ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗";
+    });
 
-      control.classList.remove("charging", "lifted");
-      arena.classList.remove("released", "surging");
-
-      victory.hidden = true;
-      victory.classList.remove("revealed");
-
-      letter.hidden = true;
-      letter.classList.remove("revealed");
-
-      instruction.hidden = false;
-      caption.textContent = "ЭНЕРГИЯ МОЛОТА · ОЖИДАНИЕ";
-
-      $("#hammer").classList.remove("personal-mode");
+    replayButton?.addEventListener("click", async () => {
+      if (transitioning) return;
+      const hammerTop = $("#hammer").getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: Math.max(0, hammerTop - getStickyHeaderHeight()), behavior: reduced.matches ? "auto" : "smooth" });
+      await new Promise(resolve => setTimeout(resolve, reduced.matches ? 0 : 850));
+      arena?.classList.remove("released", "surging");
+      control.classList.remove("lifted");
+      await beginFlight({ saveProgress: false });
     });
   })();
 

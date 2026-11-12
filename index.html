@@ -192,35 +192,7 @@
       </div>
       <div class="hammer-instruction" id="hammerInstruction">
         <span class="instruction-mark">✦</span>
-        <span>Нажми и удерживай молот.<br><small>Или коснись его три раза.</small></span>
-      </div>
-      <div class="hammer-skip-wrap">
-        <button class="hammer-skip" type="button" data-next="style" aria-label="Пропустить испытание и перейти к следующей главе">
-          ПРОПУСТИТЬ ИСПЫТАНИЕ <span aria-hidden="true">↗</span>
-        </button>
-      </div>
-      <div class="hammer-victory" id="hammerVictory" aria-live="polite" hidden>
-        <p class="eyebrow">ПРОЙДЕНО</p>
-        <h3>ТЫ МОЙ <em>СУПЕРГЕРОЙ</em></h3>
-        <p>Впрочем, у меня сомнений и не было.</p>
-        <button class="button button-light" id="revealHammerLetter">ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗</button>
-      </div>
-      <div class="hammer-letter" id="hammerLetter" hidden>
-        <div class="letter-hammer-ghost" aria-hidden="true">ϟ</div>
-        <p class="eyebrow">НЕ ОТ ЛЕГЕНДЫ. ОТ МЕНЯ.</p>
-        <h3>ТЫ БЫ ЗНАЛ, КАК Я В ТЕБЯ <em>ВЕРЮ.</em></h3>
-        <div class="hammer-letter-body">
-          <p>Не только потому, что ты сильный, умный и способен справиться практически с чем угодно. А потому, что я правда верю в тебя.</p>
-          <p>Я хочу, чтобы у тебя получалось всё, к чему ты стремишься. Чтобы сбывались даже те желания, о которых ты пока никому не рассказываешь. Чтобы жизнь давала тебе возможности, которыми ты сможешь воспользоваться.</p>
-          <p>Ты достоин гораздо большего, чем сам иногда можешь себе представить.</p>
-          <p>И я очень хочу быть рядом, видеть, как у тебя всё получается, гордиться тобой и напоминать тебе, какой ты невероятный.</p>
-          <p>А если вдруг забудешь, кто ты, — я напомню.</p>
-        </div>
-        <p class="hammer-final-line">Мой самый достойный🏋🏽</p>
-        <div class="hammer-letter-actions">
-          <button class="text-link" data-next="style">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
-          <button class="hammer-replay" id="replayHammer">ПОВТОРИТЬ СЦЕНУ ↻</button>
-        </div>
+        <span>Зажми и удерживай молот 1,35 секунды.<br><small>Не отпускай, пока энергия не достигнет предела.</small></span>
       </div>
     </section>
 
@@ -236,8 +208,34 @@
         <div class="style-file style-file-three"><span class="file-fold"></span>СИЛЬНЫЙ</div>
         <div class="style-file style-file-four"><span class="file-fold"></span>ЗАБОТЛИВЫЙ</div>
       </div>
-      <div class="style-highlights">
-        <h3>CREATOR<br>HIGHLIGHTS</h3>
+      <div class="style-highlights" id="creatorHighlights">
+        <button class="creator-highlights-toggle" id="creatorHighlightsToggle" type="button" disabled aria-expanded="false" aria-controls="creatorHighlightsContent">
+          <span class="creator-highlights-kicker">ИСПЫТАНИЕ ПРОЙДЕНО</span>
+          <span class="creator-highlights-title">CREATOR<br>HIGHLIGHTS</span>
+          <span class="creator-highlights-hint">ОТКРЫТЬ МОЁ СООБЩЕНИЕ <i aria-hidden="true">⌄</i></span>
+        </button>
+        <div class="creator-highlights-content" id="creatorHighlightsContent" hidden>
+          <div class="hammer-victory" id="hammerVictory" aria-live="polite">
+            <p class="eyebrow">МОЙ СУПЕРГЕРОЙ</p>
+            <h3>ТЫ МОЙ <em>СУПЕРГЕРОЙ</em></h3>
+            <p>Впрочем, у меня сомнений и не было.</p>
+            <button class="button button-light" id="revealHammerLetter" type="button">ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗</button>
+          </div>
+          <div class="hammer-letter" id="hammerLetter" hidden>
+            <div class="letter-hammer-ghost" aria-hidden="true">ϟ</div>
+            <p class="eyebrow">НЕ ОТ ЛЕГЕНДЫ. ОТ МЕНЯ.</p>
+            <h3>ТЫ БЫ ЗНАЛ, КАК Я В ТЕБЯ <em>ВЕРЮ.</em></h3>
+            <div class="hammer-letter-body">
+              <p>Не только потому, что ты сильный, умный и способен справиться практически с чем угодно. А потому, что я правда верю в тебя.</p>
+              <p>Я хочу, чтобы у тебя получалось всё, к чему ты стремишься. Чтобы сбывались даже те желания, о которых ты пока никому не рассказываешь. Чтобы жизнь давала тебе возможности, которыми ты сможешь воспользоваться.</p>
+              <p>Ты достоин гораздо большего, чем сам иногда можешь себе представить.</p>
+              <p>И я очень хочу быть рядом, видеть, как у тебя всё получается, гордиться тобой и напоминать тебе, какой ты невероятный.</p>
+              <p>А если вдруг забудешь, кто ты, — я напомню.</p>
+            </div>
+            <p class="hammer-final-line">Мой самый достойный🏋🏽</p>
+          </div>
+        </div>
+        <button class="hammer-replay-flight" id="replayHammerFlight" type="button" hidden>ПОВТОРИТЬ ПОЯВЛЕНИЕ МЬЁЛЬНИРА ↻</button>
       </div>
       <div class="scene-nav style-next">
         <button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
