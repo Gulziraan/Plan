@@ -6965,3 +6965,117 @@ html body #hammer .hammer-skip-wrap {
     font-size: 13px !important;
   }
 }
+
+
+/* MOBILE PROFILE COMPOSITION — keep the portrait and copy side by side.
+   The previous stacked mobile rule made the cut-out portrait too large and
+   allowed the overline to visually collide with the image. */
+@media (max-width: 680px) {
+  html body #profile .profile-hero {
+    display: grid !important;
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr) !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(12px, 3.5vw, 18px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 18px auto 24px !important;
+  }
+  html body #profile .profile-photo,
+  html body #profile .profile-photo.portrait-card {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    justify-self: stretch !important;
+    align-self: center !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+  html body #profile .profile-reference-image {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  html body #profile .profile-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  html body #profile .profile-panel .eyebrow {
+    font-size: clamp(6px, 1.7vw, 8px) !important;
+    line-height: 1.35 !important;
+    letter-spacing: .035em !important;
+    margin: 0 0 7px !important;
+    overflow-wrap: anywhere !important;
+  }
+  html body #profile .profile-panel h2 {
+    font-size: clamp(25px, 7vw, 34px) !important;
+    line-height: .98 !important;
+    margin: 0 0 7px !important;
+  }
+  html body #profile .profile-lead {
+    font-size: clamp(13px, 3.7vw, 17px) !important;
+    line-height: 1.08 !important;
+    margin: 0 0 8px !important;
+  }
+  html body #profile .profile-description {
+    font-size: clamp(9px, 2.45vw, 11px) !important;
+    line-height: 1.35 !important;
+    margin: 0 0 7px !important;
+  }
+  html body #profile .profile-universe {
+    font-size: clamp(7px, 1.9vw, 9px) !important;
+    line-height: 1.3 !important;
+  }
+  html body #profile .profile-details {
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+    gap: 14px 12px !important;
+  }
+  html body #profile .profile-skills {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Reduce the welcome portrait on phones so it fits its visual block instead
+   of expanding beyond the intended screen composition. */
+@media (max-width: 680px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: clamp(220px, 58vw, 290px) !important;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    overflow: visible !important;
+  }
+  html body #welcome .hero-head-illustration {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    width: 92% !important;
+    height: 92% !important;
+    max-width: 360px !important;
+    max-height: 290px !important;
+    transform: translate(-50%, -50%) !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
+@media (max-width: 380px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: 220px !important;
+  }
+  html body #welcome .hero-head-illustration {
+    width: 88% !important;
+    height: 88% !important;
+  }
+}
