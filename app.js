@@ -1031,7 +1031,7 @@
     const styleScene = $("#style");
     const stylePerson = $("#style .style-person");
     const styleImage = $("#style .style-person img");
-    const initialPortraitSrc = "assets/hasan-thor-before-hammer.png";
+    const initialPortraitSrc = "assets/hasan-thor-before-hammer.PNG";
     const landedPortraitSrc = "assets/hasan-thor-cutout.png";
     const highlights = $("#creatorHighlights");
     if (styleImage) {
