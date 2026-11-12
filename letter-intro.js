@@ -8,6 +8,8 @@
   }
 
   let opening = false;
+  document.body.style.overflow = "hidden";
+  document.documentElement.classList.add("letter-gate-pending");
   const artImage = intro.querySelector(".letter-intro-art img");
   artImage?.addEventListener("error", () => {
     intro.classList.add("image-failed");

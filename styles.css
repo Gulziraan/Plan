@@ -7786,3 +7786,84 @@ html.letter-gate-pending body > .toast {
   .letter-intro-art img { transition-duration: .01ms !important; }
   .letter-intro.is-opening .letter-intro-flash { animation-duration: .01ms !important; }
 }
+
+
+/* LETTER INTRO — strict single-viewport gate (including iOS Safari).
+   The main site must not appear below the invitation in a full-page capture
+   or become scrollable before the invitation is opened. */
+html:has(body > #letterIntro:not(.is-opening)),
+html:has(body > #letterIntro:not(.is-opening)) body {
+  height: 100% !important;
+  min-height: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  background: #4b0807 !important;
+}
+body > #letterIntro:not(.is-opening) {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: block !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+body > #letterIntro:not(.is-opening) .letter-intro-open {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+}
+body > #letterIntro:not(.is-opening) .letter-intro-art {
+  position: absolute !important;
+  inset: 0 !important;
+  display: grid !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+body > #letterIntro:not(.is-opening) .letter-intro-art img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+body > #letterIntro:not(.is-opening) ~ .grain,
+body > #letterIntro:not(.is-opening) ~ .topbar,
+body > #letterIntro:not(.is-opening) ~ main,
+body > #letterIntro:not(.is-opening) ~ .site-footer,
+body > #letterIntro:not(.is-opening) ~ .modal,
+body > #letterIntro:not(.is-opening) ~ .toast {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body > #letterIntro:not(.is-opening) .letter-intro-sr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+@supports (height: 100svh) {
+  body > #letterIntro:not(.is-opening) {
+    height: 100svh !important;
+    max-height: 100svh !important;
+  }
+}
