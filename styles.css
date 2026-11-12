@@ -7279,3 +7279,72 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
 #style .style-highlights.is-unlocked .creator-highlights-kicker { display: block; }
 #style .creator-highlights-toggle:disabled { cursor: not-allowed; opacity: .58; filter: saturate(.72); }
 #style .creator-highlights-toggle:disabled:hover { transform: none; box-shadow: 0 12px 32px rgba(70,42,31,.08); }
+
+
+/* CREATOR HIGHLIGHTS — compact blue card, direct opening of the full letter */
+#style .style-highlights {
+  padding-top: clamp(18px, 2.5vw, 30px) !important;
+  padding-bottom: clamp(22px, 3vw, 36px) !important;
+}
+#style .creator-highlights-toggle {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 190px !important;
+  min-height: 76px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  padding: 13px 16px !important;
+  gap: 0 !important;
+  border: 1px solid rgba(76, 120, 151, .28) !important;
+  border-radius: 3px !important;
+  background: #b9d5e6 !important;
+  box-shadow: 0 5px 12px rgba(52, 86, 108, .12) !important;
+  color: #651612 !important;
+  text-align: center !important;
+}
+#style .creator-highlights-toggle:hover {
+  transform: translateY(-2px) !important;
+  background: #c5deec !important;
+  box-shadow: 0 8px 16px rgba(52, 86, 108, .16) !important;
+}
+#style .creator-highlights-title {
+  color: #651612 !important;
+  font: 700 19px/1.02 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.02em !important;
+}
+#style .creator-highlights-hint {
+  display: none !important;
+}
+#style .creator-highlights-kicker {
+  display: none !important;
+}
+#style .creator-highlights-content {
+  width: min(100%, 760px) !important;
+  margin: 20px auto 0 !important;
+  padding: clamp(22px, 4vw, 40px) !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(112, 39, 38, .16) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#style .hammer-letter {
+  margin: 0 auto !important;
+  padding: 8px 0 0 !important;
+  border: 0 !important;
+}
+#style .hammer-letter[hidden] {
+  display: none !important;
+}
+@media (max-width: 680px) {
+  #style .creator-highlights-toggle {
+    width: 174px !important;
+    min-height: 68px !important;
+  }
+  #style .creator-highlights-title {
+    font-size: 17px !important;
+  }
+  #style .creator-highlights-content {
+    padding: 18px 4px !important;
+  }
+}

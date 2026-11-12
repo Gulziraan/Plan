@@ -1017,9 +1017,7 @@
     const highlights = $("#creatorHighlights");
     const highlightsToggle = $("#creatorHighlightsToggle");
     const highlightsContent = $("#creatorHighlightsContent");
-    const victory = $("#hammerVictory");
     const letter = $("#hammerLetter");
-    const revealLetter = $("#revealHammerLetter");
     const replayButton = $("#replayHammerFlight");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -1281,18 +1279,6 @@
       highlightsToggle.setAttribute("aria-expanded", String(!expanded));
       highlightsContent.hidden = expanded;
       highlights?.classList.toggle("is-expanded", !expanded);
-    });
-
-    revealLetter?.addEventListener("click", () => {
-      if (!letter) return;
-      const opening = letter.hidden;
-      letter.hidden = !opening;
-      if (opening) {
-        letter.classList.remove("revealed");
-        requestAnimationFrame(() => letter.classList.add("revealed"));
-        letter.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block: "nearest" });
-      } else letter.classList.remove("revealed");
-      revealLetter.textContent = opening ? "СКРЫТЬ СООБЩЕНИЕ ↑" : "ЕСТЬ ЕЩЁ ОДНО СООБЩЕНИЕ ↗";
     });
 
     replayButton?.addEventListener("click", async () => {
