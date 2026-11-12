@@ -7424,3 +7424,85 @@ html.mjolnir-flight-running { scroll-behavior: auto !important; }
 #style .style-person img:not(.portrait-changing) {
   opacity: 1 !important;
 }
+
+
+/* ==========================================================
+   FINAL LAYOUT TUNING — welcome portrait + profile lower row
+   Only CSS is changed here; image assets and all interactions stay intact.
+   ========================================================== */
+
+/* First screen: medium-sized head portrait, centered in its visual area.
+   Use the same centered sizing logic on desktop and mobile. */
+html body #welcome .hero-visual.hero-visual-cover {
+  overflow: visible !important;
+}
+html body #welcome .hero-head-illustration {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: 50% !important;
+  bottom: auto !important;
+  width: 82% !important;
+  height: 82% !important;
+  max-width: 500px !important;
+  max-height: 500px !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* The profile text beside the portrait stays in its current position.
+   Only the three lower information columns are pushed below the hero row. */
+@media (min-width: 681px) {
+  html body #profile {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: calc(100svh - 82px) !important;
+    box-sizing: border-box !important;
+  }
+  html body #profile .profile-hero {
+    flex: 0 0 auto !important;
+    margin-bottom: 0 !important;
+  }
+  html body #profile .profile-details {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+    padding-top: clamp(42px, 7vh, 88px) !important;
+  }
+  html body #profile > .scene-nav {
+    flex: 0 0 auto !important;
+    padding-top: clamp(22px, 3vh, 38px) !important;
+  }
+}
+
+/* On phones, the portrait and adjacent copy stack/flow naturally.
+   Add a clear gap before the lower information so it cannot overlap the photo. */
+@media (max-width: 680px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: clamp(240px, 64vw, 320px) !important;
+  }
+  html body #welcome .hero-head-illustration {
+    width: 82% !important;
+    height: 82% !important;
+    max-width: 330px !important;
+    max-height: 300px !important;
+  }
+  html body #profile .profile-details {
+    margin-top: clamp(38px, 7vh, 64px) !important;
+    padding-top: 0 !important;
+    clear: both !important;
+  }
+}
+
+/* Very narrow phones: keep enough breathing room without enlarging the head. */
+@media (max-width: 380px) {
+  html body #welcome .hero-visual.hero-visual-cover {
+    height: 240px !important;
+  }
+  html body #welcome .hero-head-illustration {
+    width: 78% !important;
+    height: 78% !important;
+    max-width: 290px !important;
+    max-height: 250px !important;
+  }
+}
