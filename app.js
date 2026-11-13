@@ -146,7 +146,7 @@
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "hammer", "style", "admire", "transition", "senses", "letter"];
+  const scenes = ["welcome", "profile", "admire", "hammer", "style", "belief", "transition", "senses", "letter"];
 
   function persistState() {
     try {
@@ -182,17 +182,25 @@
     if (id === "senses") {
       riddleState.sensesOpened = true;
       persistState();
-      document.getElementById("senses")?.classList.add("is-unlocked");
+      const sensesSection = document.getElementById("senses");
+      if (sensesSection) {
+        sensesSection.hidden = false;
+        sensesSection.classList.add("is-unlocked");
+      }
       renderSenses();
     }
 
-    if (id === "letter" && !riddleState.unlocked) {
+    if (id === "letter" && (!riddleState.unlocked || riddleState.solved.length !== 5)) {
       toast("Сначала нужно разгадать финальный шифр.");
       return;
     }
 
     if (id === "letter") {
-      document.getElementById("letter")?.classList.add("is-unlocked");
+      const finalSection = document.getElementById("letter");
+      if (finalSection && riddleState.unlocked && riddleState.solved.length === 5) {
+        finalSection.hidden = false;
+        finalSection.classList.add("is-unlocked");
+      }
       renderPersonalLetter();
       renderMemoryGallery();
     }
@@ -290,10 +298,9 @@
     if (!root) return;
 
     root.innerHTML = C.stats.map((s, i) => `
-      <button class="stat-row" data-stat="${i}" type="button">
+      <button class="stat-row" data-stat="${i}" type="button" aria-label="${s.name}: подробнее">
         <span class="stat-name">${s.name}</span>
-        <span class="stat-meter"><i style="--level:${s.value}%"></i></span>
-        <span class="stat-value">${s.value}</span>
+        <span class="stat-meter" aria-hidden="true"><i style="--level:100%"></i></span>
       </button>
     `).join("");
   }
@@ -764,10 +771,17 @@
       riddleState.unlocked = true;
       riddleState.sensesOpened = true;
       saveRiddles();
-      document.getElementById("letter")?.classList.add("is-unlocked");
+      const finalSection = document.getElementById("letter");
+      if (finalSection) {
+        finalSection.hidden = false;
+        finalSection.classList.add("is-unlocked");
+      }
       renderPersonalLetter();
       renderMemoryGallery();
-      openSecretChapter();
+      document.getElementById("letter")?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
       feedback.className = "riddle-feedback is-wrong";
@@ -824,15 +838,22 @@
   function restoreRiddleState() {
     if (riddleState.sensesOpened || riddleState.solved.length) {
       riddleState.sensesOpened = true;
-      document.getElementById("senses")?.classList.add("is-unlocked");
+      const sensesSection = document.getElementById("senses");
+      if (sensesSection) {
+        sensesSection.hidden = false;
+        sensesSection.classList.add("is-unlocked");
+      }
       renderSenses();
     }
     if (riddleState.solved.length === 5) renderCipher();
     if (riddleState.unlocked && riddleState.solved.length === 5) {
-      document.getElementById("letter")?.classList.add("is-unlocked");
+      const finalSection = document.getElementById("letter");
+      if (finalSection) {
+        finalSection.hidden = false;
+        finalSection.classList.add("is-unlocked");
+      }
       renderPersonalLetter();
       renderMemoryGallery();
-      openSecretChapter(false);
     }
   }
 
@@ -956,7 +977,7 @@
     localStorage.removeItem(LEGACY_RIDDLE_KEY);
 
     if (beginButton) {
-      beginButton.innerHTML = 'ОТКРЫТЬ ИСТОРИЮ <span>↗</span>';
+      beginButton.innerHTML = 'ЭТА ИСТОРИЯ О ТЕБЕ <span>↓</span>';
     }
 
     $("#riddleCipher")?.remove();
@@ -967,9 +988,11 @@
       if (!section) return;
       section.classList.remove("locked", "opened", "active", "is-unlocked");
     });
-    showScene("welcome");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    updateProgress();
+    const sensesSection = document.getElementById("senses");
+    const finalSection = document.getElementById("letter");
+    if (sensesSection) sensesSection.hidden = true;
+    if (finalSection) finalSection.hidden = true;
+    window.location.reload();
   }
 
   // ОСНОВНЫЕ КНОПКИ И НАВИГАЦИЯ
@@ -988,19 +1011,25 @@
     });
   });
 
+  $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
+
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
 
   // Вступительные главы всегда видны в одном вертикальном документе.
   // Закрыты только «Пять чувств» и финал — они раскрываются по условиям.
-  document.getElementById("senses")?.classList.toggle(
-    "is-unlocked",
-    riddleState.sensesOpened || riddleState.solved.length > 0
-  );
-  document.getElementById("letter")?.classList.toggle(
-    "is-unlocked",
-    riddleState.unlocked && riddleState.solved.length === 5
-  );
+  const sensesSectionInitial = document.getElementById("senses");
+  if (sensesSectionInitial) {
+    const sensesVisible = riddleState.sensesOpened || riddleState.solved.length > 0;
+    sensesSectionInitial.hidden = !sensesVisible;
+    sensesSectionInitial.classList.toggle("is-unlocked", sensesVisible);
+  }
+  const finalSectionInitial = document.getElementById("letter");
+  if (finalSectionInitial) {
+    const finalVisible = riddleState.unlocked && riddleState.solved.length === 5;
+    finalSectionInitial.hidden = !finalVisible;
+    finalSectionInitial.classList.toggle("is-unlocked", finalVisible);
+  }
 
   // Ненавязчивое появление крупных элементов при обычной прокрутке.
   const revealTargets = $$(".scene h2, .scene h3, .scene .profile-hero, .scene .stats-section, .scene .quality-list, .scene .sense-chapter, .scene .personal-letter, .scene .letter-opening");

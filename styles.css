@@ -7867,3 +7867,249 @@ body > #letterIntro:not(.is-opening) .letter-intro-sr {
     max-height: 100svh !important;
   }
 }
+
+
+/* =========================================================
+   HASAN — THE PERSONAL EDITION
+   Consolidated responsive layer for the revised story flow.
+   Existing mechanics and asset paths remain untouched.
+   ========================================================= */
+[hidden] { display: none !important; }
+:root {
+  --edition-milk: #fff8ea;
+  --edition-cream: #f5ead5;
+  --edition-burgundy: #711f27;
+  --edition-blue: #a9cde4;
+  --edition-powder: #ebcbd0;
+  --edition-ink: #402c2a;
+  --edition-muted: #8b7168;
+  --edition-line: rgba(113,31,39,.18);
+}
+html, body { background: var(--edition-milk); }
+body { color: var(--edition-ink); }
+main { overflow: clip; }
+.scene {
+  width: min(100%, 1600px);
+  margin-inline: auto;
+  box-sizing: border-box;
+  scroll-margin-top: 76px;
+}
+.scene[hidden] { display: none !important; }
+.scene-nav { width: min(100% - 48px, 1320px); margin-inline: auto; }
+.eyebrow { letter-spacing: .16em; }
+
+/* Keep the personal-edition palette consistent without changing the
+   dedicated burgundy letter-intro artwork. */
+#profile, #admire, #hammer, #style, #belief, #transition, #senses, #letter {
+  background-color: var(--edition-milk);
+  color: var(--edition-ink);
+}
+#profile::before, #profile::after,
+#admire::before, #admire::after,
+#belief::before, #belief::after,
+#transition::before, #transition::after,
+#senses::before, #senses::after,
+#letter::before, #letter::after {
+  pointer-events: none;
+}
+
+/* Profile: clear editorial portrait + readable side copy. */
+#profile .profile-hero {
+  display: grid;
+  grid-template-columns: minmax(260px, .88fr) minmax(320px, 1.12fr);
+  align-items: center;
+  gap: clamp(36px, 7vw, 112px);
+  width: min(100% - 64px, 1260px);
+  margin: 0 auto;
+}
+#profile .profile-photo { min-width: 0; }
+#profile .profile-reference-image { display: block; width: 100%; height: auto; object-fit: contain; }
+#profile .profile-panel { min-width: 0; max-width: 640px; }
+#profile .profile-description { max-width: 58ch; line-height: 1.65; }
+#profile .profile-details {
+  width: min(100% - 64px, 1320px);
+  margin: clamp(44px, 7vw, 96px) auto 0;
+  display: grid;
+  grid-template-columns: minmax(180px, .85fr) minmax(300px, 1.7fr) minmax(180px, .8fr);
+  gap: clamp(24px, 4vw, 64px);
+}
+#profile .profile-detail { min-width: 0; }
+#profile .stat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+}
+#profile .stat-meter { display: block; height: 2px; background: var(--edition-line); }
+#profile .stat-meter i { display: block; width: 100%; height: 100%; background: var(--edition-burgundy); }
+
+/* Qualities are now introduced before the Mjölnir challenge. */
+#admire { padding-block: clamp(64px, 9vw, 128px); }
+#admire .chapter-heading { width: min(100% - 48px, 900px); margin-inline: auto; }
+#admire .quality-list { width: min(100% - 48px, 1260px); margin: 48px auto 0; }
+#admire .quality-card {
+  display: grid;
+  grid-template-columns: minmax(220px, .8fr) minmax(300px, 1.2fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+}
+#admire .quality-card:nth-child(even) { direction: rtl; }
+#admire .quality-card:nth-child(even) > * { direction: ltr; }
+#admire .quality-photo img { width: 100%; height: auto; object-fit: contain; }
+#admire .quality-copy { min-width: 0; max-width: 62ch; }
+#admire .quality-copy p { line-height: 1.65; }
+
+/* Mjölnir keeps its original interaction dimensions; only the surrounding
+   text column is constrained so it cannot collide with the hammer. */
+#hammer .hammer-intro {
+  width: min(100% - 40px, 780px);
+  margin-inline: auto;
+  text-align: center;
+}
+#hammer .hammer-intro h2 { max-width: 15ch; margin-inline: auto; }
+#hammer .hammer-intro > p:last-child { max-width: 58ch; margin-inline: auto; line-height: 1.55; }
+#hammer .hammer-arena { isolation: isolate; }
+#hammer .mjolnir-control { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+#hammer .hammer-instruction { max-width: min(90%, 520px); margin-inline: auto; text-align: center; }
+
+/* Superhero landing scene and Creator Highlights. */
+#style .style-stage { width: min(100% - 32px, 1320px); margin-inline: auto; }
+#style .style-person { pointer-events: none; }
+#style .style-person img { max-width: 100%; height: auto; object-fit: contain; }
+#style .style-highlights { width: min(100% - 32px, 820px); margin: clamp(28px, 5vw, 64px) auto 0; }
+#style .creator-highlights-toggle {
+  width: min(100%, 360px);
+  min-height: 112px;
+  margin-inline: auto;
+  border: 1px solid rgba(65,139,180,.42);
+  border-radius: 5px;
+  background: var(--edition-blue);
+  color: var(--edition-burgundy);
+  box-shadow: 0 12px 28px rgba(54,73,83,.12);
+}
+#style .creator-highlights-toggle:disabled { opacity: .58; cursor: not-allowed; }
+#style .creator-highlights-content { width: min(100%, 720px); margin: 24px auto 0; }
+#style .hammer-letter { padding: clamp(22px, 4vw, 48px); background: rgba(255,255,255,.5); }
+#style .hammer-letter h3 { text-wrap: balance; }
+#style .hammer-letter-body { max-width: 62ch; margin-inline: auto; }
+
+/* New standalone belief chapter. */
+#belief { padding: clamp(76px, 11vw, 150px) 24px; }
+#belief .belief-layout { width: min(100%, 880px); margin-inline: auto; }
+#belief h2 {
+  max-width: 15ch;
+  margin: 18px 0 36px;
+  color: var(--edition-burgundy);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: .98;
+  text-wrap: balance;
+}
+#belief h2 em, #belief .belief-final em { color: #9d5557; }
+#belief .belief-copy { max-width: 68ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.78; }
+#belief .belief-copy p { margin: 0 0 1.05em; }
+#belief .belief-final { margin-top: 34px; color: var(--edition-burgundy); font: 600 clamp(22px, 3vw, 32px) "Cormorant Garamond", Georgia, serif; }
+
+/* Five-senses editorial intro. The interactive chapters remain hidden until
+   the explicit CTA is activated. */
+#transition { padding: clamp(80px, 12vw, 160px) 24px; }
+#transition .transition-content { width: min(100%, 860px); margin-inline: auto; }
+#transition .transition-content h2 {
+  max-width: 15ch;
+  margin: 18px 0 30px;
+  color: var(--edition-burgundy);
+  font-size: clamp(44px, 8vw, 96px);
+  line-height: .96;
+  text-wrap: balance;
+}
+#transition .transition-content > p:not(.eyebrow) {
+  max-width: 68ch;
+  font-size: clamp(17px, 1.45vw, 21px);
+  line-height: 1.72;
+}
+#transition .transition-senses { margin: 34px 0; color: var(--edition-burgundy); }
+#transition #openSensesButton { min-height: 52px; }
+#senses { padding: clamp(56px, 8vw, 110px) 24px; }
+#senses .senses-game-heading { width: min(100%, 900px); margin: 0 auto 38px; }
+#senses .senses-game-heading h2 { color: var(--edition-burgundy); font-size: clamp(40px, 7vw, 78px); }
+#senses .progress, #senses #senseList, #senses .unlock-final { width: min(100%, 1120px); margin-inline: auto; }
+
+/* Final chapter stays inaccessible until the five letters and final code pass. */
+#letter { padding: clamp(64px, 9vw, 120px) 24px; }
+#letter .personal-letter { width: min(100%, 880px); margin-inline: auto; }
+#letter .memory-gallery { width: min(100%, 1180px); margin: clamp(70px, 10vw, 130px) auto 0; }
+#letter .memory-gallery-grid img { max-width: 100%; height: auto; object-fit: contain; }
+
+/* Consistent reading widths and no accidental horizontal overflow. */
+#profile, #admire, #hammer, #style, #belief, #transition, #senses, #letter {
+  max-width: 100%;
+  overflow-x: clip;
+}
+#profile p, #admire p, #hammer p, #style p, #belief p, #transition p, #senses p, #letter p {
+  overflow-wrap: break-word;
+}
+@media (max-width: 760px) {
+  .scene { scroll-margin-top: 68px; }
+  #profile .profile-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    width: min(100% - 36px, 560px);
+  }
+  #profile .profile-photo { width: min(78%, 360px); margin-inline: auto; }
+  #profile .profile-panel { width: 100%; max-width: none; }
+  #profile .profile-details {
+    grid-template-columns: minmax(0,1fr);
+    width: min(100% - 36px, 560px);
+    gap: 26px;
+    margin-top: 40px;
+  }
+  #admire .quality-list { width: min(100% - 36px, 560px); margin-top: 30px; }
+  #admire .quality-card,
+  #admire .quality-card:nth-child(even) {
+    direction: ltr;
+    grid-template-columns: minmax(0,1fr);
+    gap: 16px;
+    margin-bottom: 42px;
+  }
+  #admire .quality-photo { width: min(76%, 340px); margin-inline: auto; }
+  #admire .quality-copy { max-width: none; }
+  #hammer .hammer-intro { width: min(100% - 32px, 560px); }
+  #style .style-stage { width: min(100% - 20px, 560px); }
+  #style .style-highlights { width: min(100% - 28px, 560px); }
+  #belief { padding: 72px 22px; }
+  #belief .belief-copy { font-size: 17px; line-height: 1.68; }
+  #transition { padding: 76px 22px; }
+  #transition .transition-content h2 { font-size: clamp(42px, 12vw, 64px); }
+  #senses { padding: 58px 18px; }
+  #letter { padding: 60px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #belief *, #transition *, #senses *, #letter * {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+#admire .quality-traits {
+  width: min(100% - 48px, 1260px);
+  margin: 34px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+#admire .quality-traits span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(113,31,39,.28);
+  color: var(--edition-burgundy);
+  font: 700 11px/1.2 Manrope, sans-serif;
+  letter-spacing: .11em;
+}
+@media (max-width:760px) {
+  #admire .quality-traits { width: min(100% - 36px, 560px); gap: 7px; }
+  #admire .quality-traits span { font-size: 10px; }
+}

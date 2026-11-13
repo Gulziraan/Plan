@@ -41,7 +41,7 @@
     <nav class="cover-nav" aria-label="Навигация по истории">
       <button type="button" data-next="profile">О ХАСАНЕ</button>
       <button type="button" data-next="admire">ЕГО КАЧЕСТВА</button>
-      <button type="button" data-next="senses">ПЯТЬ ЧУВСТВ</button>
+      <button type="button" data-next="transition">ПЯТЬ ЧУВСТВ</button>
       <button type="button" data-next="letter">ПИСЬМО</button>
     </nav>
     <button class="top-action" id="restartTop">НАЧАТЬ СНАЧАЛА ↗</button>
@@ -57,12 +57,13 @@
           <p class="eyebrow"><span></span> ОСОБЕННОЕ ИЗДАНИЕ · ТОЛЬКО ДЛЯ ТЕБЯ</p>
           <h1>Моему<em> любимому</em></h1>
           <div class="hero-description">
-            <p>Ещё один год твоей жизни. И я так рада, что могу быть рядом - видеть твои победы, смеяться с тобой и разделять даже самые обычные дни.</p>
-            <p>Я хочу, чтобы ты был счастлив, чтобы всё задуманное получалось и впереди было много прекрасного.</p>
+            <p>Ещё один год твоей жизни. И я очень рада, что могу быть рядом — видеть твои победы, смеяться с тобой и разделять даже самые обычные дни.</p>
+            <p>Сегодня хочется пожелать тебе не просто исполнения желаний, а жизни, в которой будет много поводов гордиться собой, смелых решений, счастливых случайностей и больших возможностей.</p>
+            <p>Пусть всё, к чему ты стремишься, постепенно становится реальностью.</p>
             <p class="hero-greeting-ending">С днём рождения, любимый!</p>
           </div>
           <button class="button button-light" id="beginBtn">
-            ОТКРЫТЬ ИСТОРИЮ <span>↗</span>
+            ЭТА ИСТОРИЯ О ТЕБЕ <span>↓</span>
           </button>
           <p class="hero-small">СОЗДАНО С ЛЮБОВЬЮ.</p>
         </div>
@@ -81,11 +82,11 @@
         </div>
 
         <div class="profile-panel">
-          <p class="eyebrow">НЕМНОГО ОБ ОДНОМ ОСОБЕННОМ ЧЕЛОВЕКЕ</p>
+          <p class="eyebrow">THE MAIN CHARACTER</p>
           <h2>ХАСАН</h2>
-          <p class="profile-lead">Сильный по натуре,<br>любимый по сердцу.</p>
-          <p class="profile-description">Для кого-то супергерои существуют только на экране. А для меня ты — настоящий супергерой. Не потому, что умеешь спасать мир, а потому, что я знаю, какой ты, на что способен и сколько в тебе силы, ума и характера.</p>
-          <div class="profile-universe">И ДЛЯ МЕНЯ ТЫ ВСЕГДА БУДЕШЬ ОСОБЕННЫМ.</div>
+          <p class="profile-lead">24 ГОДА. ЕДИНСТВЕННЫЙ ЭКЗЕМПЛЯР.</p>
+          <p class="profile-description">Есть люди, которых невозможно описать одной фотографией, несколькими фактами или короткой характеристикой. Ты как раз такой человек.</p>
+          <p class="profile-description">Поэтому я решила посвятить тебе целое небольшое издание. Здесь будут твои сильные стороны, немного любимой магии, несколько испытаний и кое-что, что я давно хотела тебе сказать.</p>
         </div>
       </div>
 
@@ -126,6 +127,26 @@
         </div>
       </div>
 
+      <div class="scene-nav">
+        <button class="text-link" data-next="admire">К ТВОИМ СИЛЬНЫМ СТОРОНАМ <span>↗</span></button>
+      </div>
+    </section>
+
+    <!-- КАЧЕСТВА -->
+    <section class="scene" id="admire">
+      <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
+      <div class="chapter-heading">
+        <p class="eyebrow">НЕ ВСЁ ПОПАДАЕТ В ДОСЬЕ</p>
+        <h2>ЧТО ДЕЛАЕТ ТЕБЯ <em>ТОБОЙ.</em></h2>
+        <p>Не всё самое важное можно измерить цифрами.</p>
+        <p>Мне нравится в тебе не только то, насколько ты умный, сильный или целеустремлённый. Мне нравится, как ты думаешь, как принимаешь решения, как относишься к тому, что для тебя важно. И даже твои маленькие особенности, которые, возможно, ты сам не считаешь чем-то особенным. Именно из таких деталей складывается человек, которого я знаю и люблю.</p>
+      </div>
+      <div class="quality-traits" aria-label="Сильные стороны Хасана">
+        <span>ИНТЕЛЛЕКТ</span><span>СТРАТЕГИЯ</span><span>НАДЁЖНОСТЬ</span>
+        <span>ТЕРПЕНИЕ</span><span>СИЛА</span><span>ЧУВСТВО ЮМОРА</span>
+        <span>РЕШЕНИЕ ПРОБЛЕМ</span>
+      </div>
+      <div class="quality-list" id="noteGrid"></div>
       <div class="scene-nav">
         <button class="text-link" data-next="hammer">К ОДНОМУ НЕБОЛЬШОМУ ИСПЫТАНИЮ <span>↗</span></button>
       </div>
@@ -196,37 +217,37 @@
         </button>
         <div class="creator-highlights-content" id="creatorHighlightsContent" hidden>
           <div class="hammer-letter" id="hammerLetter" aria-live="polite">
-            <div class="letter-hammer-ghost" aria-hidden="true">ϟ</div>
             <p class="eyebrow">НЕ ОТ ЛЕГЕНДЫ. ОТ МЕНЯ.</p>
-            <h3>ТЫ БЫ ЗНАЛ, КАК Я В ТЕБЯ <em>ВЕРЮ.</em></h3>
+            <h3>ТЫ МОЙ <em>СУПЕРГЕРОЙ.</em></h3>
             <div class="hammer-letter-body">
-              <p>Не только потому, что ты сильный, умный и способен справиться практически с чем угодно. А потому, что я правда верю в тебя.</p>
-              <p>Я хочу, чтобы у тебя получалось всё, к чему ты стремишься. Чтобы сбывались даже те желания, о которых ты пока никому не рассказываешь. Чтобы жизнь давала тебе возможности, которыми ты сможешь воспользоваться.</p>
-              <p>Ты достоин гораздо большего, чем сам иногда можешь себе представить.</p>
-              <p>И я очень хочу быть рядом, видеть, как у тебя всё получается, гордиться тобой и напоминать тебе, какой ты невероятный.</p>
-              <p>А если вдруг забудешь, кто ты, — я напомню.</p>
+              <p>Впрочем, у меня сомнений и не было.</p>
             </div>
-            <p class="hammer-final-line">Мой самый достойный🏋🏽</p>
           </div>
         </div>
         <button class="hammer-replay-flight" id="replayHammerFlight" type="button" hidden>ПОВТОРИТЬ ПОЯВЛЕНИЕ МЬЁЛЬНИРА ↻</button>
       </div>
       <div class="scene-nav style-next">
-        <button class="text-link" data-next="admire">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
+        <button class="text-link" data-next="belief">ДАЛЬШЕ — О ТЕБЕ <span>↗</span></button>
       </div>
     </section>
 
-    <!-- КАЧЕСТВА -->
-    <section class="scene" id="admire">
-      <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
-      <div class="chapter-heading">
-        <p class="eyebrow">НЕ ВСЁ ПОПАДАЕТ В ДОСЬЕ</p>
-        <h2>ЧТО ДЕЛАЕТ ТЕБЯ <em>ТОБОЙ.</em></h2>
-        <p>Но самое лучшее в тебе — даже не суперспособности.</p>
+    <!-- ЛИЧНАЯ ГЛАВА: Я В ТЕБЯ ВЕРЮ -->
+    <section class="scene belief-scene" id="belief" aria-labelledby="beliefTitle">
+      <div class="belief-layout">
+        <p class="eyebrow">НЕ ОТ ЛЕГЕНДЫ. ОТ МЕНЯ.</p>
+        <h2 id="beliefTitle">Я ЗНАЮ, НА ЧТО <em>ТЫ СПОСОБЕН.</em></h2>
+        <div class="belief-copy">
+          <p>Я хочу, чтобы ты никогда не сомневался в себе настолько, чтобы забыть, сколько в тебе возможностей.</p>
+          <p>Я верю в твой ум, твой характер, твои идеи и в то, что ты способен добиться гораздо большего, чем иногда сам себе представляешь.</p>
+          <p>Я хочу, чтобы у тебя получалось всё, к чему ты стремишься. Чтобы сбывались даже те желания, о которых ты пока никому не рассказываешь. Чтобы рядом оказывались нужные люди, появлялись возможности и хватало смелости ими воспользоваться.</p>
+          <p>И даже если что-то будет идти не так, я хочу, чтобы ты помнил: одна неудача ничего не говорит о том, на что ты способен.</p>
+          <p>Я очень хочу быть рядом, видеть твои победы, гордиться тобой и радоваться всему, что у тебя получается.</p>
+          <p>А если вдруг ты сам в себе усомнишься — я напомню тебе, какой ты невероятный.</p>
+        </div>
+        <p class="belief-final">Я в тебя верю. <em>Всегда.</em></p>
       </div>
-      <div class="quality-list" id="noteGrid"></div>
       <div class="scene-nav">
-        <button class="text-link" data-next="transition">Я ХОЧУ СКАЗАТЬ ТЕБЕ ЕЩЁ НЕЧТО <span>↗</span></button>
+        <button class="text-link" data-next="transition">А ТЕПЕРЬ — НЕМНОГО О НАС <span>↗</span></button>
       </div>
     </section>
 
@@ -234,42 +255,25 @@
     <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
       <div class="transition-orbit" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
       <div class="transition-content">
-        <p class="eyebrow">НЕБОЛЬШАЯ ПАУЗА ПЕРЕД СЛЕДУЮЩЕЙ ГЛАВОЙ</p>
-        <h2 id="transitionTitle">А ПОМНИШЬ,<br><em>КАК ВСЁ НАЧИНАЛОСЬ?</em></h2>
-        <p>Есть вещи, которые остаются с нами не потому, что были грандиозными. А потому, что однажды стали важными.</p> 
-        <p>Первый взгляд, знакомый голос, вкус чего-то особенного, случайное прикосновение и аромат, который теперь напоминает о тебе. </p>
-        <p>По отдельности — маленькие детали. Вместе — целая история, в которой мне дорого каждое чувство. Давай на несколько минут вернёмся к этим ощущениям.</p>
+        <p class="eyebrow">А ТЕПЕРЬ — НЕМНОГО О НАС.</p>
+        <h2 id="transitionTitle">ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2>
+        <p>Есть вещи, которые невозможно передать одним поздравлением.</p>
+        <p>Иногда целая история хранится в одной фотографии, знакомом запахе, вкусе, звуке или даже в прикосновении.</p>
+        <p>Я собрала для тебя пять небольших воспоминаний. Каждое из них связано с нами и с тем, как постепенно ты стал для меня таким близким человеком.</p>
+        <p>Здесь тебе предстоит кое-что вспомнить, кое-что разгадать и, возможно, немного улыбнуться. Ну что, готов пройти нашу маленькую историю?</p>
         <div class="transition-senses" aria-label="Пять чувств">
-          <span title="Зрение">◉</span><span title="Слух">♫</span><span title="Вкус">✳</span><span title="Прикосновения">♡</span><span title="Запах">✧</span>
+          <span title="Зрение">◉</span><span title="Звук">♫</span><span title="Вкус">✳</span><span title="Осязание">♡</span><span title="Запах">✧</span>
         </div>
-        <button class="button button-light" data-next="senses">ПОЧУВСТВУЙ ЭТУ ИСТОРИЮ <span>↗</span></button>
+        <button class="button button-light" id="openSensesButton" type="button">ПОЧУВСТВУЙ ЭТУ ИСТОРИЮ <span>↗</span></button>
       </div>
     </section>
 
     <!-- ОТДЕЛЬНАЯ ГЛАВА О ЛЮБВИ -->
     <!-- ПЯТЬ ЧУВСТВ -->
-    <section class="scene" id="senses">
-      <div class="section-top"><span>НАША ИСТОРИЯ / ПЯТЬ ЧУВСТВ</span><span>01 — 05</span></div>
-      <div class="senses-intro">
-        <div class="senses-intro-copy">
-          <p class="eyebrow">НАША ИСТОРИЯ · ПЯТЬ ЧУВСТВ</p>
-          <h2>О ТОМ, <em>ЧТО Я ЧУВСТВУЮ</em></h2>
-          <div class="senses-intro-text">
-            <p>Знаешь, мне так нравится думать о том, как постепенно ты становился для меня всё ближе.</p>
-            <p>И как много всего я успела полюбить в тебе за это время. Наверное, я даже не замечала, как сильно меняется моё отношение к тебе. </p>
-            <p>Просто однажды поняла, что ты уже не просто человек, который мне нравится. Ты — мой любимый человек, и я безумно счастлива, что мы есть друг у друга. </p>
-            <p>Я хочу показать тебе, как всё это начиналось. И немного поделиться тем, насколько сильно я люблю тебя сейчас.</p>
-          </div>
-          <div class="senses-intro-bottom">
-            <div class="senses-intro-motifs" aria-label="Пять чувств"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
-            <button class="senses-begin" type="button" data-scroll-senses="chapter-sight">НАЧАТЬ С САМОГО НАЧАЛА <span>↘</span></button>
-          </div>
-        </div>
-        <figure class="senses-intro-photo">
-          <img src="assets/m4.JPG" alt="Совместное воспоминание" loading="lazy">
-          <figcaption><span>ПЯТЬ ЧУВСТВ</span><span>ОДНА ИСТОРИЯ</span></figcaption>
-        </figure>
-        <span class="senses-intro-index" aria-hidden="true">01—05</span>
+    <section class="scene senses-game-scene" id="senses" hidden aria-label="Пять чувств — интерактивные загадки">
+      <div class="senses-game-heading">
+        <p class="eyebrow">ПЯТЬ ЧУВСТВ · ПЯТЬ ЧАСТЕЙ НАШЕЙ ИСТОРИИ</p>
+        <h2>НУ ЧТО, <em>ВСПОМНИМ?</em></h2>
       </div>
       <div class="progress">
         <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
@@ -282,7 +286,7 @@
     </section>
 
     <!-- ФИНАЛЬНОЕ ПИСЬМО -->
-    <section class="scene personal-letter-scene" id="letter" aria-labelledby="personalLetterTitle">
+    <section class="scene personal-letter-scene" id="letter" hidden aria-labelledby="personalLetterTitle">
       <div class="letter-opening">
         <p class="eyebrow">ПОСЛЕ ВСЕХ ПЯТИ ЧУВСТВ</p>
         <span class="letter-opening-mark" aria-hidden="true">♡</span>
