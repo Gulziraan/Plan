@@ -9591,3 +9591,51 @@ html body #style .style-next .text-link span {
 #challenges .cafe-receipt:before {
   display: none !important;
 }
+
+
+/* Финальная последовательность: без декоративного экрана между шифром и письмом. */
+#secretChapter, .secret-chapter { display:none !important; }
+
+/* Полученные буквы — обычный текст, без плашек и подложек. */
+#challenges .earned-letter,
+#challenges .earned-letter.receipt-earned,
+#challenges .riddle-already-solved {
+  display:flex !important;
+  align-items:baseline !important;
+  justify-content:flex-start !important;
+  gap:10px !important;
+  padding:0 !important;
+  margin:16px 0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+#challenges .earned-letter span,
+#challenges .earned-letter strong {
+  display:inline !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+#challenges .earned-letter strong {
+  color:var(--wine,#76212b) !important;
+  font-size:1.45em !important;
+}
+
+/* Буквы для расшифровки — без коричневых/серых квадратных фонов. */
+#challenges .cipher-letter {
+  background:transparent !important;
+  background-color:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+}
+#challenges .cipher-letter b {
+  background:transparent !important;
+  color:var(--wine,#76212b) !important;
+  border:0 !important;
+  box-shadow:none !important;
+}

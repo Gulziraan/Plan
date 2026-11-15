@@ -863,49 +863,17 @@
   }
 
   function openSecretChapter(shouldScroll = true) {
-    let secret = $("#secretChapter");
-
-    if (!secret) {
-      secret = document.createElement("section");
-      secret.className = "secret-chapter opened";
-      secret.id = "secretChapter";
-
-      secret.innerHTML = `
-        <div class="secret-inner">
-          <p class="eyebrow">ПЯТЬ ЧУВСТВ · ОДНА ИСТОРИЯ</p>
-          <div class="secret-senses-mark" aria-hidden="true"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
-          <h2>ТЫ СТАЛ<br><em>МОИМ САМЫМ РОДНЫМ</em></h2>
-          <div class="secret-lead">
-            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось.</p>
-            <p>Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
-            <p>Я люблю всё, что связано с тобой. И мне хочется ещё много раз переживать с тобой самые обычные моменты, потому что именно они становятся такими дорогими, когда мы вместе.</p>
-            <p>Я очень счастлива, что однажды наши пути пересеклись. И ещё счастливее от того, что теперь у меня есть ты.</p>
-          </div>
-          <div class="secret-message">
-            <span>ПЯТЬ ЧУВСТВ · ПЯТЬ ЧАСТЕЙ НАШЕЙ ИСТОРИИ</span>
-            <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
-            <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
-          </div>
-          <button class="button button-light" type="button" id="secretContinue">
-            ПЕРЕЧИТАТЬ МОЁ ПИСЬМО <span>↗</span>
-          </button>
-        </div>
-      `;
-
-      $("#challenges")?.after(secret);
-
-      $("#secretContinue")?.addEventListener("click", () => {
-        showScene("letter");
-      });
-    }
-
-    secret.classList.add("visible");
+    // После правильного шифра открываем сразу личное письмо и фотогалерею.
+    const letter = document.getElementById("letter");
+    if (!letter) return;
+    letter.hidden = false;
+    letter.classList.add("opened", "visible");
     if (shouldScroll) {
-      secret.scrollIntoView({
+      letter.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start"
       });
-      toast("Шифр разгадан. Открыта последняя глава.");
+      toast("Шифр разгадан. Открыто личное письмо.");
     }
   }
 
