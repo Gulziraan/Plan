@@ -80,6 +80,7 @@
     hammerDone: false
   };
   let currentScene = "welcome";
+  let personalMessageCompleted = false;
 
   // Восстанавливаем состояние до первой отрисовки. Старые ключи читаются
   // только для миграции; далее используется один версионируемый ключ.
@@ -178,6 +179,7 @@
   function showScene(id) {
     const targetIndex = scenes.indexOf(id);
     if (targetIndex < 0) return;
+    if (id === "senses" && !personalMessageCompleted) return;
 
     if (id === "senses") {
       riddleState.sensesOpened = true;
@@ -1103,6 +1105,7 @@
   $("#closeBeliefEnvelope")?.addEventListener("click", () => {
     if (beliefEnvelope) beliefEnvelope.hidden = true;
     document.body.classList.remove("belief-envelope-open");
+    personalMessageCompleted = true;
     showScene("senses");
   });
   $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
@@ -1111,17 +1114,13 @@
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
 
-  // Вступительные главы всегда видны в одном вертикальном документе.
-  // Закрыты только «Пять чувств» и финал — они раскрываются по условиям.
+  // Глава «О том, что я чувствую» всегда закрыта при загрузке.
+  // Её можно открыть только после явного прочтения личного послания.
   const sensesSectionInitial = document.getElementById("senses");
   if (sensesSectionInitial) {
-    const sensesVisible = riddleState.sensesOpened || riddleState.solved.length > 0;
-    sensesSectionInitial.hidden = !sensesVisible;
-    sensesSectionInitial.classList.toggle("is-unlocked", sensesVisible);
-    sensesSectionInitial.classList.toggle("opened", sensesVisible);
-    if (sensesVisible) {
-      $("#challenges")?.classList.add("opened");
-    }
+    sensesSectionInitial.hidden = true;
+    sensesSectionInitial.classList.remove("is-unlocked", "opened");
+    $("#challenges")?.classList.remove("opened");
   }
   const finalSectionInitial = document.getElementById("letter");
   if (finalSectionInitial) finalSectionInitial.hidden = false;

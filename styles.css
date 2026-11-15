@@ -8527,3 +8527,47 @@ body.post-hammer-gate #style { pointer-events:auto; }
   outline:2px solid #8fc9d6 !important;
   outline-offset:2px !important;
 }
+
+
+/* Precise visual correction from the latest screenshots */
+html body #admire .admire-long-title {
+  width: 100% !important;
+  max-width: 1180px !important;
+  margin-left: clamp(0px, 4vw, 56px) !important;
+  margin-right: auto !important;
+  text-align: left !important;
+  font-size: clamp(38px, 5.2vw, 76px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -.025em !important;
+  white-space: nowrap !important;
+}
+html body #admire .admire-long-title span {
+  color: var(--sky, #8fc7e2) !important;
+}
+@media (max-width: 760px) {
+  html body #admire .admire-long-title {
+    margin-left: 0 !important;
+    font-size: clamp(30px, 8vw, 52px) !important;
+    white-space: normal !important;
+  }
+}
+
+/* Screen 5: return to the site's original wine-red text and established sky-blue accent. */
+html body #style .style-title,
+html body #style .style-file,
+html body #style .style-next .text-link {
+  color: var(--wine, #76212b) !important;
+}
+html body #style .creator-highlights-card {
+  background: var(--sky-pale, #dceef5) !important;
+  border: 1px solid var(--sky, #8fc7e2) !important;
+  color: var(--wine, #76212b) !important;
+}
+html body #style .creator-highlights-card .creator-highlights-title,
+html body #style .creator-highlights-card .creator-highlights-kicker {
+  color: var(--wine, #76212b) !important;
+}
+html body #style .style-next .text-link::after,
+html body #style .style-next .text-link span {
+  color: var(--sky, #8fc7e2) !important;
+}
