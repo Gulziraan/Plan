@@ -863,15 +863,26 @@
   }
 
   function openSecretChapter(shouldScroll = true) {
-    // После правильного шифра открываем сразу личное письмо и фотогалерею.
     const letter = document.getElementById("letter");
     if (!letter) return;
+
+    // Снимаем все возможные состояния блокировки секции.
     letter.hidden = false;
-    letter.classList.add("opened", "visible");
+    letter.removeAttribute("hidden");
+    letter.classList.remove("locked", "is-locked", "is-hidden");
+    letter.classList.add("opened", "visible", "active", "is-active", "is-unlocked");
+    letter.style.setProperty("display", "block", "important");
+    letter.style.setProperty("visibility", "visible", "important");
+    letter.style.setProperty("opacity", "1", "important");
+    letter.style.setProperty("pointer-events", "auto", "important");
+
     if (shouldScroll) {
-      letter.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "start"
+      // Дожидаемся обновления раскладки, чтобы Safari прокрутил уже открытый блок.
+      requestAnimationFrame(() => {
+        letter.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start"
+        });
       });
       toast("Шифр разгадан. Открыто личное письмо.");
     }
@@ -889,7 +900,15 @@
     }
     if (riddleState.solved.length === 5) renderCipher();
     const letterSection = document.getElementById("letter");
-    if (letterSection) { letterSection.hidden = !riddleState.unlocked; }
+    if (letterSection) {
+      letterSection.hidden = !riddleState.unlocked;
+      if (riddleState.unlocked && riddleState.solved.length === 5) {
+        letterSection.removeAttribute("hidden");
+        letterSection.classList.add("opened", "visible", "active", "is-active", "is-unlocked");
+        letterSection.style.setProperty("display", "block", "important");
+        letterSection.style.setProperty("visibility", "visible", "important");
+      }
+    }
     if (riddleState.unlocked && riddleState.solved.length === 5) openSecretChapter(false);
   }
 
