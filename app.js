@@ -338,42 +338,8 @@
   // ПЯТЬ ГЛАВ И ИХ ИСХОДНЫЙ КОНТЕНТ
 
   function fingerprintSvg(side) {
-    // Графика построена из органичных линий папиллярного узора:
-    // не эллипсы и не пунктир, а непрерывные дуги с естественными окончаниями.
-    const ridges = [];
-    for (let i = 0; i < 17; i++) {
-      const inset = i * 4.15;
-      const left = 24 + inset * 0.72;
-      const right = 176 - inset * 0.72;
-      const top = 18 + inset * 0.78;
-      const bottom = 208 - inset * 0.58;
-      const crown = 8 + inset * 0.92;
-      const wobble = (i % 3 - 1) * 1.6;
-      // Каждая гряда — открытая арка с мягко загнутыми концами.
-      ridges.push(`<path d="M ${left + 5} ${bottom - 8}
-        C ${left - 2} ${bottom - 48}, ${left + 1 + wobble} ${top + 44}, 100 ${crown}
-        C ${right - 1 + wobble} ${top + 42}, ${right + 3} ${bottom - 50}, ${right - 5} ${bottom - 8}" />`);
-    }
-    // Центральный завиток и короткие разветвляющиеся гряды делают рисунок
-    // похожим на реальный петлевой отпечаток, а не на набор концентрических овалов.
-    const core = [
-      'M 68 139 C 57 111 68 77 96 67 C 124 58 146 79 145 105 C 144 128 126 145 105 143 C 87 141 79 126 84 111 C 88 99 102 94 113 101',
-      'M 59 151 C 43 112 62 66 96 54 C 135 41 160 72 157 108 C 155 139 132 160 104 157',
-      'M 78 153 C 65 130 69 103 86 88 C 105 71 132 81 137 103 C 141 121 128 137 111 137',
-      'M 45 130 C 38 91 59 48 94 39',
-      'M 155 145 C 174 119 174 83 159 59',
-      'M 34 164 C 22 126 25 91 42 65',
-      'M 166 166 C 184 137 185 103 177 79'
-    ];
-    const ink = '#29272a';
-    const highlight = '#494449';
-    const ridgeMarkup = ridges.map((d, i) => `<path d="${d.replace(/\s+/g, ' ')}" stroke="${i % 4 === 0 ? highlight : ink}" stroke-width="${i % 5 === 0 ? 2.15 : 1.75}"/>`).join('');
-    const coreMarkup = core.map((d, i) => `<path d="${d}" stroke="${i % 3 === 0 ? highlight : ink}" stroke-width="1.8"/>`).join('');
-    return `<svg class="fingerprint-svg" viewBox="0 0 200 230" aria-hidden="true" focusable="false">
-      <g fill="none" stroke-linecap="round" stroke-linejoin="round">${ridgeMarkup}${coreMarkup}
-        <path d="M 52 176 C 42 188 42 199 49 207 M 148 176 C 158 188 158 199 151 207" stroke="${ink}" stroke-width="1.7"/>
-      </g>
-    </svg>`;
+    const file = side === "right" ? "fingerprint-right.png" : "fingerprint-left.png";
+    return `<img class="fingerprint-image" src="assets/${file}" alt="Детализированный чёрный отпечаток пальца" loading="lazy" draggable="false">`;
   }
 
   function renderSenses() {
@@ -417,9 +383,9 @@
           <div class="spot-difference-pair">
             <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/O1.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
             <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/O2.jpg" alt="Изменённая версия фотографии" loading="lazy">
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(1) ? "is-found" : ""}" data-difference="1" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.sightFound.includes(1) ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(2) ? "is-found" : ""}" data-difference="2" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.sightFound.includes(2) ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(3) ? "is-found" : ""}" data-difference="3" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.sightFound.includes(3) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(1) ? "is-found" : ""}" data-difference="1" aria-pressed="${riddleState.sightFound.includes(1) ? "true" : "false"}" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.sightFound.includes(1) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(2) ? "is-found" : ""}" data-difference="2" aria-pressed="${riddleState.sightFound.includes(2) ? "true" : "false"}" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.sightFound.includes(2) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(3) ? "is-found" : ""}" data-difference="3" aria-pressed="${riddleState.sightFound.includes(3) ? "true" : "false"}" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.sightFound.includes(3) ? "disabled" : ""}></button>
             </div></figure>
           </div>
           <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.sightFound.length}/3</strong></div>
@@ -471,7 +437,7 @@
       if (s.kind === "scent") {
         content = `
           <div class="scent-sensory-scene" data-scent-scene>
-            <figure class="scent-memory-photo"><img src="assets/scent-memory.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
+            <figure class="scent-memory-photo"><img src="assets/scent-memory.jpg" alt="Наше совместное воспоминание" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
             <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
             <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
             <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
@@ -507,7 +473,7 @@
             <div class="sense-heading"><div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3>${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}</div><span class="sense-symbol">${s.symbol}</span></div>
             <p class="sense-description">${s.description}</p><div class="sense-content">${content}</div>
             ${tasteReceipt}${standardRiddle}
-            ${s.id === "touch" ? `<div class="certificate certificate-quiet"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>` : ""}
+
           </div>
         </article>`;
       } catch (error) {
@@ -873,9 +839,12 @@
       riddleState.unlocked = true;
       riddleState.sensesOpened = true;
       saveRiddles();
-      $("#riddleCipher")?.classList.add("is-complete");
+      const letter = $("#letter");
+      if (letter) {
+        letter.hidden = false;
+        letter.classList.add("is-unlocked", "opened");
+      }
       showScene("letter");
-      toast("Шифр разгадан. Для тебя открыто моё письмо.");
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
       feedback.className = "riddle-feedback is-wrong";
@@ -896,11 +865,8 @@
     const letterSection = document.getElementById("letter");
     if (letterSection) { letterSection.hidden = false; }
     if (riddleState.unlocked && riddleState.solved.length === 5) {
-      const letterSection = document.getElementById("letter");
-      if (letterSection) {
-        letterSection.hidden = false;
-        letterSection.classList.add("is-unlocked", "opened");
-      }
+      const letter = $("#letter");
+      if (letter) { letter.hidden = false; letter.classList.add("is-unlocked", "opened"); }
     }
   }
 
@@ -1471,10 +1437,12 @@
     if (difference) {
       const game = difference.closest("[data-spot-game]");
       if (game && !difference.classList.contains("is-found")) {
-        difference.classList.add("is-found");
-        difference.disabled = true;
         const differenceNumber = Number(difference.dataset.difference);
-        if ([1, 2, 3].includes(differenceNumber) && !riddleState.sightFound.includes(differenceNumber)) {
+        if (![1, 2, 3].includes(differenceNumber)) return;
+        difference.classList.add("is-found");
+        difference.setAttribute("aria-pressed", "true");
+        difference.disabled = true;
+        if (!riddleState.sightFound.includes(differenceNumber)) {
           riddleState.sightFound.push(differenceNumber);
           riddleState.sightFound.sort((a, b) => a - b);
           persistState();

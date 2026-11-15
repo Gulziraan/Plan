@@ -2674,8 +2674,8 @@ audio { width: 100%; max-width: 450px; }
 #senses .audio-timeline > div { display:flex; justify-content:space-between; gap:10px; color:#e2c8b7; font-size:9px; letter-spacing:.08em; }
 #senses .audio-missing { margin-top:7px!important; color:#e4c6ad!important; font-size:12px!important; font-style:italic; }
 
-#senses .cafe-scene { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr); min-height:330px; overflow:hidden; border:1px solid #c49a7855; background:linear-gradient(120deg,#29151d,#56323a); box-shadow:0 22px 48px #10070c55; }
-#senses .cafe-photo-art { position:relative; min-height:330px; overflow:hidden; background:radial-gradient(ellipse at 28% 25%,#f5d5a0aa,transparent 33%),linear-gradient(135deg,#6e4a3d,#291b1b 68%); }
+#senses .cafe-scene { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr); min-height:300px; overflow:hidden; border:1px solid var(--line); background:var(--paper-light); box-shadow:none; }
+#senses .cafe-photo-art { position:relative; min-height:300px; overflow:hidden; background:#e9dfd1; }
 #senses .cafe-window-light { position:absolute; width:55%; height:85%; left:0; top:-20%; transform:rotate(18deg); background:linear-gradient(90deg,#f5d5a055,transparent); filter:blur(13px); }
 #senses .cafe-table { position:absolute; left:-8%; right:-8%; bottom:-8%; height:43%; transform:rotate(-5deg); background:repeating-linear-gradient(90deg,#593b31 0 25px,#654637 26px 27px); box-shadow:0 -12px 35px #170e0b99; }
 #senses .cafe-cup { position:absolute; z-index:2; left:28%; bottom:27%; width:110px; height:75px; border-radius:8px 8px 36px 36px; background:linear-gradient(90deg,#e8d7c2,#fff0dc 55%,#bda28b); box-shadow:0 13px 20px #160d0a88; transform:rotate(-7deg); }
@@ -2709,28 +2709,7 @@ audio { width: 100%; max-width: 450px; }
 #senses .receipt-earned { justify-content:center; color:#573a3e; }
 
 #senses .touch-experience { margin:25px 0; }
-#senses .touch-art-stage { position:relative; display:flex; min-height:520px; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; padding:35px 20px; border:1px solid #bd916d77; background:radial-gradient(ellipse at 50% 48%,#673748 0,#3b202f 45%,#21131f 100%); box-shadow:inset 0 0 70px #110a14aa,0 22px 50px #11070d55; cursor:pointer; user-select:none; touch-action:none; }
-#senses .touch-art-stage:before { content:""; position:absolute; inset:15px; border:1px solid #c49a7844; pointer-events:none; }
-#senses .touch-art-kicker { z-index:1; color:#d6b18e; font-size:10px; letter-spacing:.24em; }
-#senses .fingerprint-pair { position:relative; display:flex; justify-content:center; align-items:center; width:min(100%,640px); height:300px; margin:18px auto; }
-#senses .fingerprint-print { position:absolute; display:grid; place-items:center; opacity:1; filter:drop-shadow(0 3px 3px #09080b66); transform-origin:50% 55%; transition:transform 2.1s cubic-bezier(.2,.7,.2,1),opacity 1.3s,filter 1.3s; }
-/* Первый отпечаток — компактнее; второй появляется заметно крупнее, как отдельное прикосновение. */
-#senses .print-left { left:calc(50% - 176px); width:190px; height:226px; transform:rotate(-24deg); }
-#senses .print-right { left:calc(50% - 58px); width:238px; height:282px; opacity:0; transform:translate(105px,22px) rotate(24deg) scale(.78); }
-#senses .fingerprint-svg { width:100%; height:100%; overflow:visible; }
-#senses .print-right .fingerprint-svg { transform:scaleX(-1); }
-#senses .fingerprint-svg path { vector-effect:non-scaling-stroke; }
-#senses .touch-art-stage.is-charging .print-left { filter:drop-shadow(0 0 10px #a6a0a655); }
-#senses .touch-art-stage.is-charging .print-left .fingerprint-svg { animation:fingerprintPulse .7s ease-in-out infinite alternate; }
-#senses .touch-progress { width:min(190px,60%); height:2px; background:#ffffff24; overflow:hidden; margin:10px 0; }
-#senses .touch-progress i { display:block; height:100%; width:100%; background:#e6bd91; transform:scaleX(0); transform-origin:left; transition:transform 1.15s linear; }
-#senses .touch-art-stage.is-charging .touch-progress i { transform:scaleX(1)!important; }
-#senses .touch-art-instruction { color:#f1dfd1; font:22px var(--serif); text-align:center; }
-#senses .touch-art-hint { max-width:430px; margin-top:9px; color:#c9aaa7; font:italic 16px var(--serif); text-align:center; }
-#senses .touch-art-stage.is-awakening .print-right { opacity:1; transform:translate(0,0) rotate(24deg) scale(1); filter:drop-shadow(0 0 10px #a6a0a644); }
-#senses .touch-art-stage.is-joined .print-left { transform:translate(35px,5px) rotate(-42deg) scale(1); }
-#senses .touch-art-stage.is-joined .print-right { transform:translate(-35px,-2px) rotate(42deg) scale(1.04); }
-#senses .touch-art-stage.is-joined .fingerprint-pair { filter:drop-shadow(0 0 14px #9b969b55); }
+#senses .touch-art-stage { position:relative; display:flex; min-height:480px; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; padding:30px 20px; border:0; background:transparent; box-shadow:none; cursor:pointer; user-select:none; touch-action:none; }
 #senses .touch-reveal-copy { position:relative; z-index:2; max-width:690px; margin:4px auto 0; padding:16px 22px; color:#f4e3d5; background:#251520bb; border-top:1px solid #d2a77b88; text-align:center; animation:appear 1.2s ease both; }
 #senses .touch-reveal-copy p { font:20px/1.5 var(--serif); }
 #senses .touch-braille-label { margin:36px 0 12px; color:#cda982; font-size:9px; letter-spacing:.18em; }
@@ -2738,19 +2717,35 @@ audio { width: 100%; max-width: 450px; }
 #senses .certificate-quiet strong { font-size:38px; }
 @keyframes fingerprintPulse { from { opacity:.75; } to { opacity:1; } }
 
-#senses .scent-sensory-scene { --pointer-x:50%; --pointer-y:50%; position:relative; min-height:440px; overflow:hidden; display:grid; place-items:center; isolation:isolate; border:1px solid #bd916d66; background:radial-gradient(ellipse at 50% 48%,#754453 0,#3c2435 45%,#1e1422 100%); box-shadow:inset 0 0 80px #100a16aa,0 20px 48px #10070d55; }
-#senses .scent-veil { position:absolute; width:78%; height:42%; border:1px solid #e4c4a322; border-radius:50%; filter:blur(1px); opacity:.5; transform:rotate(-22deg); background:linear-gradient(90deg,transparent,#e6b98b12,transparent); transition:transform 2s ease,opacity 2s ease; }
-#senses .veil-one { top:5%; left:-15%; }
-#senses .veil-two { bottom:4%; right:-18%; transform:rotate(24deg); }
-#senses .veil-three { top:35%; left:20%; width:65%; height:28%; transform:rotate(12deg); opacity:.22; }
-#senses .scent-light-core { position:absolute; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,#e8b77b38,transparent 68%); filter:blur(12px); left:calc(var(--pointer-x) - 150px); top:calc(var(--pointer-y) - 150px); transition:left .3s,top .3s; }
-#senses .scent-particles { position:absolute; inset:0; opacity:.5; background-image:radial-gradient(#eac89d 1px,transparent 1.8px),radial-gradient(#eac89d 1px,transparent 1.8px); background-size:87px 91px,131px 137px; background-position:12px 18px,48px 65px; mask-image:radial-gradient(ellipse at center,#000,transparent 75%); }
-#senses .scent-scene-copy { position:relative; z-index:2; max-width:590px; padding:45px 25px; text-align:center; }
-#senses .scent-scene-copy > span { color:#e4c19b; font:clamp(25px,4vw,42px)/1.08 var(--display); letter-spacing:.06em; }
-#senses .scent-scene-copy p { color:#ead8d1; font:19px/1.5 var(--serif); }
-#senses .scent-scene-copy button { margin-top:14px; padding:12px 17px; border:1px solid #d0a27c88; background:#ffffff0b; color:#efd8c2; font-size:9px; letter-spacing:.15em; }
-#senses .scent-scene-copy strong { display:block; margin-top:25px; color:#f1c58d; font:17px var(--display); letter-spacing:.14em; animation:appear 1s ease both; }
-#senses .scent-veil { pointer-events:none; }
+#senses .scent-sensory-scene {
+  position:relative; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  align-items:center; gap:clamp(20px,3vw,38px); min-height:0;
+  padding:0; overflow:visible; background:transparent; border:0; box-shadow:none;
+}
+#senses .scent-veil,#senses .scent-light-core,#senses .scent-particles,#senses .scent-trail { display:none !important; }
+#senses .scent-memory-photo { position:relative; z-index:1; margin:0; min-width:0; }
+#senses .scent-memory-photo img {
+  display:block; width:100%; height:clamp(230px,30vw,390px);
+  object-fit:cover; border:0; box-shadow:none;
+}
+#senses .scent-memory-photo figcaption {
+  margin-top:10px; color:var(--wine-soft); font:10px/1.5 var(--sans); letter-spacing:.13em;
+}
+#senses .scent-scene-copy { position:relative; z-index:1; max-width:590px; padding:0; text-align:left; }
+#senses .scent-scene-copy>span { color:var(--wine); font:clamp(24px,3.3vw,38px)/1.08 var(--display); letter-spacing:.01em; }
+#senses .scent-scene-copy p { color:var(--ink-2); font:18px/1.6 var(--serif); }
+#senses .scent-scene-copy button {
+  margin-top:14px; padding:10px 0; border:0; border-bottom:1px solid var(--sky);
+  background:transparent; color:var(--wine); font:600 10px/1.4 var(--sans); letter-spacing:.13em;
+}
+#senses .scent-scene-copy strong { display:block; margin-top:20px; color:var(--wine); font:600 16px/1.4 var(--display); letter-spacing:.08em; }
+@media(max-width:700px) {
+  #senses .scent-sensory-scene { grid-template-columns:1fr; gap:18px; }
+  #senses .scent-memory-photo img { height:auto; max-height:340px; object-fit:contain; }
+  #senses .scent-scene-copy { padding:0; }
+}
+
+
 #senses .scent-trail { position:absolute; z-index:1; width:110px; height:110px; border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); background:radial-gradient(circle,#e8bb7d44,transparent 70%); opacity:0; transition:opacity .4s; }
 #senses .scent-sensory-scene.is-stirred .scent-trail { opacity:1; }
 #senses .scent-sensory-scene.is-stirred .veil-one { transform:translate(25px,14px) rotate(-15deg); opacity:.72; }
@@ -2787,7 +2782,7 @@ audio { width: 100%; max-width: 450px; }
   #senses .audio-record.is-playing { animation:none!important; }
 }
 @media(prefers-reduced-motion:reduce) {
-  #senses .touch-art-stage.is-charging .fingerprint-svg { animation:none!important; }
+  #senses .touch-art-stage.is-charging .fingerprint-image { animation:none!important; }
   #senses .touch-reveal-copy { animation:none!important; }
 }
 #senses .touch-art-stage.is-joined .fingerprint-pair {
@@ -4178,16 +4173,7 @@ main > #welcome{ padding-top: clamp(22px, 3.5vw, 52px); padding-bottom: 38px; }
   margin-top: clamp(30px, 4vw, 56px);
   padding: 0;
 }
-.scene-nav::before {
-  content: "";
-  display: block;
-  width: 86px;
-  height: 5px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, var(--blue-deep), var(--wine));
-  transform: rotate(-2deg);
-}
+/* Removed decorative blue-to-burgundy stripe from all scene navigation. */
 
 /* Chapter transitions are blended into the same paper field. */
 #welcome{
@@ -8114,41 +8100,43 @@ main { overflow: clip; }
   #admire .quality-traits span { font-size: 10px; }
 }
 
-/* Chapter galleries: content and riddles are deliberately separate chapters. */
-.chapter-gallery{width:min(1180px,calc(100% - 48px));margin:52px auto 96px;position:relative}
-.chapter-gallery-top{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
-.gallery-count{font:600 12px/1.2 var(--font-mono,monospace);letter-spacing:.14em;color:var(--muted,#8b817d);margin:8px 0 0}
-.gallery-dots{display:flex;gap:8px;align-items:center}
-.gallery-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(120,100,90,.28);cursor:pointer}
-.gallery-dots button.active{width:24px;border-radius:8px;background:var(--accent,#a66f72)}
-.chapter-slides{position:relative;min-height:280px}
-.chapter-slide{display:none;animation:chapterSlideIn .42s ease both}
+/* Chapter galleries: one restrained editorial system for all five senses and puzzles. */
+.chapter-gallery{width:min(1180px,calc(100% - 56px));margin:42px auto 76px;position:relative;color:var(--ink)}
+.chapter-gallery-top{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.gallery-count{margin:7px 0 0;color:var(--wine-soft);font:600 11px/1.3 var(--sans);letter-spacing:.14em}
+.gallery-dots{display:flex;gap:9px;align-items:center}
+.gallery-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(101,22,18,.22);cursor:pointer}
+.gallery-dots button.active{width:22px;border-radius:8px;background:var(--wine)}
+.chapter-slides{position:relative;min-height:260px}
+.chapter-slide{display:none;animation:chapterSlideIn .32s ease both}
 .chapter-slide.is-active{display:block}
-@keyframes chapterSlideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
-.chapter-gallery-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(120,100,90,.2)}
-.chapter-gallery-nav button,.chapter-gallery-nav span{font:600 11px/1.4 var(--font-mono,monospace);letter-spacing:.12em;color:var(--text,#302a28)}
-.chapter-gallery-nav button{border:0;background:none;padding:12px 0;cursor:pointer}
-.chapter-gallery-nav button:disabled{opacity:.25;cursor:default}
-.chapter-gallery-nav span{color:var(--muted,#8b817d);text-align:center}
-.chapter-transition{min-height:68vh;display:grid;place-items:center;padding:90px 24px;background:linear-gradient(145deg,rgba(237,225,216,.58),rgba(249,244,238,.9))}
+@keyframes chapterSlideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.chapter-gallery-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+.chapter-gallery-nav button,.chapter-gallery-nav span{font:600 10px/1.4 var(--sans);letter-spacing:.12em;color:var(--wine)}
+.chapter-gallery-nav button{border:0;background:none;padding:10px 0;cursor:pointer}
+.chapter-gallery-nav button:disabled{opacity:.28;cursor:default}
+.chapter-gallery-nav span{color:var(--ink-2);text-align:center}
+.chapter-transition{min-height:62vh;display:grid;place-items:center;padding:80px 24px;background:transparent;border-top:1px solid var(--line)}
 .chapter-transition-inner{width:min(700px,100%);text-align:center}
-.chapter-transition-inner .transition-mark{display:block;font-size:32px;margin:25px 0;color:var(--accent,#a66f72)}
-.chapter-transition-inner h2{font-size:clamp(38px,7vw,76px);line-height:1.02;margin:0 0 30px}
-.chapter-transition-inner>p:not(.eyebrow){max-width:560px;margin:14px auto;font-size:clamp(16px,1.7vw,19px);line-height:1.75;color:var(--muted,#665d59)}
-.chapter-transition-inner .text-link{margin-top:34px;border:0;border-bottom:1px solid currentColor;background:none;padding:12px 0;font:600 12px/1.4 var(--font-mono,monospace);letter-spacing:.12em;cursor:pointer}
-.challenge-gallery{padding:70px 0 100px;background:rgba(245,238,231,.5)}
-.challenge-heading{width:min(1180px,calc(100% - 48px));margin:0 auto 35px}
-.challenge-heading h2{font-size:clamp(34px,5vw,62px);margin:12px 0}
-.challenge-heading>p:last-child{max-width:620px;line-height:1.7;color:var(--muted,#746a65)}
-.challenge-progress{width:min(1180px,calc(100% - 48px));margin:0 auto 38px}
+.chapter-transition-inner .transition-mark{display:block;font-size:25px;margin:18px 0;color:var(--wine-soft)}
+.chapter-transition-inner h2{color:var(--wine);font-size:clamp(36px,6vw,68px);line-height:1.02;margin:0 0 24px}
+.chapter-transition-inner h2 em{color:var(--sky-deep)}
+.chapter-transition-inner>p:not(.eyebrow){max-width:560px;margin:12px auto;font:18px/1.65 var(--serif);color:var(--ink-2)}
+.chapter-transition-inner .text-link{margin-top:24px;border:0;border-bottom:1px solid var(--wine);background:none;color:var(--wine);padding:12px 0;font:600 11px/1.4 var(--sans);letter-spacing:.12em;cursor:pointer}
+.challenge-gallery{padding:56px 0 78px;background:transparent;border-top:1px solid var(--line);color:var(--ink)}
+.challenge-heading{width:min(1180px,calc(100% - 56px));margin:0 auto 26px}
+.challenge-heading h2{margin:10px 0 12px;color:var(--wine);font:600 clamp(34px,5vw,58px)/1.02 var(--display)}
+.challenge-heading h2 em{color:var(--sky-deep)}
+.challenge-heading>p:last-child{max-width:620px;color:var(--ink-2);font:17px/1.6 var(--serif)}
+.challenge-progress{width:min(1180px,calc(100% - 56px));margin:0 auto 30px}
 .puzzle-gallery{margin-top:0}
-.puzzle-slide{padding:clamp(18px,3vw,36px);background:rgba(255,255,255,.62);border:1px solid rgba(120,100,90,.15);border-radius:4px}
-.puzzle-slide-heading{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:24px;border-bottom:1px solid rgba(120,100,90,.16);padding-bottom:16px}
-.puzzle-slide-heading span{font:11px var(--font-mono,monospace);letter-spacing:.12em;color:var(--muted,#8b817d)}
-.puzzle-slide-heading h3{font-size:clamp(22px,3vw,34px);margin:0}
+.puzzle-slide{padding:0;background:transparent;border:0;border-radius:0;box-shadow:none}
+.puzzle-slide-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:0 0 20px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+.puzzle-slide-heading span{color:var(--wine-soft);font:600 10px/1.4 var(--sans);letter-spacing:.14em}
+.puzzle-slide-heading h3{margin:0;color:var(--wine);font:600 clamp(25px,3.3vw,38px)/1.05 var(--display)}
 .letter-next-actions{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;margin:40px auto}
 .letter-next-actions .text-link{border:0;border-bottom:1px solid currentColor;background:none;padding:12px 0;cursor:pointer}
-@media(max-width:700px){.chapter-gallery{width:calc(100% - 28px);margin:32px auto 58px}.chapter-gallery-top{align-items:center}.chapter-slides{min-height:200px}.chapter-gallery-nav{margin-top:18px}.chapter-gallery-nav button,.chapter-gallery-nav span{font-size:10px}.chapter-transition{min-height:62vh;padding:70px 22px}.challenge-gallery{padding:52px 0 70px}.challenge-heading,.challenge-progress{width:calc(100% - 28px)}.puzzle-slide{padding:16px 12px}.puzzle-slide-heading{display:block}.puzzle-slide-heading h3{margin-top:8px}.letter-next-actions{gap:10px;flex-direction:column}}
+@media(max-width:700px){.chapter-gallery{width:calc(100% - 32px);margin:28px auto 50px}.chapter-gallery-top{align-items:center}.chapter-slides{min-height:180px}.chapter-gallery-nav{margin-top:16px}.chapter-gallery-nav button,.chapter-gallery-nav span{font-size:9px}.chapter-transition{min-height:54vh;padding:54px 18px}.challenge-gallery{padding:38px 0 54px}.challenge-heading,.challenge-progress{width:calc(100% - 32px)}.puzzle-slide-heading{display:block}.puzzle-slide-heading h3{margin-top:6px}.letter-next-actions{gap:10px;flex-direction:column}}
 
 /* Profile: details belong to the same text column as the portrait, not a detached row. */
 #profile .profile-hero{align-items:stretch;gap:0}
@@ -8174,40 +8162,6 @@ main { overflow: clip; }
 #style .creator-highlights-toggle .creator-highlights-title{font-size:clamp(22px,3vw,38px);line-height:.98}
 #style .creator-highlights-toggle .creator-highlights-hint{font:600 10px/1.5 var(--font-mono,monospace);letter-spacing:.14em}
 #style .creator-highlights-toggle:hover:not(:disabled){transform:translateX(5px);background:transparent!important;box-shadow:none!important}
-
-/* The puzzle controls now live in their own chapter, so keep their editorial palette there too. */
-#challenges .riddle-panel,#challenges .spot-difference,#challenges .audio-story-track,#challenges .touch-art-stage,#challenges .scent-sensory-scene,#challenges .cafe-scene,#challenges .cafe-receipt{background:rgba(255,250,242,.94);color:var(--ink,#302a28);border:1px solid rgba(112,33,43,.18);box-shadow:0 16px 38px rgba(57,42,36,.08)}
-#challenges .riddle-question,#challenges .riddle-intro,#challenges .spot-difference p,#challenges .spot-difference-heading p,#challenges .audio-track-copy p{color:var(--ink,#302a28)}
-#challenges .riddle-status,#challenges .spot-progress strong,#challenges .spot-difference-heading span,#challenges .spot-difference-pair figcaption,#challenges .cafe-receipt h4{color:var(--wine,#76212b)}
-#challenges .riddle-input{color:var(--ink,#302a28);background:#fffdf8;border-color:rgba(112,33,43,.3)}
-#challenges .riddle-submit{background:var(--wine,#76212b);color:#fff9ef}
-#challenges .riddle-hint{color:var(--blue-deep,#315f78)}
-#challenges .riddle-feedback{color:var(--ink-soft,#665d59)}
-#challenges .riddle-feedback.is-wrong{color:#9d2635}
-#challenges .riddle-feedback.is-hint{color:#315f78;background:#e3f1f6;padding:10px 14px}
-#challenges .earned-letter,#challenges .riddle-already-solved{color:var(--wine,#76212b);background:#e3f1f6}
-#challenges .spot-hit.is-found{border-color:var(--blue-deep,#315f78);background:rgba(120,171,196,.28)}
-#challenges .audio-play{color:var(--wine,#76212b);border-color:var(--wine,#76212b)}
-#challenges .touch-art-stage{background:linear-gradient(145deg,#e4eff2,#f8f1e8)}
-#challenges .touch-art-instruction,#challenges .touch-reveal-copy{color:var(--ink,#302a28)}
-#challenges .scent-sensory-scene{background:radial-gradient(ellipse at 50% 50%,#ead2cc,#f8f0e6 65%)}
-#challenges .secret-chapter{margin:60px auto;padding:clamp(35px,7vw,85px);max-width:1180px;background:linear-gradient(130deg,#782d3a,#4e1722);color:#fffaf2;border:1px solid #c5a77e88}
-#challenges .secret-inner{padding:0}
-#challenges .secret-inner h2{font:600 clamp(43px,6vw,76px)/.95 var(--display);color:#fff9ef}
-#challenges .secret-inner h2 em{color:#e5cba5}
-#challenges .secret-inner p{color:#fff1e9}
-#challenges .secret-chapter .button{margin-top:30px}
-@media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr}#challenges .riddle-answer-row{display:flex;flex-direction:column;align-items:stretch}#challenges .riddle-answer-row .riddle-submit{width:100%}}
-#challenges .unlock-final{margin:38px auto 20px;padding:48px 0 20px;border-top:1px solid rgba(120,100,90,.2);text-align:center}
-#challenges .unlock-final h3{color:var(--wine,#76212b);font-size:clamp(38px,5vw,62px)}
-#challenges .unlock-final h3 em{color:var(--champagne,#b28b6a)}
-#challenges .unlock-final button:disabled{opacity:.42;cursor:not-allowed}
-#challenges .riddle-cipher{margin:42px auto 0;padding:clamp(24px,4vw,52px);max-width:760px;background:#fffaf3;color:var(--ink,#302a28);border:1px solid rgba(112,33,43,.2);box-shadow:0 16px 38px rgba(57,42,36,.08)}
-#challenges .riddle-cipher h2{color:var(--wine,#76212b)}
-#challenges .cipher-input{color:var(--ink,#302a28);background:#fffdf8;border-color:rgba(112,33,43,.3)}
-#challenges .cipher-submit{background:var(--wine,#76212b);color:#fff9ef}
-#challenges .cipher-description{color:var(--ink-soft,#665d59)}
-
 
 /* === Точечные исправления по замечаниям === */
 /* Профиль: только блок опыта, ближе к основному тексту. */
@@ -8250,19 +8204,6 @@ main { overflow: clip; }
 #senses .scent-scene-copy,#challenges .scent-scene-copy { position:relative; z-index:2; }
 @media(max-width:700px){#senses .scent-sensory-scene,#challenges .scent-sensory-scene{grid-template-columns:1fr}.scent-memory-photo img{height:260px}}
 
-/* Challenge gallery: keep the original photographic hit areas interactive after moving the puzzle out of #senses. */
-#challenges .spot-difference { position:relative; z-index:1; }
-#challenges .spot-difference-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:start; }
-#challenges .spot-difference-pair figure { margin:0; min-width:0; }
-#challenges .spot-image-wrap { position:relative; line-height:0; isolation:isolate; }
-#challenges .spot-image-wrap img { position:relative; z-index:0; display:block; width:100%; height:auto; }
-#challenges .spot-hit { position:absolute; z-index:5; left:var(--x); top:var(--y); display:block; width:clamp(38px,5vw,56px); aspect-ratio:1; padding:0; transform:translate(-50%,-50%); border:2px solid rgba(112,39,38,.25); border-radius:50%; background:rgba(255,250,242,.04); cursor:crosshair; pointer-events:auto; touch-action:manipulation; }
-#challenges .spot-hit:hover,#challenges .spot-hit:focus-visible { border-color:#8a4b48; background:rgba(255,250,242,.2); outline:2px solid rgba(138,75,72,.3); outline-offset:2px; }
-#challenges .spot-hit.is-found { border-color:#315f78; background:rgba(120,171,196,.34); }
-#challenges .chapter-slide:not(.is-active) { display:none !important; }
-#challenges .puzzle-slide { background:transparent !important; border:0 !important; box-shadow:none !important; }
-#challenges .puzzle-gallery { background:transparent !important; }
-@media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr}#challenges .spot-hit{width:44px}}
 /* Restore the original Creator Highlights card surface without button behavior. */
 #style .creator-highlights-card{border:1px solid rgba(112,39,38,.16)!important;border-radius:4px!important;background:linear-gradient(145deg,rgba(255,252,244,.94),rgba(244,232,213,.82))!important;box-shadow:0 12px 32px rgba(70,42,31,.08)!important;color:#651612!important;cursor:default!important;}
 
@@ -8301,19 +8242,6 @@ body.belief-envelope-open{overflow:hidden;}
 /* Вводная пяти чувств и все игровые слайды сохраняют общую ширину сайта. */
 #senses .senses-intro{width:min(calc(100% - 48px),1100px)!important;max-width:1100px!important;margin-inline:auto!important;}
 @media(max-width:700px){#senses .senses-intro{width:calc(100% - 30px)!important;}}
-
-/* Найди три отличия: одинаковые размеры фотографий, метки невидимы даже после нахождения. */
-#challenges .spot-difference{background:#fffaf3!important;color:var(--ink)!important;border:1px solid rgba(118,33,43,.16)!important;box-shadow:0 14px 34px rgba(57,42,36,.08)!important;}
-#challenges .spot-difference-pair{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important;width:100%!important;}
-#challenges .spot-difference-pair figure{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;}
-#challenges .spot-difference-pair figure img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:766/1023!important;object-fit:cover!important;}
-#challenges .spot-image-wrap{width:100%!important;}
-#challenges .spot-hit,#challenges .spot-hit:hover,#challenges .spot-hit.is-found{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;}
-#challenges .spot-hit:focus-visible{outline:2px solid var(--sky-deep)!important;outline-offset:2px!important;}
-#challenges .spot-difference-heading h4,#challenges .spot-difference-heading p,#challenges .spot-progress,#challenges .spot-feedback{color:var(--ink)!important;}
-#challenges .spot-difference-heading>span,#challenges .spot-progress strong,#challenges .spot-difference-pair figcaption{color:var(--wine)!important;}
-@media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr!important;}}
-
 
 /* === FIX 4: профиль, заголовок и сценарный шлюз === */
 html body #profile .profile-panel {
@@ -8429,69 +8357,6 @@ body.post-hammer-gate #style { pointer-events:auto; }
   letter-spacing:.16em;
 }
 
-/* Галерея заданий — та же бумажная, бордовая редакционная система сайта */
-#challenges {
-  color:#4a302b !important;
-  background:linear-gradient(180deg,#fbf7ef 0%,#f3eadc 100%) !important;
-  border-top:1px solid rgba(101,22,18,.14) !important;
-}
-#challenges .challenge-heading h2,
-#challenges .puzzle-slide-heading h3,
-#challenges .riddle-panel h4,
-#challenges .spot-difference-heading h4,
-#challenges .cafe-receipt h4 {
-  color:#651612 !important;
-  font-family:var(--display,Georgia,serif) !important;
-}
-#challenges .challenge-heading p,
-#challenges .riddle-intro,
-#challenges .riddle-question,
-#challenges .spot-difference-heading p,
-#challenges .spot-feedback,
-#challenges .cipher-description {
-  color:#604b43 !important;
-}
-#challenges .chapter-gallery,
-#challenges .chapter-slide,
-#challenges .riddle-panel,
-#challenges .spot-difference,
-#challenges .cafe-receipt {
-  background:rgba(255,252,246,.88) !important;
-  color:#4a302b !important;
-  border:1px solid rgba(101,22,18,.16) !important;
-  box-shadow:0 14px 34px rgba(78,49,37,.07) !important;
-}
-#challenges .puzzle-slide-heading > span,
-#challenges .chapter-gallery-top .eyebrow,
-#challenges .gallery-count,
-#challenges .riddle-index,
-#challenges .riddle-status,
-#challenges .spot-difference-heading > span {
-  color:#93645a !important;
-}
-#challenges .chapter-gallery-nav button,
-#challenges .riddle-submit,
-#challenges .button {
-  color:#651612 !important;
-  border-color:rgba(101,22,18,.32) !important;
-  background:#f4e8da !important;
-}
-#challenges input,
-#challenges textarea {
-  color:#402c28 !important;
-  background:#fffdf8 !important;
-  border-color:rgba(101,22,18,.28) !important;
-}
-#challenges .earned-letter,
-#challenges .cipher-letter {
-  background:#f4e9dc !important;
-  color:#651612 !important;
-  border:1px solid rgba(101,22,18,.2) !important;
-}
-#challenges .cipher-letter b { color:#651612 !important; }
-#challenges .progress-track { background:rgba(101,22,18,.12) !important; }
-#challenges .progress-track i { background:#8fc9d6 !important; }
-
 /* Точки отличий — невидимые зоны нажатия. Подсветка появляется только после верного клика. */
 #senses .spot-image-wrap { position:relative !important; overflow:hidden; }
 #senses .spot-image-wrap > img { display:block; width:100%; height:auto; }
@@ -8573,151 +8438,208 @@ html body #style .style-next .text-link span {
 }
 
 
-/* Latest corrections: profile spacing, sight markers, and puzzle editorial system */
-@media (min-width: 681px) {
-  html body #profile {
-    display: block !important;
-    min-height: 0 !important;
-    height: auto !important;
-  }
-  html body #profile .profile-details-wrap {
-    margin-top: 14px !important;
-  }
-  html body #profile .profile-details {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  html body #profile .profile-hero {
-    margin-bottom: 0 !important;
-  }
-  html body #profile > .scene-nav {
-    padding-top: 24px !important;
-  }
-}
-
-/* The found differences are clearly marked with a visible sky-blue ring. */
-#senses .spot-image-wrap {
-  position: relative !important;
-  display: block !important;
-  overflow: hidden !important;
-}
-#senses .spot-image-wrap > img {
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-}
-#senses .spot-image-wrap button.spot-hit {
-  position: absolute !important;
-  z-index: 6 !important;
-  left: var(--x) !important;
-  top: var(--y) !important;
-  transform: translate(-50%, -50%) !important;
-  width: clamp(42px, 4.8vw, 60px) !important;
-  height: clamp(42px, 4.8vw, 60px) !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  border: 2px solid transparent !important;
-  border-radius: 50% !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  opacity: 1 !important;
-  color: transparent !important;
-  cursor: crosshair !important;
-}
-#senses .spot-image-wrap button.spot-hit.is-found,
-#senses .spot-image-wrap button.spot-hit:disabled.is-found {
-  border: 3px solid var(--sky, #8fc7e2) !important;
-  background: rgba(143,199,226,.20) !important;
-  box-shadow: 0 0 0 3px rgba(143,199,226,.20), 0 2px 12px rgba(35,65,75,.18) !important;
-  opacity: 1 !important;
-}
-#senses .spot-image-wrap button.spot-hit:disabled {
-  cursor: default !important;
-}
-
-/* Consistent warm-paper, wine and established sky palette for all puzzle content. */
-#challenges,
-#challenges.challenge-gallery {
-  background: var(--paper, #f8f2e8) !important;
-  color: var(--ink, #302a28) !important;
-  font-family: var(--sans, Arial, sans-serif) !important;
+/* Canonical challenge styling — warm editorial paper, no nested cards or random panels. */
+#challenges {
+  background: var(--paper, #f7f2e9) !important;
+  color: var(--ink, #282326) !important;
+  font-family: var(--sans, Manrope, sans-serif) !important;
+  padding: clamp(34px,5vw,66px) 0 clamp(52px,7vw,90px) !important;
+  overflow-x: clip;
 }
 #challenges .challenge-heading h2,
 #challenges .puzzle-slide-heading h3,
-#challenges .riddle-panel h4,
-#challenges .spot-difference-heading h4,
-#challenges .riddle-cipher h2 {
-  color: var(--wine, #76212b) !important;
-  font-family: var(--display, Georgia, serif) !important;
-  letter-spacing: -.02em !important;
-}
-#challenges .challenge-heading > p,
-#challenges .puzzle-slide-heading p,
-#challenges .riddle-intro,
 #challenges .riddle-question,
-#challenges .spot-difference-heading p,
-#challenges .spot-feedback,
-#challenges .cipher-description,
-#challenges .audio-track-copy p {
-  color: var(--ink-2, #554b4b) !important;
-  font-family: var(--serif, Georgia, serif) !important;
-  line-height: 1.65 !important;
+#challenges .spot-difference-heading h4,
+#challenges .cafe-receipt h4 {
+  color: var(--wine, #650e22) !important;
+  font-family: var(--display, "Cormorant Garamond", Georgia, serif) !important;
 }
-#challenges .puzzle-slide,
-#challenges .riddle-panel,
-#challenges .spot-difference,
-#challenges .cafe-receipt,
-#challenges .riddle-cipher,
-#challenges .audio-story-track {
-  background: rgba(255,252,246,.92) !important;
-  color: var(--ink, #302a28) !important;
-  border: 1px solid var(--line, rgba(101,22,18,.18)) !important;
-  border-radius: 2px !important;
-  box-shadow: 0 14px 34px rgba(57,42,36,.07) !important;
-}
-#challenges .eyebrow,
-#challenges .puzzle-slide-heading > span,
+#challenges .challenge-heading .eyebrow,
+#challenges .puzzle-slide-heading span,
 #challenges .riddle-index,
 #challenges .riddle-status,
 #challenges .spot-difference-heading > span,
-#challenges .gallery-count {
+#challenges .spot-difference-pair figcaption,
+#challenges .cafe-receipt .eyebrow {
   color: var(--wine-soft, #a66d78) !important;
-  font-family: var(--sans, Arial, sans-serif) !important;
-  letter-spacing: .12em !important;
+  font-family: var(--sans, Manrope, sans-serif) !important;
+  letter-spacing: .13em !important;
 }
+#challenges .challenge-heading > p:last-child,
+#challenges .riddle-intro,
+#challenges .spot-difference-heading p,
+#challenges .spot-feedback,
+#challenges .cipher-description,
+#challenges .cafe-receipt p {
+  color: var(--ink-2, #554b4b) !important;
+  font-family: var(--serif, "Cormorant Garamond", Georgia, serif) !important;
+  line-height: 1.65 !important;
+}
+#challenges .puzzle-slide,
+#challenges .chapter-slide,
+#challenges .riddle-panel,
+#challenges .spot-difference,
+#challenges .cafe-receipt,
+#challenges .riddle-cipher {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ink, #282326) !important;
+}
+#challenges .riddle-panel {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#challenges .riddle-panel-top {
+  display:flex; justify-content:space-between; gap:12px;
+  padding:0 0 10px; margin:0 0 16px;
+  border-bottom:1px solid var(--line, rgba(101,14,34,.16));
+}
+#challenges .riddle-question {
+  margin: 16px 0 20px !important;
+  font-size: clamp(22px,2.5vw,30px) !important;
+  line-height:1.15 !important;
+}
+#challenges .riddle-answer-row { gap:10px; }
+#challenges .riddle-input,
 #challenges input,
 #challenges textarea,
-#challenges .riddle-input,
 #challenges .cipher-input {
-  background: #fffdf8 !important;
-  color: var(--ink, #302a28) !important;
-  border: 1px solid rgba(101,22,18,.28) !important;
-  border-radius: 0 !important;
-  font-family: var(--serif, Georgia, serif) !important;
+  min-height:48px !important;
+  padding:12px 14px !important;
+  color:var(--ink) !important;
+  background:var(--paper-light, #fffaf2) !important;
+  border:1px solid rgba(101,14,34,.28) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  font:16px/1.4 var(--serif, Georgia, serif) !important;
 }
-#challenges button.riddle-submit,
-#challenges button.cipher-submit,
+#challenges .riddle-submit,
+#challenges .cipher-submit,
 #challenges .chapter-gallery-nav button {
-  background: var(--sky-pale, #dceef5) !important;
-  color: var(--wine, #76212b) !important;
-  border: 1px solid var(--sky, #8fc7e2) !important;
-  border-radius: 2px !important;
-  box-shadow: none !important;
-  font-family: var(--sans, Arial, sans-serif) !important;
-  letter-spacing: .1em !important;
+  color:var(--wine) !important;
+  background:transparent !important;
+  border:1px solid var(--wine) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:12px 18px !important;
+  font:600 10px/1.4 var(--sans, Manrope, sans-serif) !important;
+  letter-spacing:.12em !important;
 }
-#challenges .progress-track i,
-#challenges .challenge-progress-fill {
-  background: var(--sky, #8fc7e2) !important;
+#challenges .riddle-hint {
+  display:inline-block; margin-top:12px; padding:8px 0;
+  color:var(--sky-deep) !important;
+  border:0 !important; border-bottom:1px solid var(--sky) !important;
+  background:transparent !important; box-shadow:none !important;
+  font:600 10px/1.4 var(--sans, Manrope, sans-serif) !important;
+  letter-spacing:.12em !important;
 }
+#challenges .riddle-feedback { margin-top:14px; color:var(--ink-2) !important; }
+#challenges .riddle-feedback.is-wrong { color:#a3232d !important; }
+#challenges .riddle-feedback.is-hint { padding:0 !important; background:transparent !important; color:var(--sky-deep) !important; }
 #challenges .earned-letter,
+#challenges .riddle-already-solved,
 #challenges .cipher-letter {
-  background: var(--sky-pale, #dceef5) !important;
-  border: 1px solid var(--sky, #8fc7e2) !important;
-  color: var(--wine, #76212b) !important;
+  display:inline-flex; align-items:center; gap:12px;
+  margin-top:16px; padding:12px 16px !important;
+  background:transparent !important; color:var(--wine) !important;
+  border:1px solid var(--line) !important; border-radius:0 !important;
+  box-shadow:none !important;
 }
 #challenges .earned-letter strong,
-#challenges .cipher-letter b {
-  color: var(--wine, #76212b) !important;
+#challenges .cipher-letter b { color:var(--wine) !important; }
+#challenges .progress-track { background:rgba(101,14,34,.14) !important; }
+#challenges .progress-track i { background:var(--sky) !important; }
+#challenges .unlock-final {
+  margin:38px auto 0 !important; padding:34px 0 0 !important;
+  border-top:1px solid var(--line) !important; background:transparent !important;
+}
+#challenges .unlock-final h3 { color:var(--wine) !important; }
+#challenges .unlock-final h3 em { color:var(--sky-deep) !important; }
+
+/* Sight puzzle: preserve both full photographs and show a red ring only after a hit. */
+#challenges .spot-difference {
+  padding:0 !important; margin:0 !important;
+}
+#challenges .spot-difference-heading { margin:0 0 18px !important; }
+#challenges .spot-difference-heading h4 {
+  margin:7px 0 8px !important;
+  font-size:clamp(24px,3vw,34px) !important;
+}
+#challenges .spot-difference-pair {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:clamp(10px,1.5vw,18px) !important;
+  align-items:start !important;
+  width:100% !important;
+}
+#challenges .spot-difference-pair figure { min-width:0 !important; margin:0 !important; }
+#challenges .spot-difference-pair figure img {
+  display:block !important; width:100% !important; height:auto !important;
+  object-fit:contain !important; aspect-ratio:auto !important;
+}
+#challenges .spot-image-wrap {
+  position:relative !important; width:100% !important;
+  line-height:0 !important; isolation:isolate !important; overflow:hidden !important;
+}
+#challenges .spot-image-wrap > img { position:relative; z-index:0; }
+#challenges .spot-image-wrap button.spot-hit {
+  appearance:none !important; -webkit-appearance:none !important;
+  position:absolute !important; z-index:5 !important;
+  left:var(--x) !important; top:var(--y) !important;
+  transform:translate(-50%,-50%) !important;
+  display:block !important;
+  width:clamp(34px,3.7vw,42px) !important;
+  height:clamp(34px,3.7vw,42px) !important;
+  min-width:0 !important; min-height:0 !important;
+  padding:0 !important; margin:0 !important;
+  border:2px solid transparent !important;
+  border-radius:50% !important;
+  outline:0 !important; background:transparent !important;
+  box-shadow:none !important; color:transparent !important;
+  opacity:1 !important; cursor:crosshair !important;
+  touch-action:manipulation !important;
+}
+#challenges .spot-image-wrap button.spot-hit.is-found,
+#challenges .spot-image-wrap button.spot-hit:disabled.is-found {
+  border:3px solid #e0202b !important;
+  background:transparent !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.8) !important;
+  opacity:1 !important; cursor:default !important;
+}
+#challenges .spot-image-wrap button.spot-hit:focus-visible {
+  outline:2px solid #e0202b !important; outline-offset:3px !important;
+}
+#challenges .spot-progress { margin:14px 0 0; color:var(--ink-2) !important; }
+#challenges .spot-progress strong { color:var(--wine) !important; }
+
+/* Touch chapter: warm paper surface, crisp black ridges and a complete mobile-safe print. */
+#senses .touch-art-stage {
+  min-height:0 !important; padding:clamp(22px,4vw,38px) 12px !important;
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  color:var(--ink) !important;
+}
+#senses .touch-art-stage::before { display:none !important; content:none !important; }
+#senses .touch-art-kicker { color:var(--wine) !important; }
+#senses .fingerprint-pair {
+  width:min(100%,620px) !important; height:clamp(230px,35vw,300px) !important;
+  margin:16px auto !important; overflow:visible !important;
+}
+#senses .fingerprint-print { filter:none !important; }
+#senses .print-left { left:calc(50% - 170px) !important; width:180px !important; height:220px !important; }
+#senses .print-right { left:calc(50% - 12px) !important; width:180px !important; height:220px !important; }
+#senses .fingerprint-image { display:block; width:100% !important; height:100% !important; object-fit:contain !important; filter:none !important; user-select:none; -webkit-user-drag:none; }
+#senses .touch-art-instruction,
+#senses .touch-art-hint,
+#senses .touch-reveal-copy { color:var(--ink-2) !important; }
+#senses .touch-progress { background:rgba(101,14,34,.14) !important; }
+#senses .touch-progress i { background:var(--sky) !important; }
+@media(max-width:700px) {
+  #challenges .spot-difference-pair { grid-template-columns:1fr !important; }
+  #challenges .spot-image-wrap button.spot-hit { width:36px !important; height:36px !important; }
+  #senses .fingerprint-pair { height:220px !important; max-width:360px !important; }
+  #senses .print-left { left:calc(50% - 132px) !important; width:138px !important; height:180px !important; }
+  #senses .print-right { left:calc(50% - 4px) !important; width:138px !important; height:180px !important; }
+  #challenges .spot-difference-heading h4 { font-size:25px !important; }
 }
