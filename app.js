@@ -146,7 +146,7 @@
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "admire", "hammer", "style", "transition", "senses", "letter"];
+  const scenes = ["welcome", "profile", "admire", "hammer", "style", "senses", "letter"];
 
   function persistState() {
     try {
@@ -201,12 +201,12 @@
     }
 
     currentScene = id;
+    if (id === "style") document.body.classList.add("post-hammer-gate");
+    if (id === "senses") document.body.classList.remove("post-hammer-gate");
     const target = document.getElementById(id);
     if (target) {
       target.classList.add("opened");
       if (id === "senses") {
-        document.getElementById("transition")?.classList.add("opened");
-        document.getElementById("chapterTransition")?.classList.add("opened");
         document.getElementById("challenges")?.classList.add("opened");
       }
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -407,7 +407,8 @@
           { src: "assets/F1.PNG", title: s.memories[1]?.title || "02", cls: "" },
           { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
         ];
-        content = `<div class="sight-editorial-gallery">${photos.map(photo => `
+        content = `<figure class="sight-memory-hero"><img src="assets/m4.JPG" alt="Совместное воспоминание — глава «Зрение»" loading="lazy"><figcaption>ТОТ САМЫЙ ВЗГЛЯД, С КОТОРОГО ВСЁ НАЧАЛОСЬ</figcaption></figure>
+        <div class="sight-editorial-gallery">${photos.map(photo => `
           <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
         `).join("")}</div>
         <section class="spot-difference" data-spot-game>
@@ -829,9 +830,9 @@
         и собери слово.
       </p>
       <div class="cipher-letters" aria-label="Пять букв">
-        ${CODE_ORDER.map((id, index) => `
+        ${RIDDLE_ORDER.map((id, index) => `
           <div class="cipher-letter">
-            <span>0${index + 1}</span>
+            <span>ГЛАВА 0${index + 1}</span>
             <b>${RIDDLE_LETTERS[id]}</b>
           </div>
         `).join("")}
@@ -1102,10 +1103,10 @@
   $("#closeBeliefEnvelope")?.addEventListener("click", () => {
     if (beliefEnvelope) beliefEnvelope.hidden = true;
     document.body.classList.remove("belief-envelope-open");
-    showScene("transition");
+    showScene("senses");
   });
   $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
-  $("#openSensesFromLetter")?.addEventListener("click", () => showScene("transition"));
+  $("#openSensesFromLetter")?.addEventListener("click", () => showScene("senses"));
 
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
@@ -1119,8 +1120,6 @@
     sensesSectionInitial.classList.toggle("is-unlocked", sensesVisible);
     sensesSectionInitial.classList.toggle("opened", sensesVisible);
     if (sensesVisible) {
-      $("#transition")?.classList.add("opened");
-      $("#chapterTransition")?.classList.add("opened");
       $("#challenges")?.classList.add("opened");
     }
   }

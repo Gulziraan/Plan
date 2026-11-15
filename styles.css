@@ -8313,3 +8313,217 @@ body.belief-envelope-open{overflow:hidden;}
 #challenges .spot-difference-heading h4,#challenges .spot-difference-heading p,#challenges .spot-progress,#challenges .spot-feedback{color:var(--ink)!important;}
 #challenges .spot-difference-heading>span,#challenges .spot-progress strong,#challenges .spot-difference-pair figcaption{color:var(--wine)!important;}
 @media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr!important;}}
+
+
+/* === FIX 4: профиль, заголовок и сценарный шлюз === */
+html body #profile .profile-panel {
+  justify-content: flex-start !important;
+  align-self: start;
+  padding-top: clamp(28px, 4vw, 54px) !important;
+}
+html body #profile .profile-details-wrap {
+  margin-top: clamp(18px, 2.2vw, 30px) !important;
+  width: 100%;
+}
+html body #profile .profile-details-heading {
+  margin: 0 0 14px !important;
+  padding: 0 0 9px !important;
+  color: #651612 !important;
+  border-bottom: 1px solid rgba(101,22,18,.2) !important;
+  font: 700 11px/1.3 var(--serif, Georgia, serif) !important;
+  letter-spacing: .1em !important;
+}
+html body #profile .profile-details {
+  display: grid !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: clamp(14px,2vw,28px) !important;
+  align-items: start !important;
+}
+html body #profile .profile-detail-item {
+  min-width: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html body #profile .profile-detail-item span {
+  color: #98766e !important;
+  font: 10px/1.4 var(--serif, Georgia, serif) !important;
+  letter-spacing: .1em !important;
+}
+html body #profile .profile-detail-item b {
+  color: #651612 !important;
+  font: 700 clamp(14px,1.3vw,18px)/1.15 var(--serif, Georgia, serif) !important;
+}
+html body #profile .profile-detail-item small {
+  color: #51403a !important;
+  font: 13px/1.45 var(--serif, Georgia, serif) !important;
+}
+@media(max-width:760px) {
+  html body #profile .profile-details { grid-template-columns:1fr !important; gap:18px !important; }
+}
+html body #admire .admire-long-title {
+  max-width: none !important;
+  width: 100%;
+  text-align: center !important;
+  font-size: clamp(48px,8vw,112px) !important;
+  line-height: .98 !important;
+  white-space: nowrap;
+  letter-spacing: -.045em;
+}
+html body #admire .admire-long-title span { color:#8fc9d6 !important; }
+@media(max-width:760px) {
+  html body #admire .admire-long-title { white-space:normal; font-size:clamp(38px,10vw,64px) !important; }
+}
+
+/* После сцены Тора не показываем меню и обходные переходы.
+   Единственное доступное действие — открыть личное послание. */
+body.post-hammer-gate .cover-topbar,
+body.post-hammer-gate .topbar,
+body.post-hammer-gate .cover-nav,
+body.post-hammer-gate .top-action { display:none !important; }
+body.post-hammer-gate #style .scene-nav { display:flex !important; justify-content:center; }
+body.post-hammer-gate #style .scene-nav > *:not(#openBeliefEnvelope) { display:none !important; }
+body.post-hammer-gate #profile,
+body.post-hammer-gate #admire,
+body.post-hammer-gate #hammer,
+body.post-hammer-gate #transition,
+body.post-hammer-gate #senses,
+body.post-hammer-gate #letter { pointer-events:none; }
+body.post-hammer-gate #style { pointer-events:auto; }
+
+/* Creator Highlights: вернуть выразительный голубой фирменный блок */
+#style .creator-highlights-card {
+  background: linear-gradient(135deg,#dff2f6 0%,#b9e1ea 100%) !important;
+  border: 1px solid rgba(53,133,151,.32) !important;
+  border-radius: 5px !important;
+  box-shadow: 0 14px 34px rgba(54,111,125,.16) !important;
+  color: #254f5a !important;
+}
+#style .creator-highlights-card .creator-highlights-title { color:#245766 !important; }
+#style .creator-highlights-card .creator-highlights-kicker { color:#527f89 !important; }
+
+/* Фото главы «Зрение» */
+#senses .sight-memory-hero {
+  width:min(100%,780px);
+  margin:0 auto 28px;
+  overflow:hidden;
+  border:1px solid rgba(101,22,18,.14);
+  background:#f7efe4;
+}
+#senses .sight-memory-hero img {
+  display:block;
+  width:100%;
+  max-height:430px;
+  object-fit:cover;
+  object-position:center 42%;
+}
+#senses .sight-memory-hero figcaption {
+  padding:11px 15px;
+  color:#7a302b;
+  font:10px/1.4 var(--sans,Arial,sans-serif);
+  letter-spacing:.16em;
+}
+
+/* Галерея заданий — та же бумажная, бордовая редакционная система сайта */
+#challenges {
+  color:#4a302b !important;
+  background:linear-gradient(180deg,#fbf7ef 0%,#f3eadc 100%) !important;
+  border-top:1px solid rgba(101,22,18,.14) !important;
+}
+#challenges .challenge-heading h2,
+#challenges .puzzle-slide-heading h3,
+#challenges .riddle-panel h4,
+#challenges .spot-difference-heading h4,
+#challenges .cafe-receipt h4 {
+  color:#651612 !important;
+  font-family:var(--display,Georgia,serif) !important;
+}
+#challenges .challenge-heading p,
+#challenges .riddle-intro,
+#challenges .riddle-question,
+#challenges .spot-difference-heading p,
+#challenges .spot-feedback,
+#challenges .cipher-description {
+  color:#604b43 !important;
+}
+#challenges .chapter-gallery,
+#challenges .chapter-slide,
+#challenges .riddle-panel,
+#challenges .spot-difference,
+#challenges .cafe-receipt {
+  background:rgba(255,252,246,.88) !important;
+  color:#4a302b !important;
+  border:1px solid rgba(101,22,18,.16) !important;
+  box-shadow:0 14px 34px rgba(78,49,37,.07) !important;
+}
+#challenges .puzzle-slide-heading > span,
+#challenges .chapter-gallery-top .eyebrow,
+#challenges .gallery-count,
+#challenges .riddle-index,
+#challenges .riddle-status,
+#challenges .spot-difference-heading > span {
+  color:#93645a !important;
+}
+#challenges .chapter-gallery-nav button,
+#challenges .riddle-submit,
+#challenges .button {
+  color:#651612 !important;
+  border-color:rgba(101,22,18,.32) !important;
+  background:#f4e8da !important;
+}
+#challenges input,
+#challenges textarea {
+  color:#402c28 !important;
+  background:#fffdf8 !important;
+  border-color:rgba(101,22,18,.28) !important;
+}
+#challenges .earned-letter,
+#challenges .cipher-letter {
+  background:#f4e9dc !important;
+  color:#651612 !important;
+  border:1px solid rgba(101,22,18,.2) !important;
+}
+#challenges .cipher-letter b { color:#651612 !important; }
+#challenges .progress-track { background:rgba(101,22,18,.12) !important; }
+#challenges .progress-track i { background:#8fc9d6 !important; }
+
+/* Точки отличий — невидимые зоны нажатия. Подсветка появляется только после верного клика. */
+#senses .spot-image-wrap { position:relative !important; overflow:hidden; }
+#senses .spot-image-wrap > img { display:block; width:100%; height:auto; }
+#senses button.spot-hit {
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  position:absolute !important;
+  z-index:5 !important;
+  left:var(--x) !important; top:var(--y) !important;
+  width:clamp(42px,5vw,58px) !important;
+  height:clamp(42px,5vw,58px) !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:transparent !important;
+  opacity:1 !important;
+  cursor:crosshair !important;
+}
+#senses button.spot-hit::before,
+#senses button.spot-hit::after { content:none !important; display:none !important; }
+#senses button.spot-hit.is-found {
+  border:2px solid rgba(143,201,214,.9) !important;
+  background:rgba(143,201,214,.12) !important;
+  box-shadow:0 0 0 4px rgba(143,201,214,.13) !important;
+}
+#senses button.spot-hit:focus-visible {
+  outline:2px solid #8fc9d6 !important;
+  outline-offset:2px !important;
+}

@@ -41,7 +41,7 @@
     <nav class="cover-nav" aria-label="Навигация по истории">
       <button type="button" data-next="profile">О ХАСАНЕ</button>
       <button type="button" data-next="admire">ЕГО КАЧЕСТВА</button>
-      <button type="button" data-next="transition">ПЯТЬ ЧУВСТВ</button>
+      <button type="button" data-next="senses">ПЯТЬ ЧУВСТВ</button>
       <button type="button" data-next="letter">ПИСЬМО</button>
     </nav>
     <button class="top-action" id="restartTop">НАЧАТЬ СНАЧАЛА ↗</button>
@@ -87,9 +87,9 @@
           
           <p class="profile-description">Есть люди, которых невозможно описать одной фотографией, несколькими фактами или короткой характеристикой. Ты как раз такой человек.</p>
           <p class="profile-description">Поэтому я решила посвятить тебе целое небольшое издание. Здесь будут твои сильные стороны, немного любимой магии, несколько испытаний и кое-что, что я давно хотела тебе сказать.</p>
-      <div class="profile-details">
-        <div class="profile-detail">
-          <p class="profile-detail-title">ОПЫТ</p>
+      <div class="profile-details-wrap">
+        <p class="profile-detail-title profile-details-heading">ОПЫТ</p>
+        <div class="profile-details">
           <div class="profile-detail-item">
             <span>24 ГОДА</span>
             <b>БЫТЬ СОБОЙ</b>
@@ -100,10 +100,11 @@
             <b>СОЗДАВАТЬ СВОЮ ИСТОРИЮ</b>
             <small>С характером, смелостью и собственным взглядом на мир</small>
           </div>
-        </div>
-        <div class="profile-detail profile-detail-rarity">
-          <p class="profile-detail-title">РЕДКОСТЬ</p>
-          <div class="profile-detail-item"><span>1 ИЗ 1</span><b>ЕДИНСТВЕННЫЙ</b></div>
+          <div class="profile-detail-item">
+            <span>1 ИЗ 1</span>
+            <b>ЕДИНСТВЕННЫЙ</b>
+            <small>Без повторений и аналогов</small>
+          </div>
         </div>
       </div>
         </div>
@@ -119,7 +120,7 @@
     <section class="scene" id="admire">
       <div class="section-top"><span>ЧАСТЬ I / ЗА КАДРОМ ГЕРОИЗМА</span><span>02 — 05</span></div>
       <div class="chapter-heading">
-        <h2 class="admire-long-title">ЧТО ДЕЛАЕТ ТЕБЯ ТОБОЙ.</h2>
+        <h2 class="admire-long-title">ЧТО ДЕЛАЕТ ТЕБЯ <span>ТОБОЙ.</span></h2>
       </div>
       <div class="quality-traits" aria-label="Сильные стороны Хасана">
         <span>ИНТЕЛЛЕКТ</span><span>СТРАТЕГИЯ</span><span>НАДЁЖНОСТЬ</span>
@@ -219,23 +220,7 @@
       </div>
     </section>
 
-    <!-- ВВОДНАЯ ГЛАВА К ПЯТИ ЧУВСТВАМ -->
-    <section class="scene transition-scene" id="transition" aria-labelledby="transitionTitle">
-      <div class="transition-orbit" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
-      <div class="transition-content">
-        <p class="eyebrow">А ТЕПЕРЬ — НЕМНОГО О НАС.</p>
-        <h2 id="transitionTitle">ПЯТЬ ЧУВСТВ.<br><em>И ВЕЗДЕ — ТЫ.</em></h2>
-        <p>Есть вещи, которые невозможно передать одним поздравлением.</p>
-        <p>Иногда целая история хранится в одной фотографии, знакомом запахе, вкусе, звуке или даже в прикосновении.</p>
-        <p>Я собрала для тебя пять небольших воспоминаний. Каждое из них связано с нами и с тем, как постепенно ты стал для меня таким близким человеком.</p>
-        <p>Здесь тебе предстоит кое-что вспомнить, кое-что разгадать и, возможно, немного улыбнуться. Ну что, готов пройти нашу маленькую историю?</p>
-        <div class="transition-senses" aria-label="Пять чувств">
-          <span title="Зрение">◉</span><span title="Звук">♫</span><span title="Вкус">✳</span><span title="Осязание">♡</span><span title="Запах">✧</span>
-        </div>
-        <button class="button button-light" id="openSensesButton" type="button">ПОЧУВСТВУЙ ЭТУ ИСТОРИЮ <span>↗</span></button>
-      </div>
-    </section>
-
+    <!-- ПЯТЬ ЧУВСТВ: личное вступление с фотографией, затем галерея -->
     <!-- ОТДЕЛЬНАЯ ГЛАВА О ЛЮБВИ -->
     <!-- ПЯТЬ ЧУВСТВ -->
     <section class="scene senses-game-scene" id="senses" hidden aria-label="Пять чувств — интерактивные загадки">
