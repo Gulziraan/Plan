@@ -9279,3 +9279,235 @@ html body #style .style-next .text-link span {
     right: 2px !important;
   }
 }
+
+
+/* ROUTE COLOR SYSTEM: burgundy paths, existing site-blue headings, delicate editorial stickers. */
+#senses .sense-route-line path,
+#challenges .puzzle-route-line path {
+  fill: none !important;
+  stroke: var(--wine, #76212b) !important;
+  stroke-width: 3.2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  opacity: .72 !important;
+}
+#senses .sense-route-line {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+#senses .sense-route-step,
+#challenges .puzzle-route-step {
+  position: relative !important;
+  z-index: 1 !important;
+}
+#senses .sense-route-step .sense-heading h3,
+#senses .sense-route-heading h3,
+#challenges .challenge-heading h2,
+#challenges .puzzle-slide-heading h3 {
+  color: var(--sky-deep, #79b8c8) !important;
+}
+#senses .sense-route-heading h3 em,
+#challenges .challenge-heading h2 em {
+  color: var(--sky-deep, #79b8c8) !important;
+}
+#senses .sense-route-step .sense-number,
+#challenges .puzzle-route-number {
+  background: var(--wine, #76212b) !important;
+  color: var(--edition-milk, #f8f3e8) !important;
+}
+#senses .sense-route-doodle,
+#challenges .puzzle-route-doodle {
+  color: var(--sky-deep, #79b8c8) !important;
+}
+#senses .sense-route-step.route-right .sense-route-doodle,
+#challenges .puzzle-route-step.route-right .puzzle-route-doodle {
+  color: var(--wine, #76212b) !important;
+}
+
+/* Tiny paper-cut / stitched illustration accents, deliberately replaceable. */
+#senses .sense-route-step::after,
+#challenges .puzzle-route-step::after {
+  content: "✦";
+  position: absolute;
+  right: 4%;
+  bottom: 3px;
+  color: var(--sky-deep, #79b8c8);
+  font: 24px/1 Georgia, serif;
+  opacity: .82;
+  transform: rotate(-13deg);
+  pointer-events: none;
+}
+#senses .sense-route-step.route-right::after,
+#challenges .puzzle-route-step.route-right::after {
+  right: auto;
+  left: 4%;
+  color: var(--wine, #76212b);
+  transform: rotate(12deg);
+}
+#senses .sense-route-step:nth-child(2)::after,
+#challenges .puzzle-route-step:nth-child(2)::after { content: "♡"; }
+#senses .sense-route-step:nth-child(3)::after,
+#challenges .puzzle-route-step:nth-child(3)::after { content: "✿"; }
+#senses .sense-route-step:nth-child(4)::after,
+#challenges .puzzle-route-step:nth-child(4)::after { content: "✧"; }
+#senses .sense-route-step:nth-child(5)::after,
+#challenges .puzzle-route-step:nth-child(5)::after { content: "⋆"; }
+
+/* Challenges become a full vertical winding route; puzzle contents remain mounted and interactive. */
+#challenges .puzzle-route {
+  width: min(1180px, calc(100% - 56px)) !important;
+  margin: 48px auto 88px !important;
+  position: relative !important;
+}
+#challenges .puzzle-route .chapter-gallery-top {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 58px;
+}
+#challenges .puzzle-route .chapter-slides {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(86px, 10vw, 132px) !important;
+  position: relative !important;
+  min-height: 0 !important;
+}
+#challenges .puzzle-route .chapter-slide,
+#challenges .puzzle-route .chapter-slide.is-active {
+  display: block !important;
+  width: min(45%, 520px) !important;
+  min-height: 170px;
+  position: relative !important;
+  padding: 0 0 22px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  animation: none !important;
+  overflow: visible !important;
+}
+#challenges .puzzle-route .chapter-slide.route-left { align-self: flex-start !important; }
+#challenges .puzzle-route .chapter-slide.route-right { align-self: flex-end !important; }
+#challenges .puzzle-route-line {
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 58px 0 -10px !important;
+  width: 100% !important;
+  height: calc(100% - 48px) !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+#challenges .puzzle-route-number {
+  position: absolute;
+  top: 0;
+  right: -92px;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 62px;
+  clip-path: polygon(50% 0,100% 28%,88% 76%,50% 100%,12% 76%,0 28%);
+  font: italic 23px/1 Georgia,serif;
+}
+#challenges .puzzle-route-step.route-right .puzzle-route-number {
+  right: auto;
+  left: -92px;
+}
+#challenges .puzzle-slide-heading {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 16px !important;
+  padding: 0 0 14px !important;
+  margin: 0 0 20px !important;
+  border: 0 !important;
+}
+#challenges .puzzle-slide-heading > span:first-child {
+  color: var(--wine, #76212b) !important;
+  font: 600 10px/1.4 var(--font-mono, monospace) !important;
+  letter-spacing: .13em !important;
+}
+#challenges .puzzle-slide-heading h3 {
+  margin: 0 !important;
+  font: 500 clamp(27px, 3.5vw, 42px)/1.05 var(--display, Georgia), Georgia, serif !important;
+}
+#challenges .puzzle-route-doodle {
+  margin-left: auto;
+  font: 28px/1 Georgia,serif;
+}
+#challenges .puzzle-route .chapter-gallery-nav {
+  position: relative;
+  z-index: 2;
+  border: 0 !important;
+  padding-top: 16px !important;
+}
+#challenges .puzzle-route .gallery-dots button.active {
+  width: 9px !important;
+  height: 9px !important;
+  border-radius: 50% !important;
+  background: var(--sky-deep, #79b8c8) !important;
+}
+#challenges .puzzle-route .chapter-slide > [data-spot-game],
+#challenges .puzzle-route .chapter-slide .riddle-panel,
+#challenges .puzzle-route .chapter-slide .cafe-receipt {
+  max-width: 100%;
+}
+@media (max-width: 760px) {
+  #challenges .puzzle-route {
+    width: calc(100% - 42px) !important;
+    margin-top: 34px !important;
+  }
+  #challenges .puzzle-route .chapter-slides {
+    gap: 68px !important;
+    padding-left: 48px !important;
+  }
+  #challenges .puzzle-route .chapter-slide,
+  #challenges .puzzle-route .chapter-slide.route-left,
+  #challenges .puzzle-route .chapter-slide.route-right {
+    width: 100% !important;
+    align-self: stretch !important;
+    min-height: 0 !important;
+  }
+  #challenges .puzzle-route-line {
+    inset: 56px auto -30px 0 !important;
+    width: 56px !important;
+    height: calc(100% - 26px) !important;
+  }
+  #challenges .puzzle-route-line path {
+    d: path("M500 0 C900 90 100 170 500 270 C900 370 100 470 500 570 C900 670 100 770 500 870 C900 970 100 1070 500 1170 C500 1280 500 1380 500 1500") !important;
+    stroke-width: 2.6 !important;
+  }
+  #challenges .puzzle-route-number,
+  #challenges .puzzle-route-step.route-right .puzzle-route-number {
+    top: 0 !important;
+    left: -62px !important;
+    right: auto !important;
+    width: 42px !important;
+    height: 48px !important;
+    font-size: 18px !important;
+  }
+  #challenges .puzzle-slide-heading {
+    flex-wrap: wrap !important;
+    gap: 9px !important;
+  }
+  #challenges .puzzle-slide-heading h3 {
+    font-size: clamp(25px, 7vw, 34px) !important;
+  }
+  #challenges .puzzle-route-doodle { font-size: 22px !important; }
+}
+
+/* Keep the winding lines behind content, never across text or controls. */
+#senses .sense-route-track,
+#challenges .puzzle-route .chapter-slides {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+
+@media (min-width: 761px) {
+  #senses .sense-route-line path {
+    d: path("M500 70 C570 110 570 250 500 330 C430 410 430 550 500 610 C570 670 570 850 500 960 C430 1070 430 1220 500 1330 C570 1440 570 1600 500 1740 C470 1810 500 1880 500 1990") !important;
+  }
+  #challenges .puzzle-route-line path {
+    d: path("M500 20 C570 100 570 260 500 390 C430 520 430 650 500 780 C570 910 570 1080 500 1210 C430 1340 430 1500 500 1630 C570 1760 570 1930 500 2060 C470 2160 500 2300 500 2480") !important;
+  }
+}

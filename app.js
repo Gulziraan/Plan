@@ -498,7 +498,7 @@
         <p>Каждое чувство хранит свою часть нашей истории.</p>
       </div>
       <svg class="sense-route-line" viewBox="0 0 1000 2050" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M500 70 C850 60 870 250 520 330 C200 410 120 550 470 610 C820 670 880 850 530 960 C180 1070 120 1220 470 1330 C820 1440 870 1600 520 1740 C360 1810 500 1880 500 1990" />
+        <path d="M500 70 C570 110 570 250 500 330 C430 410 430 550 500 610 C570 670 570 850 500 960 C430 1070 430 1220 500 1330 C570 1440 570 1600 500 1740 C470 1810 500 1880 500 1990" />
       </svg>
       <div class="sense-route-track"></div>
     `;
@@ -537,7 +537,12 @@
     challenge.className = "scene challenge-gallery";
     challenge.id = "challenges";
     if (riddleState.sensesOpened || riddleState.solved.length) challenge.classList.add("opened");
-    challenge.innerHTML = `<div class="challenge-heading"><p class="eyebrow">ГЛАВА II · ПЯТЬ ИСПЫТАНИЙ</p><h2>СОБЕРИ ПЯТЬ <em>БУКВ.</em></h2><p>Можно возвращаться к любому заданию. Твой прогресс сохранится.</p></div><div class="progress challenge-progress"><div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 РАЗГАДАНО</b></div><div class="progress-track"><i id="progressFill"></i></div><div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div><div class="chapter-gallery puzzle-gallery"><div class="chapter-gallery-top"><div><span class="eyebrow">ПЯТЬ ЗАДАНИЙ · ОДИН КОД</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div></div><div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div></section>`;
+    challenge.innerHTML = `<div class="challenge-heading"><p class="eyebrow">ГЛАВА II · ПЯТЬ ИСПЫТАНИЙ</p><h2>СОБЕРИ ПЯТЬ <em>БУКВ.</em></h2><p>Можно возвращаться к любому заданию. Твой прогресс сохранится.</p></div><div class="progress challenge-progress"><div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 РАЗГАДАНО</b></div><div class="progress-track"><i id="progressFill"></i></div><div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div><div class="chapter-gallery puzzle-gallery puzzle-route">
+      <div class="chapter-gallery-top"><div><span class="eyebrow">ПЯТЬ ЗАДАНИЙ · ОДИН КОД</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div>
+      <svg class="puzzle-route-line" viewBox="0 0 1000 2500" preserveAspectRatio="none" aria-hidden="true"><path d="M500 20 C570 100 570 260 500 390 C430 520 430 650 500 780 C570 910 570 1080 500 1210 C430 1340 430 1500 500 1630 C570 1760 570 1930 500 2060 C470 2160 500 2300 500 2480"/></svg>
+      <div class="chapter-slides" data-gallery-slides></div>
+      <div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← ПРЕДЫДУЩЕЕ</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>СЛЕДУЮЩЕЕ →</button></div>
+    </div><div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div></section>`;
     transition.after(challenge);
     const puzzleSlides = challenge.querySelector("[data-gallery-slides]");
     const puzzleNames = {sight:"ЗРЕНИЕ",sound:"ЗВУК",taste:"ВКУС",touch:"ПРИКОСНОВЕНИЕ",scent:"ЗАПАХ"};
@@ -545,9 +550,10 @@
     order.forEach((id,index) => {
       const entry = puzzleNodes.find(x=>x.id===id);
       const slide = document.createElement("div");
-      slide.className = "chapter-slide puzzle-slide";
+      slide.className = `chapter-slide puzzle-slide puzzle-route-step ${index % 2 === 0 ? "route-left" : "route-right"}`;
       slide.dataset.slide = String(index);
-      slide.innerHTML = `<div class="puzzle-slide-heading"><span>ИСПЫТАНИЕ 0${index+1} / 05</span><h3>${puzzleNames[id]}</h3></div>`;
+      slide.dataset.puzzleStep = String(index + 1);
+      slide.innerHTML = `<span class="puzzle-route-number" aria-hidden="true">0${index+1}</span><div class="puzzle-slide-heading"><span>ИСПЫТАНИЕ 0${index+1} / 05</span><h3>${puzzleNames[id]}</h3><span class="puzzle-route-doodle" aria-hidden="true">${["✦","♡","✧","❀","⋆"][index]}</span></div>`;
       if (entry) slide.appendChild(entry.node);
       else slide.insertAdjacentHTML("beforeend", `<p>Материал этого задания не найден в исходном проекте.</p>`);
       puzzleSlides.appendChild(slide);
@@ -557,6 +563,9 @@
       const all = $$(".chapter-slide", g);
       const safe = Math.max(0, Math.min(index, all.length - 1));
       all.forEach((el,i)=>el.classList.toggle("is-active", i===safe));
+      if (g.dataset.routeReady === "true" && all[safe]) {
+        all[safe].scrollIntoView({behavior:"smooth", block:"center"});
+      }
       const count = g.querySelector("[data-gallery-count]");
       if (count) count.textContent = `${String(safe+1).padStart(2,"0")} / ${String(all.length).padStart(2,"0")}`;
       const prev = g.querySelector("[data-gallery-prev]"); const next = g.querySelector("[data-gallery-next]");
@@ -568,7 +577,9 @@
       g.dataset.active = String(safe);
     }
     const puzzleGallery = challenge.querySelector(".puzzle-gallery");
+    // В режиме маршрута все пять испытаний остаются на странице одновременно.
     activateGallery(puzzleGallery, priorPuzzleIndex);
+    puzzleGallery.dataset.routeReady = "true";
     puzzleGallery.addEventListener("click", e=>{
       const prev=e.target.closest("[data-gallery-prev]"); const next=e.target.closest("[data-gallery-next]"); const dot=e.target.closest("[data-dot]");
       const current=Number(puzzleGallery.dataset.active||0);
