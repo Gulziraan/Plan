@@ -8571,3 +8571,153 @@ html body #style .style-next .text-link::after,
 html body #style .style-next .text-link span {
   color: var(--sky, #8fc7e2) !important;
 }
+
+
+/* Latest corrections: profile spacing, sight markers, and puzzle editorial system */
+@media (min-width: 681px) {
+  html body #profile {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  html body #profile .profile-details-wrap {
+    margin-top: 14px !important;
+  }
+  html body #profile .profile-details {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  html body #profile .profile-hero {
+    margin-bottom: 0 !important;
+  }
+  html body #profile > .scene-nav {
+    padding-top: 24px !important;
+  }
+}
+
+/* The found differences are clearly marked with a visible sky-blue ring. */
+#senses .spot-image-wrap {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+#senses .spot-image-wrap > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+}
+#senses .spot-image-wrap button.spot-hit {
+  position: absolute !important;
+  z-index: 6 !important;
+  left: var(--x) !important;
+  top: var(--y) !important;
+  transform: translate(-50%, -50%) !important;
+  width: clamp(42px, 4.8vw, 60px) !important;
+  height: clamp(42px, 4.8vw, 60px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 2px solid transparent !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  color: transparent !important;
+  cursor: crosshair !important;
+}
+#senses .spot-image-wrap button.spot-hit.is-found,
+#senses .spot-image-wrap button.spot-hit:disabled.is-found {
+  border: 3px solid var(--sky, #8fc7e2) !important;
+  background: rgba(143,199,226,.20) !important;
+  box-shadow: 0 0 0 3px rgba(143,199,226,.20), 0 2px 12px rgba(35,65,75,.18) !important;
+  opacity: 1 !important;
+}
+#senses .spot-image-wrap button.spot-hit:disabled {
+  cursor: default !important;
+}
+
+/* Consistent warm-paper, wine and established sky palette for all puzzle content. */
+#challenges,
+#challenges.challenge-gallery {
+  background: var(--paper, #f8f2e8) !important;
+  color: var(--ink, #302a28) !important;
+  font-family: var(--sans, Arial, sans-serif) !important;
+}
+#challenges .challenge-heading h2,
+#challenges .puzzle-slide-heading h3,
+#challenges .riddle-panel h4,
+#challenges .spot-difference-heading h4,
+#challenges .riddle-cipher h2 {
+  color: var(--wine, #76212b) !important;
+  font-family: var(--display, Georgia, serif) !important;
+  letter-spacing: -.02em !important;
+}
+#challenges .challenge-heading > p,
+#challenges .puzzle-slide-heading p,
+#challenges .riddle-intro,
+#challenges .riddle-question,
+#challenges .spot-difference-heading p,
+#challenges .spot-feedback,
+#challenges .cipher-description,
+#challenges .audio-track-copy p {
+  color: var(--ink-2, #554b4b) !important;
+  font-family: var(--serif, Georgia, serif) !important;
+  line-height: 1.65 !important;
+}
+#challenges .puzzle-slide,
+#challenges .riddle-panel,
+#challenges .spot-difference,
+#challenges .cafe-receipt,
+#challenges .riddle-cipher,
+#challenges .audio-story-track {
+  background: rgba(255,252,246,.92) !important;
+  color: var(--ink, #302a28) !important;
+  border: 1px solid var(--line, rgba(101,22,18,.18)) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 14px 34px rgba(57,42,36,.07) !important;
+}
+#challenges .eyebrow,
+#challenges .puzzle-slide-heading > span,
+#challenges .riddle-index,
+#challenges .riddle-status,
+#challenges .spot-difference-heading > span,
+#challenges .gallery-count {
+  color: var(--wine-soft, #a66d78) !important;
+  font-family: var(--sans, Arial, sans-serif) !important;
+  letter-spacing: .12em !important;
+}
+#challenges input,
+#challenges textarea,
+#challenges .riddle-input,
+#challenges .cipher-input {
+  background: #fffdf8 !important;
+  color: var(--ink, #302a28) !important;
+  border: 1px solid rgba(101,22,18,.28) !important;
+  border-radius: 0 !important;
+  font-family: var(--serif, Georgia, serif) !important;
+}
+#challenges button.riddle-submit,
+#challenges button.cipher-submit,
+#challenges .chapter-gallery-nav button {
+  background: var(--sky-pale, #dceef5) !important;
+  color: var(--wine, #76212b) !important;
+  border: 1px solid var(--sky, #8fc7e2) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-family: var(--sans, Arial, sans-serif) !important;
+  letter-spacing: .1em !important;
+}
+#challenges .progress-track i,
+#challenges .challenge-progress-fill {
+  background: var(--sky, #8fc7e2) !important;
+}
+#challenges .earned-letter,
+#challenges .cipher-letter {
+  background: var(--sky-pale, #dceef5) !important;
+  border: 1px solid var(--sky, #8fc7e2) !important;
+  color: var(--wine, #76212b) !important;
+}
+#challenges .earned-letter strong,
+#challenges .cipher-letter b {
+  color: var(--wine, #76212b) !important;
+}

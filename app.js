@@ -409,8 +409,7 @@
           { src: "assets/F1.PNG", title: s.memories[1]?.title || "02", cls: "" },
           { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
         ];
-        content = `<figure class="sight-memory-hero"><img src="assets/m4.JPG" alt="Совместное воспоминание — глава «Зрение»" loading="lazy"><figcaption>ТОТ САМЫЙ ВЗГЛЯД, С КОТОРОГО ВСЁ НАЧАЛОСЬ</figcaption></figure>
-        <div class="sight-editorial-gallery">${photos.map(photo => `
+        content = `<div class="sight-editorial-gallery">${photos.map(photo => `
           <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
         `).join("")}</div>
         <section class="spot-difference" data-spot-game>
@@ -472,7 +471,7 @@
       if (s.kind === "scent") {
         content = `
           <div class="scent-sensory-scene" data-scent-scene>
-            <figure class="scent-memory-photo"><img src="assets/02.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
+            <figure class="scent-memory-photo"><img src="assets/scent-memory.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
             <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
             <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
             <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
@@ -874,57 +873,12 @@
       riddleState.unlocked = true;
       riddleState.sensesOpened = true;
       saveRiddles();
-      openSecretChapter(true);
+      $("#riddleCipher")?.classList.add("is-complete");
+      showScene("letter");
+      toast("Шифр разгадан. Для тебя открыто моё письмо.");
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
       feedback.className = "riddle-feedback is-wrong";
-    }
-  }
-
-  function openSecretChapter(shouldScroll = true) {
-    let secret = $("#secretChapter");
-
-    if (!secret) {
-      secret = document.createElement("section");
-      secret.className = "secret-chapter opened";
-      secret.id = "secretChapter";
-
-      secret.innerHTML = `
-        <div class="secret-inner">
-          <p class="eyebrow">ПЯТЬ ЧУВСТВ · ОДНА ИСТОРИЯ</p>
-          <div class="secret-senses-mark" aria-hidden="true"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
-          <h2>ТЫ СТАЛ<br><em>МОИМ САМЫМ РОДНЫМ</em></h2>
-          <div class="secret-lead">
-            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось.</p>
-            <p>Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
-            <p>Я люблю всё, что связано с тобой. И мне хочется ещё много раз переживать с тобой самые обычные моменты, потому что именно они становятся такими дорогими, когда мы вместе.</p>
-            <p>Я очень счастлива, что однажды наши пути пересеклись. И ещё счастливее от того, что теперь у меня есть ты.</p>
-          </div>
-          <div class="secret-message">
-            <span>ПЯТЬ ЧУВСТВ · ПЯТЬ ЧАСТЕЙ НАШЕЙ ИСТОРИИ</span>
-            <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
-            <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
-          </div>
-          <button class="button button-light" type="button" id="secretContinue">
-            ПЕРЕЧИТАТЬ МОЁ ПИСЬМО <span>↗</span>
-          </button>
-        </div>
-      `;
-
-      $("#challenges")?.after(secret);
-
-      $("#secretContinue")?.addEventListener("click", () => {
-        showScene("letter");
-      });
-    }
-
-    secret.classList.add("visible");
-    if (shouldScroll) {
-      secret.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "start"
-      });
-      toast("Шифр разгадан. Открыта последняя глава.");
     }
   }
 
@@ -941,7 +895,13 @@
     if (riddleState.solved.length === 5) renderCipher();
     const letterSection = document.getElementById("letter");
     if (letterSection) { letterSection.hidden = false; }
-    if (riddleState.unlocked && riddleState.solved.length === 5) openSecretChapter(false);
+    if (riddleState.unlocked && riddleState.solved.length === 5) {
+      const letterSection = document.getElementById("letter");
+      if (letterSection) {
+        letterSection.hidden = false;
+        letterSection.classList.add("is-unlocked", "opened");
+      }
+    }
   }
 
   function compressImage(file, maxSide = 1500, quality = 0.78) {
