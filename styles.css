@@ -8631,3 +8631,40 @@ html body #style .style-next .text-link span {
   .belief-envelope-paper h2 { font-size: clamp(28px, 8vw, 38px) !important; }
   .belief-envelope-paper .belief-copy { font-size: 16px !important; line-height: 1.55 !important; }
 }
+
+
+/* PROFILE SCREEN — keep the intro and the three lower text blocks together. */
+html body #profile .profile-hero {
+  align-items: start !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+html body #profile .profile-panel {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  padding-top: 0 !important;
+}
+html body #profile .profile-description {
+  margin: 0 0 14px !important;
+}
+html body #profile .profile-details-wrap {
+  display: block !important;
+  flex: 0 0 auto !important;
+  margin-top: 18px !important;
+  padding-top: 0 !important;
+}
+html body #profile .profile-details {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+@media (max-width: 760px) {
+  html body #profile .profile-panel {
+    margin-top: 20px !important;
+  }
+  html body #profile .profile-details-wrap {
+    margin-top: 18px !important;
+  }
+}

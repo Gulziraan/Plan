@@ -8841,3 +8841,170 @@ html body #style .style-next .text-link span {
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
+
+/* EDITORIAL SENSE ROUTE — closer to the reference: flowing path, numbered markers, text and the five original sense symbols. */
+#senses .sense-route {
+  width: min(100% - 54px, 1220px);
+  padding-bottom: clamp(55px, 8vw, 105px);
+}
+#senses .sense-route-heading {
+  max-width: 760px;
+  margin-bottom: clamp(62px, 9vw, 112px);
+  text-align: left;
+}
+#senses .sense-route-heading h3 {
+  font-size: clamp(36px, 5.8vw, 68px);
+  line-height: .98;
+}
+#senses .sense-route-track {
+  gap: clamp(94px, 12vw, 154px);
+}
+#senses .sense-route-line {
+  inset: 110px 0 15px;
+  height: calc(100% - 125px);
+}
+#senses .sense-route-line path {
+  stroke: rgba(153, 132, 110, .55);
+  stroke-width: 9;
+}
+#senses .sense-route-step {
+  width: min(46%, 520px);
+}
+#senses .sense-route-step .sense-number {
+  top: 10px;
+  left: auto;
+  right: -88px;
+  width: 58px;
+  height: 66px;
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 30%, 88% 76%, 50% 100%, 12% 76%, 0 30%);
+  background: var(--wine, #76212b);
+  color: #fff8ed !important;
+  box-shadow: none;
+  font-size: 24px;
+}
+#senses .sense-route-step.route-right .sense-number {
+  left: -88px;
+  right: auto;
+}
+#senses .sense-route-step .sense-heading {
+  margin-bottom: 20px !important;
+}
+#senses .sense-route-step .sense-heading h3 {
+  font-size: clamp(31px, 4.2vw, 50px) !important;
+  letter-spacing: -.02em;
+}
+#senses .sense-route-step .sense-symbol {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 1px solid rgba(118,33,43,.2);
+  border-radius: 50%;
+  background: rgba(248,243,232,.8);
+  color: var(--wine, #76212b) !important;
+  font-size: 34px;
+}
+#senses .sense-route-step .sense-description {
+  max-width: 490px;
+  font-size: clamp(16px, 1.42vw, 19px) !important;
+  line-height: 1.58 !important;
+}
+#senses .sense-route-step .sense-heading::after {
+  display: none;
+}
+#senses .sense-route-step.route-left .sense-number {
+  right: -88px;
+}
+#senses .sense-route-step.route-right .sense-number {
+  left: -88px;
+}
+#senses .sense-route-step.route-right .sense-heading {
+  flex-direction: row;
+}
+#senses .sense-route-step.route-right .sense-heading > div {
+  text-align: right;
+}
+#senses .sense-route-step.route-right .sense-description {
+  text-align: right;
+}
+#senses .sense-route-step.route-right .sense-content {
+  text-align: right;
+}
+#senses .sense-route-step.route-right .sense-content .audio-story-list,
+#senses .sense-route-step.route-right .sense-content .touch-experience,
+#senses .sense-route-step.route-right .sense-content .scent-sensory-scene,
+#senses .sense-route-step.route-right .sense-content .sight-editorial-gallery,
+#senses .sense-route-step.route-right .sense-content .spot-difference {
+  text-align: left;
+}
+@media (max-width: 760px) {
+  #senses .sense-route {
+    width: calc(100% - 34px);
+  }
+  #senses .sense-route-heading {
+    margin-bottom: 52px;
+  }
+  #senses .sense-route-track {
+    gap: 70px;
+    padding-left: 48px;
+  }
+  #senses .sense-route-line {
+    inset: 92px auto 20px 0;
+    width: 58px;
+    height: calc(100% - 112px);
+  }
+  #senses .sense-route-step .sense-number,
+  #senses .sense-route-step.route-left .sense-number,
+  #senses .sense-route-step.route-right .sense-number {
+    top: 2px;
+    left: -59px;
+    right: auto;
+    width: 42px;
+    height: 48px;
+    font-size: 18px;
+  }
+  #senses .sense-route-step .sense-heading,
+  #senses .sense-route-step.route-right .sense-heading {
+    flex-direction: row;
+  }
+  #senses .sense-route-step .sense-heading > div,
+  #senses .sense-route-step.route-right .sense-heading > div {
+    text-align: left;
+  }
+  #senses .sense-route-step .sense-description,
+  #senses .sense-route-step.route-right .sense-description {
+    text-align: left;
+  }
+  #senses .sense-route-step .sense-symbol {
+    width: 46px;
+    height: 46px;
+    font-size: 27px;
+  }
+  #senses .sense-route-step.route-right .sense-content {
+    text-align: left;
+  }
+}
+
+/* Difference markers: every correctly found spot stays unmistakably circled in red. */
+#challenges .spot-hit.is-found,
+#senses .spot-hit.is-found {
+  border: 4px solid #e32636 !important;
+  background: rgba(227, 38, 54, .14) !important;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.92),
+    0 0 0 6px rgba(227,38,54,.3),
+    0 0 18px rgba(227,38,54,.62) !important;
+  opacity: 1 !important;
+  cursor: default !important;
+}
+#challenges .spot-hit.is-found::after,
+#senses .spot-hit.is-found::after {
+  content: "";
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  background: rgba(227,38,54,.26);
+}
