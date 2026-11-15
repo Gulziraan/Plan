@@ -4178,16 +4178,7 @@ main > #welcome{ padding-top: clamp(22px, 3.5vw, 52px); padding-bottom: 38px; }
   margin-top: clamp(30px, 4vw, 56px);
   padding: 0;
 }
-.scene-nav::before {
-  content: "";
-  display: block;
-  width: 86px;
-  height: 5px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, var(--blue-deep), var(--wine));
-  transform: rotate(-2deg);
-}
+.scene-nav::before { content:none !important; display:none !important; }
 
 /* Chapter transitions are blended into the same paper field. */
 #welcome{
@@ -4568,18 +4559,7 @@ main > #welcome{ padding-top: clamp(22px, 3.5vw, 52px); padding-bottom: 38px; }
   border-radius: 50%;
   background: radial-gradient(circle,rgba(169,207,223,.58),transparent 70%);
 }
-#transition .transition-content::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -5%; top: 8%;
-  width: 9px; height: 78%;
-  border: 0;
-  border-radius: 8px;
-  background: linear-gradient(180deg,var(--blue),var(--paper-pink-deep),var(--wine-soft));
-  transform: rotate(2deg);
-  opacity: .62;
-}
+#transition .transition-content::after { content:none !important; display:none !important; }
 #transition .eyebrow { color: var(--wine); }
 #transition h2 {
   color: var(--wine);
@@ -4655,16 +4635,7 @@ main > #welcome{ padding-top: clamp(22px, 3.5vw, 52px); padding-bottom: 38px; }
   position: relative;
   border: 0 !important;
 }
-#senses .sense-chapter::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0;
-  width: 46px; height: 5px;
-  border-radius: 5px;
-  background: linear-gradient(90deg,var(--blue-deep),var(--paper-pink-deep));
-  transform: rotate(-2deg);
-  opacity: .75;
-}
+#senses .sense-chapter::before { content:none !important; display:none !important; }
 #senses .sense-chapter:nth-child(even)::before { left: auto; right: 3%; background: var(--paper-pink-deep); }
 #senses .sense-number { color: var(--blue-deep); font: italic 34px var(--display); }
 #senses .sense-heading h3 { color: var(--wine); font: 600 clamp(39px,5.8vw,74px)/.92 var(--display); }
@@ -8580,3 +8551,83 @@ html body #style .style-next .text-link span {
 .chapter-one-finale .text-link:hover { color: var(--sky-deep, #4b91aa); border-color: var(--sky-deep, #4b91aa); transform: translateY(-2px); }
 .chapter-two-topbar .logo { cursor: default; }
 @media(max-width:700px) { .chapter-one-finale { margin-top: 24px; padding-top: 18px; } .chapter-one-finale .text-link { min-height: 52px; width:100%; } }
+
+
+
+/* CHAPTER BREAK: a letter on paper against the same deep burgundy field as the opening envelope. */
+.belief-envelope-overlay {
+  background: #5b0908 !important;
+  background-image: radial-gradient(ellipse at 50% 38%, #76110f 0%, #5b0908 58%, #3e0506 100%) !important;
+  backdrop-filter: none !important;
+  padding: clamp(20px, 5vw, 64px) !important;
+}
+.belief-envelope-paper {
+  position: relative;
+  width: min(760px, 100%) !important;
+  min-height: min(720px, calc(100svh - 40px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(30px, 6vw, 76px) !important;
+  background: #fbf5e9 !important;
+  background-image: linear-gradient(90deg, rgba(128,72,55,.035) 1px, transparent 1px), linear-gradient(rgba(128,72,55,.025) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 32px !important;
+  border: 0 !important;
+  box-shadow: 0 24px 80px rgba(18,0,0,.34), 0 0 0 1px rgba(255,245,230,.24) !important;
+}
+.belief-envelope-paper:before {
+  content: "✦" !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto 18px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #8c2927 !important;
+  font-size: 20px !important;
+}
+.belief-envelope-paper > .eyebrow {
+  color: #8c2927 !important;
+  letter-spacing: .2em !important;
+}
+.belief-envelope-paper h2 {
+  color: #651514 !important;
+  font-family: var(--display, Georgia), Georgia, serif !important;
+  font-size: clamp(30px, 5vw, 52px) !important;
+  line-height: 1.08 !important;
+}
+.belief-envelope-paper .belief-copy {
+  color: #403331 !important;
+}
+.belief-envelope-paper .belief-final {
+  color: #7b1c1a !important;
+}
+.belief-envelope-paper .chapter-one-finale {
+  margin-top: clamp(24px, 4vw, 42px) !important;
+  padding-top: 20px !important;
+  border-top: 1px solid rgba(111,35,31,.22) !important;
+  text-align: center !important;
+}
+.belief-envelope-paper .chapter-one-finale > .eyebrow {
+  color: #8c2927 !important;
+}
+.belief-envelope-paper .chapter-one-finale > p:not(.eyebrow) {
+  color: #51403c !important;
+  font: italic 18px/1.5 var(--serif, Georgia) !important;
+}
+.belief-envelope-paper #closeBeliefEnvelope {
+  color: #7b1c1a !important;
+  border-bottom: 1px solid #7b1c1a !important;
+  background: transparent !important;
+  padding: 12px 8px !important;
+  min-height: 44px !important;
+  letter-spacing: .12em !important;
+}
+@media (max-width: 700px) {
+  .belief-envelope-overlay { padding: 14px !important; }
+  .belief-envelope-paper {
+    min-height: calc(100svh - 28px);
+    padding: 28px 22px !important;
+  }
+  .belief-envelope-paper h2 { font-size: clamp(28px, 8vw, 38px) !important; }
+  .belief-envelope-paper .belief-copy { font-size: 16px !important; line-height: 1.55 !important; }
+}
