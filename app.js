@@ -509,6 +509,10 @@
       const id = article.id.replace("chapter-", "");
       const puzzle = article.querySelector(id === "sight" ? "[data-spot-game]" : id === "taste" ? ".cafe-receipt" : ".riddle-panel");
       if (puzzle) { puzzleNodes.push({id, node:puzzle}); puzzle.remove(); }
+      // На маршруте пяти чувств оставляем только номер, тему, название,
+      // символ и авторский текст. Фото/аудио/вложения не входят в эту композицию.
+      article.querySelector(".sense-content")?.remove();
+      article.querySelector(".sense-heading .sense-tagline")?.remove();
       article.classList.add("sense-route-step", index % 2 === 0 ? "route-left" : "route-right");
       article.dataset.routeStep = String(index + 1);
       track.appendChild(article);
