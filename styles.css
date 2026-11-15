@@ -8113,3 +8113,97 @@ main { overflow: clip; }
   #admire .quality-traits { width: min(100% - 36px, 560px); gap: 7px; }
   #admire .quality-traits span { font-size: 10px; }
 }
+
+/* Chapter galleries: content and riddles are deliberately separate chapters. */
+.chapter-gallery{width:min(1180px,calc(100% - 48px));margin:52px auto 96px;position:relative}
+.chapter-gallery-top{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
+.gallery-count{font:600 12px/1.2 var(--font-mono,monospace);letter-spacing:.14em;color:var(--muted,#8b817d);margin:8px 0 0}
+.gallery-dots{display:flex;gap:8px;align-items:center}
+.gallery-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(120,100,90,.28);cursor:pointer}
+.gallery-dots button.active{width:24px;border-radius:8px;background:var(--accent,#a66f72)}
+.chapter-slides{position:relative;min-height:280px}
+.chapter-slide{display:none;animation:chapterSlideIn .42s ease both}
+.chapter-slide.is-active{display:block}
+@keyframes chapterSlideIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.chapter-gallery-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(120,100,90,.2)}
+.chapter-gallery-nav button,.chapter-gallery-nav span{font:600 11px/1.4 var(--font-mono,monospace);letter-spacing:.12em;color:var(--text,#302a28)}
+.chapter-gallery-nav button{border:0;background:none;padding:12px 0;cursor:pointer}
+.chapter-gallery-nav button:disabled{opacity:.25;cursor:default}
+.chapter-gallery-nav span{color:var(--muted,#8b817d);text-align:center}
+.chapter-transition{min-height:68vh;display:grid;place-items:center;padding:90px 24px;background:linear-gradient(145deg,rgba(237,225,216,.58),rgba(249,244,238,.9))}
+.chapter-transition-inner{width:min(700px,100%);text-align:center}
+.chapter-transition-inner .transition-mark{display:block;font-size:32px;margin:25px 0;color:var(--accent,#a66f72)}
+.chapter-transition-inner h2{font-size:clamp(38px,7vw,76px);line-height:1.02;margin:0 0 30px}
+.chapter-transition-inner>p:not(.eyebrow){max-width:560px;margin:14px auto;font-size:clamp(16px,1.7vw,19px);line-height:1.75;color:var(--muted,#665d59)}
+.chapter-transition-inner .text-link{margin-top:34px;border:0;border-bottom:1px solid currentColor;background:none;padding:12px 0;font:600 12px/1.4 var(--font-mono,monospace);letter-spacing:.12em;cursor:pointer}
+.challenge-gallery{padding:70px 0 100px;background:rgba(245,238,231,.5)}
+.challenge-heading{width:min(1180px,calc(100% - 48px));margin:0 auto 35px}
+.challenge-heading h2{font-size:clamp(34px,5vw,62px);margin:12px 0}
+.challenge-heading>p:last-child{max-width:620px;line-height:1.7;color:var(--muted,#746a65)}
+.challenge-progress{width:min(1180px,calc(100% - 48px));margin:0 auto 38px}
+.puzzle-gallery{margin-top:0}
+.puzzle-slide{padding:clamp(18px,3vw,36px);background:rgba(255,255,255,.62);border:1px solid rgba(120,100,90,.15);border-radius:4px}
+.puzzle-slide-heading{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:24px;border-bottom:1px solid rgba(120,100,90,.16);padding-bottom:16px}
+.puzzle-slide-heading span{font:11px var(--font-mono,monospace);letter-spacing:.12em;color:var(--muted,#8b817d)}
+.puzzle-slide-heading h3{font-size:clamp(22px,3vw,34px);margin:0}
+.letter-next-actions{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;margin:40px auto}
+.letter-next-actions .text-link{border:0;border-bottom:1px solid currentColor;background:none;padding:12px 0;cursor:pointer}
+@media(max-width:700px){.chapter-gallery{width:calc(100% - 28px);margin:32px auto 58px}.chapter-gallery-top{align-items:center}.chapter-slides{min-height:200px}.chapter-gallery-nav{margin-top:18px}.chapter-gallery-nav button,.chapter-gallery-nav span{font-size:10px}.chapter-transition{min-height:62vh;padding:70px 22px}.challenge-gallery{padding:52px 0 70px}.challenge-heading,.challenge-progress{width:calc(100% - 28px)}.puzzle-slide{padding:16px 12px}.puzzle-slide-heading{display:block}.puzzle-slide-heading h3{margin-top:8px}.letter-next-actions{gap:10px;flex-direction:column}}
+
+/* Profile: details belong to the same text column as the portrait, not a detached row. */
+#profile .profile-hero{align-items:stretch;gap:0}
+#profile .profile-panel{display:flex;flex-direction:column;justify-content:center;min-width:0}
+#profile .profile-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:clamp(24px,3vw,38px) 0 0;padding:0;width:100%}
+#profile .profile-detail{min-width:0;padding:16px 14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.045)}
+#profile .profile-detail:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#profile .profile-detail:last-child .profile-detail-title{grid-column:1/-1}
+#profile .profile-detail-title{margin:0 0 12px;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.68)}
+#profile .profile-detail-item{min-width:0;margin:10px 0}
+#profile .profile-detail-item span,#profile .profile-detail-item small{display:block;font-size:10px;line-height:1.5;color:rgba(255,255,255,.68)}
+#profile .profile-detail-item b{display:block;margin:4px 0;font-size:12px;line-height:1.35;color:#fffaf2}
+#profile .stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#profile .stats-grid>*{min-width:0}
+#admire .chapter-heading{max-width:900px;margin:0 auto clamp(34px,5vw,64px);text-align:left}
+#admire .chapter-heading h2{max-width:850px;line-height:1.02;text-wrap:balance}
+#admire .chapter-heading>p:not(.eyebrow){max-width:740px;line-height:1.8}
+@media(max-width:760px){#profile .profile-details{grid-template-columns:1fr;margin-top:24px}#profile .profile-detail:last-child{grid-template-columns:1fr}#profile .profile-detail:last-child .profile-detail-title{grid-column:auto}#profile .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* After the Mjölnir sequence, the reveal action is typographic rather than a filled button. */
+#style .creator-highlights-toggle{display:flex;align-items:flex-start;flex-direction:column;gap:10px;width:auto;max-width:100%;padding:14px 0;background:transparent!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.42)!important;border-radius:0!important;box-shadow:none!important;color:inherit;text-align:left;cursor:pointer}
+#style .creator-highlights-toggle:disabled{opacity:.58;cursor:default}
+#style .creator-highlights-toggle .creator-highlights-title{font-size:clamp(22px,3vw,38px);line-height:.98}
+#style .creator-highlights-toggle .creator-highlights-hint{font:600 10px/1.5 var(--font-mono,monospace);letter-spacing:.14em}
+#style .creator-highlights-toggle:hover:not(:disabled){transform:translateX(5px);background:transparent!important;box-shadow:none!important}
+
+/* The puzzle controls now live in their own chapter, so keep their editorial palette there too. */
+#challenges .riddle-panel,#challenges .spot-difference,#challenges .audio-story-track,#challenges .touch-art-stage,#challenges .scent-sensory-scene,#challenges .cafe-scene,#challenges .cafe-receipt{background:rgba(255,250,242,.94);color:var(--ink,#302a28);border:1px solid rgba(112,33,43,.18);box-shadow:0 16px 38px rgba(57,42,36,.08)}
+#challenges .riddle-question,#challenges .riddle-intro,#challenges .spot-difference p,#challenges .spot-difference-heading p,#challenges .audio-track-copy p{color:var(--ink,#302a28)}
+#challenges .riddle-status,#challenges .spot-progress strong,#challenges .spot-difference-heading span,#challenges .spot-difference-pair figcaption,#challenges .cafe-receipt h4{color:var(--wine,#76212b)}
+#challenges .riddle-input{color:var(--ink,#302a28);background:#fffdf8;border-color:rgba(112,33,43,.3)}
+#challenges .riddle-submit{background:var(--wine,#76212b);color:#fff9ef}
+#challenges .riddle-hint{color:var(--blue-deep,#315f78)}
+#challenges .riddle-feedback{color:var(--ink-soft,#665d59)}
+#challenges .riddle-feedback.is-wrong{color:#9d2635}
+#challenges .riddle-feedback.is-hint{color:#315f78;background:#e3f1f6;padding:10px 14px}
+#challenges .earned-letter,#challenges .riddle-already-solved{color:var(--wine,#76212b);background:#e3f1f6}
+#challenges .spot-hit.is-found{border-color:var(--blue-deep,#315f78);background:rgba(120,171,196,.28)}
+#challenges .audio-play{color:var(--wine,#76212b);border-color:var(--wine,#76212b)}
+#challenges .touch-art-stage{background:linear-gradient(145deg,#e4eff2,#f8f1e8)}
+#challenges .touch-art-instruction,#challenges .touch-reveal-copy{color:var(--ink,#302a28)}
+#challenges .scent-sensory-scene{background:radial-gradient(ellipse at 50% 50%,#ead2cc,#f8f0e6 65%)}
+#challenges .secret-chapter{margin:60px auto;padding:clamp(35px,7vw,85px);max-width:1180px;background:linear-gradient(130deg,#782d3a,#4e1722);color:#fffaf2;border:1px solid #c5a77e88}
+#challenges .secret-inner{padding:0}
+#challenges .secret-inner h2{font:600 clamp(43px,6vw,76px)/.95 var(--display);color:#fff9ef}
+#challenges .secret-inner h2 em{color:#e5cba5}
+#challenges .secret-inner p{color:#fff1e9}
+#challenges .secret-chapter .button{margin-top:30px}
+@media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr}#challenges .riddle-answer-row{display:flex;flex-direction:column;align-items:stretch}#challenges .riddle-answer-row .riddle-submit{width:100%}}
+#challenges .unlock-final{margin:38px auto 20px;padding:48px 0 20px;border-top:1px solid rgba(120,100,90,.2);text-align:center}
+#challenges .unlock-final h3{color:var(--wine,#76212b);font-size:clamp(38px,5vw,62px)}
+#challenges .unlock-final h3 em{color:var(--champagne,#b28b6a)}
+#challenges .unlock-final button:disabled{opacity:.42;cursor:not-allowed}
+#challenges .riddle-cipher{margin:42px auto 0;padding:clamp(24px,4vw,52px);max-width:760px;background:#fffaf3;color:var(--ink,#302a28);border:1px solid rgba(112,33,43,.2);box-shadow:0 16px 38px rgba(57,42,36,.08)}
+#challenges .riddle-cipher h2{color:var(--wine,#76212b)}
+#challenges .cipher-input{color:var(--ink,#302a28);background:#fffdf8;border-color:rgba(112,33,43,.3)}
+#challenges .cipher-submit{background:var(--wine,#76212b);color:#fff9ef}
+#challenges .cipher-description{color:var(--ink-soft,#665d59)}

@@ -146,7 +146,7 @@
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "admire", "hammer", "style", "belief", "transition", "senses", "letter"];
+  const scenes = ["welcome", "profile", "admire", "belief", "hammer", "style", "letter", "transition", "senses"];
 
   function persistState() {
     try {
@@ -185,14 +185,9 @@
       const sensesSection = document.getElementById("senses");
       if (sensesSection) {
         sensesSection.hidden = false;
-        sensesSection.classList.add("is-unlocked");
+        sensesSection.classList.add("is-unlocked", "opened");
       }
       renderSenses();
-    }
-
-    if (id === "letter" && (!riddleState.unlocked || riddleState.solved.length !== 5)) {
-      toast("Сначала нужно разгадать финальный шифр.");
-      return;
     }
 
     if (id === "letter") {
@@ -208,6 +203,12 @@
     currentScene = id;
     const target = document.getElementById(id);
     if (target) {
+      target.classList.add("opened");
+      if (id === "senses") {
+        document.getElementById("transition")?.classList.add("opened");
+        document.getElementById("chapterTransition")?.classList.add("opened");
+        document.getElementById("challenges")?.classList.add("opened");
+      }
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     }
@@ -267,7 +268,7 @@
   function photoMarkup(key, className = "memory-photo") {
     // Поддерживаем оба варианта:
     // 1) ключи загруженных в браузере файлов (например, "sight-0");
-    // 2) прямые пути к изображениям в папке проекта (например, "assets/11.jpg").
+    // 2) прямые пути к изображениям в папке проекта (например, "assets/11.PNG").
     const isFilePath = typeof key === "string" &&
       /^(assets\/|\.\/|https?:\/\/)/i.test(key);
     const src = assets[key] || (isFilePath ? key : C.media?.[key]) || "";
@@ -513,10 +514,110 @@
     }).join("") + `
       <div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div>`;
 
+    buildChapterGalleries();
     setupAudioPlayers();
     setupTouchScene();
     setupScentScene();
     updateProgress();
+  }
+
+  function buildChapterGalleries() {
+    const senses = $("#senses");
+    const list = $("#senseList");
+    if (!senses || !list) return;
+
+    const priorSenseIndex = Number($("#senseGallery")?.dataset.active || 0);
+    const priorPuzzleIndex = Number($("#challenges .puzzle-gallery")?.dataset.active || 0);
+    $("#chapterTransition")?.remove();
+    $("#challenges")?.remove();
+    $("#senseGallery")?.remove();
+    const articles = $$(".sense-chapter", list);
+    const progress = $(".progress", senses);
+    if (progress) progress.remove();
+    const gallery = document.createElement("div");
+    gallery.id = "senseGallery";
+    gallery.className = "chapter-gallery sense-gallery";
+    gallery.innerHTML = `<div class="chapter-gallery-top"><div><span class="eyebrow">ГЛАВА I · НАША ИСТОРИЯ</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div>`;
+    const slides = gallery.querySelector('[data-gallery-slides]');
+    const puzzleNodes = [];
+    articles.forEach((article, index) => {
+      const id = article.id.replace('chapter-', '');
+      const puzzle = article.querySelector(id === 'sight' ? '[data-spot-game]' : id === 'taste' ? '.cafe-receipt' : '.riddle-panel');
+      if (puzzle) { puzzleNodes.push({id, node:puzzle}); puzzle.remove(); }
+      const slide = document.createElement('div');
+      slide.className = 'chapter-slide';
+      slide.dataset.slide = String(index);
+      slide.appendChild(article);
+      slides.appendChild(slide);
+    });
+    list.before(gallery);
+    list.hidden = true;
+
+    const transition = document.createElement('section');
+    transition.className = 'scene chapter-transition';
+    transition.id = 'chapterTransition';
+    if (riddleState.sensesOpened || riddleState.solved.length) transition.classList.add("opened");
+    transition.innerHTML = `<div class="chapter-transition-inner"><p class="eyebrow">ГЛАВА II · ТВОЙ ХОД</p><span class="transition-mark">✦</span><h2>А ТЕПЕРЬ —<br><em>ТВОЯ ОЧЕРЕДЬ.</em></h2><p>Ты увидел пять чувств. Теперь попробуй разгадать, что скрывается за каждым из них.</p><p>Пройди все задания, собери пять букв — и откроешь следующую главу.</p><button type="button" class="text-link" id="beginChallenges">ПЕРЕЙТИ К ИСПЫТАНИЯМ →</button></div>`;
+    senses.after(transition);
+
+    const challenge = document.createElement('section');
+    challenge.className = 'scene challenge-gallery';
+    challenge.id = 'challenges';
+    if (riddleState.sensesOpened || riddleState.solved.length) challenge.classList.add("opened");
+    challenge.innerHTML = `<div class="challenge-heading"><p class="eyebrow">ГЛАВА II · ПЯТЬ ИСПЫТАНИЙ</p><h2>СОБЕРИ ПЯТЬ <em>БУКВ.</em></h2><p>Можно возвращаться к любому заданию. Твой прогресс сохранится.</p></div><div class="progress challenge-progress"><div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 РАЗГАДАНО</b></div><div class="progress-track"><i id="progressFill"></i></div><div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div><div class="chapter-gallery puzzle-gallery"><div class="chapter-gallery-top"><div><span class="eyebrow">ПЯТЬ ЗАДАНИЙ · ОДИН КОД</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div></div><div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? '' : 'disabled'}>ПЕРЕЙТИ К ШИФРУ ↗</button></div></section>`;
+    transition.after(challenge);
+    const puzzleSlides = challenge.querySelector('[data-gallery-slides]');
+    const puzzleNames = {sight:'ЗРЕНИЕ',sound:'ЗВУК',taste:'ВКУС',touch:'ПРИКОСНОВЕНИЕ',scent:'ЗАПАХ'};
+    const order = ['sight','sound','taste','touch','scent'];
+    order.forEach((id,index) => {
+      const entry = puzzleNodes.find(x=>x.id===id);
+      const slide = document.createElement('div');
+      slide.className = 'chapter-slide puzzle-slide';
+      slide.dataset.slide = String(index);
+      slide.innerHTML = `<div class="puzzle-slide-heading"><span>ИСПЫТАНИЕ 0${index+1} / 05</span><h3>${puzzleNames[id]}</h3></div>`;
+      if (entry) slide.appendChild(entry.node);
+      else slide.insertAdjacentHTML('beforeend', `<p>Материал этого задания не найден в исходном проекте.</p>`);
+      puzzleSlides.appendChild(slide);
+    });
+
+    function activateGallery(g, index) {
+      const all = $$('.chapter-slide', g);
+      const safe = Math.max(0, Math.min(index, all.length - 1));
+      all.forEach((el,i)=>el.classList.toggle('is-active', i===safe));
+      const count = g.querySelector('[data-gallery-count]');
+      if (count) count.textContent = `${String(safe+1).padStart(2,'0')} / ${String(all.length).padStart(2,'0')}`;
+      const prev = g.querySelector('[data-gallery-prev]'); const next = g.querySelector('[data-gallery-next]');
+      if (prev) prev.disabled = safe===0; if (next) next.disabled = safe===all.length-1;
+      const labels = g.querySelector('[data-gallery-label]');
+      if (labels) labels.textContent = all[safe]?.querySelector('.sense-heading h3, .puzzle-slide-heading h3')?.textContent || '';
+      const dots = g.querySelector('[data-gallery-dots]');
+      if (dots) dots.innerHTML = all.map((_,i)=>`<button type="button" aria-label="Слайд ${i+1}" class="${i===safe?'active':''}" data-dot="${i}"></button>`).join('');
+      g.dataset.active = String(safe);
+    }
+    [gallery, challenge.querySelector('.puzzle-gallery')].forEach((g, galleryIndex)=>{
+      activateGallery(g, galleryIndex === 0 ? priorSenseIndex : priorPuzzleIndex);
+      g.addEventListener('click', e=>{
+        const prev=e.target.closest('[data-gallery-prev]'); const next=e.target.closest('[data-gallery-next]'); const dot=e.target.closest('[data-dot]');
+        const current=Number(g.dataset.active||0);
+        if(prev) activateGallery(g,current-1); if(next) activateGallery(g,current+1); if(dot) activateGallery(g,Number(dot.dataset.dot));
+      });
+      let startX=0;
+      g.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});
+      g.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>55) activateGallery(g,Number(g.dataset.active||0)+(dx<0?1:-1));},{passive:true});
+    });
+    if (window.__hasanGalleryKeyHandler) document.removeEventListener('keydown', window.__hasanGalleryKeyHandler);
+    window.__hasanGalleryKeyHandler = e=>{
+      if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+      const active=document.activeElement;
+      if(active && /INPUT|TEXTAREA/.test(active.tagName)) return;
+      const g = challenge.getBoundingClientRect().top < innerHeight && challenge.getBoundingClientRect().bottom > 0 ? challenge.querySelector('.puzzle-gallery') : gallery;
+      activateGallery(g,Number(g.dataset.active||0)+(e.key==='ArrowRight'?1:-1));
+    };
+    document.addEventListener('keydown', window.__hasanGalleryKeyHandler);
+    $('#beginChallenges')?.addEventListener('click',()=>challenge.scrollIntoView({behavior:'smooth',block:'start'}));
+    // Keep the letter in the narrative before the senses chapter.
+    const letter = $('#letter');
+    if (letter && letter.parentElement) { letter.hidden = false; const intro = $("#transition"); if (intro) intro.before(letter); else senses.before(letter); }
   }
 
   function formatAudioTime(seconds) {
@@ -711,7 +812,7 @@
   function renderCipher() {
     if (riddleState.solved.length !== 5) return;
 
-    const root = $("#senses");
+    const root = $("#challenges");
     if (!root) return;
 
     let cipher = $("#riddleCipher");
@@ -771,17 +872,7 @@
       riddleState.unlocked = true;
       riddleState.sensesOpened = true;
       saveRiddles();
-      const finalSection = document.getElementById("letter");
-      if (finalSection) {
-        finalSection.hidden = false;
-        finalSection.classList.add("is-unlocked");
-      }
-      renderPersonalLetter();
-      renderMemoryGallery();
-      document.getElementById("letter")?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        block: "start"
-      });
+      openSecretChapter(true);
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
       feedback.className = "riddle-feedback is-wrong";
@@ -793,7 +884,7 @@
 
     if (!secret) {
       secret = document.createElement("section");
-      secret.className = "secret-chapter";
+      secret.className = "secret-chapter opened";
       secret.id = "secretChapter";
 
       secret.innerHTML = `
@@ -813,12 +904,12 @@
             <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
           </div>
           <button class="button button-light" type="button" id="secretContinue">
-            ОТКРЫТЬ МОЁ ПИСЬМО <span>↗</span>
+            ПЕРЕЧИТАТЬ МОЁ ПИСЬМО <span>↗</span>
           </button>
         </div>
       `;
 
-      $("#senses")?.appendChild(secret);
+      $("#challenges")?.after(secret);
 
       $("#secretContinue")?.addEventListener("click", () => {
         showScene("letter");
@@ -841,20 +932,14 @@
       const sensesSection = document.getElementById("senses");
       if (sensesSection) {
         sensesSection.hidden = false;
-        sensesSection.classList.add("is-unlocked");
+        sensesSection.classList.add("is-unlocked", "opened");
       }
       renderSenses();
     }
     if (riddleState.solved.length === 5) renderCipher();
-    if (riddleState.unlocked && riddleState.solved.length === 5) {
-      const finalSection = document.getElementById("letter");
-      if (finalSection) {
-        finalSection.hidden = false;
-        finalSection.classList.add("is-unlocked");
-      }
-      renderPersonalLetter();
-      renderMemoryGallery();
-    }
+    const letterSection = document.getElementById("letter");
+    if (letterSection) { letterSection.hidden = false; }
+    if (riddleState.unlocked && riddleState.solved.length === 5) openSecretChapter(false);
   }
 
   function compressImage(file, maxSide = 1500, quality = 0.78) {
@@ -1012,6 +1097,7 @@
   });
 
   $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
+  $("#openSensesFromLetter")?.addEventListener("click", () => showScene("transition"));
 
   $("#restartTop")?.addEventListener("click", reset);
   $("#restartFinal")?.addEventListener("click", reset);
@@ -1023,13 +1109,15 @@
     const sensesVisible = riddleState.sensesOpened || riddleState.solved.length > 0;
     sensesSectionInitial.hidden = !sensesVisible;
     sensesSectionInitial.classList.toggle("is-unlocked", sensesVisible);
+    sensesSectionInitial.classList.toggle("opened", sensesVisible);
+    if (sensesVisible) {
+      $("#transition")?.classList.add("opened");
+      $("#chapterTransition")?.classList.add("opened");
+      $("#challenges")?.classList.add("opened");
+    }
   }
   const finalSectionInitial = document.getElementById("letter");
-  if (finalSectionInitial) {
-    const finalVisible = riddleState.unlocked && riddleState.solved.length === 5;
-    finalSectionInitial.hidden = !finalVisible;
-    finalSectionInitial.classList.toggle("is-unlocked", finalVisible);
-  }
+  if (finalSectionInitial) finalSectionInitial.hidden = false;
 
   // Ненавязчивое появление крупных элементов при обычной прокрутке.
   const revealTargets = $$(".scene h2, .scene h3, .scene .profile-hero, .scene .stats-section, .scene .quality-list, .scene .sense-chapter, .scene .personal-letter, .scene .letter-opening");
