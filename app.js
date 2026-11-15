@@ -456,7 +456,6 @@
             <div class="sense-heading"><div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3>${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}</div><span class="sense-symbol">${s.symbol}</span></div>
             <p class="sense-description">${s.description}</p><div class="sense-content">${content}</div>
             ${tasteReceipt}${standardRiddle}
-            ${s.id === "touch" ? `<div class="certificate certificate-quiet"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>` : ""}
           </div>
         </article>`;
       } catch (error) {
@@ -498,8 +497,8 @@
         <h3>ПЯТЬ МОМЕНТОВ,<br><em>КОТОРЫЕ Я ЧУВСТВУЮ.</em></h3>
         <p>Каждое чувство хранит свою часть нашей истории.</p>
       </div>
-      <svg class="sense-route-line" viewBox="0 0 1000 1900" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M500 70 C850 60 870 250 520 330 C200 410 120 550 470 610 C820 670 880 850 530 960 C180 1070 120 1220 470 1330 C820 1440 870 1600 520 1740" />
+      <svg class="sense-route-line" viewBox="0 0 1000 2050" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M500 70 C850 60 870 250 520 330 C200 410 120 550 470 610 C820 670 880 850 530 960 C180 1070 120 1220 470 1330 C820 1440 870 1600 520 1740 C360 1810 500 1880 500 1990" />
       </svg>
       <div class="sense-route-track"></div>
     `;
@@ -515,6 +514,12 @@
       article.querySelector(".sense-heading .sense-tagline")?.remove();
       article.classList.add("sense-route-step", index % 2 === 0 ? "route-left" : "route-right");
       article.dataset.routeStep = String(index + 1);
+      const doodles = ["✦", "☁", "♡", "✧", "⋆"];
+      const doodle = document.createElement("span");
+      doodle.className = "sense-route-doodle";
+      doodle.setAttribute("aria-hidden", "true");
+      doodle.textContent = doodles[index] || "✦";
+      article.appendChild(doodle);
       track.appendChild(article);
     });
     list.before(gallery);

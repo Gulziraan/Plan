@@ -9202,3 +9202,80 @@ html body #style .style-next .text-link span {
 #senses .spot-hit.is-found::after {
   content: none !important;
 }
+
+
+/* Softer, friendlier details for the five-senses route. */
+#senses .sense-route {
+  --route-blue: var(--sky, #a9d5df);
+  padding-bottom: 112px !important;
+}
+#senses .sense-route-line {
+  inset: 0 0 -132px !important;
+  height: calc(100% + 132px) !important;
+  z-index: 0 !important;
+  overflow: visible !important;
+}
+#senses .sense-route-line path {
+  stroke: color-mix(in srgb, var(--wine, #76212b) 25%, var(--route-blue)) !important;
+  stroke-width: 6 !important;
+}
+#senses .sense-route-track { z-index: 1 !important; }
+#senses .sense-route-step .sense-symbol {
+  color: var(--sky-deep, #79b8c8) !important;
+}
+#senses .sense-route-doodle {
+  position: absolute;
+  z-index: 2;
+  top: auto;
+  bottom: 4px;
+  right: -28px;
+  color: var(--sky-deep, #79b8c8);
+  font: 26px/1 var(--serif, Georgia), serif;
+  opacity: .88;
+  pointer-events: none;
+  transform: rotate(-12deg);
+}
+#senses .sense-route-step.route-right .sense-route-doodle {
+  right: auto;
+  left: -30px;
+  color: var(--wine, #76212b);
+  transform: rotate(10deg);
+}
+#senses .sense-route-step:nth-child(2) .sense-route-doodle,
+#senses .sense-route-step:nth-child(4) .sense-route-doodle {
+  color: var(--sky-deep, #79b8c8);
+}
+#senses .chapter-transition {
+  position: relative;
+}
+#senses .chapter-transition::before {
+  content: "✦";
+  display: block;
+  width: fit-content;
+  margin: -28px auto 22px;
+  color: var(--sky-deep, #79b8c8);
+  font: 26px/1 var(--serif, Georgia), serif;
+}
+@media (max-width: 760px) {
+  #senses .sense-route {
+    padding-bottom: 100px !important;
+  }
+  #senses .sense-route-line {
+    inset: 0 auto -108px 0 !important;
+    width: 56px !important;
+    height: calc(100% + 108px) !important;
+  }
+  #senses .sense-route-line path {
+    d: path("M500 0 C900 90 100 170 500 270 C900 370 100 470 500 570 C900 670 100 770 500 870 C900 970 100 1070 500 1170 C500 1250 500 1320 500 1450") !important;
+    stroke-width: 5 !important;
+  }
+  #senses .sense-route-doodle {
+    right: 2px !important;
+    bottom: -20px !important;
+    font-size: 21px !important;
+  }
+  #senses .sense-route-step.route-right .sense-route-doodle {
+    left: auto !important;
+    right: 2px !important;
+  }
+}
