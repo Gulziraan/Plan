@@ -10,6 +10,10 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+  const PAGE = document.body.dataset.page || "chapter-one";
+  const IS_CHAPTER_TWO = PAGE === "chapter-two";
+  const CHAPTER_TWO_KEY = "hasan-chapter-two-unlocked";
+  if (IS_CHAPTER_TWO && localStorage.getItem(CHAPTER_TWO_KEY) !== "yes") { window.location.replace("index.html?chapter=locked"); return; }
   const STATE_KEY = "hasan-birthday-experience-v2";
   const LEGACY_PROGRESS_KEY = "hasan-chapter-24-progress";
   const LEGACY_RIDDLE_KEY = "hasan-chapter-24-riddle-progress";
@@ -28,48 +32,7 @@
   };
   const FINAL_CODE = "ВЕЧНО";
 
-  const RIDDLES = {
-    sight: {
-      title: "НАЙДИ ТРИ ОТЛИЧИЯ",
-      intro: "Сравни две версии нашей фотографии и найди все три изменения.",
-      question: "Нажми на каждое отличие на нижней фотографии.",
-      hint: "Присмотрись к деталям фона и одежды.",
-      answer: [],
-      success: "Все три отличия найдены. Буква открыта."
-    },
-    sound: {
-      title: "ЗАГАДКА СЛУХА",
-      intro: "У каждого сигнала есть свой ритм. Попробуй расшифровать короткое сообщение.",
-      question: "Что означает сигнал Морзе «− · ·»?",
-      hint: "Это буква из азбуки Морзе. Вспомни русский алфавит.",
-      answer: ["д", "де"],
-      success: "Ты услышал правильный ответ. Вторая буква твоя."
-    },
-    taste: {
-      title: "ВОСПОМИНАНИЕ ОБ УГОЩЕНИИ",
-      intro: "Какой едой я угостила тебя впервые?",
-      question: "Какой едой я угостила тебя впервые?",
-      hint: "Москва",
-      answer: ["бургер", "бургеры"],
-      success: "Ты вспомнил. Буква найдена."
-    },
-    touch: {
-      title: "ЗАГАДКА ПРИКОСНОВЕНИЯ",
-      intro: "Не всё можно прочитать глазами. Иногда нужно почувствовать структуру.",
-      question: "В шрифте Брайля точки 1, 3 и 5 образуют одну букву. Какую?",
-      hint: "Это русская буква. Представь точки в ячейке Брайля: слева сверху вниз 1–2–3, справа 4–5–6.",
-      answer: ["о"],
-      success: "Ты разгадал тактильный код. Четвёртая буква найдена."
-    },
-    scent: {
-      title: "ЛИЧНАЯ АССОЦИАЦИЯ",
-      intro: "Какой запах у меня ассоциируется с тобой?",
-      question: "Какой запах у меня ассоциируется с тобой?",
-      hint: "То, что ты проспорил мне 😏",
-      answer: ["кофе"],
-      success: "Композиция собрана. Пятая буква найдена."
-    }
-  };
+  const RIDDLES = window.CHAPTER_TWO_RIDDLES || {};;
 
   let assets = {};
   let riddleState = {
@@ -80,7 +43,7 @@
     hammerDone: false
   };
   let currentScene = "welcome";
-  let personalMessageCompleted = false;
+  let personalMessageCompleted = IS_CHAPTER_TWO;
 
   // Восстанавливаем состояние до первой отрисовки. Старые ключи читаются
   // только для миграции; далее используется один версионируемый ключ.
@@ -129,25 +92,9 @@
     };
   }
 
-  // Испытание Мьёльнира начинается заново при каждой новой загрузке сайта.
-  // Прогресс остальных загадок при этом сохраняется.
-  riddleState.hammerDone = false;
-  // Write the reset immediately, so no old v2/legacy completion flag can
-  // make the next visit look completed. Other puzzle progress is preserved.
-  try {
-    localStorage.setItem(STATE_KEY, JSON.stringify({
-      version: 2,
-      solved: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)),
-      letters: RIDDLE_ORDER.filter(id => riddleState.solved.includes(id)).map(id => RIDDLE_LETTERS[id]),
-      sightFound: [1, 2, 3].filter(n => riddleState.sightFound.includes(n)),
-      sensesOpened: riddleState.sensesOpened === true,
-      unlocked: riddleState.unlocked === true,
-      hammerDone: false
-    }));
-  } catch (_) {}
-
+  // Успешное поднятие Мьёльнира сохраняется между загрузками и устройствами одного браузера.
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "admire", "hammer", "style", "senses", "letter"];
+  const scenes = IS_CHAPTER_TWO ? ["senses", "letter"] : ["welcome", "profile", "admire", "hammer", "style"];
 
   function persistState() {
     try {
@@ -179,6 +126,7 @@
   function showScene(id) {
     const targetIndex = scenes.indexOf(id);
     if (targetIndex < 0) return;
+    if (id === "style" && !riddleState.hammerDone) return;
     if (id === "senses" && !personalMessageCompleted) return;
 
     if (id === "senses") {
@@ -338,8 +286,42 @@
   // ПЯТЬ ГЛАВ И ИХ ИСХОДНЫЙ КОНТЕНТ
 
   function fingerprintSvg(side) {
-    const file = side === "right" ? "fingerprint-right.png" : "fingerprint-left.png";
-    return `<img class="fingerprint-image" src="assets/${file}" alt="Детализированный чёрный отпечаток пальца" loading="lazy" draggable="false">`;
+    // Графика построена из органичных линий папиллярного узора:
+    // не эллипсы и не пунктир, а непрерывные дуги с естественными окончаниями.
+    const ridges = [];
+    for (let i = 0; i < 17; i++) {
+      const inset = i * 4.15;
+      const left = 24 + inset * 0.72;
+      const right = 176 - inset * 0.72;
+      const top = 18 + inset * 0.78;
+      const bottom = 208 - inset * 0.58;
+      const crown = 8 + inset * 0.92;
+      const wobble = (i % 3 - 1) * 1.6;
+      // Каждая гряда — открытая арка с мягко загнутыми концами.
+      ridges.push(`<path d="M ${left + 5} ${bottom - 8}
+        C ${left - 2} ${bottom - 48}, ${left + 1 + wobble} ${top + 44}, 100 ${crown}
+        C ${right - 1 + wobble} ${top + 42}, ${right + 3} ${bottom - 50}, ${right - 5} ${bottom - 8}" />`);
+    }
+    // Центральный завиток и короткие разветвляющиеся гряды делают рисунок
+    // похожим на реальный петлевой отпечаток, а не на набор концентрических овалов.
+    const core = [
+      'M 68 139 C 57 111 68 77 96 67 C 124 58 146 79 145 105 C 144 128 126 145 105 143 C 87 141 79 126 84 111 C 88 99 102 94 113 101',
+      'M 59 151 C 43 112 62 66 96 54 C 135 41 160 72 157 108 C 155 139 132 160 104 157',
+      'M 78 153 C 65 130 69 103 86 88 C 105 71 132 81 137 103 C 141 121 128 137 111 137',
+      'M 45 130 C 38 91 59 48 94 39',
+      'M 155 145 C 174 119 174 83 159 59',
+      'M 34 164 C 22 126 25 91 42 65',
+      'M 166 166 C 184 137 185 103 177 79'
+    ];
+    const ink = '#29272a';
+    const highlight = '#494449';
+    const ridgeMarkup = ridges.map((d, i) => `<path d="${d.replace(/\s+/g, ' ')}" stroke="${i % 4 === 0 ? highlight : ink}" stroke-width="${i % 5 === 0 ? 2.15 : 1.75}"/>`).join('');
+    const coreMarkup = core.map((d, i) => `<path d="${d}" stroke="${i % 3 === 0 ? highlight : ink}" stroke-width="1.8"/>`).join('');
+    return `<svg class="fingerprint-svg" viewBox="0 0 200 230" aria-hidden="true" focusable="false">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">${ridgeMarkup}${coreMarkup}
+        <path d="M 52 176 C 42 188 42 199 49 207 M 148 176 C 158 188 158 199 151 207" stroke="${ink}" stroke-width="1.7"/>
+      </g>
+    </svg>`;
   }
 
   function renderSenses() {
@@ -375,7 +357,8 @@
           { src: "assets/F1.PNG", title: s.memories[1]?.title || "02", cls: "" },
           { src: "assets/F3.PNG", title: s.memories[2]?.title || "03", cls: "" }
         ];
-        content = `<div class="sight-editorial-gallery">${photos.map(photo => `
+        content = `<figure class="sight-memory-hero"><img src="assets/m4.JPG" alt="Совместное воспоминание — глава «Зрение»" loading="lazy"><figcaption>ТОТ САМЫЙ ВЗГЛЯД, С КОТОРОГО ВСЁ НАЧАЛОСЬ</figcaption></figure>
+        <div class="sight-editorial-gallery">${photos.map(photo => `
           <figure class="sight-photo ${photo.cls}"><img src="${photo.src}" alt="${photo.title}" loading="lazy"><figcaption>${photo.title}</figcaption></figure>
         `).join("")}</div>
         <section class="spot-difference" data-spot-game>
@@ -383,9 +366,9 @@
           <div class="spot-difference-pair">
             <figure><figcaption>ОРИГИНАЛ</figcaption><img src="assets/O1.jpg" alt="Оригинальная фотография" loading="lazy"></figure>
             <figure class="spot-target"><figcaption>НАЙДИ ОТЛИЧИЯ</figcaption><div class="spot-image-wrap"><img src="assets/O2.jpg" alt="Изменённая версия фотографии" loading="lazy">
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(1) ? "is-found" : ""}" data-difference="1" aria-pressed="${riddleState.sightFound.includes(1) ? "true" : "false"}" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.sightFound.includes(1) ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(2) ? "is-found" : ""}" data-difference="2" aria-pressed="${riddleState.sightFound.includes(2) ? "true" : "false"}" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.sightFound.includes(2) ? "disabled" : ""}></button>
-              <button type="button" class="spot-hit ${riddleState.sightFound.includes(3) ? "is-found" : ""}" data-difference="3" aria-pressed="${riddleState.sightFound.includes(3) ? "true" : "false"}" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.sightFound.includes(3) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(1) ? "is-found" : ""}" data-difference="1" style="--x:39.2%;--y:40.9%" aria-label="Найти первое отличие" ${riddleState.sightFound.includes(1) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(2) ? "is-found" : ""}" data-difference="2" style="--x:84.1%;--y:3.6%" aria-label="Найти второе отличие" ${riddleState.sightFound.includes(2) ? "disabled" : ""}></button>
+              <button type="button" class="spot-hit ${riddleState.sightFound.includes(3) ? "is-found" : ""}" data-difference="3" style="--x:4.4%;--y:57.5%" aria-label="Найти третье отличие" ${riddleState.sightFound.includes(3) ? "disabled" : ""}></button>
             </div></figure>
           </div>
           <div class="spot-progress"><span>НАЙДЕНО</span><strong data-spot-count>${riddleState.sightFound.length}/3</strong></div>
@@ -437,7 +420,7 @@
       if (s.kind === "scent") {
         content = `
           <div class="scent-sensory-scene" data-scent-scene>
-            <figure class="scent-memory-photo"><img src="assets/scent-memory.jpg" alt="Наше совместное воспоминание" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
+            <figure class="scent-memory-photo"><img src="assets/02.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
             <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
             <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
             <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
@@ -473,7 +456,7 @@
             <div class="sense-heading"><div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3>${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}</div><span class="sense-symbol">${s.symbol}</span></div>
             <p class="sense-description">${s.description}</p><div class="sense-content">${content}</div>
             ${tasteReceipt}${standardRiddle}
-
+            ${s.id === "touch" ? `<div class="certificate certificate-quiet"><p class="eyebrow">СЕРТИФИКАТ ДЛЯ ОЧЕНЬ ВАЖНОГО ЧЕЛОВЕКА</p><strong>Один полноценный<br><em>массаж.</em></strong><p>Можно использовать в любой день, когда захочется немного заботы и отдыха.</p><span class="handwritten">с любовью, всегда</span></div>` : ""}
           </div>
         </article>`;
       } catch (error) {
@@ -839,15 +822,57 @@
       riddleState.unlocked = true;
       riddleState.sensesOpened = true;
       saveRiddles();
-      const letter = $("#letter");
-      if (letter) {
-        letter.hidden = false;
-        letter.classList.add("is-unlocked", "opened");
-      }
-      showScene("letter");
+      openSecretChapter(true);
     } else {
       feedback.textContent = "Пока не получилось. Проверь порядок букв.";
       feedback.className = "riddle-feedback is-wrong";
+    }
+  }
+
+  function openSecretChapter(shouldScroll = true) {
+    let secret = $("#secretChapter");
+
+    if (!secret) {
+      secret = document.createElement("section");
+      secret.className = "secret-chapter opened";
+      secret.id = "secretChapter";
+
+      secret.innerHTML = `
+        <div class="secret-inner">
+          <p class="eyebrow">ПЯТЬ ЧУВСТВ · ОДНА ИСТОРИЯ</p>
+          <div class="secret-senses-mark" aria-hidden="true"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
+          <h2>ТЫ СТАЛ<br><em>МОИМ САМЫМ РОДНЫМ</em></h2>
+          <div class="secret-lead">
+            <p>Знаешь, сейчас мне так приятно вспоминать, с чего всё начиналось.</p>
+            <p>Тогда я только узнавала тебя, а теперь ты стал для меня настолько родным и любимым.</p>
+            <p>Я люблю всё, что связано с тобой. И мне хочется ещё много раз переживать с тобой самые обычные моменты, потому что именно они становятся такими дорогими, когда мы вместе.</p>
+            <p>Я очень счастлива, что однажды наши пути пересеклись. И ещё счастливее от того, что теперь у меня есть ты.</p>
+          </div>
+          <div class="secret-message">
+            <span>ПЯТЬ ЧУВСТВ · ПЯТЬ ЧАСТЕЙ НАШЕЙ ИСТОРИИ</span>
+            <h3>Я ЛЮБЛЮ ТЕБЯ.</h3>
+            <p class="handwritten">А теперь я хочу сказать тебе кое-что лично.</p>
+          </div>
+          <button class="button button-light" type="button" id="secretContinue">
+            ПЕРЕЧИТАТЬ МОЁ ПИСЬМО <span>↗</span>
+          </button>
+        </div>
+      `;
+
+      $("#challenges")?.after(secret);
+
+      $("#secretContinue")?.addEventListener("click", () => {
+        showScene("letter");
+      });
+    }
+
+    secret.classList.add("visible");
+    if (shouldScroll) {
+      secret.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+      toast("Шифр разгадан. Открыта последняя глава.");
     }
   }
 
@@ -863,11 +888,8 @@
     }
     if (riddleState.solved.length === 5) renderCipher();
     const letterSection = document.getElementById("letter");
-    if (letterSection) { letterSection.hidden = false; }
-    if (riddleState.unlocked && riddleState.solved.length === 5) {
-      const letter = $("#letter");
-      if (letter) { letter.hidden = false; letter.classList.add("is-unlocked", "opened"); }
-    }
+    if (letterSection) { letterSection.hidden = !riddleState.unlocked; }
+    if (riddleState.unlocked && riddleState.solved.length === 5) openSecretChapter(false);
   }
 
   function compressImage(file, maxSide = 1500, quality = 0.78) {
@@ -986,6 +1008,7 @@
     scentSequences.clear();
 
     localStorage.removeItem(STATE_KEY);
+    localStorage.removeItem(CHAPTER_TWO_KEY);
     localStorage.removeItem(LEGACY_PROGRESS_KEY);
     localStorage.removeItem(LEGACY_RIDDLE_KEY);
 
@@ -1026,13 +1049,17 @@
 
   const beliefEnvelope = $("#beliefEnvelope");
   $("#openBeliefEnvelope")?.addEventListener("click", () => {
+    if (!riddleState.hammerDone) { toast("Сначала подними Мьёльнир."); return; }
     if (beliefEnvelope) { beliefEnvelope.hidden = false; document.body.classList.add("belief-envelope-open"); }
   });
   $("#closeBeliefEnvelope")?.addEventListener("click", () => {
+    if (IS_CHAPTER_TWO || !riddleState.hammerDone) return;
+    personalMessageCompleted = true;
+    try { localStorage.setItem(CHAPTER_TWO_KEY, "yes"); persistState(); }
+    catch (error) { toast("Не удалось сохранить переход. Разреши сохранение данных в браузере."); return; }
     if (beliefEnvelope) beliefEnvelope.hidden = true;
     document.body.classList.remove("belief-envelope-open");
-    personalMessageCompleted = true;
-    showScene("senses");
+    window.location.assign("chapter-two.html");
   });
   $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
   $("#openSensesFromLetter")?.addEventListener("click", () => showScene("senses"));
@@ -1043,13 +1070,15 @@
   // Глава «О том, что я чувствую» всегда закрыта при загрузке.
   // Её можно открыть только после явного прочтения личного послания.
   const sensesSectionInitial = document.getElementById("senses");
-  if (sensesSectionInitial) {
-    sensesSectionInitial.hidden = true;
-    sensesSectionInitial.classList.remove("is-unlocked", "opened");
-    $("#challenges")?.classList.remove("opened");
-  }
+  if (IS_CHAPTER_TWO && sensesSectionInitial) {
+    riddleState.sensesOpened = true;
+    sensesSectionInitial.hidden = false;
+    sensesSectionInitial.classList.add("is-unlocked", "opened");
+    $("#challenges")?.classList.add("opened");
+    persistState();
+  } else if (sensesSectionInitial) sensesSectionInitial.hidden = true;
   const finalSectionInitial = document.getElementById("letter");
-  if (finalSectionInitial) finalSectionInitial.hidden = false;
+  if (finalSectionInitial && !riddleState.unlocked) finalSectionInitial.hidden = true;
 
   // Ненавязчивое появление крупных элементов при обычной прокрутке.
   const revealTargets = $$(".scene h2, .scene h3, .scene .profile-hero, .scene .stats-section, .scene .quality-list, .scene .sense-chapter, .scene .personal-letter, .scene .letter-opening");
@@ -1437,12 +1466,10 @@
     if (difference) {
       const game = difference.closest("[data-spot-game]");
       if (game && !difference.classList.contains("is-found")) {
-        const differenceNumber = Number(difference.dataset.difference);
-        if (![1, 2, 3].includes(differenceNumber)) return;
         difference.classList.add("is-found");
-        difference.setAttribute("aria-pressed", "true");
         difference.disabled = true;
-        if (!riddleState.sightFound.includes(differenceNumber)) {
+        const differenceNumber = Number(difference.dataset.difference);
+        if ([1, 2, 3].includes(differenceNumber) && !riddleState.sightFound.includes(differenceNumber)) {
           riddleState.sightFound.push(differenceNumber);
           riddleState.sightFound.sort((a, b) => a - b);
           persistState();
@@ -1662,12 +1689,15 @@
 
   // НАЧАЛЬНАЯ ОТРИСОВКА
 
-  renderStats();
-  renderQualities();
-  renderSenses();
-  renderPersonalLetter();
-  renderMemoryGallery();
-  applyFixedPhotos();
-  updateProgress();
-  restoreRiddleState();
+  if (!IS_CHAPTER_TWO) {
+    renderStats();
+    renderQualities();
+    applyFixedPhotos();
+  } else {
+    renderSenses();
+    renderPersonalLetter();
+    renderMemoryGallery();
+    updateProgress();
+    restoreRiddleState();
+  }
 })();

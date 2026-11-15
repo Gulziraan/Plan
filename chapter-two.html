@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru" class="letter-gate-pending">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4b0807">
+  <meta name="description" content="Особенная история для Хасана. Глава 24.">
+  <title>Хасан — особенная история · Глава II</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="chapter-two.css">
+  <script>(function(){try{if(localStorage.getItem("hasan-chapter-two-unlocked")!=="yes")location.replace("index.html?chapter=locked");}catch(_){location.replace("index.html?chapter=locked");}})();</script>
+</head>
+<body data-page="chapter-two">
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar cover-topbar chapter-two-topbar"><span class="logo" aria-label="Глава вторая">Х<span>.</span></span><nav class="cover-nav" aria-label="Навигация второй главы"><button type="button" data-next="senses">ПЯТЬ ЧУВСТВ</button></nav><span class="top-action chapter-two-label">ГЛАВА II</span></header>
+  <main class="chapter-two-main">
+    <section class="scene senses-game-scene" id="senses" hidden aria-label="Пять чувств — интерактивные загадки">
+      <div class="senses-intro">
+        <div class="senses-intro-copy">
+          <p class="eyebrow">НАША ИСТОРИЯ · ПЯТЬ ЧУВСТВ</p>
+          <h2>О ТОМ, <em>ЧТО Я ЧУВСТВУЮ</em></h2>
+          <div class="senses-intro-text">
+            <p>Знаешь, мне так нравится думать о том, как постепенно ты становился для меня всё ближе.</p>
+            <p>И как много всего я успела полюбить в тебе за это время. Наверное, я даже не замечала, как сильно меняется моё отношение к тебе. </p>
+            <p>Просто однажды поняла, что ты уже не просто человек, который мне нравится. Ты — мой любимый человек, и я безумно счастлива, что мы есть друг у друга. </p>
+            <p>Я хочу показать тебе, как всё это начиналось. И немного поделиться тем, насколько сильно я люблю тебя сейчас.</p>
+          </div>
+          <div class="senses-intro-bottom">
+            <div class="senses-intro-motifs" aria-label="Пять чувств"><span>◉</span><span>∿</span><span>✳</span><span>⌁</span><span>✧</span></div>
+            <button class="senses-begin" type="button" data-scroll-senses="chapter-sight">НАЧАТЬ С САМОГО НАЧАЛА <span>↘</span></button>
+          </div>
+        </div>
+        <figure class="senses-intro-photo">
+          <img src="assets/m4.JPG" alt="Совместное воспоминание" loading="lazy">
+          <figcaption><span>ПЯТЬ ЧУВСТВ</span><span>ОДНА ИСТОРИЯ</span></figcaption>
+        </figure>
+        <span class="senses-intro-index" aria-hidden="true">01—05</span>
+      </div>
+      <div class="progress">
+        <div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 ОТКРЫТО</b></div>
+        <div class="progress-track"><i id="progressFill"></i></div>
+        <div class="progress-numbers" id="progressSymbols">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+        </div>
+      </div>
+      <div id="senseList" class="sense-list"></div>
+    </section>
+
+    <!-- ФИНАЛЬНОЕ ПИСЬМО -->
+    <section class="scene personal-letter-scene" id="letter" hidden aria-labelledby="personalLetterTitle">
+      <div class="letter-opening">
+        <p class="eyebrow">ПОСЛЕ ВСЕХ ПЯТИ ЧУВСТВ</p>
+        <span class="letter-opening-mark" aria-hidden="true">♡</span>
+        <h2 id="personalLetterTitle">А ТЕПЕРЬ —<br><em>МОИ СЛОВА.</em></h2>
+        <p>Есть вещи, которые хочется сказать не загадками.</p>
+      </div>
+
+      <article class="personal-letter" aria-label="Личное письмо">
+        <div class="personal-letter-top"><span>ЛИЧНОЕ ПОСЛАНИЕ</span><span>ЛИЧНОЕ ПИСЬМО · ТОЛЬКО ДЛЯ ТЕБЯ</span></div>
+        <p class="personal-letter-salutation" id="personalLetterSalutation"></p>
+        <div class="personal-letter-body" id="personalLetterBody">
+          
+        </div>
+        <p class="personal-letter-signature" id="personalLetterSignature"></p>
+        <div class="personal-letter-end" aria-hidden="true">✦</div>
+      </article>
+
+      <section class="memory-gallery" aria-labelledby="memoryGalleryTitle">
+        <div class="memory-gallery-heading">
+          <div>
+            <p class="eyebrow">НАШ АРХИВ / МОМЕНТЫ, К КОТОРЫМ ХОЧЕТСЯ ВОЗВРАЩАТЬСЯ</p>
+            <h2 id="memoryGalleryTitle">ОСОБЕННЫЕ МОМЕНТЫ,<br><em>КОТОРЫЕ Я ОЧЕНЬ ЛЮБЛЮ.</em></h2>
+          </div>
+          <p>Неидеальные, смешные, тёплые. Просто наши.</p>
+        </div>
+        <div class="memory-gallery-grid" id="memoryGalleryGrid"></div>
+        <p class="memory-gallery-note">КАЖДЫЙ КАДР — ЧАСТЬ НАШЕЙ ИСТОРИИ <span>♥</span></p>
+      </section>
+      <div class="letter-next-actions"><button class="text-link" id="openSensesFromLetter" type="button">ПЕРЕЙТИ К ПЯТИ ЧУВСТВАМ →</button></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Х. / ГЛАВА II</span><span>ПРОДОЛЖЕНИЕ ИСТОРИИ</span></footer>
+  <div class="modal" id="detailModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Закрыть">×</button><p class="eyebrow" id="modalKicker"></p><h3 id="modalTitle"></h3><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="content.js"></script><script src="chapter-two-riddles.js"></script><script src="app.js"></script>
+</body></html>
