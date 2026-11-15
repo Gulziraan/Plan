@@ -478,7 +478,6 @@
     const list = $("#senseList");
     if (!senses || !list) return;
 
-    const priorSenseIndex = Number($("#senseGallery")?.dataset.active || 0);
     const priorPuzzleIndex = Number($("#challenges .puzzle-gallery")?.dataset.active || 0);
     $("#chapterTransition")?.remove();
     $("#challenges")?.remove();
@@ -486,88 +485,102 @@
     const articles = $$(".sense-chapter", list);
     const progress = $(".progress", senses);
     if (progress) progress.remove();
-    const gallery = document.createElement("div");
+
+    // Пять чувств теперь представлены единым редакционным маршрутом,
+    // а не пятью перелистываемыми карточками.
+    const gallery = document.createElement("section");
     gallery.id = "senseGallery";
-    gallery.className = "chapter-gallery sense-gallery";
-    gallery.innerHTML = `<div class="chapter-gallery-top"><div><span class="eyebrow">ГЛАВА I · НАША ИСТОРИЯ</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div>`;
-    const slides = gallery.querySelector('[data-gallery-slides]');
+    gallery.className = "sense-route";
+    gallery.setAttribute("aria-label", "Пять чувств — единый маршрут нашей истории");
+    gallery.innerHTML = `
+      <div class="sense-route-heading">
+        <p class="eyebrow">ПЯТЬ ЧУВСТВ · ОДНА ИСТОРИЯ</p>
+        <h3>ПЯТЬ МОМЕНТОВ,<br><em>КОТОРЫЕ Я ЧУВСТВУЮ.</em></h3>
+        <p>Каждое чувство хранит свою часть нашей истории.</p>
+      </div>
+      <svg class="sense-route-line" viewBox="0 0 1000 1900" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M180 70 C560 20 780 190 730 330 C690 455 290 420 230 610 C170 800 760 760 790 960 C820 1160 280 1120 220 1330 C160 1540 650 1510 790 1740" />
+      </svg>
+      <div class="sense-route-track"></div>
+    `;
+    const track = gallery.querySelector(".sense-route-track");
     const puzzleNodes = [];
     articles.forEach((article, index) => {
-      const id = article.id.replace('chapter-', '');
-      const puzzle = article.querySelector(id === 'sight' ? '[data-spot-game]' : id === 'taste' ? '.cafe-receipt' : '.riddle-panel');
+      const id = article.id.replace("chapter-", "");
+      const puzzle = article.querySelector(id === "sight" ? "[data-spot-game]" : id === "taste" ? ".cafe-receipt" : ".riddle-panel");
       if (puzzle) { puzzleNodes.push({id, node:puzzle}); puzzle.remove(); }
-      const slide = document.createElement('div');
-      slide.className = 'chapter-slide';
-      slide.dataset.slide = String(index);
-      slide.appendChild(article);
-      slides.appendChild(slide);
+      article.classList.add("sense-route-step", index % 2 === 0 ? "route-left" : "route-right");
+      article.dataset.routeStep = String(index + 1);
+      track.appendChild(article);
     });
     list.before(gallery);
+    gallery.appendChild(track);
     list.hidden = true;
 
-    const transition = document.createElement('section');
-    transition.className = 'scene chapter-transition';
-    transition.id = 'chapterTransition';
+    const transition = document.createElement("section");
+    transition.className = "scene chapter-transition";
+    transition.id = "chapterTransition";
     if (riddleState.sensesOpened || riddleState.solved.length) transition.classList.add("opened");
     transition.innerHTML = `<div class="chapter-transition-inner"><p class="eyebrow">ГЛАВА II · ТВОЙ ХОД</p><span class="transition-mark">✦</span><h2>А ТЕПЕРЬ —<br><em>ТВОЯ ОЧЕРЕДЬ.</em></h2><p>Ты увидел пять чувств. Теперь попробуй разгадать, что скрывается за каждым из них.</p><p>Пройди все задания, собери пять букв — и откроешь следующую главу.</p><button type="button" class="text-link" id="beginChallenges">ПЕРЕЙТИ К ИСПЫТАНИЯМ →</button></div>`;
     senses.after(transition);
 
-    const challenge = document.createElement('section');
-    challenge.className = 'scene challenge-gallery';
-    challenge.id = 'challenges';
+    const challenge = document.createElement("section");
+    challenge.className = "scene challenge-gallery";
+    challenge.id = "challenges";
     if (riddleState.sensesOpened || riddleState.solved.length) challenge.classList.add("opened");
-    challenge.innerHTML = `<div class="challenge-heading"><p class="eyebrow">ГЛАВА II · ПЯТЬ ИСПЫТАНИЙ</p><h2>СОБЕРИ ПЯТЬ <em>БУКВ.</em></h2><p>Можно возвращаться к любому заданию. Твой прогресс сохранится.</p></div><div class="progress challenge-progress"><div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 РАЗГАДАНО</b></div><div class="progress-track"><i id="progressFill"></i></div><div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div><div class="chapter-gallery puzzle-gallery"><div class="chapter-gallery-top"><div><span class="eyebrow">ПЯТЬ ЗАДАНИЙ · ОДИН КОД</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div></div><div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? '' : 'disabled'}>ПЕРЕЙТИ К ШИФРУ ↗</button></div></section>`;
+    challenge.innerHTML = `<div class="challenge-heading"><p class="eyebrow">ГЛАВА II · ПЯТЬ ИСПЫТАНИЙ</p><h2>СОБЕРИ ПЯТЬ <em>БУКВ.</em></h2><p>Можно возвращаться к любому заданию. Твой прогресс сохранится.</p></div><div class="progress challenge-progress"><div><span>ТВОЯ ИСТОРИЯ</span><b id="progressCount">0 ИЗ 5 РАЗГАДАНО</b></div><div class="progress-track"><i id="progressFill"></i></div><div class="progress-numbers" id="progressSymbols"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></div></div><div class="chapter-gallery puzzle-gallery"><div class="chapter-gallery-top"><div><span class="eyebrow">ПЯТЬ ЗАДАНИЙ · ОДИН КОД</span><p class="gallery-count" data-gallery-count>01 / 05</p></div><div class="gallery-dots" data-gallery-dots></div></div><div class="chapter-slides" data-gallery-slides></div><div class="chapter-gallery-nav"><button type="button" data-gallery-prev disabled>← НАЗАД</button><span data-gallery-label>ЗРЕНИЕ</span><button type="button" data-gallery-next>ДАЛЕЕ →</button></div></div><div class="unlock-final"><p class="eyebrow">КОГДА БУДУТ СОБРАНЫ ВСЕ ПЯТЬ БУКВ</p><h3>ОСТАЛОСЬ<br><em>КОЕ-ЧТО ЕЩЁ.</em></h3><button class="button button-light" id="finalAccess" ${riddleState.solved.length === 5 ? "" : "disabled"}>ПЕРЕЙТИ К ШИФРУ ↗</button></div></section>`;
     transition.after(challenge);
-    const puzzleSlides = challenge.querySelector('[data-gallery-slides]');
-    const puzzleNames = {sight:'ЗРЕНИЕ',sound:'ЗВУК',taste:'ВКУС',touch:'ПРИКОСНОВЕНИЕ',scent:'ЗАПАХ'};
-    const order = ['sight','sound','taste','touch','scent'];
+    const puzzleSlides = challenge.querySelector("[data-gallery-slides]");
+    const puzzleNames = {sight:"ЗРЕНИЕ",sound:"ЗВУК",taste:"ВКУС",touch:"ПРИКОСНОВЕНИЕ",scent:"ЗАПАХ"};
+    const order = ["sight","sound","taste","touch","scent"];
     order.forEach((id,index) => {
       const entry = puzzleNodes.find(x=>x.id===id);
-      const slide = document.createElement('div');
-      slide.className = 'chapter-slide puzzle-slide';
+      const slide = document.createElement("div");
+      slide.className = "chapter-slide puzzle-slide";
       slide.dataset.slide = String(index);
       slide.innerHTML = `<div class="puzzle-slide-heading"><span>ИСПЫТАНИЕ 0${index+1} / 05</span><h3>${puzzleNames[id]}</h3></div>`;
       if (entry) slide.appendChild(entry.node);
-      else slide.insertAdjacentHTML('beforeend', `<p>Материал этого задания не найден в исходном проекте.</p>`);
+      else slide.insertAdjacentHTML("beforeend", `<p>Материал этого задания не найден в исходном проекте.</p>`);
       puzzleSlides.appendChild(slide);
     });
 
     function activateGallery(g, index) {
-      const all = $$('.chapter-slide', g);
+      const all = $$(".chapter-slide", g);
       const safe = Math.max(0, Math.min(index, all.length - 1));
-      all.forEach((el,i)=>el.classList.toggle('is-active', i===safe));
-      const count = g.querySelector('[data-gallery-count]');
-      if (count) count.textContent = `${String(safe+1).padStart(2,'0')} / ${String(all.length).padStart(2,'0')}`;
-      const prev = g.querySelector('[data-gallery-prev]'); const next = g.querySelector('[data-gallery-next]');
+      all.forEach((el,i)=>el.classList.toggle("is-active", i===safe));
+      const count = g.querySelector("[data-gallery-count]");
+      if (count) count.textContent = `${String(safe+1).padStart(2,"0")} / ${String(all.length).padStart(2,"0")}`;
+      const prev = g.querySelector("[data-gallery-prev]"); const next = g.querySelector("[data-gallery-next]");
       if (prev) prev.disabled = safe===0; if (next) next.disabled = safe===all.length-1;
-      const labels = g.querySelector('[data-gallery-label]');
-      if (labels) labels.textContent = all[safe]?.querySelector('.sense-heading h3, .puzzle-slide-heading h3')?.textContent || '';
-      const dots = g.querySelector('[data-gallery-dots]');
-      if (dots) dots.innerHTML = all.map((_,i)=>`<button type="button" aria-label="Слайд ${i+1}" class="${i===safe?'active':''}" data-dot="${i}"></button>`).join('');
+      const labels = g.querySelector("[data-gallery-label]");
+      if (labels) labels.textContent = all[safe]?.querySelector(".sense-heading h3, .puzzle-slide-heading h3")?.textContent || "";
+      const dots = g.querySelector("[data-gallery-dots]");
+      if (dots) dots.innerHTML = all.map((_,i)=>`<button type="button" aria-label="Слайд ${i+1}" class="${i===safe?"active":""}" data-dot="${i}"></button>`).join("");
       g.dataset.active = String(safe);
     }
-    [gallery, challenge.querySelector('.puzzle-gallery')].forEach((g, galleryIndex)=>{
-      activateGallery(g, galleryIndex === 0 ? priorSenseIndex : priorPuzzleIndex);
-      g.addEventListener('click', e=>{
-        const prev=e.target.closest('[data-gallery-prev]'); const next=e.target.closest('[data-gallery-next]'); const dot=e.target.closest('[data-dot]');
-        const current=Number(g.dataset.active||0);
-        if(prev) activateGallery(g,current-1); if(next) activateGallery(g,current+1); if(dot) activateGallery(g,Number(dot.dataset.dot));
-      });
-      let startX=0;
-      g.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});
-      g.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>55) activateGallery(g,Number(g.dataset.active||0)+(dx<0?1:-1));},{passive:true});
+    const puzzleGallery = challenge.querySelector(".puzzle-gallery");
+    activateGallery(puzzleGallery, priorPuzzleIndex);
+    puzzleGallery.addEventListener("click", e=>{
+      const prev=e.target.closest("[data-gallery-prev]"); const next=e.target.closest("[data-gallery-next]"); const dot=e.target.closest("[data-dot]");
+      const current=Number(puzzleGallery.dataset.active||0);
+      if(prev) activateGallery(puzzleGallery,current-1);
+      if(next) activateGallery(puzzleGallery,current+1);
+      if(dot) activateGallery(puzzleGallery,Number(dot.dataset.dot));
     });
-    if (window.__hasanGalleryKeyHandler) document.removeEventListener('keydown', window.__hasanGalleryKeyHandler);
+    let startX=0;
+    puzzleGallery.addEventListener("touchstart",e=>{startX=e.changedTouches[0].clientX},{passive:true});
+    puzzleGallery.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>55) activateGallery(puzzleGallery,Number(puzzleGallery.dataset.active||0)+(dx<0?1:-1));},{passive:true});
+    if (window.__hasanGalleryKeyHandler) document.removeEventListener("keydown", window.__hasanGalleryKeyHandler);
     window.__hasanGalleryKeyHandler = e=>{
-      if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+      if (!["ArrowLeft","ArrowRight"].includes(e.key)) return;
       const active=document.activeElement;
       if(active && /INPUT|TEXTAREA/.test(active.tagName)) return;
-      const g = challenge.getBoundingClientRect().top < innerHeight && challenge.getBoundingClientRect().bottom > 0 ? challenge.querySelector('.puzzle-gallery') : gallery;
-      activateGallery(g,Number(g.dataset.active||0)+(e.key==='ArrowRight'?1:-1));
+      if (challenge.getBoundingClientRect().top < innerHeight && challenge.getBoundingClientRect().bottom > 0) {
+        activateGallery(puzzleGallery,Number(puzzleGallery.dataset.active||0)+(e.key==="ArrowRight"?1:-1));
+      }
     };
-    document.addEventListener('keydown', window.__hasanGalleryKeyHandler);
-    $('#beginChallenges')?.addEventListener('click',()=>challenge.scrollIntoView({behavior:'smooth',block:'start'}));
-    // Личное письмо остаётся финальной главой после пяти испытаний и кода.
+    document.addEventListener("keydown", window.__hasanGalleryKeyHandler);
+    $("#beginChallenges")?.addEventListener("click",()=>challenge.scrollIntoView({behavior:"smooth",block:"start"}));
   }
 
   function formatAudioTime(seconds) {

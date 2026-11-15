@@ -8542,3 +8542,302 @@ html body #style .style-next .text-link::after,
 html body #style .style-next .text-link span {
   color: var(--sky, #8fc7e2) !important;
 }
+
+
+
+/* FIVE SENSES — one continuous editorial route inspired by the supplied reference. */
+#senses .sense-route {
+  position: relative;
+  isolation: isolate;
+  width: min(100% - 44px, 1180px);
+  margin: clamp(42px, 6vw, 82px) auto 0;
+  padding: 0 0 clamp(40px, 7vw, 90px);
+  color: var(--ink, #342c2b);
+}
+#senses .sense-route-heading {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto clamp(54px, 8vw, 100px);
+  text-align: center;
+}
+#senses .sense-route-heading .eyebrow {
+  margin-bottom: 18px;
+  color: var(--wine, #76212b);
+  font-size: 10px;
+  letter-spacing: .2em;
+}
+#senses .sense-route-heading h3 {
+  margin: 0;
+  color: var(--wine, #76212b);
+  font: 600 clamp(32px, 5.4vw, 64px)/.98 var(--display, Georgia), Georgia, serif;
+  letter-spacing: -.035em;
+}
+#senses .sense-route-heading h3 em {
+  color: var(--sky-deep, #79b8c8);
+  font-style: normal;
+}
+#senses .sense-route-heading > p:last-child {
+  margin: 20px 0 0;
+  color: var(--ink-soft, #66585a);
+  font: italic clamp(16px, 1.5vw, 20px)/1.5 var(--serif, Georgia), Georgia, serif;
+}
+#senses .sense-route-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(68px, 9vw, 124px);
+}
+#senses .sense-route-line {
+  position: absolute;
+  z-index: -1;
+  inset: 150px 0 40px;
+  width: 100%;
+  height: calc(100% - 190px);
+  overflow: visible;
+  pointer-events: none;
+}
+#senses .sense-route-line path {
+  fill: none;
+  stroke: rgba(150, 128, 108, .42);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+#senses .sense-route-step {
+  position: relative;
+  display: block !important;
+  width: min(48%, 540px);
+  min-width: 0;
+  margin: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#senses .sense-route-step.route-left { align-self: flex-start; }
+#senses .sense-route-step.route-right { align-self: flex-end; }
+#senses .sense-route-step .sense-number {
+  position: absolute;
+  z-index: 3;
+  top: -28px;
+  left: -28px;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(118, 33, 43, .26);
+  border-radius: 50%;
+  background: var(--edition-milk, #f8f3e8);
+  color: var(--wine, #76212b) !important;
+  font: italic 27px/1 var(--display, Georgia), Georgia, serif;
+  box-shadow: 0 0 0 8px rgba(248,243,232,.72);
+}
+#senses .sense-route-step.route-right .sense-number {
+  left: auto;
+  right: -28px;
+}
+#senses .sense-route-step .sense-main {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+#senses .sense-route-step .sense-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 14px !important;
+  max-width: none !important;
+}
+#senses .sense-route-step .sense-heading .eyebrow {
+  margin: 0 0 10px;
+  color: var(--wine, #76212b);
+  font-size: 9px;
+  letter-spacing: .18em;
+}
+#senses .sense-route-step .sense-heading h3 {
+  max-width: 100%;
+  margin: 0;
+  color: var(--wine, #76212b) !important;
+  font: 600 clamp(30px, 4vw, 48px)/1.04 var(--display, Georgia), Georgia, serif !important;
+  letter-spacing: -.025em;
+}
+#senses .sense-route-step .sense-symbol {
+  flex: 0 0 auto;
+  color: var(--sky-deep, #79b8c8) !important;
+  font: 400 clamp(34px, 4vw, 52px)/1 var(--serif, Georgia), Georgia, serif;
+  opacity: .9;
+}
+#senses .sense-route-step .sense-description {
+  max-width: 590px;
+  margin: 0 0 24px !important;
+  color: var(--ink-soft, #66585a) !important;
+  font: clamp(17px, 1.5vw, 20px)/1.65 var(--serif, Georgia), Georgia, serif !important;
+  white-space: pre-line;
+}
+#senses .sense-route-step .sense-content {
+  margin: 0;
+}
+#senses .sense-route-step .sense-content > :first-child { margin-top: 0; }
+#senses .sense-route-step .sense-content figure,
+#senses .sense-route-step .sense-content img {
+  max-width: 100%;
+}
+#senses .sense-route-step .sense-heading,
+#senses .sense-route-step .sense-description,
+#senses .sense-route-step .sense-content {
+  position: relative;
+  z-index: 1;
+}
+#senses .sense-route-step .sense-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  width: 54px;
+  height: 1px;
+  background: rgba(118,33,43,.28);
+}
+#senses .sense-route-step.route-right .sense-heading::after {
+  left: auto;
+  right: 0;
+}
+#senses .sense-route-step .sight-memory-hero,
+#senses .sense-route-step .scent-memory-photo {
+  margin: 24px 0 18px;
+}
+#senses .sense-route-step .sight-memory-hero img,
+#senses .sense-route-step .scent-memory-photo img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+}
+#senses .sense-route-step .sight-memory-hero figcaption,
+#senses .sense-route-step .scent-memory-photo figcaption {
+  color: var(--wine, #76212b);
+  font-size: 9px;
+  letter-spacing: .13em;
+}
+#senses .sense-route-step .audio-story-track,
+#senses .sense-route-step .touch-art-stage,
+#senses .sense-route-step .scent-sensory-scene,
+#senses .sense-route-step .cafe-scene {
+  box-shadow: none !important;
+}
+#senses .sense-route-step .sense-heading h3,
+#senses .sense-route-step .sense-description {
+  text-align: left;
+}
+#senses .sense-route-step.route-right .sense-heading {
+  flex-direction: row-reverse;
+}
+#senses .sense-route-step.route-right .sense-heading > div {
+  text-align: right;
+}
+#senses .sense-route-step.route-right .sense-description {
+  margin-left: auto !important;
+  text-align: right;
+}
+#senses .sense-route-step.route-right .sense-content {
+  margin-left: auto;
+}
+#senses .sense-route-step.route-right .sense-content > * {
+  margin-left: auto;
+}
+#senses .sense-route-step.route-right .sense-content .audio-story-list,
+#senses .sense-route-step.route-right .sense-content .scent-sensory-scene,
+#senses .sense-route-step.route-right .sense-content .touch-experience {
+  width: 100%;
+}
+#senses .sense-route-step.route-right .sense-content .scent-scene-copy {
+  text-align: right;
+}
+@media (max-width: 760px) {
+  #senses .sense-route {
+    width: calc(100% - 30px);
+    margin-top: 42px;
+    padding-bottom: 34px;
+  }
+  #senses .sense-route-heading {
+    margin: 0 0 48px;
+    text-align: left;
+    padding-left: 4px;
+  }
+  #senses .sense-route-heading h3 {
+    font-size: clamp(30px, 8vw, 44px);
+  }
+  #senses .sense-route-track {
+    gap: 58px;
+    padding-left: 42px;
+  }
+  #senses .sense-route-line {
+    inset: 105px auto 30px 0;
+    width: 58px;
+    height: calc(100% - 135px);
+  }
+  #senses .sense-route-step,
+  #senses .sense-route-step.route-left,
+  #senses .sense-route-step.route-right {
+    align-self: stretch;
+    width: 100%;
+    max-width: none;
+  }
+  #senses .sense-route-step .sense-number,
+  #senses .sense-route-step.route-right .sense-number {
+    top: 0;
+    left: -56px;
+    right: auto;
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    box-shadow: 0 0 0 5px rgba(248,243,232,.8);
+  }
+  #senses .sense-route-step .sense-heading,
+  #senses .sense-route-step.route-right .sense-heading {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+  #senses .sense-route-step .sense-heading > div,
+  #senses .sense-route-step.route-right .sense-heading > div {
+    text-align: left;
+  }
+  #senses .sense-route-step .sense-heading h3 {
+    font-size: clamp(30px, 8vw, 42px) !important;
+  }
+  #senses .sense-route-step .sense-description,
+  #senses .sense-route-step.route-right .sense-description {
+    margin-left: 0 !important;
+    text-align: left;
+    font-size: 17px !important;
+  }
+  #senses .sense-route-step .sense-content,
+  #senses .sense-route-step.route-right .sense-content {
+    width: 100%;
+    margin-left: 0;
+  }
+  #senses .sense-route-step.route-right .sense-content > * {
+    margin-left: 0;
+  }
+  #senses .sense-route-step .sense-heading::after,
+  #senses .sense-route-step.route-right .sense-heading::after {
+    left: 0;
+    right: auto;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #senses .sense-route-step {
+    animation: senseRouteReveal .7s ease both;
+  }
+  #senses .sense-route-step:nth-child(2) { animation-delay: .06s; }
+  #senses .sense-route-step:nth-child(3) { animation-delay: .12s; }
+  #senses .sense-route-step:nth-child(4) { animation-delay: .18s; }
+  #senses .sense-route-step:nth-child(5) { animation-delay: .24s; }
+  @keyframes senseRouteReveal {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
