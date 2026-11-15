@@ -9511,3 +9511,48 @@ html body #style .style-next .text-link span {
     d: path("M500 20 C570 100 570 260 500 390 C430 520 430 650 500 780 C570 910 570 1080 500 1210 C430 1340 430 1500 500 1630 C570 1760 570 1930 500 2060 C470 2160 500 2300 500 2480") !important;
   }
 }
+
+
+/* Seamless chapter-two integration: restore the original wine heading and remove card framing. */
+#senses .sense-route-heading h3,
+#senses .sense-route-heading h3 em {
+  color: var(--wine, #76212b) !important;
+}
+
+/* The challenges section should sit directly on the chapter background. */
+#challenges.challenge-gallery,
+#challenges {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Puzzle steps are editorial route elements, not cards. */
+#challenges .puzzle-route .chapter-slide,
+#challenges .puzzle-route .chapter-slide.is-active,
+#challenges .puzzle-route .puzzle-slide {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 0 18px !important;
+}
+
+/* Remove the pale panel behind the route itself and any extra slide wrapper treatment. */
+#challenges .puzzle-route,
+#challenges .puzzle-route .chapter-slides {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep the route headings and descriptions naturally integrated with the page. */
+#challenges .puzzle-slide-heading {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
