@@ -9556,3 +9556,38 @@ html body #style .style-next .text-link span {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+/* Final visual correction: challenge titles use the wine accent; puzzle surfaces are fully frameless. */
+#challenges .challenge-heading h2,
+#challenges .challenge-heading h2 em,
+#challenges .puzzle-slide-heading h3 {
+  color: var(--wine, #76212b) !important;
+}
+
+/* Remove the lingering pale paper panels from individual tasks, not just the outer slides. */
+#challenges .riddle-panel,
+#challenges .spot-difference,
+#challenges .audio-story-track,
+#challenges .touch-art-stage,
+#challenges .scent-sensory-scene,
+#challenges .cafe-scene,
+#challenges .cafe-receipt {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* The receipt used to be a cream sheet; keep its content but remove the sheet treatment. */
+#challenges .cafe-receipt {
+  clip-path: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+}
+#challenges .riddle-panel:before,
+#challenges .cafe-receipt:before {
+  display: none !important;
+}
