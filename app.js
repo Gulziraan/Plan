@@ -146,7 +146,7 @@
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "admire", "hammer", "style", "belief", "letter", "transition", "senses"];
+  const scenes = ["welcome", "profile", "admire", "hammer", "style", "transition", "senses", "letter"];
 
   function persistState() {
     try {
@@ -616,9 +616,7 @@
     };
     document.addEventListener('keydown', window.__hasanGalleryKeyHandler);
     $('#beginChallenges')?.addEventListener('click',()=>challenge.scrollIntoView({behavior:'smooth',block:'start'}));
-    // Keep the letter in the narrative before the senses chapter.
-    const letter = $('#letter');
-    if (letter && letter.parentElement) { letter.hidden = false; const intro = $("#transition"); if (intro) intro.before(letter); else senses.before(letter); }
+    // Личное письмо остаётся финальной главой после пяти испытаний и кода.
   }
 
   function formatAudioTime(seconds) {
@@ -1097,6 +1095,15 @@
     });
   });
 
+  const beliefEnvelope = $("#beliefEnvelope");
+  $("#openBeliefEnvelope")?.addEventListener("click", () => {
+    if (beliefEnvelope) { beliefEnvelope.hidden = false; document.body.classList.add("belief-envelope-open"); }
+  });
+  $("#closeBeliefEnvelope")?.addEventListener("click", () => {
+    if (beliefEnvelope) beliefEnvelope.hidden = true;
+    document.body.classList.remove("belief-envelope-open");
+    showScene("transition");
+  });
   $("#openSensesButton")?.addEventListener("click", () => showScene("senses"));
   $("#openSensesFromLetter")?.addEventListener("click", () => showScene("transition"));
 
