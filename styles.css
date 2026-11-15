@@ -8207,3 +8207,61 @@ main { overflow: clip; }
 #challenges .cipher-input{color:var(--ink,#302a28);background:#fffdf8;border-color:rgba(112,33,43,.3)}
 #challenges .cipher-submit{background:var(--wine,#76212b);color:#fff9ef}
 #challenges .cipher-description{color:var(--ink-soft,#665d59)}
+
+
+/* === Точечные исправления по замечаниям === */
+/* Профиль: только блок опыта, ближе к основному тексту. */
+#profile .profile-details { margin-top: 16px !important; grid-template-columns: minmax(0,1fr) !important; }
+#profile .profile-detail { padding: 12px 0 !important; background: transparent !important; border: 0 !important; }
+#profile .profile-detail-title { margin-bottom: 8px !important; }
+#profile .profile-detail-item { margin: 7px 0 !important; }
+
+/* Экран качеств: заголовок — единственный текстовый вводный элемент. */
+#admire .chapter-heading { width: min(100% - 48px, 1100px) !important; text-align: center !important; margin: 0 auto clamp(30px,4vw,52px) !important; }
+#admire .chapter-heading h2 { max-width: none !important; margin-inline: auto !important; text-align: center !important; }
+#admire .chapter-heading > p:not(.eyebrow) { display:none !important; }
+#admire .chapter-heading .eyebrow { text-align:center !important; }
+
+/* Creator Highlights — исходная карточка, но это больше не кнопка. */
+#style .creator-highlights-card { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(100%,620px); min-height:140px; margin:0 auto; padding:22px 24px; border:1px solid rgba(112,39,38,.16); border-radius:4px; background:linear-gradient(145deg,rgba(255,252,244,.94),rgba(244,232,213,.82)); box-shadow:0 12px 32px rgba(70,42,31,.08); color:#651612; text-align:center; }
+#style .creator-highlights-card .creator-highlights-kicker { color:#92716b; font:700 9px/1.4 var(--sans); letter-spacing:.2em; }
+#style .creator-highlights-card .creator-highlights-title { color:#651612; font:700 clamp(25px,3vw,38px)/.96 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+#style .creator-highlights-card:hover { transform:none; }
+
+/* Belief chapter: standalone envelope-like introduction before the personal letter. */
+#belief { min-height:82vh; display:grid; align-content:center; padding:clamp(70px,10vw,130px) 24px; background:linear-gradient(145deg,#f5eee5,#eadbd0 55%,#f8f2e9) !important; }
+#belief .belief-layout { position:relative; width:min(780px,100%); margin:0 auto; padding:clamp(34px,6vw,70px); background:rgba(255,251,244,.92); border:1px solid rgba(112,39,38,.2); box-shadow:0 22px 65px rgba(70,42,31,.1); }
+#belief .belief-layout::before { content:"✉"; display:grid; place-items:center; width:54px; height:54px; margin:0 auto 24px; border:1px solid rgba(112,39,38,.24); border-radius:50%; color:#8a4b48; font-size:25px; }
+#belief .belief-layout > .eyebrow,#belief h2,#belief .belief-final { text-align:center; }
+#belief h2 { max-width:650px; margin:12px auto 28px; }
+#belief .belief-copy { max-width:620px; margin:0 auto; }
+#belief .belief-final { margin-top:30px; }
+
+/* Intro to five senses follows the same page width and alignment as other chapters. */
+#senses .senses-intro { width:min(100% - 64px,1260px) !important; max-width:1260px !important; margin-inline:auto !important; box-sizing:border-box; }
+#senses .senses-intro-copy { min-width:0; }
+@media(max-width:700px){#senses .senses-intro{width:calc(100% - 32px)!important;padding-inline:0!important}}
+
+/* Scent memory photo inside the sensory composition. */
+#senses .scent-sensory-scene,#challenges .scent-sensory-scene { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); align-items:center; gap:clamp(18px,3vw,34px); padding:clamp(18px,3vw,30px); }
+.scent-memory-photo { position:relative; z-index:2; margin:0; min-width:0; }
+.scent-memory-photo img { display:block; width:100%; height:clamp(230px,30vw,390px); object-fit:cover; border:1px solid rgba(255,255,255,.35); box-shadow:0 14px 35px rgba(30,20,24,.18); }
+.scent-memory-photo figcaption { margin-top:10px; color:var(--champagne,#ddc7aa); font:10px/1.5 var(--sans,Arial); letter-spacing:.13em; }
+#senses .scent-scene-copy,#challenges .scent-scene-copy { position:relative; z-index:2; }
+@media(max-width:700px){#senses .scent-sensory-scene,#challenges .scent-sensory-scene{grid-template-columns:1fr}.scent-memory-photo img{height:260px}}
+
+/* Challenge gallery: keep the original photographic hit areas interactive after moving the puzzle out of #senses. */
+#challenges .spot-difference { position:relative; z-index:1; }
+#challenges .spot-difference-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:start; }
+#challenges .spot-difference-pair figure { margin:0; min-width:0; }
+#challenges .spot-image-wrap { position:relative; line-height:0; isolation:isolate; }
+#challenges .spot-image-wrap img { position:relative; z-index:0; display:block; width:100%; height:auto; }
+#challenges .spot-hit { position:absolute; z-index:5; left:var(--x); top:var(--y); display:block; width:clamp(38px,5vw,56px); aspect-ratio:1; padding:0; transform:translate(-50%,-50%); border:2px solid rgba(112,39,38,.25); border-radius:50%; background:rgba(255,250,242,.04); cursor:crosshair; pointer-events:auto; touch-action:manipulation; }
+#challenges .spot-hit:hover,#challenges .spot-hit:focus-visible { border-color:#8a4b48; background:rgba(255,250,242,.2); outline:2px solid rgba(138,75,72,.3); outline-offset:2px; }
+#challenges .spot-hit.is-found { border-color:#315f78; background:rgba(120,171,196,.34); }
+#challenges .chapter-slide:not(.is-active) { display:none !important; }
+#challenges .puzzle-slide { background:transparent !important; border:0 !important; box-shadow:none !important; }
+#challenges .puzzle-gallery { background:transparent !important; }
+@media(max-width:700px){#challenges .spot-difference-pair{grid-template-columns:1fr}#challenges .spot-hit{width:44px}}
+/* Restore the original Creator Highlights card surface without button behavior. */
+#style .creator-highlights-card{border:1px solid rgba(112,39,38,.16)!important;border-radius:4px!important;background:linear-gradient(145deg,rgba(255,252,244,.94),rgba(244,232,213,.82))!important;box-shadow:0 12px 32px rgba(70,42,31,.08)!important;color:#651612!important;cursor:default!important;}

@@ -146,7 +146,7 @@
   } catch (_) {}
 
   // Единая вертикальная страница: следующие разделы открываются только действием пользователя.
-  const scenes = ["welcome", "profile", "admire", "belief", "hammer", "style", "letter", "transition", "senses"];
+  const scenes = ["welcome", "profile", "admire", "hammer", "style", "belief", "letter", "transition", "senses"];
 
   function persistState() {
     try {
@@ -192,9 +192,9 @@
 
     if (id === "letter") {
       const finalSection = document.getElementById("letter");
-      if (finalSection && riddleState.unlocked && riddleState.solved.length === 5) {
+      if (finalSection) {
         finalSection.hidden = false;
-        finalSection.classList.add("is-unlocked");
+        finalSection.classList.add("is-unlocked", "opened");
       }
       renderPersonalLetter();
       renderMemoryGallery();
@@ -469,6 +469,7 @@
       if (s.kind === "scent") {
         content = `
           <div class="scent-sensory-scene" data-scent-scene>
+            <figure class="scent-memory-photo"><img src="assets/02.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
             <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
             <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
             <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
@@ -1157,9 +1158,6 @@
       styleImage.classList.remove("portrait-changing", "portrait-landed");
       stylePerson?.classList.remove("mjolnir-landed");
     }
-    const highlightsToggle = $("#creatorHighlightsToggle");
-    const highlightsContent = $("#creatorHighlightsContent");
-    const letter = $("#hammerLetter");
     const replayButton = $("#replayHammerFlight");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -1193,7 +1191,6 @@
     function setHighlightsReady() {
       if (replayButton) replayButton.hidden = false;
       if (highlights) highlights.classList.add("is-unlocked");
-      if (highlightsToggle) highlightsToggle.disabled = false;
     }
 
     if (completed) {
@@ -1437,13 +1434,6 @@
     window.addEventListener("blur", () => finishHold(null, true));
     document.addEventListener("visibilitychange", () => { if (document.hidden) finishHold(null, true); });
     window.addEventListener("pagehide", () => finishHold(null, true));
-
-    highlightsToggle?.addEventListener("click", () => {
-      const expanded = highlightsToggle.getAttribute("aria-expanded") === "true";
-      highlightsToggle.setAttribute("aria-expanded", String(!expanded));
-      highlightsContent.hidden = expanded;
-      highlights?.classList.toggle("is-expanded", !expanded);
-    });
 
     replayButton?.addEventListener("click", async () => {
       if (transitioning) return;
