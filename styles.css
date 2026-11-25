@@ -8862,3 +8862,159 @@ body > #letterIntro:not(.is-opening) .letter-intro-open,
 @media (min-width: 1100px) and (min-height: 700px) {
   .typewriter-machine-wrap { width: min(635px, 56svh, 46vw) !important; }
 }
+
+
+/* ==========================================================
+   CHAPTER I — EDITORIAL BRIDGE INTO THE EXISTING MJÖLNIR SCENE
+   ========================================================== */
+#admire .admire-closing-line {
+  width: min(100% - 48px, 1260px);
+  margin: clamp(30px, 4vw, 54px) auto 0;
+  color: var(--wine, #76212b);
+  font-family: var(--serif, Georgia, serif);
+  font-size: clamp(19px, 2vw, 25px);
+  font-style: italic;
+  line-height: 1.45;
+  opacity: .86;
+  text-align: center;
+}
+#hammer .hammer-story-transition {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vh, 22px);
+  padding: clamp(32px, 8vw, 100px) clamp(24px, 8vw, 110px);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(196,164,119,.13), transparent 44%),
+    linear-gradient(180deg, rgba(30,12,14,.94), rgba(42,17,20,.97));
+  color: #f4e9da;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.25s ease, visibility 1.25s ease;
+}
+#hammer .hammer-story-transition.is-complete {
+  opacity: 0;
+  visibility: hidden;
+}
+#hammer .hammer-story-line {
+  max-width: min(850px, 88vw);
+  margin: 0;
+  color: #f0e5d8;
+  font-family: var(--serif, Georgia, serif);
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: .005em;
+  opacity: 0;
+  transform: translateY(13px);
+  filter: blur(3px);
+  transition: opacity 1s ease, transform 1.15s cubic-bezier(.2,.7,.2,1), filter 1.1s ease;
+}
+#hammer .hammer-story-line.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+#hammer .hammer-story-line.is-fading {
+  opacity: 0;
+  transform: translateY(-9px);
+  filter: blur(4px);
+}
+#hammer .hammer-story-line.hammer-story-second {
+  color: #d9bd91;
+  font-size: clamp(21px, 2.7vw, 34px);
+}
+#hammer .hammer-story-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 21% 31%, rgba(221,194,155,.65) 0 1px, transparent 2px),
+    radial-gradient(circle at 73% 25%, rgba(221,194,155,.48) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 72%, rgba(221,194,155,.55) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 36% 78%, rgba(221,194,155,.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 58%, rgba(221,194,155,.38) 0 1px, transparent 2px),
+    radial-gradient(circle at 14% 63%, rgba(221,194,155,.42) 0 1px, transparent 2px);
+  animation: hammerDustDrift 7s ease-in-out infinite alternate;
+}
+#hammer.is-storytelling .hammer-story-particles { opacity: .8; }
+#hammer .hammer-topline,
+#hammer .hammer-intro,
+#hammer .hammer-arena,
+#hammer .hammer-instruction {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.35s ease, visibility 1.35s ease, transform 1.6s cubic-bezier(.2,.7,.2,1), filter 1.4s ease;
+}
+#hammer .hammer-topline { transform: translateY(10px); }
+#hammer .hammer-intro { transform: translateY(18px); filter: blur(4px); }
+#hammer .hammer-arena { transform: translateY(24px) scale(.975); filter: brightness(.55) blur(2px); }
+#hammer .hammer-instruction { transform: translateY(12px); }
+#hammer.hammer-revealed .hammer-topline,
+#hammer.hammer-revealed .hammer-intro,
+#hammer.hammer-revealed .hammer-arena,
+#hammer.hammer-revealed .hammer-instruction {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  filter: none;
+}
+#hammer.hammer-revealed .hammer-arena {
+  transition-delay: .18s;
+}
+#hammer.hammer-revealed .hammer-instruction {
+  transition-delay: .35s;
+}
+#hammer.hammer-revealed .hammer-aura {
+  animation: mjolnirAuraAwaken 3.8s ease-in-out 1 both;
+}
+#hammer.hammer-revealed .mjolnir-control {
+  animation: mjolnirArrival 2.2s cubic-bezier(.18,.75,.2,1) both;
+}
+#hammer.hammer-revealed .hammer-lightning {
+  opacity: .13;
+  transition: opacity 2s ease;
+}
+#hammer.hammer-revealed .lightning-core {
+  animation: lightningCore 4.8s ease-in-out 1.8s infinite;
+}
+@keyframes hammerDustDrift {
+  from { transform: translate3d(-5px, 4px, 0); }
+  to { transform: translate3d(7px, -8px, 0); }
+}
+@keyframes mjolnirAuraAwaken {
+  0% { opacity: .05; filter: blur(24px); transform: scale(.82); }
+  65% { opacity: .92; filter: blur(13px); transform: scale(1.08); }
+  100% { opacity: .68; filter: blur(18px); transform: scale(1); }
+}
+@keyframes mjolnirArrival {
+  0% { opacity: 0; transform: translateY(30px) scale(.92); filter: brightness(.35) drop-shadow(0 0 0 transparent); }
+  58% { opacity: 1; transform: translateY(-5px) scale(1.025); filter: brightness(1.18) drop-shadow(0 0 22px rgba(193,167,131,.3)); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) drop-shadow(0 0 12px rgba(193,167,131,.12)); }
+}
+@media (max-width: 700px) {
+  #hammer .hammer-story-transition { gap: 14px; padding: 36px 24px; }
+  #hammer .hammer-story-line { font-size: clamp(20px, 5.4vw, 27px); }
+  #hammer .hammer-story-line.hammer-story-second { font-size: clamp(19px, 5vw, 25px); }
+  #admire .admire-closing-line { width: min(100% - 36px, 560px); text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hammer .hammer-story-transition,
+  #hammer .hammer-story-line,
+  #hammer .hammer-topline,
+  #hammer .hammer-intro,
+  #hammer .hammer-arena,
+  #hammer .hammer-instruction { transition-duration: .01ms !important; }
+  #hammer .hammer-story-particles,
+  #hammer.hammer-revealed .hammer-aura,
+  #hammer.hammer-revealed .mjolnir-control,
+  #hammer.hammer-revealed .lightning-core { animation: none !important; }
+}

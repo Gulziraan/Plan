@@ -164,6 +164,61 @@
     }
   }
 
+  // КИНОПЕРЕХОД К МЬЁЛЬНИРУ. Существующая навигация и механика молота не меняются.
+  if (!IS_CHAPTER_TWO) {
+    const hammerScene = $("#hammer");
+    const storyTransition = $("#hammerStoryTransition");
+    const storyLines = storyTransition ? $$(".hammer-story-line", storyTransition) : [];
+    const hammerIntro = $("#hammerIntro");
+    const hammerArena = $("#hammerArena");
+    const hammerInstruction = $("#hammerInstruction");
+    const reduceStoryMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let storyStarted = false;
+    let storyTimers = [];
+
+    function revealStoryLine(index) {
+      if (!storyLines[index]) return;
+      storyLines[index].classList.add("is-visible");
+    }
+
+    function startHammerStory() {
+      if (storyStarted || !storyTransition) return;
+      storyStarted = true;
+      hammerScene?.classList.add("is-storytelling");
+      const timings = reduceStoryMotion
+        ? [0, 100, 200, 300, 400]
+        : [250, 1550, 3050, 5650, 7350];
+      timings.forEach((delay, index) => {
+        storyTimers.push(window.setTimeout(() => revealStoryLine(index), delay));
+      });
+
+      const fadeLastLineAt = reduceStoryMotion ? 250 : 4750;
+      storyTimers.push(window.setTimeout(() => {
+        storyLines[2]?.classList.add("is-fading");
+      }, fadeLastLineAt));
+
+      const revealHammerAt = reduceStoryMotion ? 850 : 10100;
+      storyTimers.push(window.setTimeout(() => {
+        storyTransition.classList.add("is-complete");
+        storyTransition.setAttribute("aria-hidden", "true");
+        hammerScene?.classList.add("hammer-revealed");
+        hammerIntro?.classList.add("is-revealed");
+        hammerArena?.classList.add("is-revealed");
+        hammerInstruction?.classList.add("is-revealed");
+      }, revealHammerAt));
+    }
+
+    if (hammerScene && storyTransition) {
+      const storyObserver = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.22)) {
+          startHammerStory();
+          storyObserver.disconnect();
+        }
+      }, { threshold: [0.22, 0.4] });
+      storyObserver.observe(hammerScene);
+    }
+  }
+
   function toast(message) {
     const element = $("#toast");
     if (!element) return;
