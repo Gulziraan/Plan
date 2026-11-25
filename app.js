@@ -186,19 +186,18 @@
       storyStarted = true;
       hammerScene?.classList.add("is-storytelling");
       const timings = reduceStoryMotion
-        ? [0, 80, 160, 280, 400]
-        : [350, 1900, 3550, 5850, 7850];
+        ? [0, 100, 200, 300, 400]
+        : [250, 1550, 3050, 5650, 7350];
       timings.forEach((delay, index) => {
         storyTimers.push(window.setTimeout(() => revealStoryLine(index), delay));
       });
 
-      // The first editorial passage clears before the second one begins.
-      const fadeFirstPassageAt = reduceStoryMotion ? 220 : 5000;
+      const fadeLastLineAt = reduceStoryMotion ? 250 : 4750;
       storyTimers.push(window.setTimeout(() => {
-        storyLines.slice(0, 3).forEach(line => line?.classList.add("is-fading"));
-      }, fadeFirstPassageAt));
+        storyLines[2]?.classList.add("is-fading");
+      }, fadeLastLineAt));
 
-      const revealHammerAt = reduceStoryMotion ? 800 : 10800;
+      const revealHammerAt = reduceStoryMotion ? 850 : 10100;
       storyTimers.push(window.setTimeout(() => {
         storyTransition.classList.add("is-complete");
         storyTransition.setAttribute("aria-hidden", "true");
@@ -219,6 +218,7 @@
       storyObserver.observe(hammerScene);
     }
   }
+
 
   function toast(message) {
     const element = $("#toast");
