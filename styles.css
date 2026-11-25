@@ -9046,3 +9046,69 @@ body > #letterIntro:not(.is-opening) .letter-intro-open,
   #hammer .hammer-story-line { transition-duration: .01ms !important; }
   #hammer .hammer-story-particles { animation: none !important; }
 }
+
+
+/* FINAL POLISH — raised Mjölnir portrait screen */
+html body #style .style-title {
+  /* Keep the original title in the document so it can be restored later. */
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+html body #style .style-file {
+  color: #fffaf3 !important;
+  -webkit-text-fill-color: #fffaf3 !important;
+  text-shadow: 0 1px 2px rgba(45, 7, 13, .22);
+}
+html body #style .style-file .file-fold {
+  color: inherit;
+}
+html body #style .creator-highlights-title {
+  color: var(--wine, #76212b) !important;
+  -webkit-text-fill-color: var(--wine, #76212b) !important;
+}
+html body #style .style-next {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+html body #style .style-next #openBeliefEnvelope {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  width: auto !important;
+  min-width: min(330px, calc(100vw - 44px)) !important;
+  min-height: 62px !important;
+  margin: 0 auto !important;
+  padding: 17px 30px !important;
+  border: 1px solid rgba(118, 33, 43, .42) !important;
+  border-radius: 999px !important;
+  background: var(--wine, #76212b) !important;
+  color: #fffaf3 !important;
+  -webkit-text-fill-color: #fffaf3 !important;
+  box-shadow: 0 9px 24px rgba(78, 19, 27, .16) !important;
+  font-size: clamp(12px, 1.05vw, 14px) !important;
+  font-weight: 800 !important;
+  letter-spacing: .12em !important;
+  text-align: center !important;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease !important;
+}
+html body #style .style-next #openBeliefEnvelope:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 13px 28px rgba(78, 19, 27, .22) !important;
+}
+html body #style .style-next #openBeliefEnvelope span {
+  color: #fffaf3 !important;
+  -webkit-text-fill-color: #fffaf3 !important;
+}
+@media (max-width: 700px) {
+  html body #style .style-next #openBeliefEnvelope {
+    min-width: min(310px, calc(100vw - 40px)) !important;
+    min-height: 58px !important;
+    padding: 15px 22px !important;
+    letter-spacing: .09em !important;
+  }
+}
