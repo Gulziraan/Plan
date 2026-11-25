@@ -1124,7 +1124,7 @@
   });
 
   const beliefEnvelope = $("#beliefEnvelope");
-  $("#openBeliefEnvelope")?.addEventListener("click", () => {
+  $("#creatorHighlightsCard")?.addEventListener("click", () => {
     if (!riddleState.hammerDone) { toast("Сначала подними Мьёльнир."); return; }
     if (beliefEnvelope) { beliefEnvelope.hidden = false; document.body.classList.add("belief-envelope-open"); }
   });

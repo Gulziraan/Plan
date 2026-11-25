@@ -9112,3 +9112,58 @@ html body #style .style-next #openBeliefEnvelope span {
     letter-spacing: .09em !important;
   }
 }
+
+
+/* PROFILE FINISH: editorial title + message action on the existing highlight card */
+html body #style .style-title {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: var(--wine, #76212b) !important;
+}
+html body #style .message-open-button {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: min(360px, calc(100% - 40px)) !important;
+  min-height: 126px !important;
+  margin: 0 auto !important;
+  padding: 20px 24px !important;
+  border: 1.5px solid var(--sky, #8fc7e2) !important;
+  border-radius: 9px !important;
+  background: linear-gradient(145deg, #e2f3f9, #cfe8f2) !important;
+  color: var(--wine, #76212b) !important;
+  box-shadow: 0 10px 26px rgba(54, 105, 124, .12) !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  transition: transform .25s ease, box-shadow .25s ease !important;
+}
+html body #style .message-open-button:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 15px 32px rgba(54, 105, 124, .18) !important;
+}
+html body #style .message-open-button .creator-highlights-kicker {
+  color: rgba(101, 22, 18, .68) !important;
+  font: 700 9px/1.4 var(--sans, Manrope, sans-serif) !important;
+  letter-spacing: .18em !important;
+}
+html body #style .message-open-button .creator-highlights-title {
+  color: var(--wine, #76212b) !important;
+  -webkit-text-fill-color: var(--wine, #76212b) !important;
+  font: 800 clamp(22px, 2.6vw, 30px)/.98 Georgia, "Times New Roman", serif !important;
+  letter-spacing: .015em !important;
+}
+@media (max-width: 700px) {
+  html body #style .style-title {
+    top: 24px !important;
+    font-size: 18px !important;
+  }
+  html body #style .message-open-button {
+    width: min(330px, calc(100% - 36px)) !important;
+    min-height: 112px !important;
+  }
+}
