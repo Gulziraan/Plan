@@ -133,10 +133,8 @@
     unlockAudio();
     if (typing) {
       finishTyping();
-      return;
-    }
-    if (!finished) {
-      finishTyping();
+      // One tap is enough: finish the line, then continue automatically.
+      window.setTimeout(openLetter, 520);
       return;
     }
     openLetter();
