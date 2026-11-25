@@ -9,28 +9,29 @@
   <script>(function(){function guard(){try{if(localStorage.getItem("hasan-chapter-two-unlocked")==="yes")location.replace("chapter-two.html");}catch(_){}}guard();window.addEventListener("pageshow",guard);})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="chapter-one">
 
-  <!-- ПЕРВОЕ ВСТУПЛЕНИЕ: ЛИЧНОЕ ПИСЬМО -->
-  <section class="letter-intro" id="letterIntro" aria-label="Личное письмо для Хасана">
-    <button class="letter-intro-open" id="letterIntroOpen" type="button"
-      aria-label="Open me — Hello Hasan" aria-controls="welcome">
-      <picture class="letter-intro-art">
-        <source media="(max-aspect-ratio: 3/4)" srcset="assets/letter-intro-portrait.png">
-        <img src="assets/letter-intro-landscape.png"
-          alt="A cream lace envelope with a gold wax seal, reading Hello Hasan and Open me."
-          fetchpriority="high" decoding="async">
-      </picture>
-      <span class="letter-intro-fallback" hidden>
-        <span class="letter-intro-fallback-greeting">Hello Hasan</span>
-        <span class="letter-intro-fallback-action">Open me</span>
+  <!-- ПЕРВОЕ ВСТУПЛЕНИЕ: ЛИЧНОЕ ПИСЬМО НА ПЕЧАТНОЙ МАШИНКЕ -->
+  <section class="letter-intro typewriter-intro" id="letterIntro" aria-label="Личное письмо для Хасана">
+    <button class="letter-intro-open typewriter-open" id="letterIntroOpen" type="button"
+      aria-label="Нажми, чтобы продолжить" aria-controls="welcome">
+      <span class="typewriter-machine-wrap">
+        <img class="typewriter-machine-image" src="assets/typewriter-intro.png"
+          alt="Бордовая механическая печатная машинка с чистым листом бумаги" fetchpriority="high" decoding="async">
+        <span class="typewriter-copy" aria-live="polite">
+          <span class="typewriter-line" data-type-line="0"></span>
+          <span class="typewriter-line" data-type-line="1"></span>
+          <span class="typewriter-line" data-type-line="2"></span>
+          <span class="typewriter-caret" aria-hidden="true"></span>
+        </span>
+        <span class="typewriter-hint" aria-hidden="true">НАЖМИ, КОГДА БУДЕШЬ ГОТОВ</span>
       </span>
       <span class="letter-intro-flash" aria-hidden="true"></span>
     </button>
-    <span class="letter-intro-sr">Hello Hasan. Open me.</span>
+    <span class="letter-intro-sr">Сегодня очень особенный день. Эти несколько страниц — для тебя. Просто нажми, когда будешь готов.</span>
   </section>
 
   <div class="grain" aria-hidden="true"></div>
