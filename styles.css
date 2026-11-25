@@ -8864,3 +8864,34 @@ html body #profile .profile-details {
     letter-spacing: .14em;
   }
 }
+
+
+/* Revised placement and refined Cyrillic typewriter lettering. */
+.typewriter-machine-wrap .typewriter-copy {
+  top: 8.2%;
+  left: 23.5%;
+  width: 54%;
+  height: 22%;
+  justify-content: center;
+  font-family: "PT Mono", "Courier Prime", monospace;
+  font-size: clamp(11px, 1.62vw, 18px);
+  line-height: 1.5;
+  letter-spacing: -.018em;
+}
+.typewriter-machine-wrap .typewriter-line {
+  min-height: 1.5em;
+  margin: 0 0 .5em;
+}
+.typewriter-machine-wrap .typewriter-line:last-of-type { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .typewriter-machine-wrap .typewriter-copy {
+    top: 7.8%;
+    left: 23.5%;
+    width: 54%;
+    height: 23%;
+    font-size: clamp(9px, 2.75vw, 12px);
+    line-height: 1.42;
+    letter-spacing: -.035em;
+  }
+  .typewriter-machine-wrap .typewriter-line { margin-bottom: .35em; }
+}

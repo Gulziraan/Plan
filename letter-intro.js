@@ -13,16 +13,57 @@
   let timer = null;
   let lineIndex = 0;
   let charIndex = 0;
+  let audioContext = null;
+  let audioUnlocked = false;
   const lines = Array.from(intro.querySelectorAll(".typewriter-line"));
   const caret = intro.querySelector(".typewriter-caret");
   const text = [
+    "Приветик, Хасан",
     "Сегодня очень особенный день.",
-    "Эти несколько страниц — для тебя.",
-    "Просто нажми, когда будешь готов."
+    "И я приготовила для тебя кое-что интересное.",
+    "Начнём?"
   ];
 
   document.body.style.overflow = "hidden";
   document.documentElement.classList.add("letter-gate-pending");
+
+  // Мягкий механический щелчок клавиши. Звук синтезируется локально,
+  // поэтому отдельный аудиофайл и сетевое подключение не нужны.
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    try {
+      audioContext = new AudioContextClass();
+      audioContext.resume().then(() => { audioUnlocked = audioContext.state === "running"; }).catch(() => {});
+    } catch (_) {}
+  }
+
+  function keyClick(when = 0) {
+    if (!audioContext || audioContext.state !== "running") return;
+    const now = audioContext.currentTime + when;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const filter = audioContext.createBiquadFilter();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(920 + Math.random() * 420, now);
+    osc.frequency.exponentialRampToValueAtTime(360, now + 0.022);
+    filter.type = "highpass";
+    filter.frequency.setValueAtTime(500, now);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.035, now + 0.002);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.032);
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioContext.destination);
+    osc.start(now);
+    osc.stop(now + 0.035);
+  }
+
+  function playShortTypingBurst() {
+    if (!audioContext || audioContext.state !== "running") return;
+    for (let i = 0; i < 14; i++) keyClick(i * (0.075 + Math.random() * 0.025));
+  }
 
   function finishTyping() {
     if (timer) window.clearTimeout(timer);
@@ -35,6 +76,9 @@
     caret?.classList.remove("is-visible");
     caret?.classList.add("is-fading");
     intro.classList.add("is-complete");
+    // Safari/iOS разрешает звук после жеста пользователя:
+    // короткая тихая серия клавиш поддерживает ощущение печати при раскрытии текста.
+    playShortTypingBurst();
   }
 
   function typeCharacter() {
@@ -49,14 +93,15 @@
     }
     const current = text[lineIndex];
     if (charIndex < current.length) {
-      lines[lineIndex].textContent += current[charIndex++];
-      const ch = current[charIndex - 1];
-      const delay = ch === "." ? 390 : ch === "—" ? 220 : 58 + Math.random() * 34;
+      const character = current[charIndex++];
+      lines[lineIndex].textContent += character;
+      keyClick();
+      const delay = character === "." || character === "?" ? 470 : character === "—" ? 230 : 72 + Math.random() * 38;
       timer = window.setTimeout(typeCharacter, delay);
     } else {
       lineIndex++;
       charIndex = 0;
-      timer = window.setTimeout(typeCharacter, lineIndex < text.length ? 850 : 250);
+      timer = window.setTimeout(typeCharacter, lineIndex < text.length ? 900 : 280);
     }
   }
 
@@ -77,6 +122,7 @@
       document.body.style.overflow = "";
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       document.getElementById("welcome")?.focus?.({ preventScroll: true });
+      if (audioContext && audioContext.state !== "closed") audioContext.close().catch(() => {});
     }, delay);
   }
 
@@ -84,6 +130,7 @@
     if (event.type === "keydown" && !["Enter", " "].includes(event.key)) return;
     if (event.type === "keydown") event.preventDefault();
     if (opening) return;
+    unlockAudio();
     if (typing) {
       finishTyping();
       return;
