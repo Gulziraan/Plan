@@ -186,18 +186,19 @@
       storyStarted = true;
       hammerScene?.classList.add("is-storytelling");
       const timings = reduceStoryMotion
-        ? [0, 100, 200, 300, 400]
-        : [250, 1550, 3050, 5650, 7350];
+        ? [0, 80, 160, 280, 400]
+        : [350, 1900, 3550, 5850, 7850];
       timings.forEach((delay, index) => {
         storyTimers.push(window.setTimeout(() => revealStoryLine(index), delay));
       });
 
-      const fadeLastLineAt = reduceStoryMotion ? 250 : 4750;
+      // The first editorial passage clears before the second one begins.
+      const fadeFirstPassageAt = reduceStoryMotion ? 220 : 5000;
       storyTimers.push(window.setTimeout(() => {
-        storyLines[2]?.classList.add("is-fading");
-      }, fadeLastLineAt));
+        storyLines.slice(0, 3).forEach(line => line?.classList.add("is-fading"));
+      }, fadeFirstPassageAt));
 
-      const revealHammerAt = reduceStoryMotion ? 850 : 10100;
+      const revealHammerAt = reduceStoryMotion ? 800 : 10800;
       storyTimers.push(window.setTimeout(() => {
         storyTransition.classList.add("is-complete");
         storyTransition.setAttribute("aria-hidden", "true");
