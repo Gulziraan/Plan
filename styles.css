@@ -8818,3 +8818,47 @@ html body #profile .profile-details {
   .typewriter-machine-wrap { transition-duration: .01ms !important; }
   .typewriter-machine-wrap .typewriter-caret.is-visible { animation: none; }
 }
+
+
+/* FIX: center the complete machine as one unit in the viewport.
+   The strict iOS gate rule previously changed the full-screen button to block,
+   which left its child aligned to the upper-left instead of the center. */
+body > #letterIntro:not(.is-opening) .letter-intro-open,
+.letter-intro.typewriter-intro .typewriter-open {
+  position: absolute !important;
+  inset: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  place-items: center !important;
+  align-content: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+.typewriter-machine-wrap {
+  grid-area: 1 / 1 !important;
+  justify-self: center !important;
+  align-self: center !important;
+  margin: 0 auto !important;
+  transform: translate(0, 0) !important;
+}
+.typewriter-machine-wrap .typewriter-hint {
+  left: 50% !important;
+  right: auto !important;
+  width: max-content !important;
+  max-width: 100vw !important;
+  transform: translateX(-50%) !important;
+}
+@media (max-width: 640px) {
+  .typewriter-machine-wrap { width: min(88vw, 56svh, 430px) !important; }
+}
+@media (min-width: 641px) and (max-width: 1099px) {
+  .typewriter-machine-wrap { width: min(76vw, 56svh, 560px) !important; }
+}
+@media (min-width: 1100px) and (min-height: 700px) {
+  .typewriter-machine-wrap { width: min(635px, 56svh, 46vw) !important; }
+}
