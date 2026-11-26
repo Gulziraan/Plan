@@ -9264,3 +9264,20 @@ html body #style .message-open-button .creator-highlights-title {
     z-index: 6 !important;
   }
 }
+
+
+/* Cover portrait: a restrained side-to-side, lifelike head sway. */
+html body #welcome .hero-head-illustration {
+  transform-origin: 50% 78% !important;
+  animation: hasan-head-sway 4.8s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes hasan-head-sway {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-2.2deg); }
+  50% { transform: translate(calc(-50% + 5px), -50%) rotate(2.2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body #welcome .hero-head-illustration {
+    animation: none !important;
+  }
+}
