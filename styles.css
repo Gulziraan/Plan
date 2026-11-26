@@ -9167,3 +9167,86 @@ html body #style .message-open-button .creator-highlights-title {
     min-height: 112px !important;
   }
 }
+
+
+/* TYPEWRITER: smaller, more refined print; preserve the paper composition. */
+html body .typewriter-copy {
+  font-family: "Courier Prime", "IBM Plex Mono", monospace !important;
+  font-size: clamp(11px, .98vw, 14px) !important;
+  line-height: 1.48 !important;
+  letter-spacing: -.018em !important;
+}
+html body .typewriter-line {
+  margin-bottom: .58em !important;
+}
+@media (max-width: 700px) {
+  html body .typewriter-copy {
+    font-size: clamp(10px, 2.85vw, 12px) !important;
+    line-height: 1.42 !important;
+    letter-spacing: -.025em !important;
+  }
+}
+
+/* PROFILE: keep the portrait and the next-step link in separate flow rows. */
+@media (max-width: 680px) {
+  html body #profile .profile-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  html body #profile .profile-photo {
+    width: min(88vw, 390px) !important;
+    max-width: 390px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto 30px !important;
+    overflow: visible !important;
+  }
+  html body #profile .profile-photo .profile-reference-image {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  html body #profile .profile-panel {
+    margin-top: 0 !important;
+  }
+  html body #profile > .scene-nav {
+    position: relative !important;
+    z-index: 5 !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 34px auto 0 !important;
+    padding: 18px 0 0 !important;
+    clear: both !important;
+  }
+}
+
+/* The message action returns to the compact footprint of the original
+   Creator Highlights block rather than the oversized custom button. */
+html body #style .message-open-button {
+  width: min(100%, 360px) !important;
+  min-height: 100px !important;
+  padding: 18px 22px !important;
+  gap: 7px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 12px 32px rgba(70, 42, 31, .08) !important;
+}
+html body #style .message-open-button .creator-highlights-title {
+  font-size: clamp(21px, 2.3vw, 27px) !important;
+  line-height: .98 !important;
+}
+@media (max-width: 700px) {
+  html body #style .message-open-button {
+    width: min(100%, 330px) !important;
+    min-height: 94px !important;
+    padding: 16px 18px !important;
+  }
+}

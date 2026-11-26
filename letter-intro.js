@@ -19,9 +19,9 @@
   const caret = intro.querySelector(".typewriter-caret");
   const text = [
     "Приветик, Хасан",
-    "Сегодня очень особенный день.",
-    "И я приготовила для тебя кое-что интересное.",
-    "Начнём?"
+    "Сегодня особенный день,",
+    "и я приготовила для тебя кое-что интересное)",
+    "Начнем?"
   ];
 
   document.body.style.overflow = "hidden";
@@ -76,9 +76,6 @@
     caret?.classList.remove("is-visible");
     caret?.classList.add("is-fading");
     intro.classList.add("is-complete");
-    // Safari/iOS разрешает звук после жеста пользователя:
-    // короткая тихая серия клавиш поддерживает ощущение печати при раскрытии текста.
-    playShortTypingBurst();
   }
 
   function typeCharacter() {
@@ -132,16 +129,19 @@
     if (opening) return;
     unlockAudio();
     if (typing) {
-      finishTyping();
-      // One tap is enough: finish the line, then continue automatically.
-      window.setTimeout(openLetter, 520);
+      // If autoplay was blocked by the browser, this gesture unlocks sound.
+      // The typewriter keeps printing in sync; the tap does not skip the text.
       return;
     }
     openLetter();
   }
 
+  openButton.addEventListener("pointerdown", unlockAudio, { passive: true });
   openButton.addEventListener("click", activate);
   openButton.addEventListener("keydown", activate);
   caret?.classList.add("is-visible");
+  // Attempt autoplay immediately so the keystrokes begin with the first glyph.
+  // Browsers that block audible autoplay will resume on the first user gesture.
+  unlockAudio();
   typeCharacter();
 })();
