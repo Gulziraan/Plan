@@ -9250,3 +9250,17 @@ html body #style .message-open-button .creator-highlights-title {
     padding: 16px 18px !important;
   }
 }
+
+
+/* PROFILE MOBILE/TABLET: keep the next-section label clear of the portrait. */
+@media (max-width: 900px) {
+  html body #profile > .scene-nav {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    clear: both !important;
+    margin-top: clamp(76px, 12vw, 118px) !important;
+    padding-top: 22px !important;
+    z-index: 6 !important;
+  }
+}

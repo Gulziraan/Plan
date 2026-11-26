@@ -487,7 +487,7 @@
       const riddle = RIDDLES[s.id];
       const tasteReceipt = s.id === "taste" ? `
         <div class="cafe-receipt">
-          <div class="receipt-top"><b>OUR LITTLE CAFÉ</b><span>МАЛЕНЬКИЕ РАДОСТИ · ОСОБЕННЫЙ ЗАКАЗ</span></div>
+          <div class="receipt-top"><span>МАЛЕНЬКИЕ РАДОСТИ · ОСОБЕННЫЙ ЗАКАЗ</span></div>
           <div class="receipt-rule"></div>
           <div class="receipt-rule receipt-dashed"></div><h4>КАКОЙ ЕДОЙ Я УГОСТИЛА ТЕБЯ ВПЕРВЫЕ?</h4>
           ${renderRiddleControl(s.id, solved)}
