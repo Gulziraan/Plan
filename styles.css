@@ -9266,18 +9266,21 @@ html body #style .message-open-button .creator-highlights-title {
 }
 
 
-/* Cover portrait: a restrained side-to-side, lifelike head sway. */
+/* Cover portrait: animate with the individual CSS rotate property.
+   The image already has a !important centering transform, so animating
+   transform itself would be overridden and remain invisible. */
 html body #welcome .hero-head-illustration {
   transform-origin: 50% 78% !important;
-  animation: hasan-head-sway 4.8s ease-in-out infinite;
-  will-change: transform;
+  animation: hasan-head-sway-v2 4.2s ease-in-out infinite !important;
+  will-change: rotate;
 }
-@keyframes hasan-head-sway {
-  0%, 100% { transform: translate(-50%, -50%) rotate(-2.2deg); }
-  50% { transform: translate(calc(-50% + 5px), -50%) rotate(2.2deg); }
+@keyframes hasan-head-sway-v2 {
+  0%, 100% { rotate: -2.8deg; }
+  50% { rotate: 2.8deg; }
 }
 @media (prefers-reduced-motion: reduce) {
   html body #welcome .hero-head-illustration {
     animation: none !important;
+    rotate: 0deg !important;
   }
 }
