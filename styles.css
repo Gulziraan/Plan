@@ -9428,3 +9428,46 @@ html body #letter .personal-letter-body {
     line-height: 1.72 !important;
   }
 }
+
+/* Light celebration palette: warm paper remains the canvas throughout. */
+:root {
+  --archive-cream: #f5efe3;
+  --archive-paper: #fffdf8;
+  --archive-wine: #641c20;
+  --archive-wine-deep: #641c20;
+  --archive-sky: #a9cfe0;
+  --archive-ink: #403630;
+  --archive-muted: #79675f;
+  --archive-gold: #b69a67;
+}
+html body { background: #f5efe3; color: #403630; }
+html body .topbar { border-bottom-color: rgba(100, 28, 32, .15); }
+html body .logo, html body .top-action, html body .cover-nav button { color: #641c20; }
+html body .cover-nav button::after { background: #a9cfe0; }
+html body .site-footer { color: #806d65; border-top-color: rgba(100, 28, 32, .14); }
+html body .hero-scene, html body #profile, html body #admire, html body #style {
+  color: #403630; background-color: #f5efe3;
+}
+html body .hero-scene { background-image: radial-gradient(ellipse at 82% 28%, rgba(169,207,224,.34), transparent 36%), linear-gradient(120deg, #fffdf8, #f5efe3) !important; }
+html body .hero-scene .hero-copy, html body #profile .profile-panel, html body #admire .chapter-heading,
+html body #admire .quality-list, html body #style .style-stage, html body #style .style-highlights { color: #403630; }
+html body #profile .profile-panel { background: linear-gradient(145deg, #fffdf8, #f1e5d9) !important; border: 1px solid rgba(100,28,32,.13); box-shadow: 0 18px 45px rgba(70,42,31,.07); }
+html body #profile .profile-panel :is(h2,p,span,b,small) { color: #403630; }
+html body #profile .profile-panel .eyebrow, html body #profile .profile-panel h2 { color: #641c20 !important; }
+html body #admire .quality-traits span { color: #641c20; border-color: rgba(100,28,32,.2); background: rgba(255,253,248,.7); }
+html body #admire .quality-list > * { color: #403630; }
+html body #style .style-title { color: #641c20 !important; }
+html body #style .style-file { color: #641c20; background: #fffdf8; border-color: rgba(100,28,32,.16); }
+html body .hammer-scene { color: #403630; background: radial-gradient(ellipse at 50% 18%, rgba(169,207,224,.45), transparent 44%), linear-gradient(145deg, #fffdf8, #f2e9dd) !important; }
+html body .hammer-scene::before, html body .hammer-scene::after { opacity: .22; }
+html body .hammer-scene .hammer-topline, html body .hammer-scene .hammer-intro,
+html body .hammer-scene .hammer-story-line, html body .hammer-scene .hammer-instruction { color: #403630; }
+html body .hammer-scene .hammer-intro h2 { color: #641c20; }
+html body .hammer-scene .hammer-intro .eyebrow { color: #806d65; }
+html body .hammer-scene .hammer-story-transition { background: linear-gradient(180deg, rgba(245,239,227,.96), rgba(245,239,227,.88)); }
+html body .belief-envelope-paper { background: #fffdf8; color: #403630; }
+html body .belief-envelope-paper :is(h2,p) { color: #403630; }
+html body .belief-envelope-paper h2, html body .belief-envelope-paper .belief-final { color: #641c20; }
+@media (max-width: 700px) {
+  html body .hero-scene, html body #profile, html body #admire, html body #style { background-color: #f5efe3; }
+}

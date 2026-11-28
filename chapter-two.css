@@ -9662,3 +9662,39 @@ html body #senses .senses-begin { color: var(--archive-wine) !important; font-fa
 html body #letter .personal-letter-body { color: var(--archive-ink); font-family: var(--sans) !important; font-size: 16px !important; line-height: 1.9 !important; }
 html body #letter .letter-opening h2, html body #letter .memory-gallery-heading h2 { font-family: var(--display) !important; line-height: 1 !important; letter-spacing: -.025em !important; }
 @media (max-width: 700px) { html body #senses .senses-intro-copy h2 { font-size: clamp(34px, 9vw, 48px) !important; } html body #senses .senses-intro-text p { font-size: 14px !important; line-height: 1.72 !important; } }
+
+/* THE WORTHY ARCHIVE — narrative bridge and final editorial polish */
+.senses-story-bridge {
+  width: min(1120px, calc(100% - 48px));
+  margin: clamp(36px, 6vw, 76px) auto clamp(44px, 7vw, 88px);
+  padding: clamp(26px, 5vw, 58px) clamp(22px, 5vw, 64px) clamp(28px, 5vw, 54px);
+  background: linear-gradient(135deg, #fffdf8 0%, #f8f1e7 100%);
+  border: 1px solid rgba(118, 33, 43, .13);
+  border-radius: 3px;
+  box-shadow: 0 18px 48px rgba(87, 56, 43, .055);
+  position: relative;
+  overflow: hidden;
+}
+.senses-story-bridge::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 5px;
+  background: linear-gradient(180deg, #a9cfdf, #76212b 72%, #b69a67);
+}
+.senses-story-step { max-width: 760px; margin: 0 0 clamp(24px, 3.4vw, 38px); padding-left: clamp(0px, 2vw, 20px); }
+.senses-story-step > span { display: block; margin-bottom: 8px; color: #8b6f69; font: 700 9px/1.5 Manrope, sans-serif; letter-spacing: .16em; }
+.senses-story-step h2, .senses-story-signoff h2 { margin: 0 0 8px; color: #76212b; font: 600 clamp(28px, 3.4vw, 43px)/1.04 "Cormorant Garamond", Georgia, serif; letter-spacing: -.02em; }
+.senses-story-step p, .senses-story-signoff p { max-width: 66ch; margin: 0; color: #493b36; font: 400 clamp(14px, 1.15vw, 16px)/1.78 Manrope, sans-serif; }
+.senses-story-step-final { margin-bottom: 30px; }
+.senses-story-signoff { margin-left: clamp(0px, 2vw, 20px); padding: 22px 0 0; border-top: 1px solid rgba(118, 33, 43, .18); }
+.senses-story-signoff h2 em { color: #8fc7d8; font-style: italic; }
+.letter-after-senses { width: min(620px, 100%); margin: 0 auto 34px; text-align: center; }
+.letter-after-senses p { margin: 0 0 8px; color: #493b36; font: 400 14px/1.75 Manrope, sans-serif; }
+.gallery-bridge-copy { max-width: 46ch; margin-top: 14px !important; color: #806d65 !important; font-size: 13px !important; line-height: 1.7 !important; }
+#senses .sense-description { white-space: pre-line; }
+#senses .riddle-intro { white-space: pre-line; }
+@media (max-width: 700px) {
+  .senses-story-bridge { width: calc(100% - 28px); margin: 28px auto 42px; padding: 25px 20px 28px 23px; }
+  .senses-story-step { margin-bottom: 26px; }
+  .senses-story-step h2, .senses-story-signoff h2 { font-size: 30px; }
+  .senses-story-step p, .senses-story-signoff p { font-size: 14px; line-height: 1.72; }
+  .letter-after-senses { padding: 0 18px; margin-bottom: 28px; }
+}

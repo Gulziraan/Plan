@@ -479,7 +479,7 @@
             <figure class="scent-memory-photo"><img src="assets/02.jpg" alt="Совместное воспоминание, связанное с нашей историей" loading="lazy"><figcaption>ОДИН ИЗ ТЕХ МОМЕНТОВ, КОТОРЫЕ ОСТАЮТСЯ С НАМИ</figcaption></figure>
             <div class="scent-veil veil-one"></div><div class="scent-veil veil-two"></div><div class="scent-veil veil-three"></div>
             <div class="scent-light-core"></div><div class="scent-particles" aria-hidden="true"></div>
-            <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><p>Некоторые воспоминания невозможно увидеть. Но иногда достаточно одного знакомого ощущения.</p><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
+            <div class="scent-scene-copy"><span>АРОМАТ, КОТОРЫЙ НАПОМИНАЕТ О ТЕБЕ</span><button type="button" data-scent-reveal>ПРИКОСНУТЬСЯ К ВОСПОМИНАНИЮ</button><strong data-scent-message hidden>ТЕПЕРЬ ЭТОТ АРОМАТ АССОЦИИРУЕТСЯ У МЕНЯ С ТОБОЙ</strong></div>
             <div class="scent-trail" aria-hidden="true"></div>
           </div>`;
       }
@@ -510,7 +510,7 @@
         <article class="sense-chapter sense-${s.id}" id="chapter-${s.id}">
           <div class="sense-number">${s.number}</div><div class="sense-main">
             <div class="sense-heading"><div><p class="eyebrow">${s.theme}</p><h3>${s.name}</h3>${s.tagline ? `<p class="sense-tagline">${s.tagline}</p>` : ""}</div><span class="sense-symbol">${s.symbol}</span></div>
-            <p class="sense-description">${s.description}</p><div class="sense-content">${content}</div>
+            <p class="sense-description" ${s.description ? "" : "hidden"}>${s.description}</p><div class="sense-content">${content}</div>
             ${tasteReceipt}${standardRiddle}
           </div>
         </article>`;
