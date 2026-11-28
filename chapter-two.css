@@ -9724,3 +9724,22 @@ html body #senses .senses-intro-bottom .senses-begin span {
     letter-spacing: .1em !important;
   }
 }
+
+
+/* FINAL CTA READABILITY — one high-contrast treatment for the start button. */
+html body #senses button.senses-begin,
+html body #senses .senses-intro-bottom button.senses-begin,
+html body #senses button.senses-begin:visited,
+html body #senses button.senses-begin:hover,
+html body #senses button.senses-begin:active,
+html body #senses button.senses-begin:focus {
+  background: #641c20 !important;
+  color: #fff9ef !important;
+  -webkit-text-fill-color: #fff9ef !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+html body #senses button.senses-begin span {
+  color: #a9cfe0 !important;
+  -webkit-text-fill-color: #a9cfe0 !important;
+}
