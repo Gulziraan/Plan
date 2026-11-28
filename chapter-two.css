@@ -9698,3 +9698,29 @@ html body #letter .letter-opening h2, html body #letter .memory-gallery-heading 
   .senses-story-step p, .senses-story-signoff p { font-size: 14px; line-height: 1.72; }
   .letter-after-senses { padding: 0 18px; margin-bottom: 28px; }
 }
+
+
+/* CTA contrast fix — the transition button label must remain readable on burgundy. */
+html body #senses .senses-intro-bottom .senses-begin {
+  background: #641c20 !important;
+  color: #fff9ef !important;
+  -webkit-text-fill-color: #fff9ef !important;
+  border: 1px solid #641c20 !important;
+  border-bottom: 2px solid #a9cfe0 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+html body #senses .senses-intro-bottom .senses-begin span {
+  color: #a9cfe0 !important;
+  -webkit-text-fill-color: #a9cfe0 !important;
+}
+@media (max-width: 700px) {
+  html body #senses .senses-intro-bottom .senses-begin {
+    width: 100%;
+    min-height: 58px;
+    justify-content: space-between;
+    padding: 16px 18px !important;
+    font-size: 11px !important;
+    letter-spacing: .1em !important;
+  }
+}
