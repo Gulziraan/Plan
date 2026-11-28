@@ -9471,3 +9471,11 @@ html body .belief-envelope-paper h2, html body .belief-envelope-paper .belief-fi
 @media (max-width: 700px) {
   html body .hero-scene, html body #profile, html body #admire, html body #style { background-color: #f5efe3; }
 }
+
+/* GLOBAL CANVAS CORRECTION — profile content must sit on the same cream canvas. */
+html body #profile .profile-panel {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
