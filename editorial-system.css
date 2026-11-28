@@ -1,0 +1,393 @@
+
+/* THE WORTHY ARCHIVE — unified editorial design system
+   One controlled layer shared by both chapters. Interaction and content remain in legacy files. */
+:root {
+  --archive-milk: #fbf6ec;
+  --archive-paper: #fffaf2;
+  --archive-wine: #76212b;
+  --archive-wine-deep: #4b1019;
+  --archive-blue: #4d8eae;
+  --archive-blue-soft: #dcecf2;
+  --archive-gold: #c9a36b;
+  --archive-ink: #392d2a;
+  --archive-muted: #816b62;
+  --archive-line: rgba(118,33,43,.19);
+  --archive-shadow: 0 18px 48px rgba(67,38,29,.08);
+  --archive-display: "Oswald", "Arial Narrow", sans-serif;
+  --archive-body: "Manrope", Arial, sans-serif;
+  --archive-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+html { background: var(--archive-milk); }
+body {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 320px;
+  margin: 0 !important;
+  color: var(--archive-ink);
+  background: var(--archive-milk);
+  font-family: var(--archive-body);
+  overflow-x: clip;
+}
+body, body * { box-sizing: border-box; }
+main { width: 100%; max-width: none; margin: 0 auto; overflow-x: clip; }
+.scene {
+  width: 100% !important;
+  max-width: 1600px !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(22px, 5.2vw, 88px);
+  color: var(--archive-ink);
+  background-color: var(--archive-milk);
+}
+.eyebrow, .section-top, .section-top span, .quality-index,
+.profile-detail-title, .creator-highlights-kicker {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-body) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: .19em !important;
+  line-height: 1.5 !important;
+  text-transform: uppercase;
+}
+h1, h2, h3, h4,
+.chapter-heading h2, .style-title, .senses-intro h2,
+.letter-opening h2, .memory-gallery-heading h2 {
+  color: var(--archive-wine);
+  font-family: var(--archive-display);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button { font-family: var(--archive-body); }
+
+/* Consistent top navigation and editorial rhythm */
+.topbar {
+  width: min(100% - 44px, 1480px) !important;
+  margin-inline: auto !important;
+  color: var(--archive-wine) !important;
+}
+.topbar a, .topbar button, .topbar .topbar-title {
+  color: var(--archive-wine) !important;
+}
+.scene-nav {
+  border-top: 1px solid var(--archive-line) !important;
+  margin-top: clamp(38px, 6vw, 76px) !important;
+  padding-top: 22px !important;
+}
+.text-link, .scene-nav button {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-body) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase;
+}
+.text-link span, .scene-nav button span { color: var(--archive-blue) !important; }
+
+/* Chapter I — warm editorial cover */
+#welcome {
+  background: var(--archive-milk) !important;
+  color: var(--archive-ink) !important;
+}
+#welcome .hero-layout {
+  width: min(100%, 1400px) !important;
+  margin-inline: auto !important;
+  gap: clamp(30px, 6vw, 100px) !important;
+}
+#welcome .hero-copy { color: var(--archive-ink) !important; }
+#welcome .hero-copy h1 {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-display) !important;
+  font-size: clamp(58px, 8.3vw, 124px) !important;
+  line-height: .91 !important;
+  letter-spacing: -.045em !important;
+}
+#welcome .hero-copy h1 em {
+  color: var(--archive-blue) !important;
+  font-style: italic !important;
+}
+#welcome .hero-description {
+  max-width: 590px;
+  color: var(--archive-muted) !important;
+  font-family: var(--archive-serif) !important;
+  font-size: clamp(19px, 1.65vw, 24px) !important;
+  line-height: 1.52 !important;
+}
+#welcome .hero-greeting-ending { color: var(--archive-wine) !important; }
+#welcome .eyebrow { color: var(--archive-wine) !important; }
+#welcome .button-light {
+  border: 1px solid var(--archive-wine) !important;
+  border-radius: 2px !important;
+  background: var(--archive-wine) !important;
+  color: var(--archive-paper) !important;
+  box-shadow: none !important;
+  letter-spacing: .12em !important;
+}
+#welcome .hero-small { color: var(--archive-muted) !important; }
+
+/* Profile — editorial portrait and clear two-column hierarchy */
+#profile {
+  min-height: auto !important;
+  padding-block: clamp(58px, 8vw, 112px) !important;
+  background: var(--archive-milk) !important;
+}
+#profile .profile-hero {
+  width: min(100%, 1260px) !important;
+  margin-inline: auto !important;
+  align-items: center !important;
+  gap: clamp(36px, 6.5vw, 104px) !important;
+}
+#profile .profile-photo {
+  box-shadow: none !important;
+  border: 1px solid rgba(201,163,107,.72) !important;
+  background: transparent !important;
+}
+#profile .profile-panel { color: var(--archive-ink) !important; }
+#profile .profile-panel h2 {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-display) !important;
+  font-size: clamp(52px, 7vw, 88px) !important;
+  line-height: .94 !important;
+}
+#profile .profile-description {
+  color: var(--archive-muted) !important;
+  font-family: var(--archive-serif) !important;
+  font-size: clamp(19px, 1.7vw, 24px) !important;
+  line-height: 1.5 !important;
+}
+#profile .profile-detail-item {
+  border-top: 1px solid var(--archive-line) !important;
+  background: transparent !important;
+}
+#profile .profile-detail-item span { color: var(--archive-blue) !important; }
+#profile .profile-detail-item b { color: var(--archive-wine) !important; }
+#profile .profile-detail-item small { color: var(--archive-muted) !important; }
+
+/* Qualities — restrained magazine grid, not a stack of unrelated cards */
+#admire {
+  padding-block: clamp(72px, 9vw, 132px) !important;
+  background: var(--archive-milk) !important;
+}
+#admire .chapter-heading h2 {
+  color: var(--archive-wine) !important;
+  font-size: clamp(52px, 8vw, 112px) !important;
+  line-height: .93 !important;
+}
+#admire .chapter-heading h2 span { color: var(--archive-blue) !important; }
+#admire .quality-traits {
+  border-block: 1px solid var(--archive-line);
+  padding-block: 18px;
+  gap: 12px 24px !important;
+}
+#admire .quality-traits span {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-body) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: .13em !important;
+}
+#admire .quality-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--archive-line) !important;
+  box-shadow: none !important;
+}
+#admire .quality-card h3, #admire .quality-card strong { color: var(--archive-wine) !important; }
+#admire .quality-card p { color: var(--archive-muted) !important; font-family: var(--archive-serif) !important; }
+
+/* Story bridge and hammer — retain existing assets, timings and handlers */
+#hammer {
+  background-color: var(--archive-wine-deep) !important;
+  color: var(--archive-paper) !important;
+}
+#hammer .hammer-story-transition { color: var(--archive-paper) !important; }
+#hammer .hammer-story-transition p,
+#hammer .hammer-copy p { color: #f0e2d9 !important; }
+#hammer .hammer-copy h2, #hammer .hammer-copy h3 { color: var(--archive-paper) !important; }
+#hammer .hammer-copy em, #hammer .hammer-result { color: #d9b982 !important; }
+#hammer .hammer-hint { color: #d9b982 !important; }
+
+/* Hero reveal / My Superhero — retain image and compact call-to-action */
+#style {
+  padding-block: clamp(50px, 7vw, 96px) !important;
+  background: var(--archive-milk) !important;
+  color: var(--archive-ink) !important;
+}
+#style .style-stage {
+  width: min(100%, 1260px) !important;
+  margin-inline: auto !important;
+}
+#style .style-title {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-serif) !important;
+  font-size: clamp(38px, 5.2vw, 68px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -.035em !important;
+}
+#style .style-file {
+  background: var(--archive-wine) !important;
+  color: var(--archive-paper) !important;
+  border: 0 !important;
+  box-shadow: 0 10px 24px rgba(67,38,29,.10) !important;
+}
+#style .style-highlights { margin-top: clamp(26px, 4vw, 52px) !important; }
+#style .message-open-button {
+  width: min(300px, calc(100% - 36px)) !important;
+  min-height: 88px !important;
+  padding: 14px 20px !important;
+  border: 1px solid var(--archive-blue) !important;
+  border-radius: 2px !important;
+  background: var(--archive-blue-soft) !important;
+  color: var(--archive-wine) !important;
+  box-shadow: none !important;
+}
+#style .message-open-button .creator-highlights-kicker { color: var(--archive-wine) !important; }
+#style .message-open-button .creator-highlights-title {
+  color: var(--archive-wine) !important;
+  -webkit-text-fill-color: var(--archive-wine) !important;
+  font-family: var(--archive-display) !important;
+  font-size: clamp(20px, 2.1vw, 26px) !important;
+}
+
+/* Chapter II — same paper, wine and blue design language */
+body[data-page="chapter-two"] { background: var(--archive-milk) !important; color: var(--archive-ink) !important; }
+body[data-page="chapter-two"] .scene {
+  max-width: 1600px !important;
+  background: var(--archive-milk) !important;
+}
+#senses, #letter { background: var(--archive-milk) !important; color: var(--archive-ink) !important; }
+#senses .senses-intro {
+  width: min(100%, 1320px);
+  margin-inline: auto;
+}
+#senses .senses-intro h2 {
+  color: var(--archive-wine) !important;
+  font-size: clamp(44px, 6.4vw, 88px) !important;
+  line-height: .98 !important;
+}
+#senses .senses-intro h2 em { color: var(--archive-blue) !important; }
+#senses .senses-intro-text {
+  color: var(--archive-muted) !important;
+  font-family: var(--archive-serif) !important;
+  font-size: clamp(19px, 1.65vw, 24px) !important;
+  line-height: 1.52 !important;
+}
+#senses .sense-route {
+  width: min(100% - 44px, 1180px) !important;
+  color: var(--archive-ink) !important;
+}
+#senses .sense-route-heading h3,
+#senses .sense-route-step h3 { color: var(--archive-blue) !important; }
+#senses .sense-route-heading em { color: var(--archive-wine) !important; }
+#senses .sense-route-step p,
+#senses .sense-route-step .sense-route-copy { color: var(--archive-muted) !important; }
+#senses .challenge-gallery {
+  background: transparent !important;
+  padding-block: clamp(36px, 6vw, 76px) !important;
+}
+#senses .puzzle-route {
+  width: min(100% - 44px, 1180px) !important;
+}
+#senses .puzzle-slide,
+#senses .puzzle-slide.is-active,
+#senses .puzzle-slide .riddle-panel,
+#senses .puzzle-slide .cafe-receipt,
+#senses .puzzle-slide .spot-game-panel {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#senses .puzzle-slide { padding: clamp(18px, 3vw, 34px) 0 !important; }
+#senses .puzzle-slide h3,
+#senses .puzzle-slide h4 { color: var(--archive-wine) !important; }
+#senses .puzzle-slide p { color: var(--archive-muted) !important; }
+#senses input, #senses textarea {
+  border: 1px solid rgba(118,33,43,.28) !important;
+  border-radius: 0 !important;
+  background: rgba(255,250,242,.58) !important;
+  color: var(--archive-ink) !important;
+  box-shadow: none !important;
+}
+#senses button:not(.text-link) {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#senses .senses-begin,
+#senses .riddle-panel button,
+#senses .cafe-receipt button {
+  border: 1px solid var(--archive-wine) !important;
+  background: var(--archive-wine) !important;
+  color: var(--archive-paper) !important;
+}
+
+/* Cipher, letter and photo archive */
+#letter { padding-block: clamp(52px, 8vw, 112px) !important; }
+#letter .letter-opening h2 {
+  color: var(--archive-wine) !important;
+  font-family: var(--archive-display) !important;
+  font-size: clamp(68px, 12vw, 150px) !important;
+  line-height: .88 !important;
+  letter-spacing: -.035em !important;
+}
+#letter .letter-opening > p:last-child {
+  color: var(--archive-blue) !important;
+  font-family: var(--archive-serif) !important;
+  font-size: clamp(23px, 2.2vw, 32px) !important;
+}
+#letter .personal-letter {
+  border-left: 1px solid var(--archive-gold) !important;
+  border-right: 1px solid var(--archive-gold) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#letter .personal-letter p { color: var(--archive-ink) !important; }
+#letter .personal-letter-top,
+#letter .personal-letter .eyebrow { color: var(--archive-wine) !important; }
+#letter .personal-letter-signature,
+#letter .personal-letter-end { color: var(--archive-blue) !important; }
+#letter .memory-gallery {
+  border-top: 1px solid var(--archive-line) !important;
+}
+#letter .memory-gallery-heading h2 { color: var(--archive-wine) !important; }
+#letter .memory-gallery-heading h2 em { color: var(--archive-blue) !important; }
+#letter .memory-gallery-heading p { color: var(--archive-muted) !important; }
+
+/* Shared interactive states */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--archive-blue) !important;
+  outline-offset: 4px !important;
+}
+@media (hover:hover) {
+  .text-link:hover, .scene-nav button:hover { color: var(--archive-blue) !important; }
+  #style .message-open-button:hover { transform: translateY(-2px); }
+}
+@media (max-width: 900px) {
+  .scene { padding-inline: clamp(18px, 4.5vw, 38px) !important; }
+  #welcome .hero-layout { grid-template-columns: 1fr !important; }
+  #profile .profile-hero { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr) !important; }
+  #senses .senses-intro { min-height: 0 !important; }
+}
+@media (max-width: 680px) {
+  .scene { padding-inline: 20px !important; }
+  #welcome { padding-top: 46px !important; padding-bottom: 58px !important; }
+  #welcome .hero-copy h1 { font-size: clamp(52px, 14vw, 78px) !important; }
+  #welcome .hero-description { font-size: 19px !important; }
+  #profile .profile-hero { display: flex !important; flex-direction: column !important; }
+  #profile .profile-photo { width: min(88vw, 390px) !important; margin-inline: auto !important; }
+  #profile .profile-panel { width: 100% !important; }
+  #admire .chapter-heading h2 { font-size: clamp(46px, 12vw, 70px) !important; }
+  #style .style-title { font-size: clamp(36px, 10vw, 52px) !important; }
+  #style .style-file { font-size: 10px !important; }
+  #senses .senses-intro { display: flex !important; flex-direction: column !important; }
+  #senses .senses-intro h2 { font-size: clamp(42px, 11vw, 60px) !important; }
+  #senses .sense-route { width: calc(100% - 8px) !important; }
+  #senses .puzzle-route { width: calc(100% - 8px) !important; }
+  #letter .letter-opening h2 { font-size: clamp(62px, 17vw, 94px) !important; }
+  #letter .personal-letter { padding-inline: 18px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
